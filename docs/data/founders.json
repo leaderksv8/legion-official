@@ -1,0 +1,47 @@
+[
+  {
+    "id": "paustovskyi",
+    "name": { "uk": "Дмитро Паустовський", "en": "Dmytro Paustovskyi" },
+    "role": { "uk": "Голова організації", "en": "Head of Organization" },
+    "bio": { "uk": "Ветеран війни, активний громадський діяч...", "en": "War veteran, active public figure..." },
+    "phone": "+38 (067) 111-22-33",
+    "tg": "@paustovskyi",
+    "img": "https://via.placeholder.com/400x500?text=Dmytro"
+  },
+  {
+    "id": "salikhov",
+    "name": { "uk": "Сергій Саліхов", "en": "Serhii Salikhov" },
+    "role": { "uk": "Співзасновник", "en": "Co-founder" },
+    "bio": { "uk": "Координатор проектів з реабілітації...", "en": "Rehabilitation project coordinator..." },
+    "phone": "+38 (067) 222-33-44",
+    "tg": "@salikhov",
+    "img": "https://via.placeholder.com/400x500?text=Serhii"
+  },
+  {
+    "id": "founder3",
+    "name": { "uk": "Олександр Іванов", "en": "Oleksandr Ivanov" },
+    "role": { "uk": "Співзасновник", "en": "Co-founder" },
+    "bio": { "uk": "Юридична підтримка ветеранів...", "en": "Legal support for veterans..." },
+    "phone": "+38 (067) 333-44-55",
+    "tg": "@alex_titans",
+    "img": "https://via.placeholder.com/400x500?text=Founder3"
+  },
+  {
+    "id": "founder4",
+    "name": { "uk": "Андрій Петренко", "en": "Andrii Petrenko" },
+    "role": { "uk": "Співзасновник", "en": "Co-founder" },
+    "bio": { "uk": "Відповідальний за логістику та допомогу...", "en": "Responsible for logistics..." },
+    "phone": "+38 (067) 444-55-66",
+    "tg": "@andrii_p",
+    "img": "https://via.placeholder.com/400x500?text=Founder4"
+  },
+  {
+    "id": "founder5",
+    "name": { "uk": "Микола Сидоров", "en": "Mykola Sydorov" },
+    "role": { "uk": "Співзасновник", "en": "Co-founder" },
+    "bio": { "uk": "Медичний консультант...", "en": "Medical consultant..." },
+    "phone": "+38 (067) 555-66-77",
+    "tg": "@mykola_doc",
+    "img": "https://via.placeholder.com/400x500?text=Founder5"
+  }
+]

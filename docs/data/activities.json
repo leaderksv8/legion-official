@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "icon": "balance-scale",
+    "title": { "uk": "Юридична допомога", "en": "Legal Aid" },
+    "desc": { 
+      "uk": "Захист прав ветеранів, допомога з оформленням статусів, пільг та субсидій.", 
+      "en": "Protection of veterans' rights, assistance with status and benefits." 
+    }
+  },
+  {
+    "id": 2,
+    "icon": "heartbeat",
+    "title": { "uk": "Реабілітація", "en": "Rehabilitation" },
+    "desc": { 
+      "uk": "Організація фізичного відновлення та лікування у партнерських закладах.", 
+      "en": "Organization of physical recovery and treatment in partner institutions." 
+    }
+  },
+  {
+    "id": 3,
+    "icon": "users",
+    "title": { "uk": "Соціалізація", "en": "Socialization" },
+    "desc": { 
+      "uk": "Адаптація до мирного життя через спілкування та спільні заходи.", 
+      "en": "Adaptation to peaceful life through communication and joint events." 
+    }
+  },
+  {
+    "id": 4,
+    "icon": "briefcase",
+    "title": { "uk": "Працевлаштування", "en": "Employment" },
+    "desc": { 
+      "uk": "Допомога у пошуку роботи, перекваліфікація та підтримка ветеранського бізнесу.", 
+      "en": "Assistance in job search, retraining and veteran business support." 
+    }
+  },
+  {
+    "id": 5,
+    "icon": "hands-helping",
+    "title": { "uk": "Підтримка сімей", "en": "Family Support" },
+    "desc": { 
+      "uk": "Психологічна та соціальна допомога родинам ветеранів та загиблих героїв.", 
+      "en": "Psychological and social assistance to families of veterans." 
+    }
+  },
+  {
+    "id": 6,
+    "icon": "trophy",
+    "title": { "uk": "Спорт та дозвілля", "en": "Sport & Leisure" },
+    "desc": { 
+      "uk": "Організація турнірів, поїздок на відпочинок та активного дозвілля.", 
+      "en": "Organization of tournaments, vacation trips and active leisure." 
+    }
+  }
+]

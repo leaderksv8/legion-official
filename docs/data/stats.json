@@ -1,0 +1,6 @@
+[
+  { "label": { "uk": "Допомогли ветеранам", "en": "Veterans helped" }, "value": 150, "suffix": "+" },
+  { "label": { "uk": "Юридичних консультацій", "en": "Legal consultations" }, "value": 340, "suffix": "" },
+  { "label": { "uk": "Реабілітаційних виїздів", "en": "Rehabilitation trips" }, "value": 12, "suffix": "" },
+  { "label": { "uk": "Залучено партнерів", "en": "Partners involved" }, "value": 25, "suffix": "+" }
+]
