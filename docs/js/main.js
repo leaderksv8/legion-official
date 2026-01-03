@@ -1,109 +1,173 @@
-import * as render from './render.js';
+/* Імпорт шрифту */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
 
-let currentLang = 'uk';
-let cache = {};
-
-// Універсальна функція для завантаження
-async function loadData(url) {
-    try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`Помилка: ${url}`);
-        return await response.json();
-    } catch (e) {
-        console.error("Не вдалося завантажити " + url, e);
-        return [];
-    }
+:root {
+    --primary: #1a2a44;
+    --accent: #c5a059;
+    --accent-hover: #b38f4d;
+    --dark: #121212;
+    --light: #f4f7f6;
+    --white: #ffffff;
+    --gray: #666666;
+    --shadow: 0 10px 30px rgba(0,0,0,0.08);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-async function init() {
-    // Завантажуємо все
-    cache.founders = await loadData('data/founders.json');
-    cache.stats = await loadData('data/stats.json');
-    cache.partners = await loadData('data/partners.json');
-    cache.news = await loadData('data/news.json');
-    cache.stories = await loadData('data/stories.json');
-    cache.contacts = await loadData('data/contacts.json');
-    cache.activities = await loadData('data/activities.json');
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-    updateUI();
+body { 
+    font-family: 'Montserrat', sans-serif; 
+    line-height: 1.6; 
+    color: var(--dark); 
+    background-color: var(--white); 
+    scroll-behavior: smooth;
 }
 
-function updateUI() {
-    if (cache.activities.length) render.renderActivities(cache.activities, currentLang);
-    if (cache.founders.length) render.renderFounders(cache.founders, currentLang);
-    if (cache.stats.length) render.renderStats(cache.stats, currentLang);
-    if (cache.partners.length) render.renderPartners(cache.partners);
-    if (cache.news.length) render.renderNews(cache.news, currentLang);
-    if (cache.stories.length) render.renderStories(cache.stories, currentLang);
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+section { padding: 100px 0; }
+.section-alt { background-color: var(--light); }
+.text-center { text-align: center; margin-bottom: 50px; } /* Додано відступ для всіх центрованих заголовків */
 
-    // Контакти
-    if (cache.contacts && cache.contacts.address) {
-        document.getElementById('contacts-content').innerHTML = `
-            <p><i class="fas fa-phone"></i> ${cache.contacts.phone}</p>
-            <p><i class="fas fa-envelope"></i> ${cache.contacts.email}</p>
-            <p><i class="fas fa-map-marker-alt"></i> ${cache.contacts.address[currentLang]}</p>
-        `;
-    }
-
-    // Переклад статичних елементів
-    document.querySelectorAll('[data-' + currentLang + ']').forEach(el => {
-        el.innerHTML = el.getAttribute('data-' + currentLang);
-    });
-
-    startStatsAnimation();
+/* HEADER & NAVIGATION */
+.main-header { 
+    background: var(--primary); 
+    color: white; 
+    padding: 20px 0; 
+    position: sticky; 
+    top: 0; 
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
+.header-wrapper { display: flex; justify-content: space-between; align-items: center; }
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: white; }
+.logo i { font-size: 1.8rem; color: var(--accent); }
+.logo-text { font-weight: 800; font-size: 1.4rem; letter-spacing: 1px; }
 
-function startStatsAnimation() {
-    const counters = document.querySelectorAll('.counter');
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const target = +entry.target.getAttribute('data-target');
-                let count = 0;
-                const update = () => {
-                    const inc = target / 50;
-                    if (count < target) {
-                        count += inc;
-                        entry.target.innerText = Math.ceil(count);
-                        setTimeout(update, 30);
-                    } else entry.target.innerText = target;
-                };
-                update();
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-    counters.forEach(c => observer.observe(c));
+.nav-menu ul { display: flex; list-style: none; gap: 30px; }
+.nav-menu a { 
+    color: white; 
+    text-decoration: none; 
+    font-size: 0.85rem; 
+    font-weight: 600; 
+    text-transform: uppercase; 
+    transition: var(--transition);
 }
+.nav-menu a:hover { color: var(--accent); }
 
-// Події кнопок мови
-document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.onclick = (e) => {
-        currentLang = e.target.dataset.lang;
-        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-        updateUI();
-    };
-});
+.lang-btn { 
+    background: transparent; 
+    border: 1px solid var(--accent); 
+    color: white; 
+    padding: 4px 10px; 
+    cursor: pointer; 
+    font-size: 0.75rem; 
+    font-weight: 700;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+.lang-btn.active { background: var(--accent); color: var(--primary); }
 
-window.openBio = (id) => {
-    const f = cache.founders.find(x => x.id === id);
-    if (!f) return;
-    document.getElementById('modal-data').innerHTML = `
-        <div class="bio-flex">
-            <img src="${f.img}" class="bio-img">
-            <div>
-                <h2>${f.name[currentLang]}</h2>
-                <p class="bio-role">${f.role[currentLang]}</p>
-                <div class="bio-text">${f.bio[currentLang]}</div>
-                <p><b>TG:</b> ${f.tg} | <b>Тел:</b> ${f.phone}</p>
-            </div>
-        </div>`;
-    document.getElementById('bioModal').style.display = 'block';
-};
+/* HERO BLOCK */
+.hero-block { 
+    height: 85vh; 
+    background: linear-gradient(rgba(26, 42, 68, 0.85), rgba(26, 42, 68, 0.85)), 
+                url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1600') center/cover no-repeat;
+    display: flex; 
+    align-items: center; 
+    text-align: center; 
+    color: white;
+}
+.hero-block h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 25px; line-height: 1.2; }
+.hero-block p { font-size: 1.1rem; max-width: 850px; margin: 0 auto; opacity: 0.9; }
 
-document.querySelector('.close-modal').onclick = () => {
-    document.getElementById('bioModal').style.display = 'none';
-};
+/* ACTIVITIES SECTION */
+.about-intro { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; margin-bottom: 80px; }
+.about-image img { width: 100%; border-radius: 20px; box-shadow: 25px 25px 0 var(--accent); transition: var(--transition); }
+.about-text h2 { font-size: 2.2rem; margin-bottom: 20px; color: var(--primary); }
 
-document.addEventListener('DOMContentLoaded', init);
+.grid-6 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+.activity-card { 
+    background: white; 
+    padding: 45px 35px; 
+    border-radius: 20px; 
+    box-shadow: var(--shadow); 
+    text-align: center; 
+    transition: var(--transition); 
+    border-bottom: 6px solid var(--accent);
+}
+.activity-card:hover { transform: translateY(-15px); }
+.card-icon { font-size: 3rem; color: var(--primary); margin-bottom: 25px; }
+
+/* STATS SECTION */
+.stats-bg { background: var(--primary); color: white; padding: 120px 0; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; text-align: center; margin-top: 30px; }
+.stat-item h2 { font-size: 4rem; color: var(--accent); font-weight: 800; margin-bottom: 10px; }
+
+/* PARTNERS SLIDER */
+.partners-slider { overflow: hidden; padding: 40px 0; }
+.partners-track { display: flex; gap: 80px; animation: scroll 35s linear infinite; align-items: center; }
+.partners-track img { height: 55px; filter: grayscale(100%); opacity: 0.4; transition: 0.3s; }
+.partners-track img:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.1); }
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* MEDIA (NEWS & GALLERY) */
+.media-layout { display: grid; grid-template-columns: 1.6fr 1fr; gap: 50px; }
+.news-island { 
+    background: white; 
+    padding: 30px; 
+    border-radius: 20px; 
+    margin-bottom: 25px; 
+    box-shadow: var(--shadow); 
+    border-left: 8px solid var(--accent);
+    transition: var(--transition);
+}
+.news-island:hover { transform: scale(1.02); }
+
+.gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+.gallery-item { border-radius: 15px; overflow: hidden; height: 180px; position: relative; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+
+/* FOUNDERS SECTION */
+.founders-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+    gap: 30px; 
+    margin-top: 50px; /* Збільшено відстань від заголовка до карток */
+}
+.founder-card { 
+    background: white; 
+    border-radius: 25px; 
+    overflow: hidden; 
+    box-shadow: var(--shadow); 
+    text-align: center; 
+    cursor: pointer; 
+    transition: var(--transition);
+    padding-bottom: 25px;
+}
+.founder-card:hover { transform: translateY(-10px); }
+.founder-img-wrapper { height: 320px; overflow: hidden; }
+.founder-card img { width: 100%; height: 100%; object-fit: cover; }
+
+/* STORIES */
+.stories-list { margin-top: 40px; }
+.story-card { background: white; padding: 30px; border-radius: 20px; display: flex; gap: 25px; align-items: center; margin-bottom: 20px; box-shadow: var(--shadow); }
+.story-card img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); }
+
+/* FOOTER */
+.main-footer { background: #0a111f; color: white; padding: 100px 0 40px; }
+.footer-grid { display: grid; grid-template-columns: 1.8fr 1fr 1fr; gap: 70px; }
+.footer-info h3 { font-size: 1.6rem; color: var(--accent); margin-bottom: 25px; }
+
+/* MODAL */
+.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); backdrop-filter: blur(10px); }
+.modal-content { background: white; margin: 50px auto; padding: 60px; width: 80%; max-width: 1000px; border-radius: 40px; position: relative; }
+.bio-flex { display: flex; gap: 50px; }
+.bio-img { width: 350px; border-radius: 25px; object-fit: cover; }
+.close-modal { position: absolute; right: 30px; top: 20px; font-size: 45px; cursor: pointer; color: #999; }
+
+/* Адаптивність */
+@media (max-width: 992px) {
+    .about-intro, .media-layout, .footer-grid, .bio-flex { grid-template-columns: 1fr; }
+    .hero-block h1 { font-size: 2rem; }
+    .bio-img { width: 100%; height: 350px; }
+}

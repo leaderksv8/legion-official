@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
 
 :root {
-    --primary: #1a2a44;    /* Темно-синій */
-    --accent: #c5a059;     /* Золотий */
+    --primary: #1a2a44;
+    --accent: #c5a059;
     --accent-hover: #b38f4d;
     --dark: #121212;
     --light: #f4f7f6;
@@ -26,7 +26,7 @@ body {
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 section { padding: 100px 0; }
 .section-alt { background-color: var(--light); }
-.text-center { text-align: center; }
+.text-center { text-align: center; margin-bottom: 50px; } /* Додано відступ для всіх центрованих заголовків */
 
 /* HEADER & NAVIGATION */
 .main-header { 
@@ -39,9 +39,9 @@ section { padding: 100px 0; }
     box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 .header-wrapper { display: flex; justify-content: space-between; align-items: center; }
-.logo { display: flex; align-items: center; gap: 12px; }
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: white; }
 .logo i { font-size: 1.8rem; color: var(--accent); }
-.logo-text { font-weight: 800; font-size: 1.4rem; letter-spacing: 1px; color: var(--white); }
+.logo-text { font-weight: 800; font-size: 1.4rem; letter-spacing: 1px; }
 
 .nav-menu ul { display: flex; list-style: none; gap: 30px; }
 .nav-menu a { 
@@ -50,7 +50,6 @@ section { padding: 100px 0; }
     font-size: 0.85rem; 
     font-weight: 600; 
     text-transform: uppercase; 
-    letter-spacing: 1px;
     transition: var(--transition);
 }
 .nav-menu a:hover { color: var(--accent); }
@@ -78,8 +77,8 @@ section { padding: 100px 0; }
     text-align: center; 
     color: white;
 }
-.hero-block h1 { font-size: 3rem; font-weight: 800; margin-bottom: 25px; line-height: 1.2; }
-.hero-block p { font-size: 1.2rem; max-width: 850px; margin: 0 auto; opacity: 0.9; line-height: 1.6; }
+.hero-block h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 25px; line-height: 1.2; }
+.hero-block p { font-size: 1.1rem; max-width: 850px; margin: 0 auto; opacity: 0.9; }
 
 /* ACTIVITIES SECTION */
 .about-intro { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; margin-bottom: 80px; }
@@ -98,13 +97,11 @@ section { padding: 100px 0; }
 }
 .activity-card:hover { transform: translateY(-15px); }
 .card-icon { font-size: 3rem; color: var(--primary); margin-bottom: 25px; }
-.activity-card h3 { margin-bottom: 15px; color: var(--primary); font-size: 1.4rem; }
 
 /* STATS SECTION */
 .stats-bg { background: var(--primary); color: white; padding: 120px 0; }
-.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; text-align: center; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; text-align: center; margin-top: 30px; }
 .stat-item h2 { font-size: 4rem; color: var(--accent); font-weight: 800; margin-bottom: 10px; }
-.stat-item p { text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; font-weight: 600; opacity: 0.8; }
 
 /* PARTNERS SLIDER */
 .partners-slider { overflow: hidden; padding: 40px 0; }
@@ -125,17 +122,18 @@ section { padding: 100px 0; }
     transition: var(--transition);
 }
 .news-island:hover { transform: scale(1.02); }
-.news-meta { display: flex; justify-content: space-between; margin-bottom: 15px; }
-.news-tag { background: var(--primary); color: white; padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; }
-.news-date { color: var(--gray); font-size: 0.85rem; }
 
-.gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
 .gallery-item { border-radius: 15px; overflow: hidden; height: 180px; position: relative; }
-.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-.gallery-item:hover img { transform: scale(1.1); }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; }
 
 /* FOUNDERS SECTION */
-.founders-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; }
+.founders-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+    gap: 30px; 
+    margin-top: 50px; /* Збільшено відстань від заголовка до карток */
+}
 .founder-card { 
     background: white; 
     border-radius: 25px; 
@@ -149,19 +147,16 @@ section { padding: 100px 0; }
 .founder-card:hover { transform: translateY(-10px); }
 .founder-img-wrapper { height: 320px; overflow: hidden; }
 .founder-card img { width: 100%; height: 100%; object-fit: cover; }
-.founder-card h4 { margin-top: 20px; font-size: 1.2rem; color: var(--primary); }
-.founder-card p { color: var(--accent); font-weight: 700; font-size: 0.9rem; }
+
+/* STORIES */
+.stories-list { margin-top: 40px; }
+.story-card { background: white; padding: 30px; border-radius: 20px; display: flex; gap: 25px; align-items: center; margin-bottom: 20px; box-shadow: var(--shadow); }
+.story-card img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); }
 
 /* FOOTER */
 .main-footer { background: #0a111f; color: white; padding: 100px 0 40px; }
 .footer-grid { display: grid; grid-template-columns: 1.8fr 1fr 1fr; gap: 70px; }
 .footer-info h3 { font-size: 1.6rem; color: var(--accent); margin-bottom: 25px; }
-.footer-info p { color: #bdc3c7; margin-bottom: 10px; }
-.footer-links h4, .footer-services h4 { margin-bottom: 25px; font-size: 1.1rem; color: var(--accent); }
-.footer-links ul, .footer-services ul { list-style: none; }
-.footer-links li, .footer-services li { margin-bottom: 12px; }
-.footer-links a { color: #bdc3c7; text-decoration: none; transition: 0.3s; }
-.footer-links a:hover { color: var(--accent); padding-left: 10px; }
 
 /* MODAL */
 .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); backdrop-filter: blur(10px); }
@@ -174,6 +169,5 @@ section { padding: 100px 0; }
 @media (max-width: 992px) {
     .about-intro, .media-layout, .footer-grid, .bio-flex { grid-template-columns: 1fr; }
     .hero-block h1 { font-size: 2rem; }
-    .modal-content { width: 95%; padding: 30px; margin: 20px auto; }
     .bio-img { width: 100%; height: 350px; }
 }
