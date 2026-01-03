@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ГО «ЛЕГІОН ТИТАНІВ» | Бучанський район</title>
+    
+    <!-- SEO & Соціальні мережі -->
+    <meta name="description" content="Громадська організація ветеранів війни з обмеженими можливостями Бучанського району. Допомога, реабілітація, адаптація.">
+    <meta property="og:title" content="ГО «ЛЕГІОН ТИТАНІВ»">
+    <meta property="og:description" content="Ми об'єднуємо захисників для взаємодопомоги та реабілітації.">
+    <meta property="og:image" content="images/001.jpg">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon (Іконка у вкладці) -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
     <!-- Шрифти та іконки -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,17 +22,16 @@
 </head>
 <body>
 
-    <!-- HEADER -->
     <header class="main-header">
         <div class="container header-wrapper">
-            <div class="logo">
+            <a href="#home" class="logo" style="text-decoration:none;">
                 <i class="fas fa-shield-alt"></i>
                 <div class="logo-text">ЛЕГІОН ТИТАНІВ</div>
-            </div>
+            </a>
             <nav class="nav-menu">
-                <ul id="main-nav">
+                <ul>
                     <li><a href="#home" data-uk="Головна" data-en="Home">Головна</a></li>
-                    <li><a href="#activities" data-uk="Наша діяльність" data-en="Activities">Наша діяльність</a></li>
+                    <li><a href="#activities" data-uk="Діяльність" data-en="Activities">Діяльність</a></li>
                     <li><a href="#partners" data-uk="Партнери" data-en="Partners">Партнери</a></li>
                     <li><a href="#contact" data-uk="Контакти" data-en="Contacts">Контакти</a></li>
                 </ul>
@@ -34,59 +44,53 @@
     </header>
 
     <main>
-        <!-- БЛОК 1: HERO (Головна) -->
+        <!-- БЛОК 1: HERO -->
         <section id="home" class="hero-block">
             <div class="container">
-                <h1 data-uk="ГРОМАДСЬКА ОРГАНІЗАЦІЯ<br>«ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ «ЛЕГІОН ТИТАНІВ»»" 
-                    data-en="PUBLIC ORGANIZATION<br>«WAR VETERANS WITH DISABILITIES OF BUCHA DISTRICT «LEGION OF TITANS»»">
-                    ГРОМАДСЬКА ОРГАНІЗАЦІЯ<br>«ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ «ЛЕГІОН ТИТАНІВ»»
+                <h1 data-uk="ГРОМАДСЬКА ОРГАНІЗАЦІЯ<br>«ЛЕГІОН ТИТАНІВ»" 
+                    data-en="PUBLIC ORGANIZATION<br>«LEGION OF TITANS»">
+                    ГРОМАДСЬКА ОРГАНІЗАЦІЯ<br>«ЛЕГІОН ТИТАНІВ»
                 </h1>
-                <p data-uk="Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку, реабілітацію та нові можливості для тих, хто захищав нашу країну."
-                   data-en="We unite war veterans with disabilities of the Bucha district for mutual aid, adaptation to peaceful life and development. Our mission is to provide support and new opportunities.">
-                    Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку, реабілітацію та нові можливості для тих, хто захищав нашу країну.
+                <p data-uk="Ветерани війни з обмеженими можливостями Бучанського району. Разом до адаптації та розвитку."
+                   data-en="War veterans with disabilities of the Bucha district. Together towards adaptation and development.">
+                    Ветерани війни з обмеженими можливостями Бучанського району. Разом до адаптації та розвитку.
                 </p>
             </div>
         </section>
 
-        <!-- БЛОК 2: НАША ДІЯЛЬНІСТЬ -->
+        <!-- БЛОК 2: ДІЯЛЬНІСТЬ -->
         <section id="activities" class="section">
             <div class="container">
                 <div class="about-intro">
                     <div class="about-image">
-                        <img src="images/001.jpg" alt="Наша діяльність">
+                        <img src="images/001.jpg" alt="Діяльність">
                     </div>
                     <div class="about-text">
                         <h2 data-uk="Наша діяльність" data-en="Our Activities">Наша діяльність</h2>
-                        <p data-uk="Головною метою Організації – захист прав та інтересів ветеранів війни з обмеженими можливостями внаслідок бойових дій та їх сімей, а також сприяння їхній реінтеграції, соціалізації та економічному розвитку."
-                           data-en="The main goal of the Organization is to protect the rights and interests of war veterans with disabilities as a result of hostilities and their families.">
-                            Головною метою Організації – захист прав та інтересів ветеранів війни з обмеженими можливостями внаслідок бойових дій та їх сімей, а також сприяння їхній реінтеграції, соціалізації та економічному розвитку.
+                        <p data-uk="Захист прав та інтересів ветеранів війни з обмеженими можливостями, допомога в реінтеграції та соціалізації."
+                           data-en="Protection of the rights and interests of war veterans with disabilities, assistance in reintegration and socialization.">
+                            Захист прав та інтересів ветеранів війни з обмеженими можливостями, допомога в реінтеграції та соціалізації.
                         </p>
                     </div>
                 </div>
-                <div id="activities-cards" class="grid-6">
-                    <!-- 6 карток завантажуються з JS -->
-                </div>
+                <div id="activities-cards" class="grid-6"></div>
             </div>
         </section>
 
-        <!-- БЛОК 3: ЗВІТНІСТЬ (Цифри) -->
+        <!-- БЛОК 3: ЗВІТНІСТЬ -->
         <section id="reports" class="section stats-bg">
             <div class="container">
-                <h2 class="text-center" style="color:white; margin-bottom:40px;" data-uk="Наші досягнення" data-en="Our Achievements">Наші досягнення</h2>
-                <div id="stats-container" class="stats-grid">
-                    <!-- Лічильники завантажуються з stats.json -->
-                </div>
+                <h2 class="text-center" style="color:white;" data-uk="Наші досягнення" data-en="Our Achievements">Наші досягнення</h2>
+                <div id="stats-container" class="stats-grid"></div>
             </div>
         </section>
 
-        <!-- БЛОК 4: ПАРТНЕРИ (Карусель) -->
+        <!-- БЛОК 4: ПАРТНЕРИ -->
         <section id="partners" class="section">
             <div class="container">
                 <h2 class="text-center" data-uk="Наші партнери" data-en="Our Partners">Наші партнери</h2>
                 <div class="partners-slider">
-                    <div id="partners-track" class="partners-track">
-                        <!-- Карусель партнерів -->
-                    </div>
+                    <div id="partners-track" class="partners-track"></div>
                 </div>
             </div>
         </section>
@@ -95,13 +99,11 @@
         <section id="stories" class="section section-alt">
             <div class="container">
                 <h2 class="text-center" data-uk="Історії наших героїв" data-en="Heroes Stories">Історії наших героїв</h2>
-                <div id="stories-container" class="stories-list">
-                    <!-- Картки історій -->
-                </div>
+                <div id="stories-container" class="stories-list"></div>
             </div>
         </section>
 
-        <!-- БЛОК 6: НОВИНИ ТА ГАЛЕРЕЯ -->
+        <!-- БЛОК 6: МЕДІА (НОВИНИ ТА ГАЛЕРЕЯ) -->
         <section id="media" class="section">
             <div class="container">
                 <div class="media-layout">
@@ -121,9 +123,7 @@
         <section id="founders" class="section section-alt">
             <div class="container">
                 <h2 class="text-center" data-uk="Наші співзасновники" data-en="Our Founders">Наші співзасновники</h2>
-                <div id="founders-container" class="founders-grid">
-                    <!-- 5 карток засновників -->
-                </div>
+                <div id="founders-container" class="founders-grid"></div>
             </div>
         </section>
 
@@ -133,10 +133,15 @@
                 <div class="footer-info">
                     <h3 data-uk="Контакти" data-en="Contacts">Контакти</h3>
                     <div id="contacts-content"></div>
+                    
                     <div class="join-team">
-                        <h4 data-uk="Долучитися до команди" data-en="Join our Team">Долучитися до команди</h4>
-                        <p data-uk="Шукаємо журналістів, юристів, медиків." data-en="We are looking for journalists, lawyers, medics.">Шукаємо журналістів, юристів, медиків.</p>
-                        <button class="btn-sm" data-uk="Подати заявку" data-en="Apply Now">Подати заявку</button>
+                        <h4 data-uk="Написати нам" data-en="Write to Us">Написати нам</h4>
+                        <form action="https://formspree.io/f/mqkrvylk" method="POST" style="margin-top:15px;">
+                            <input type="text" name="name" placeholder="Ваше ім'я" required style="width:100%; padding:10px; margin-bottom:10px; border-radius:5px; border:none;">
+                            <input type="email" name="email" placeholder="Ваш Email" required style="width:100%; padding:10px; margin-bottom:10px; border-radius:5px; border:none;">
+                            <textarea name="message" placeholder="Повідомлення" required style="width:100%; padding:10px; margin-bottom:10px; border-radius:5px; border:none; height:80px;"></textarea>
+                            <button type="submit" class="btn-sm" data-uk="Відправити" data-en="Send">Відправити</button>
+                        </form>
                     </div>
                 </div>
                 <div class="footer-links">
@@ -145,24 +150,20 @@
                         <li><a href="#home" data-uk="Головна" data-en="Home">Головна</a></li>
                         <li><a href="#activities" data-uk="Діяльність" data-en="Activities">Діяльність</a></li>
                         <li><a href="#reports" data-uk="Звітність" data-en="Reports">Звітність</a></li>
-                        <li><a href="#stories" data-uk="Історії" data-en="Stories">Історії</a></li>
-                        <li><a href="#partners" data-uk="Партнери" data-en="Partners">Партнери</a></li>
-                        <li><a href="#media" data-uk="Галерея" data-en="Gallery">Галерея</a></li>
+                        <li><a href="#contact" data-uk="Контакти" data-en="Contacts">Контакти</a></li>
                     </ul>
                 </div>
                 <div class="footer-services">
-                    <h4 data-uk="Наші послуги" data-en="Our Services">Наші послуги</h4>
-                    <ul>
-                        <li data-uk="Допомога з документами" data-en="Docs help">Допомога з документами</li>
-                        <li data-uk="Юридична допомога" data-en="Legal aid">Юридична допомога</li>
-                        <li data-uk="Медична реабілітація" data-en="Medical help">Медична реабілітація</li>
-                        <li data-uk="Проведення дозвілля" data-en="Leisure">Проведення дозвілля</li>
-                        <li data-uk="Навчальні програми" data-en="Education">Навчальні програми</li>
+                    <h4 data-uk="Послуги" data-en="Services">Послуги</h4>
+                    <ul style="list-style: none; color: #aaa;">
+                        <li data-uk="Юридична допомога" data-en="Legal help">Юридична допомога</li>
+                        <li data-uk="Реабілітація" data-en="Rehabilitation">Реабілітація</li>
+                        <li data-uk="Допомога з документами" data-en="Documents">Допомога з документами</li>
                     </ul>
                 </div>
             </div>
-            <div class="copyright text-center">
-                <p>&copy; 2026 ГО «ЛЕГІОН ТИТАНІВ». Все права захищені.</p>
+            <div class="copyright text-center" style="margin-top:50px; border-top:1px solid #222; padding-top:20px; font-size:0.8rem; color:#666;">
+                <p>&copy; 2026 ГО «ЛЕГІОН ТИТАНІВ». Всі права захищені.</p>
             </div>
         </footer>
     </main>
