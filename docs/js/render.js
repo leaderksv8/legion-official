@@ -75,8 +75,8 @@ export function renderGallery(data) {
     const container = document.getElementById('gallery-preview');
     if (!container) return;
     container.innerHTML = data.map(img => `
-        <div class="gallery-item" onclick="openFullImage('${img}')" style="cursor:pointer; overflow:hidden; border-radius:10px; height:150px;">
-            <img src="${img}" alt="Захід" style="width:100%; height:100%; object-fit:cover; transition: 0.3s;">
+        <div class="gallery-item" onclick="openFullImage('${img}')">
+            <img src="${img}" alt="Захід">
         </div>
     `).join('');
 }

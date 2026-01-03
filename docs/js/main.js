@@ -35,12 +35,12 @@ function refresh() {
     if (cache.news.length) render.renderNews(cache.news, currentLang);
     if (cache.stories.length) render.renderStories(cache.stories, currentLang);
     
-    // Тестова галерея
+    // Галерея (ваші фото)
     render.renderGallery([
         'images/001.jpg',
-        'https://via.placeholder.com/400x300?text=Event+1',
-        'https://via.placeholder.com/400x300?text=Event+2',
-        'https://via.placeholder.com/400x300?text=Event+3'
+        'https://via.placeholder.com/400x300?text=Захід+1',
+        'https://via.placeholder.com/400x300?text=Захід+2',
+        'https://via.placeholder.com/400x300?text=Захід+3'
     ]);
 
     const c = cache.contacts;
@@ -63,11 +63,11 @@ function refresh() {
         entries.forEach(en => {
             if (en.isIntersecting) {
                 const target = +en.target.dataset.target;
-                let c = 0;
+                let cValue = 0;
                 const step = () => {
-                    if (c < target) {
-                        c += target / 40;
-                        en.target.innerText = Math.ceil(c);
+                    if (cValue < target) {
+                        cValue += target / 40;
+                        en.target.innerText = Math.ceil(cValue);
                         setTimeout(step, 30);
                     } else en.target.innerText = target;
                 };
@@ -79,15 +79,17 @@ function refresh() {
     counters.forEach(c => obs.observe(c));
 }
 
+// Функція для відкриття біографії
 window.openBio = (id) => {
     const f = cache.founders.find(x => x.id === id);
     if (!f) return;
     const m = document.getElementById('bioModal');
-    document.getElementById('modal-data').innerHTML = `
+    const data = document.getElementById('modal-data');
+    data.innerHTML = `
         <div class="bio-flex">
             <img src="${f.img}" class="bio-img">
             <div>
-                <h2 style="color:var(--primary);">${f.name[currentLang]}</h2>
+                <h2>${f.name[currentLang]}</h2>
                 <p style="color:#c5a059;font-weight:700;margin-bottom:15px;">${f.role[currentLang]}</p>
                 <div style="line-height:1.7;">${f.bio[currentLang]}</div>
                 <div style="margin-top:20px; border-top:1px solid #eee; padding-top:10px;">
@@ -100,11 +102,13 @@ window.openBio = (id) => {
     document.body.style.overflow = 'hidden';
 };
 
+// НОВА ФУНКЦІЯ: Відкриття фото на весь екран
 window.openFullImage = (src) => {
     const m = document.getElementById('bioModal');
-    document.getElementById('modal-data').innerHTML = `
+    const data = document.getElementById('modal-data');
+    data.innerHTML = `
         <div style="text-align:center;">
-            <img src="${src}" style="max-width:100%; max-height:80vh; border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
+            <img src="${src}" style="max-width:100%; max-height:85vh; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
         </div>`;
     m.style.display = 'block';
     document.body.style.overflow = 'hidden';
@@ -112,8 +116,10 @@ window.openFullImage = (src) => {
 
 const closeModal = () => {
     const m = document.getElementById('bioModal');
-    m.style.display = 'none';
-    document.body.style.overflow = 'auto';
+    if (m) {
+        m.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
 };
 
 document.querySelector('.close-modal').onclick = closeModal;
