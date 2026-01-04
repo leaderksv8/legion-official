@@ -4,22 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ГО «ЛЕГІОН ТИТАНІВ» | Бучанський район</title>
+    
+    <!-- SEO & Meta -->
     <meta name="description" content="Громадська організація ветеранів війни з обмеженими можливостями Бучанського району.">
     <meta property="og:title" content="ГО «ЛЕГІОН ТИТАНІВ»">
     <meta property="og:image" content="images/001.jpg">
+
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
     <header class="main-header">
         <div class="container header-wrapper">
             <a href="#home" class="logo">
                 <i class="fas fa-shield-alt"></i>
                 <div class="logo-text">ЛЕГІОН ТИТАНІВ</div>
             </a>
-            <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
+            
+            <div class="header-right-controls">
+                <!-- Перемикач мов для мобільних (біля бургера) -->
+                <div class="lang-switcher mobile-header-langs">
+                    <button class="lang-btn active" data-lang="uk">UA</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+
+                <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
             <nav class="nav-menu" id="navMenu">
                 <ul id="main-nav">
                     <li><a href="#home" class="nav-link">Головна</a></li>
@@ -27,11 +45,14 @@
                     <li><a href="#partners" class="nav-link">Партнери</a></li>
                     <li><a href="#contact" class="nav-link">Контакти</a></li>
                 </ul>
-                <div class="lang-switcher mobile-langs">
+                <!-- Перемикач мов всередині бургера -->
+                <div class="lang-switcher burger-langs">
                     <button class="lang-btn active" data-lang="uk">UA</button>
                     <button class="lang-btn" data-lang="en">EN</button>
                 </div>
             </nav>
+
+            <!-- Перемикач мов для ПК -->
             <div class="lang-switcher desktop-langs">
                 <button class="lang-btn active" data-lang="uk">UA</button>
                 <button class="lang-btn" data-lang="en">EN</button>
@@ -118,7 +139,7 @@
             <div class="container footer-grid">
                 <div class="footer-info">
                     <h3 class="footer-label">Контакти</h3>
-                    <div id="contacts-content" class="footer-contacts-list"></div>
+                    <div id="contacts-content"></div>
                     <div class="join-team">
                         <h4 class="footer-label-sm">Написати нам</h4>
                         <form id="contactForm">
@@ -138,16 +159,10 @@
                         <li><a href="#contact"><i class="fas fa-chevron-right"></i> Контакти</a></li>
                     </ul>
                 </div>
-                <div class="footer-services">
-                    <h3 class="footer-label">Послуги</h3>
-                    <ul class="footer-list">
-                        <li><i class="fas fa-check"></i> Юридична допомога</li>
-                        <li><i class="fas fa-check"></i> Реабілітація</li>
-                        <li><i class="fas fa-check"></i> Соціальна адаптація</li>
-                    </ul>
-                </div>
             </div>
-            <div class="copyright text-center"><p>&copy; 2026 ГО «ЛЕГІОН ТИТАНІВ». Всі права захищені.</p></div>
+            <div class="copyright text-center">
+                <p>&copy; 2026 ГО «ЛЕГІОН ТИТАНІВ». Всі права захищені.</p>
+            </div>
         </footer>
     </main>
 

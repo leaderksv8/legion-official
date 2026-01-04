@@ -40,9 +40,9 @@ function refresh() {
     
     render.renderGallery([
         'images/001.jpg',
-        'https://via.placeholder.com/400x300?text=Захід+1',
-        'https://via.placeholder.com/400x300?text=Захід+2',
-        'https://via.placeholder.com/400x300?text=Захід+3'
+        'https://via.placeholder.com/400x300?text=Event+1',
+        'https://via.placeholder.com/400x300?text=Event+2',
+        'https://via.placeholder.com/400x300?text=Event+3'
     ]);
 
     const c = cache.contacts;
@@ -53,7 +53,10 @@ function refresh() {
         }
     }
 
-    document.querySelectorAll('[data-' + currentLang + ']').forEach(el => { el.innerHTML = el.getAttribute('data-' + currentLang); });
+    document.querySelectorAll('[data-' + currentLang + ']').forEach(el => {
+        el.innerHTML = el.getAttribute('data-' + currentLang);
+    });
+
     setupCounters();
 }
 
@@ -74,21 +77,23 @@ function setupPartnerCarousel() {
     const track = document.getElementById('partners-track');
     if (!slider || !track) return;
 
-    let isDown = false, startX, scrollLeft, autoScrollSpeed = 0.7, animationId;
+    let isDown = false, startX, scrollLeft, autoScrollSpeed = 0.5, animationId, isPaused = false;
 
     const startAutoScroll = () => {
-        slider.scrollLeft += autoScrollSpeed;
-        if (slider.scrollLeft >= track.scrollWidth / 3) { slider.scrollLeft = 0; }
+        if (!isPaused && !isDown) {
+            slider.scrollLeft += autoScrollSpeed;
+            if (slider.scrollLeft >= track.scrollWidth / 3) slider.scrollLeft = 0;
+        }
         animationId = requestAnimationFrame(startAutoScroll);
     };
 
     startAutoScroll();
 
-    slider.addEventListener('mouseenter', () => cancelAnimationFrame(animationId));
-    slider.addEventListener('mouseleave', () => { if(!isDown) startAutoScroll(); });
+    slider.addEventListener('mouseenter', () => isPaused = true);
+    slider.addEventListener('mouseleave', () => isPaused = false);
 
-    const startDrag = (e) => { isDown = true; cancelAnimationFrame(animationId); startX = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; scrollLeft = slider.scrollLeft; };
-    const stopDrag = () => { isDown = false; startAutoScroll(); };
+    const startDrag = (e) => { isDown = true; startX = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; scrollLeft = slider.scrollLeft; };
+    const stopDrag = () => { isDown = false; };
     const moveDrag = (e) => { if (!isDown) return; e.preventDefault(); const x = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 1.5; };
 
     slider.addEventListener('mousedown', startDrag);
