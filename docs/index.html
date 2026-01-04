@@ -6,14 +6,12 @@
     <title>ГО «ЛЕГІОН ТИТАНІВ» | Бучанський район</title>
     
     <!-- SEO & Social Media -->
-    <meta name="description" content="Громадська організація ветеранів війни Бучанського району. Допомога, реабілітація, соціальна адаптація.">
+    <meta name="description" content="Громадська організація ветеранів війни Бучанського району. Допомога, реабілітація, адаптація.">
     <meta property="og:title" content="ГО «ЛЕГІОН ТИТАНІВ»">
     <meta property="og:description" content="Ми об'єднуємо захисників для взаємодопомоги та реабілітації.">
-    <meta property="og:image" content="images/000.png">
+    <meta property="og:image" content="images/001.jpg">
 
-    <link rel="icon" type="image/png" href="images/000.png">
-
-    <!-- Fonts & Icons -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -23,7 +21,7 @@
     <header class="main-header">
         <div class="container header-wrapper">
             <a href="#home" class="logo">
-                <img src="images/000.png" alt="Лого" class="site-logo-img">
+                <i class="fas fa-shield-alt"></i>
                 <div class="logo-text" data-uk="ЛЕГІОН ТИТАНІВ" data-en="LEGION OF TITANS">ЛЕГІОН ТИТАНІВ</div>
             </a>
             
@@ -35,22 +33,23 @@
                         <li><a href="#partners" class="nav-link" data-uk="Партнери" data-en="Partners">Партнери</a></li>
                         <li><a href="#contact" class="nav-link" data-uk="Контакти" data-en="Contacts">Контакти</a></li>
                     </ul>
+                    <div class="lang-switcher burger-langs">
+                        <button class="lang-btn" data-lang="uk">UA</button>
+                        <button class="lang-btn" data-lang="en">EN</button>
+                    </div>
                 </nav>
 
-                <div class="lang-switcher">
-                    <button class="lang-btn active" data-lang="uk">UA</button>
+                <div class="lang-switcher desktop-langs">
+                    <button class="lang-btn" data-lang="uk">UA</button>
                     <button class="lang-btn" data-lang="en">EN</button>
                 </div>
 
-                <button class="menu-toggle" id="menuToggle" aria-label="Open Menu">
-                    <span></span><span></span><span></span>
-                </button>
+                <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
             </div>
         </div>
     </header>
 
     <main>
-        <!-- БЛОК 1: HERO -->
         <section id="home" class="hero-block">
             <div class="container text-center">
                 <div class="hero-content-wrapper">
@@ -60,34 +59,35 @@
                     <div class="hero-description">
                         <p data-uk="Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку тих, хто захищав нашу країну." data-en="We unite war veterans with disabilities of the Bucha district for mutual aid and adaptation. Our mission is to support those who protected our country.">Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку тих, хто захищав нашу країну.</p>
                     </div>
+                    <div class="hero-btns-group">
+                        <a href="#contact" class="shiny-button"><span>ПРИЄДНАТИСЯ</span></a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- БЛОК 2: НАША ДІЯЛЬНІСТЬ -->
         <section id="activities" class="section">
             <div class="container">
+                <h2 class="section-title text-center" data-uk="Наша діяльність" data-en="Our Activities">Наша діяльність</h2>
                 <div class="about-intro">
                     <div class="about-image"><img src="images/001.jpg" alt="Діяльність"></div>
                     <div class="about-text">
-                        <h2 class="section-title text-left" data-uk="Наша діяльність" data-en="Our Activities">Наша діяльність</h2>
-                        <p data-uk="Захист прав та інтересів ветеранів війни з обмеженими можливостями, допомога в реінтеграції та соціалізації." data-en="Protection of the rights and interests of war veterans with disabilities.">Захист прав та інтересів ветеранів війни з обмеженими можливостями, допомога в реінтеграції та соціалізації.</p>
+                        <h3 class="accent-title" data-uk="Комплексна допомога ветеранам" data-en="Comprehensive Assistance">Комплексна допомога ветеранам</h3>
+                        <p data-uk="Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів, реабілітаційними програмами та юридичним супроводом." data-en="Our NGO provides support in adaptation to peaceful life, helps with documents, rehabilitation programs and legal support.">Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів, реабілітаційними програмами та юридичним супроводом.</p>
                     </div>
                 </div>
                 <div id="activities-cards" class="grid-6"></div>
             </div>
         </section>
 
-        <!-- БЛОК 3: НАШІ ДОСЯГНЕННЯ -->
-        <section id="reports" class="section stats-bg reveal">
+        <section id="reports" class="section stats-bg">
             <div class="container text-center">
                 <h2 class="section-title white-text" data-uk="Наші досягнення" data-en="Our Achievements">Наші досягнення</h2>
                 <div id="stats-container" class="stats-grid"></div>
             </div>
         </section>
 
-        <!-- БЛОК 4: НАШІ ПАРТНЕРИ -->
-        <section id="partners" class="section reveal">
+        <section id="partners" class="section">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Наші партнери" data-en="Our Partners">Наші партнери</h2>
                 <div class="partners-wrapper">
@@ -100,7 +100,6 @@
             </div>
         </section>
 
-        <!-- БЛОК 5: ДРУЗІ -->
         <section id="friends" class="section reveal">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Наші друзі" data-en="Our Friends">Наші друзі</h2>
@@ -108,7 +107,6 @@
             </div>
         </section>
 
-        <!-- БЛОК 6: ІСТОРІЇ -->
         <section id="stories" class="section section-alt reveal">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Історії наших героїв" data-en="Heroes Stories">Історії наших героїв</h2>
@@ -116,7 +114,6 @@
             </div>
         </section>
 
-        <!-- БЛОК 7: МЕДІА-ЦЕНТР -->
         <section id="media" class="section reveal">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Медіа-центр" data-en="Media Center">Медіа-центр</h2>
@@ -126,14 +123,13 @@
                         <div id="news-container"></div>
                     </div>
                     <div class="media-col">
-                        <h3 class="media-sub-title" data-uk="Фото та Відео звіти" data-en="Reports & Photos">Фото та Відео звіти</h3>
+                        <h3 class="media-sub-title" data-uk="Звіти та фото" data-en="Reports & Photos">Звіти та фото</h3>
                         <div id="gallery-preview" class="gallery-grid"></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- БЛОК 8: СПІВЗАСНОВНИКИ -->
         <section id="founders" class="section section-alt reveal">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Наші співзасновники" data-en="Our Founders">Наші співзасновники</h2>
@@ -141,16 +137,11 @@
             </div>
         </section>
 
-        <!-- ФУТЕР -->
         <footer id="contact" class="main-footer">
             <div class="container footer-grid">
                 <div class="footer-column contact-card">
                     <h3 class="footer-label" data-uk="Контакти" data-en="Contacts">Контакти</h3>
                     <div class="contact-info-box">
-                        <div class="footer-logo-box">
-                             <img src="images/000.png" alt="Logo" class="footer-logo-img">
-                             <span data-uk="ЛЕГІОН ТИТАНІВ" data-en="LEGION OF TITANS">ЛЕГІОН ТИТАНІВ</span>
-                        </div>
                         <p><i class="fas fa-map-marker-alt"></i> <span data-uk="м. Буча, Київська обл." data-en="Bucha, Kyiv Region">м. Буча, Київська обл.</span></p>
                         <p><i class="fas fa-phone"></i> +38 (067) 123-45-67</p>
                         <p><i class="fas fa-paper-plane"></i> @legion_bucha</p>
