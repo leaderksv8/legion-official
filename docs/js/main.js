@@ -64,47 +64,38 @@ function refresh() {
     setupCounters();
 }
 
-// Анімація появи, підсвітка меню ТА підсвітка заголовків
 function setupScrollEffects() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-menu a');
-    const reveals = document.querySelectorAll('.reveal');
 
     window.addEventListener('scroll', () => {
-        let current = "";
-        const scrollPos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-
-        // 1. Reveal effects + Заголовки
+        let currentSectionId = "";
+        
         sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            const windowHeight = window.innerHeight;
+            const rect = section.getBoundingClientRect();
+            const title = section.querySelector('.section-title');
             
-            // Якщо секція в центрі екрану
-            if (scrollPos >= sectionTop - 250 && scrollPos < sectionTop + sectionHeight - 250) {
-                current = section.getAttribute("id");
-                
-                // Знаходимо заголовок всередині цієї секції і додаємо клас підсвітки
-                const title = section.querySelector('.section-title');
+            // ЛОГІКА ДЛЯ ЗАГОЛОВКІВ НА СТОРІНЦІ
+            // Якщо верх секції знаходиться в межах від 0 до 400 пікселів від верху екрана
+            if (rect.top < 400 && rect.bottom > 400) {
                 if (title) title.classList.add('highlight');
+                currentSectionId = section.getAttribute("id");
             } else {
-                // Прибираємо підсвітку, якщо вийшли з секції
-                const title = section.querySelector('.section-title');
                 if (title) title.classList.remove('highlight');
             }
 
             // Класична анімація появи (Reveal)
             if (section.classList.contains('reveal')) {
-                if (section.getBoundingClientRect().top < windowHeight - 150) {
+                if (rect.top < window.innerHeight - 100) {
                     section.classList.add('active');
                 }
             }
         });
 
-        // 2. Navigation Active State (Меню в хедері)
+        // ЛОГІКА ДЛЯ МЕНЮ В ХЕДЕРІ
         navLinks.forEach((a) => {
             a.classList.remove("active");
-            if (a.getAttribute("href").includes(current) && current !== "") {
+            if (currentSectionId && a.getAttribute("href").includes(currentSectionId)) {
                 a.classList.add("active");
             }
         });
@@ -136,57 +127,40 @@ function setupCounters() {
 function setupBackToTop() {
     const btn = document.getElementById("backToTop");
     if (!btn) return;
-
     window.addEventListener('scroll', () => {
-        const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
-        if (scrollPos > 300) {
-            btn.setAttribute("style", "display: flex !important");
-        } else {
-            btn.setAttribute("style", "display: none !important");
-        }
+        if (window.pageYOffset > 300) btn.setAttribute("style", "display: flex !important");
+        else btn.setAttribute("style", "display: none !important");
     });
-
-    btn.onclick = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+    btn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function setupContactForm() {
     const form = document.getElementById('contactForm');
     const status = document.getElementById('formStatus');
     if (!form) return;
-
     form.onsubmit = async (e) => {
         e.preventDefault();
         const data = new FormData(form);
         const submitBtn = document.getElementById('formSubmit');
-        
         submitBtn.disabled = true;
-        const originalText = submitBtn.innerText;
         submitBtn.innerText = currentLang === 'uk' ? 'Надсилається...' : 'Sending...';
-
         try {
-            const response = await fetch("https://formspree.io/f/mqkrvylk", {
+            const res = await fetch("https://formspree.io/f/mqkrvylk", {
                 method: "POST",
                 body: data,
                 headers: { 'Accept': 'application/json' }
             });
-
-            if (response.ok) {
-                status.style.display = "block";
-                status.style.color = "#28a745";
-                status.innerText = currentLang === 'uk' ? "Дякуємо! Повідомлення надіслано." : "Thanks! Your message has been sent.";
+            if (res.ok) {
+                status.style.display = "block"; status.style.color = "#28a745";
+                status.innerText = currentLang === 'uk' ? "Дякуємо! Повідомлення надіслано." : "Thanks! Message sent.";
                 form.reset();
-            } else {
-                throw new Error();
-            }
+            } else throw new Error();
         } catch (error) {
-            status.style.display = "block";
-            status.style.color = "#dc3545";
-            status.innerText = currentLang === 'uk' ? "Помилка відправки. Спробуйте ще раз." : "Error. Please try again.";
+            status.style.display = "block"; status.style.color = "#dc3545";
+            status.innerText = currentLang === 'uk' ? "Помилка. Спробуйте ще раз." : "Error. Try again.";
         } finally {
             submitBtn.disabled = false;
-            submitBtn.innerText = originalText;
+            submitBtn.innerText = currentLang === 'uk' ? 'Відправити' : 'Send';
         }
     };
 }
@@ -199,7 +173,7 @@ window.openBio = (id) => {
     data.innerHTML = `<div class="bio-flex">
             <img src="${f.img}" class="bio-img">
             <div>
-                <h2 style="color:var(--primary);">${f.name[currentLang]}</h2>
+                <h2>${f.name[currentLang]}</h2>
                 <p style="color:var(--accent);font-weight:700;margin-bottom:15px;">${f.role[currentLang]}</p>
                 <div style="line-height:1.7;">${f.bio[currentLang]}</div>
                 <p style="margin-top:20px;"><b>TG:</b> ${f.tg} | <b>Тел:</b> ${f.phone}</p>
@@ -219,10 +193,7 @@ window.openFullImage = (src) => {
 
 const closeModal = () => {
     const m = document.getElementById('bioModal');
-    if (m) {
-        m.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
+    if (m) { m.style.display = 'none'; document.body.style.overflow = 'auto'; }
 };
 
 document.querySelector('.close-modal').onclick = closeModal;

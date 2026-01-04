@@ -27,14 +27,14 @@ body {
 section { padding: 100px 0; }
 .section-alt { background-color: var(--light); }
 
-/* Заголовки секцій */
+/* ПІДСВІТКА ЗАГОЛОВКІВ НА СТОРІНЦІ */
 .section-title { 
-    transition: var(--transition); 
-    margin-bottom: 30px; 
+    transition: all 0.5s ease-in-out; 
+    display: inline-block; /* Щоб трансформація масштабу працювала коректно */
 }
 .section-title.highlight { 
     color: var(--accent) !important; 
-    transform: scale(1.05);
+    transform: scale(1.1); /* Текст збільшується на 10% */
 }
 .text-center { text-align: center; margin-bottom: 50px; }
 
@@ -62,9 +62,11 @@ section { padding: 100px 0; }
     text-transform: uppercase; 
     transition: var(--transition);
 }
-.nav-menu a:hover, .nav-menu a.active { 
+/* Підсвітка активного пункту в меню */
+.nav-menu a.active { 
     color: var(--accent) !important; 
 }
+.nav-menu a:hover { color: white; }
 
 .lang-btn { 
     background: transparent; 
