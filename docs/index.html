@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ГО «ЛЕГІОН ТИТАНІВ» | Бучанський район</title>
     
-    <!-- SEO & Social -->
-    <meta name="description" content="Громадська організація ветеранів війни Бучанського району.">
+    <!-- SEO & Meta -->
+    <meta name="description" content="Громадська організація ветеранів війни Бучанського району. Допомога, реабілітація, адаптація.">
     <meta property="og:title" content="ГО «ЛЕГІОН ТИТАНІВ»">
     <meta property="og:image" content="images/001.jpg">
 
@@ -32,13 +32,10 @@
                         <li><a href="#partners" class="nav-link" data-uk="Партнери" data-en="Partners">Партнери</a></li>
                         <li><a href="#contact" class="nav-link" data-uk="Контакти" data-en="Contacts">Контакти</a></li>
                     </ul>
-                    <div class="lang-switcher burger-langs">
-                        <button class="lang-btn" data-lang="uk">UA</button>
-                        <button class="lang-btn" data-lang="en">EN</button>
-                    </div>
                 </nav>
 
-                <div class="lang-switcher desktop-langs">
+                <!-- ЄДИНИЙ ПЕРЕМИКАЧ МОВ НА САЙТІ -->
+                <div class="lang-switcher" id="mainLangSwitcher">
                     <button class="lang-btn active" data-lang="uk">UA</button>
                     <button class="lang-btn" data-lang="en">EN</button>
                 </div>
@@ -66,12 +63,12 @@
         <!-- БЛОК 2: НАША ДІЯЛЬНІСТЬ -->
         <section id="activities" class="section">
             <div class="container">
-                <h2 class="section-title text-center" data-uk="Наша діяльність" data-en="Our Activities">Наша діяльність</h2>
+                <h2 class="section-title" data-uk="Наша діяльність" data-en="Our Activities">Наша діяльність</h2>
                 <div class="about-intro">
                     <div class="about-image"><img src="images/001.jpg" alt="Діяльність"></div>
                     <div class="about-text">
                         <h3 class="accent-title" data-uk="Комплексна допомога ветеранам" data-en="Comprehensive Assistance">Комплексна допомога ветеранам</h3>
-                        <p data-uk="Наша організація займається допомогою колишнім військовим в адаптації до мирного життя, надаємо підтримку у оформленні документів, пільг та послуг." data-en="Our organization helps former military personnel adapt to civilian life, providing support in document processing and benefits.">Захист прав та інтересів ветеранів війни з обмеженими можливостями, допомога в реінтеграції та соціалізації.</p>
+                        <p data-uk="Наша організація займається допомогою колишнім військовим в адаптації до мирного життя, надаємо підтримку у оформленні документів, пільг та послуг." data-en="Our organization helps former military personnel adapt to civilian life, providing support in document processing and benefits.">Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів, реабілітаційними програмами та юридичним супроводом.</p>
                     </div>
                 </div>
                 <div id="activities-cards" class="grid-6"></div>
@@ -90,13 +87,17 @@
         <section id="partners" class="section reveal">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Наші партнери" data-en="Our Partners">Наші партнери</h2>
-                <div class="partners-slider" id="partnersSlider">
-                    <div id="partners-track" class="partners-track"></div>
+                <div class="partners-wrapper">
+                    <button class="slider-arrow prev" id="prevPartner"><i class="fas fa-chevron-left"></i></button>
+                    <div class="partners-slider" id="partnersSlider">
+                        <div id="partners-track" class="partners-track"></div>
+                    </div>
+                    <button class="slider-arrow next" id="nextPartner"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
         </section>
 
-        <!-- БЛОК 5: НАШІ ДРУЗІ -->
+        <!-- БЛОК 5: ДРУЗІ -->
         <section id="friends" class="section reveal">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Наші друзі" data-en="Our Friends">Наші друзі</h2>
@@ -156,7 +157,7 @@
                 </div>
                 
                 <div class="footer-column links-column">
-                    <h3 class="footer-label" data-uk="Швидкі посилання" data-en="Quick Links">Швидкі посилання</h3>
+                    <h3 class="footer-label" data-uk="Посилання" data-en="Links">Посилання</h3>
                     <ul class="footer-list">
                         <li><a href="#home" data-uk="Головна" data-en="Home">Головна</a></li>
                         <li><a href="#activities" data-uk="Діяльність" data-en="Activities">Діяльність</a></li>

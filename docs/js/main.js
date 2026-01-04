@@ -32,6 +32,7 @@ async function init() {
 }
 
 function refresh() {
+    // Рендеримо всі динамічні блоки
     render.renderActivities(cache.activities, currentLang);
     render.renderFounders(cache.founders, currentLang);
     render.renderStats(cache.stats, currentLang);
@@ -41,11 +42,13 @@ function refresh() {
     render.renderFriends(cache.friends, currentLang);
     render.renderGallery(['images/001.jpg', 'images/001.jpg', 'images/001.jpg', 'images/001.jpg']);
 
+    // ПЕРЕКЛАД ВСЬОГО ТЕКСТУ (СТАТИКА)
     document.querySelectorAll('[data-uk], [data-en]').forEach(el => {
         const text = el.getAttribute(`data-${currentLang}`);
         if (text) el.innerHTML = text;
     });
 
+    // ПЕРЕКЛАД ПЛЕЙСХОЛДЕРІВ
     document.querySelectorAll('[data-uk-placeholder]').forEach(el => {
         const ph = el.getAttribute(`data-${currentLang}-placeholder`);
         if (ph) el.placeholder = ph;
@@ -60,6 +63,7 @@ function setupLanguageSwitcher() {
         btn.onclick = (e) => {
             currentLang = e.currentTarget.dataset.lang;
             btns.forEach(b => b.classList.remove('active'));
+            // Синхронізуємо всі кнопки на сторінці
             document.querySelectorAll(`.lang-btn[data-lang="${currentLang}"]`).forEach(b => b.classList.add('active'));
             refresh();
         };
@@ -96,9 +100,6 @@ function setupScrollLogic() {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
                 const id = entry.target.getAttribute('id');
-                document.querySelectorAll('.nav-menu a').forEach(a => {
-                    a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
-                });
                 const title = entry.target.querySelector('.section-title');
                 if (title) title.classList.add('highlight');
             } else {
@@ -127,7 +128,8 @@ function setupCounters() {
 
 function setupBackToTop() {
     const btn = document.getElementById("backToTop");
-    window.onscroll = () => { if (window.pageYOffset > 400) btn.setAttribute("style", "display: flex !important"); else btn.setAttribute("style", "display: none !important"); };
+    if (!btn) return;
+    window.addEventListener('scroll', () => { if (window.pageYOffset > 400) btn.setAttribute("style", "display: flex !important"); else btn.setAttribute("style", "display: none !important"); });
     btn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -136,7 +138,7 @@ function setupContactForm() {
     if (!form) return;
     form.onsubmit = async (e) => {
         e.preventDefault();
-        alert(currentLang === 'uk' ? "Дякуємо! Ваше повідомлення надіслано." : "Thank you! Message sent.");
+        alert(currentLang === 'uk' ? "Дякуємо! Ваше повідомлення надіслано." : "Thank you! Sent.");
         form.reset();
     };
 }

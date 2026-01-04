@@ -51,7 +51,7 @@ export function renderNews(data, lang) {
     container.innerHTML = data.map(n => `
         <div class="news-card">
             <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:0.8rem; font-weight:700;">
-                <span style="background:var(--primary); color:white; padding:3px 12px; border-radius:50px;">${n.tag[lang]}</span>
+                <span class="news-tag">${n.tag[lang]}</span>
                 <span style="color:var(--gray);">${n.date}</span>
             </div>
             <h4 style="color:var(--primary);">${n.title[lang]}</h4>
@@ -65,6 +65,7 @@ export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track || !data) return;
     const list = data.length > 0 ? data : [{name: "ГО", img: ""}];
+    // Потрійна порція для нескінченності
     const double = [...list, ...list, ...list];
     track.innerHTML = double.map(p => {
         const imgSrc = p.img || `https://via.placeholder.com/200x80?text=${p.name}`;
