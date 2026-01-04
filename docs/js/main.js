@@ -53,7 +53,10 @@ function refresh() {
         }
     }
 
-    document.querySelectorAll('[data-' + currentLang + ']').forEach(el => { el.innerHTML = el.getAttribute('data-' + currentLang); });
+    document.querySelectorAll('[data-' + currentLang + ']').forEach(el => {
+        el.innerHTML = el.getAttribute('data-' + currentLang);
+    });
+
     setupCounters();
 }
 
@@ -89,8 +92,8 @@ function setupPartnerCarousel() {
     slider.addEventListener('mouseenter', () => isPaused = true);
     slider.addEventListener('mouseleave', () => isPaused = false);
 
-    const startDrag = (e) => { isDown = true; cancelAnimationFrame(animationId); startX = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; scrollLeft = slider.scrollLeft; };
-    const stopDrag = () => { isDown = false; startAutoScroll(); };
+    const startDrag = (e) => { isDown = true; startX = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; scrollLeft = slider.scrollLeft; };
+    const stopDrag = () => { isDown = false; };
     const moveDrag = (e) => { if (!isDown) return; e.preventDefault(); const x = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 1.5; };
 
     slider.addEventListener('mousedown', startDrag);
