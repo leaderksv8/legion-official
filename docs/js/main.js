@@ -41,7 +41,6 @@ function refresh() {
     render.renderFriends(cache.friends, currentLang);
     render.renderGallery(['images/001.jpg', 'images/001.jpg', 'images/001.jpg', 'images/001.jpg']);
 
-    // ПЕРЕКЛАД ВСЬОГО ТЕКСТУ (СТАТИКА ТА БРЕНД)
     document.querySelectorAll('[data-uk], [data-en]').forEach(el => {
         const text = el.getAttribute(`data-${currentLang}`);
         if (text) el.innerHTML = text;
@@ -56,7 +55,6 @@ function setupLanguageSwitcher() {
         btn.onclick = (e) => {
             currentLang = e.currentTarget.dataset.lang;
             btns.forEach(b => b.classList.remove('active'));
-            // Синхронізуємо кнопки
             document.querySelectorAll(`.lang-btn[data-lang="${currentLang}"]`).forEach(b => b.classList.add('active'));
             refresh();
         };
@@ -83,11 +81,7 @@ function setupMobileMenu() {
     const toggle = document.getElementById('menuToggle');
     const menu = document.getElementById('navMenu');
     if (!toggle || !menu) return;
-    toggle.onclick = () => { 
-        toggle.classList.toggle('active'); 
-        menu.classList.toggle('active'); 
-        document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto'; 
-    };
+    toggle.onclick = () => { toggle.classList.toggle('active'); menu.classList.toggle('active'); document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto'; };
 }
 
 function setupScrollLogic() {
