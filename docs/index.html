@@ -44,7 +44,7 @@
     </header>
 
     <main>
-        <!-- БЛОК 1: HERO (ДИЗАЙНЕРСЬКЕ ОБІГРАШ ТЕКСТУ) -->
+        <!-- БЛОК 1: HERO -->
         <section id="home" class="hero-block">
             <div class="container">
                 <div class="hero-content-wrapper">
@@ -135,42 +135,44 @@
             </div>
         </section>
 
-        <!-- БЛОК 8: ФУТЕР -->
+        <!-- БЛОК 8: ФУТЕР (ПРОФЕСІЙНИЙ ДИЗАЙН) -->
         <footer id="contact" class="main-footer">
             <div class="container footer-grid">
                 <div class="footer-info">
-                    <h3 data-uk="Контакти" data-en="Contacts">Контакти</h3>
-                    <div id="contacts-content"></div>
+                    <h3 class="footer-label" data-uk="Контакти" data-en="Contacts">Контакти</h3>
+                    <div id="contacts-content" class="footer-contacts-list"></div>
                     <div class="join-team">
-                        <h4 data-uk="Написати нам" data-en="Write to Us">Написати нам</h4>
+                        <h4 class="footer-label-sm" data-uk="Написати нам" data-en="Write to Us">Написати нам</h4>
                         <form id="contactForm" style="margin-top:15px;">
-                            <input type="text" name="name" placeholder="Ваше ім'я" required style="width:100%; padding:12px; margin-bottom:12px; border-radius:8px; border:none;">
-                            <input type="email" name="email" placeholder="Ваш Email" required style="width:100%; padding:12px; margin-bottom:12px; border-radius:8px; border:none;">
-                            <textarea name="message" placeholder="Повідомлення" required style="width:100%; padding:12px; margin-bottom:12px; border-radius:8px; border:none; height:100px; resize: none;"></textarea>
-                            <button type="submit" id="formSubmit" class="btn-sm" data-uk="Відправити" data-en="Send">Відправити</button>
+                            <input type="text" name="name" placeholder="Ваше ім'я" required class="footer-input">
+                            <input type="email" name="email" placeholder="Ваш Email" required class="footer-input">
+                            <textarea name="message" placeholder="Повідомлення" required class="footer-input footer-textarea"></textarea>
+                            <button type="submit" id="formSubmit" class="btn-sm footer-btn" data-uk="Відправити" data-en="Send">Відправити</button>
                             <p id="formStatus" style="margin-top:10px; font-weight:600; display:none;"></p>
                         </form>
                     </div>
                 </div>
+                
                 <div class="footer-links">
-                    <h4 data-uk="Швидкі посилання" data-en="Quick Links">Швидкі посилання</h4>
-                    <ul>
-                        <li><a href="#home" data-uk="Головна" data-en="Home">Головна</a></li>
-                        <li><a href="#activities" data-uk="Діяльність" data-en="Activities">Діяльність</a></li>
-                        <li><a href="#reports" data-uk="Звітність" data-en="Reports">Звітність</a></li>
-                        <li><a href="#contact" data-uk="Контакти" data-en="Contacts">Контакти</a></li>
+                    <h3 class="footer-label" data-uk="Швидкі посилання" data-en="Quick Links">Швидкі посилання</h3>
+                    <ul class="footer-list">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> <span data-uk="Головна" data-en="Home">Головна</span></a></li>
+                        <li><a href="#activities"><i class="fas fa-chevron-right"></i> <span data-uk="Діяльність" data-en="Activities">Діяльність</span></a></li>
+                        <li><a href="#reports"><i class="fas fa-chevron-right"></i> <span data-uk="Звітність" data-en="Reports">Звітність</span></a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> <span data-uk="Контакти" data-en="Contacts">Контакти</span></a></li>
                     </ul>
                 </div>
+                
                 <div class="footer-services">
-                    <h4 data-uk="Послуги" data-en="Services">Послуги</h4>
-                    <ul style="list-style: none; color: #aaa; padding: 0;">
-                        <li style="margin-bottom:10px;">Юридична допомога</li>
-                        <li style="margin-bottom:10px;">Реабілітація</li>
-                        <li style="margin-bottom:10px;">Соціальна адаптація</li>
+                    <h3 class="footer-label" data-uk="Послуги" data-en="Services">Послуги</h3>
+                    <ul class="footer-list">
+                        <li><i class="fas fa-check"></i> <span data-uk="Юридична допомога" data-en="Legal Help">Юридична допомога</span></li>
+                        <li><i class="fas fa-check"></i> <span data-uk="Реабілітація" data-en="Rehabilitation">Реабілітація</span></li>
+                        <li><i class="fas fa-check"></i> <span data-uk="Соціальна адаптація" data-en="Social Adaptation">Соціальна адаптація</span></li>
                     </ul>
                 </div>
             </div>
-            <div class="copyright text-center" style="margin-top:50px; border-top:1px solid #222; padding-top:20px; font-size:0.85rem; color:#666;">
+            <div class="copyright text-center">
                 <p>&copy; 2026 ГО «ЛЕГІОН ТИТАНІВ». Всі права захищені.</p>
             </div>
         </footer>
