@@ -37,7 +37,6 @@ function refresh() {
     if (cache.news.length) render.renderNews(cache.news, currentLang);
     if (cache.stories.length) render.renderStories(cache.stories, currentLang);
     
-    // Галерея (можна додати реальні фото в масив)
     render.renderGallery([
         'images/001.jpg',
         'https://via.placeholder.com/400x300?text=Захід+1',
@@ -63,7 +62,6 @@ function refresh() {
     setupCounters();
 }
 
-// Анімація цифр
 function setupCounters() {
     const counters = document.querySelectorAll('.counter');
     const obs = new IntersectionObserver(entries => {
@@ -86,22 +84,25 @@ function setupCounters() {
     counters.forEach(c => obs.observe(c));
 }
 
-// Кнопка Вгору
 function setupBackToTop() {
     const btn = document.getElementById("backToTop");
+    if (!btn) return;
+
     window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) {
+        // Перевіряємо скрол через різні властивості для надійності
+        const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollPos > 300) {
             btn.style.display = "block";
         } else {
             btn.style.display = "none";
         }
     });
+
     btn.onclick = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 }
 
-// Розумна форма контактів
 function setupContactForm() {
     const form = document.getElementById('contactForm');
     const status = document.getElementById('formStatus');
@@ -114,6 +115,7 @@ function setupContactForm() {
         const submitBtn = document.getElementById('formSubmit');
         
         submitBtn.disabled = true;
+        const originalText = submitBtn.innerText;
         submitBtn.innerText = currentLang === 'uk' ? 'Надсилається...' : 'Sending...';
 
         try {
@@ -137,12 +139,11 @@ function setupContactForm() {
             status.innerText = currentLang === 'uk' ? "Помилка відправки. Спробуйте ще раз." : "Error. Please try again.";
         } finally {
             submitBtn.disabled = false;
-            submitBtn.innerText = currentLang === 'uk' ? 'Відправити' : 'Send';
+            submitBtn.innerText = originalText;
         }
     };
 }
 
-// Глобальні функції модалок
 window.openBio = (id) => {
     const f = cache.founders.find(x => x.id === id);
     if (!f) return;
