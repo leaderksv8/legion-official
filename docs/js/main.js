@@ -14,7 +14,6 @@ async function getJSON(url) {
 }
 
 async function init() {
-    setupMobileMenu(); 
     setupBackToTop();
     
     cache.founders = await getJSON('data/founders.json') || [];
@@ -63,31 +62,21 @@ function refresh() {
     setupCounters();
 }
 
-function setupMobileMenu() {
-    const toggle = document.getElementById('menuToggle');
-    const menu = document.getElementById('navMenu');
-    const links = document.querySelectorAll('.nav-link');
-    if (!toggle || !menu) return;
-    toggle.onclick = () => {
-        toggle.classList.toggle('active');
-        menu.classList.toggle('active');
-        document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
-    };
-    links.forEach(l => l.onclick = () => {
-        toggle.classList.remove('active');
-        menu.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    });
-}
-
 function setupScrollLogic() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-menu a');
-    const observerOptions = { root: null, rootMargin: '-20% 0px -50% 0px', threshold: 0 };
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -50% 0px', 
+        threshold: 0
+    };
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const id = entry.target.getAttribute('id');
             const title = entry.target.querySelector('.section-title');
+
             if (entry.isIntersecting) {
                 if (title) title.classList.add('highlight');
                 navLinks.forEach(link => {
@@ -100,6 +89,7 @@ function setupScrollLogic() {
             }
         });
     }, observerOptions);
+
     sections.forEach(section => observer.observe(section));
 }
 
@@ -167,8 +157,7 @@ window.openBio = (id) => {
     const f = cache.founders.find(x => x.id === id);
     if (!f) return;
     const m = document.getElementById('bioModal');
-    const data = document.getElementById('modal-data');
-    data.innerHTML = `
+    document.getElementById('modal-data').innerHTML = `
         <div class="bio-flex">
             <img src="${f.img}" class="bio-img">
             <div>
