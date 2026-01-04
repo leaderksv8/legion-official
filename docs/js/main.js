@@ -39,9 +39,9 @@ function refresh() {
     
     render.renderGallery([
         'images/001.jpg',
-        'https://via.placeholder.com/400x300?text=Захід+1',
-        'https://via.placeholder.com/400x300?text=Захід+2',
-        'https://via.placeholder.com/400x300?text=Захід+3'
+        'https://via.placeholder.com/400x300?text=Event+1',
+        'https://via.placeholder.com/400x300?text=Event+2',
+        'https://via.placeholder.com/400x300?text=Event+3'
     ]);
 
     const c = cache.contacts;
@@ -49,8 +49,8 @@ function refresh() {
         const block = document.getElementById('contacts-content');
         if (block) {
             block.innerHTML = `
-                <p><i class="fas fa-phone"></i> ${c.phone}</p>
-                <p><i class="fas fa-envelope"></i> ${c.email}</p>
+                <p style="margin-bottom:10px;"><i class="fas fa-phone"></i> ${c.phone}</p>
+                <p style="margin-bottom:10px;"><i class="fas fa-envelope"></i> ${c.email}</p>
                 <p><i class="fas fa-map-marker-alt"></i> ${c.address[currentLang]}</p>`;
         }
     }
@@ -65,7 +65,6 @@ function refresh() {
 function setupScrollLogic() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-menu a');
-
     const observerOptions = { threshold: 0.3 };
 
     const observer = new IntersectionObserver((entries) => {
