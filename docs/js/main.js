@@ -5,7 +5,6 @@ let cache = {
     founders: [], stats: [], partners: [], news: [], stories: [], contacts: {}, activities: []
 };
 
-// Допоміжна функція завантаження
 async function getJSON(url) {
     try {
         const r = await fetch(url);
@@ -17,10 +16,9 @@ async function getJSON(url) {
 }
 
 async function init() {
-    // Ініціалізуємо кнопку Вгору НЕГАЙНО, не чекаючи завантаження JSON
     setupBackToTop();
+    setupScrollEffects();
 
-    // Завантажуємо дані
     cache.founders = await getJSON('data/founders.json') || [];
     cache.stats = await getJSON('data/stats.json') || [];
     cache.partners = await getJSON('data/partners.json') || [];
@@ -66,6 +64,42 @@ function refresh() {
     setupCounters();
 }
 
+// Анімація появи та підсвітка меню
+function setupScrollEffects() {
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    const reveals = document.querySelectorAll('.reveal');
+
+    window.addEventListener('scroll', () => {
+        let current = "";
+        const scrollPos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+
+        // 1. Reveal effects
+        reveals.forEach(rev => {
+            const windowHeight = window.innerHeight;
+            const revealTop = rev.getBoundingClientRect().top;
+            if (revealTop < windowHeight - 150) {
+                rev.classList.add('active');
+            }
+        });
+
+        // 2. Navigation Active State
+        sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            if (scrollPos >= sectionTop - 100) {
+                current = section.getAttribute("id");
+            }
+        });
+
+        navLinks.forEach((a) => {
+            a.classList.remove("active");
+            if (a.getAttribute("href").includes(current)) {
+                a.classList.add("active");
+            }
+        });
+    });
+}
+
 function setupCounters() {
     const counters = document.querySelectorAll('.counter');
     const obs = new IntersectionObserver(entries => {
@@ -88,26 +122,20 @@ function setupCounters() {
     counters.forEach(c => obs.observe(c));
 }
 
-// ПЕРЕПИСАНА ФУНКЦІЯ ВГОРУ
 function setupBackToTop() {
     const btn = document.getElementById("backToTop");
     if (!btn) return;
 
-    const toggleBtn = () => {
-        const scrollPos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+    window.addEventListener('scroll', () => {
+        const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
         if (scrollPos > 300) {
             btn.setAttribute("style", "display: flex !important");
         } else {
             btn.setAttribute("style", "display: none !important");
         }
-    };
+    });
 
-    // Слухаємо скрол
-    window.addEventListener('scroll', toggleBtn);
-    
-    // Клік
-    btn.onclick = (e) => {
-        e.preventDefault();
+    btn.onclick = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 }
@@ -152,7 +180,6 @@ function setupContactForm() {
     };
 }
 
-// Модалки
 window.openBio = (id) => {
     const f = cache.founders.find(x => x.id === id);
     if (!f) return;

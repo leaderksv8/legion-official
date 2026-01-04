@@ -10,7 +10,7 @@
     --white: #ffffff;
     --gray: #666666;
     --shadow: 0 10px 30px rgba(0,0,0,0.08);
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -45,14 +45,14 @@ section { padding: 100px 0; }
 
 .nav-menu ul { display: flex; list-style: none; gap: 30px; }
 .nav-menu a { 
-    color: white; 
+    color: rgba(255,255,255,0.7); 
     text-decoration: none; 
     font-size: 0.85rem; 
     font-weight: 600; 
     text-transform: uppercase; 
     transition: var(--transition);
 }
-.nav-menu a:hover { color: var(--accent); }
+.nav-menu a:hover, .nav-menu a.active { color: var(--accent); }
 
 .lang-btn { 
     background: transparent; 
@@ -79,6 +79,17 @@ section { padding: 100px 0; }
 }
 .hero-block h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 25px; line-height: 1.2; }
 .hero-block p { font-size: 1.1rem; max-width: 850px; margin: 0 auto; opacity: 0.9; }
+
+/* REVEAL ON SCROLL */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 /* ACTIVITIES SECTION */
 .about-intro { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; margin-bottom: 80px; }
@@ -163,11 +174,11 @@ section { padding: 100px 0; }
 
 /* КНОПКА ВГОРУ */
 #backToTop {
-    display: none !important; /* Початково приховано */
+    display: none !important;
     position: fixed;
     bottom: 40px;
     right: 40px;
-    z-index: 99999; /* Найвищий пріоритет */
+    z-index: 99999;
     border: none;
     outline: none;
     background-color: var(--accent);
