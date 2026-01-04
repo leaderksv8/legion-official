@@ -1,7 +1,27 @@
 [
-  { "name": "Partner 1", "img": "https://via.placeholder.com/200x80?text=Partner+1", "link": "#" },
-  { "name": "Partner 2", "img": "https://via.placeholder.com/200x80?text=Partner+2", "link": "#" },
-  { "name": "Partner 3", "img": "https://via.placeholder.com/200x80?text=Partner+3", "link": "#" },
-  { "name": "Partner 4", "img": "https://via.placeholder.com/200x80?text=Partner+4", "link": "#" },
-  { "name": "Partner 5", "img": "https://via.placeholder.com/200x80?text=Partner+5", "link": "#" }
+  {
+    "name": "Бучанська районна державна адміністрація",
+    "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Coat_of_Arms_of_Bucha_Raion_in_Kyiv_Oblast.svg/800px-Coat_of_Arms_of_Bucha_Raion_in_Kyiv_Oblast.svg.png",
+    "link": "https://buchanska-rda.gov.ua/"
+  },
+  {
+    "name": "Партнер 2",
+    "img": "https://via.placeholder.com/200x80?text=Partner+2",
+    "link": "#"
+  },
+  {
+    "name": "Партнер 3",
+    "img": "https://via.placeholder.com/200x80?text=Partner+3",
+    "link": "#"
+  },
+  {
+    "name": "Партнер 4",
+    "img": "https://via.placeholder.com/200x80?text=Partner+4",
+    "link": "#"
+  },
+  {
+    "name": "Партнер 5",
+    "img": "https://via.placeholder.com/200x80?text=Partner+5",
+    "link": "#"
+  }
 ]

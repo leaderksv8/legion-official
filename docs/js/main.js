@@ -14,7 +14,7 @@ async function getJSON(url) {
 }
 
 async function init() {
-    setupBurgerMenu(); // Ініціалізація Бургера
+    setupBurgerMenu(); 
     setupBackToTop();
     
     cache.founders = await getJSON('data/founders.json') || [];
@@ -63,20 +63,16 @@ function refresh() {
     setupCounters();
 }
 
-// ЛОГІКА БУРГЕР-МЕНЮ
 function setupBurgerMenu() {
     const burger = document.getElementById('burgerBtn');
     const menu = document.getElementById('navMenu');
     const links = document.querySelectorAll('.nav-link');
-
     if (!burger || !menu) return;
-
     burger.onclick = () => {
         burger.classList.toggle('active');
         menu.classList.toggle('active');
         document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
     };
-
     links.forEach(l => l.onclick = () => {
         burger.classList.remove('active');
         menu.classList.remove('active');
@@ -88,7 +84,6 @@ function setupScrollLogic() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-menu a');
     const observerOptions = { root: null, rootMargin: '-20% 0px -50% 0px', threshold: 0 };
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const id = entry.target.getAttribute('id');
@@ -156,7 +151,7 @@ function setupContactForm() {
             });
             if (res.ok) {
                 status.style.display = "block"; status.style.color = "#28a745";
-                status.innerText = currentLang === 'uk' ? "Успішно!" : "Success!";
+                status.innerText = currentLang === 'uk' ? "Дякуємо! Надіслано." : "Success!";
                 form.reset();
             } else throw new Error();
         } catch (error) {
