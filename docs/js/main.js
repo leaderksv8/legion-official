@@ -16,7 +16,6 @@ async function getJSON(url) {
 async function init() {
     setupBackToTop();
     
-    // Завантаження даних
     cache.founders = await getJSON('data/founders.json') || [];
     cache.stats = await getJSON('data/stats.json') || [];
     cache.partners = await getJSON('data/partners.json') || [];
@@ -63,7 +62,6 @@ function refresh() {
     setupCounters();
 }
 
-// ПЕРЕПИСАНА ЛОГІКА СКРОЛУ (Підсвітка заголовків та меню)
 function setupScrollLogic() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-menu a');
@@ -76,16 +74,11 @@ function setupScrollLogic() {
             const title = entry.target.querySelector('.section-title');
 
             if (entry.isIntersecting) {
-                // 1. Підсвітка заголовка на сторінці
                 if (title) title.classList.add('highlight');
-                
-                // 2. Підсвітка пункту меню
                 navLinks.forEach(link => {
                     link.classList.remove('active');
                     if (link.getAttribute('href') === `#${id}`) link.classList.add('active');
                 });
-
-                // 3. Reveal ефект
                 if (entry.target.classList.contains('reveal')) entry.target.classList.add('active');
             } else {
                 if (title) title.classList.remove('highlight');
@@ -178,7 +171,8 @@ window.openBio = (id) => {
 
 window.openFullImage = (src) => {
     const m = document.getElementById('bioModal');
-    document.getElementById('modal-data').innerHTML = `<div style="text-align:center;"><img src="${src}" style="max-width:100%; max-height:85vh; border-radius:20px; box-shadow:0 20px 50px rgba(0,0,0,0.5);"></div>`;
+    const data = document.getElementById('modal-data');
+    data.innerHTML = `<div style="text-align:center;"><img src="${src}" style="max-width:100%; max-height:85vh; border-radius:20px; box-shadow:0 20px 50px rgba(0,0,0,0.5);"></div>`;
     m.style.display = 'block';
     document.body.style.overflow = 'hidden';
 };
