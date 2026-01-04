@@ -33,6 +33,18 @@ export function renderFounders(data, lang) {
     `).join('');
 }
 
+export function renderFriends(data, lang) {
+    const container = document.getElementById('friends-container');
+    if (!container || !data) return;
+    container.innerHTML = data.map(f => `
+        <div class="friend-card">
+            <img src="${f.img}" alt="${f.name}">
+            <h4 style="color:var(--primary);">${f.name}</h4>
+            <p style="color:var(--accent); font-size:0.85rem; font-weight:600;">${f.role[lang]}</p>
+        </div>
+    `).join('');
+}
+
 export function renderNews(data, lang) {
     const container = document.getElementById('news-container');
     if (!container || !data) return;
@@ -58,18 +70,6 @@ export function renderPartners(data) {
         const imgSrc = p.img || `https://via.placeholder.com/200x80?text=${p.name}`;
         return `<a href="${p.link || '#'}" target="_blank"><img src="${imgSrc}" alt="${p.name}" referrerpolicy="no-referrer"></a>`;
     }).join('');
-}
-
-export function renderFriends(data, lang) {
-    const container = document.getElementById('friends-container');
-    if (!container || !data) return;
-    container.innerHTML = data.map(f => `
-        <div class="friend-card">
-            <img src="${f.img}" alt="${f.name}">
-            <h4>${f.name}</h4>
-            <p style="color:var(--accent); font-size:0.85rem; font-weight:600;">${f.role[lang]}</p>
-        </div>
-    `).join('');
 }
 
 export function renderStories(data, lang) {

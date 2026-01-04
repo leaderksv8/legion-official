@@ -47,7 +47,11 @@ function refresh() {
     if (c && c.phone) {
         const block = document.getElementById('contacts-content');
         if (block) {
-            block.innerHTML = `<p style="margin-bottom:12px;"><i class="fas fa-phone" style="color:var(--accent)"></i> ${c.phone}</p><p style="margin-bottom:12px;"><i class="fas fa-envelope" style="color:var(--accent)"></i> ${c.email}</p><p><i class="fas fa-map-marker-alt" style="color:var(--accent)"></i> ${c.address[currentLang]}</p>`;
+            block.innerHTML = `
+                <p style="margin-bottom:12px;"><i class="fas fa-map-marker-alt" style="color:var(--accent)"></i> Бучанський район, Київська обл.</p>
+                <p style="margin-bottom:12px;"><i class="fas fa-phone" style="color:var(--accent)"></i> ${c.phone}</p>
+                <p style="margin-bottom:12px;"><i class="fas fa-paper-plane" style="color:var(--accent)"></i> @legion_bucha</p>
+                <p style="margin-bottom:12px;"><i class="fas fa-envelope" style="color:var(--accent)"></i> ${c.email}</p>`;
         }
     }
 
@@ -71,7 +75,7 @@ function setupPartnerCarousel() {
     const slider = document.getElementById('partnersSlider');
     const track = document.getElementById('partners-track');
     if (!slider || !track) return;
-    let isDown = false, startX, scrollLeft, autoScrollSpeed = 0.5, animationId, isPaused = false;
+    let isDown = false, startX, scrollLeft, autoScrollSpeed = 0.3, animationId, isPaused = false;
     const startAutoScroll = () => { if (!isPaused && !isDown) { slider.scrollLeft += autoScrollSpeed; if (slider.scrollLeft >= track.scrollWidth / 3) slider.scrollLeft = 0; } animationId = requestAnimationFrame(startAutoScroll); };
     startAutoScroll();
     slider.addEventListener('mouseenter', () => isPaused = true);
