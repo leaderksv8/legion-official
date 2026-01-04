@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ГО «ЛЕГІОН ТИТАНІВ» | Бучанський район</title>
     
-    <!-- SEO & Meta -->
-    <meta name="description" content="Громадська організація ветеранів війни Бучанського району. Допомога, реабілітація, адаптація.">
+    <!-- SEO & Social Media -->
+    <meta name="description" content="Громадська організація ветеранів війни Бучанського району. Допомога, реабілітація, соціальна адаптація.">
     <meta property="og:title" content="ГО «ЛЕГІОН ТИТАНІВ»">
     <meta property="og:description" content="Ми об'єднуємо захисників для взаємодопомоги та реабілітації.">
     <meta property="og:image" content="images/000.png">
 
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/000.png">
 
     <!-- Fonts & Icons -->
@@ -23,11 +22,9 @@
 
     <header class="main-header">
         <div class="container header-wrapper">
-            <a href="#home" class="logo-link">
-                <div class="logo-container">
-                    <img src="images/000.png" alt="ЛЕГІОН ТИТАНІВ" class="main-logo-img">
-                    <div class="logo-text" data-uk="ЛЕГІОН ТИТАНІВ" data-en="LEGION OF TITANS">ЛЕГІОН ТИТАНІВ</div>
-                </div>
+            <a href="#home" class="logo">
+                <img src="images/000.png" alt="Лого" class="site-logo-img">
+                <div class="logo-text" data-uk="ЛЕГІОН ТИТАНІВ" data-en="LEGION OF TITANS">ЛЕГІОН ТИТАНІВ</div>
             </a>
             
             <div class="header-right-controls">
@@ -40,12 +37,14 @@
                     </ul>
                 </nav>
 
-                <div class="lang-switcher" id="globalLangSwitcher">
-                    <button class="lang-btn" data-lang="uk">UA</button>
+                <div class="lang-switcher" id="unifiedLangSwitcher">
+                    <button class="lang-btn active" data-lang="uk">UA</button>
                     <button class="lang-btn" data-lang="en">EN</button>
                 </div>
 
-                <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
+                <button class="menu-toggle" id="menuToggle" aria-label="Open Menu">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
         </div>
     </header>
@@ -59,10 +58,7 @@
                     <h1 class="hero-brand" data-uk="«ЛЕГІОН ТИТАНІВ»" data-en="«LEGION OF TITANS»">«ЛЕГІОН ТИТАНІВ»</h1>
                     <h2 class="hero-subtitle" data-uk="ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ" data-en="WAR VETERANS WITH DISABILITIES OF THE BUCHA DISTRICT">ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ</h2>
                     <div class="hero-description">
-                        <p data-uk="Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку тих, хто захищав нашу країну." data-en="We unite war veterans with disabilities of the Bucha district for mutual assistance, adaptation and development. Our mission is to provide support, rehabilitation and new opportunities.">Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку тих, хто захищав нашу країну.</p>
-                    </div>
-                    <div class="hero-btns-group">
-                        <a href="#contact" class="shiny-button"><span>ПРИЄДНАТИСЯ</span></a>
+                        <p data-uk="Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку тих, хто захищав нашу країну." data-en="We unite war veterans with disabilities of the Bucha district for mutual aid and adaptation. Our mission is to support those who protected our country.">Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку тих, хто захищав нашу країну.</p>
                     </div>
                 </div>
             </div>
@@ -70,28 +66,28 @@
 
         <!-- БЛОК 2: НАША ДІЯЛЬНІСТЬ -->
         <section id="activities" class="section">
-            <div class="container text-center">
+            <div class="container">
                 <h2 class="section-title" data-uk="Наша діяльність" data-en="Our Activities">Наша діяльність</h2>
                 <div class="about-intro">
                     <div class="about-image"><img src="images/001.jpg" alt="Діяльність"></div>
                     <div class="about-text">
                         <h3 class="accent-title" data-uk="Комплексна допомога ветеранам" data-en="Comprehensive Assistance">Комплексна допомога ветеранам</h3>
-                        <p data-uk="Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів, реабілітаційними програмами та юридичним супроводом." data-en="Our NGO provides support in adaptation to peaceful life, helps with documents, rehabilitation programs and legal support.">Захист прав та інтересів ветеранів війни з обмеженими можливостями, допомога в реінтеграції та соціалізації.</p>
+                        <p data-uk="Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів, реабілітаційними програмами та юридичним супроводом." data-en="Our NGO provides support in adaptation to peaceful life, helps with documents, rehabilitation programs and legal support.">Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів, реабілітаційними програмами та юридичним супроводом.</p>
                     </div>
                 </div>
                 <div id="activities-cards" class="grid-6"></div>
             </div>
         </section>
 
-        <!-- БЛОК 3: НАШІ ДОСЯГНЕННЯ -->
-        <section id="reports" class="section stats-bg">
+        <!-- БЛОК 3: ДОСЯГНЕННЯ -->
+        <section id="reports" class="section stats-bg reveal">
             <div class="container text-center">
                 <h2 class="section-title white-text" data-uk="Наші досягнення" data-en="Our Achievements">Наші досягнення</h2>
                 <div id="stats-container" class="stats-grid"></div>
             </div>
         </section>
 
-        <!-- БЛОК 4: НАШІ ПАРТНЕРИ -->
+        <!-- БЛОК 4: ПАРТНЕРИ -->
         <section id="partners" class="section reveal">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Наші партнери" data-en="Our Partners">Наші партнери</h2>
@@ -131,7 +127,7 @@
                         <div id="news-container"></div>
                     </div>
                     <div class="media-col">
-                        <h3 class="media-sub-title" data-uk="Фото та Відео звіти" data-en="Photo & Video Reports">Фото та Відео звіти</h3>
+                        <h3 class="media-sub-title" data-uk="Фото та Відео звіти" data-en="Reports & Photos">Фото та Відео звіти</h3>
                         <div id="gallery-preview" class="gallery-grid"></div>
                     </div>
                 </div>
@@ -160,11 +156,6 @@
                         <p><i class="fas fa-phone"></i> +38 (067) 123-45-67</p>
                         <p><i class="fas fa-paper-plane"></i> @legion_bucha</p>
                         <p><i class="fas fa-envelope"></i> info@legion-titaniv.org.ua</p>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-facebook"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-youtube"></i></a>
-                        </div>
                     </div>
                 </div>
                 
