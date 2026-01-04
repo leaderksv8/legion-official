@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ГО «ЛЕГІОН ТИТАНІВ» | Бучанський район</title>
     
-    <!-- SEO & Social Media -->
+    <!-- SEO & Meta -->
     <meta name="description" content="Громадська організація ветеранів війни Бучанського району. Допомога, реабілітація, соціальна адаптація.">
     <meta property="og:title" content="ГО «ЛЕГІОН ТИТАНІВ»">
-    <meta property="og:description" content="Ми об'єднуємо захисників для взаємодопомоги та реабілітації.">
     <meta property="og:image" content="images/000.png">
 
     <link rel="icon" type="image/png" href="images/000.png">
-
-    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -23,7 +20,7 @@
     <header class="main-header">
         <div class="container header-wrapper">
             <a href="#home" class="logo">
-                <img src="images/000.png" alt="Лого" class="site-logo-img">
+                <img src="images/000.png" alt="Лого" class="header-logo-img">
                 <div class="logo-text" data-uk="ЛЕГІОН ТИТАНІВ" data-en="LEGION OF TITANS">ЛЕГІОН ТИТАНІВ</div>
             </a>
             
@@ -42,18 +39,20 @@
                     <button class="lang-btn" data-lang="en">EN</button>
                 </div>
 
-                <button class="menu-toggle" id="menuToggle" aria-label="Open Menu">
-                    <span></span><span></span><span></span>
-                </button>
+                <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
             </div>
         </div>
     </header>
 
     <main>
-        <!-- БЛОК 1: HERO -->
+        <!-- БЛОК 1: HERO (ЛОГОТИП НАД ТЕКСТОМ) -->
         <section id="home" class="hero-block">
             <div class="container text-center">
                 <div class="hero-content-wrapper">
+                    <!-- Головний логотип у центрі -->
+                    <div class="hero-logo-box">
+                        <img src="images/000.png" alt="ЛЕГІОН ТИТАНІВ" class="hero-main-logo">
+                    </div>
                     <span class="hero-label" data-uk="ГРОМАДСЬКА ОРГАНІЗАЦІЯ" data-en="PUBLIC ORGANIZATION">ГРОМАДСЬКА ОРГАНІЗАЦІЯ</span>
                     <h1 class="hero-brand" data-uk="«ЛЕГІОН ТИТАНІВ»" data-en="«LEGION OF TITANS»">«ЛЕГІОН ТИТАНІВ»</h1>
                     <h2 class="hero-subtitle" data-uk="ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ" data-en="WAR VETERANS WITH DISABILITIES OF THE BUCHA DISTRICT">ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ</h2>
@@ -67,11 +66,12 @@
         <!-- БЛОК 2: НАША ДІЯЛЬНІСТЬ -->
         <section id="activities" class="section">
             <div class="container">
+                <h2 class="section-title" data-uk="Наша діяльність" data-en="Our Activities">Наша діяльність</h2>
                 <div class="about-intro">
                     <div class="about-image"><img src="images/001.jpg" alt="Діяльність"></div>
                     <div class="about-text">
-                        <h2 class="section-title text-left" data-uk="Наша діяльність" data-en="Our Activities">Наша діяльність</h2>
-                        <p data-uk="Захист прав та інтересів ветеранів війни з обмеженими можливостями, допомога в реінтеграції та соціалізації." data-en="Protection of the rights and interests of war veterans with disabilities.">Захист прав та інтересів ветеранів війни з обмеженими можливостями, допомога в реінтеграції та соціалізації.</p>
+                        <h3 class="accent-title" data-uk="Комплексна допомога ветеранам" data-en="Comprehensive Assistance">Комплексна допомога ветеранам</h3>
+                        <p data-uk="Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів, реабілітаційними програмами та юридичним супроводом." data-en="Our NGO provides support in adaptation to peaceful life, helps with documents, rehabilitation programs and legal support.">Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів, реабілітаційними програмами та юридичним супроводом.</p>
                     </div>
                 </div>
                 <div id="activities-cards" class="grid-6"></div>
