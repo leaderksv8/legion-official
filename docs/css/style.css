@@ -74,7 +74,6 @@ section { padding: 100px 0; overflow: hidden; }
     border-radius: 50px; transition: 0.3s;
 }
 .lang-btn.active { background: var(--accent) !important; color: var(--primary) !important; }
-.menu-toggle { display: none; }
 
 /* HERO */
 .hero-block { 
@@ -112,7 +111,7 @@ section { padding: 100px 0; overflow: hidden; }
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
 .stat-item h2 { font-size: 4rem; color: var(--accent); font-weight: 800; }
 
-/* ПАРТНЕРИ (ІНТЕРАКТИВНА КАРУСЕЛЬ) */
+/* ПАРТНЕРИ (БЕЗКІНЕЧНА DRAG-КАРУСЕЛЬ) */
 .partners-slider { 
     overflow: hidden; 
     padding: 40px 0; 
@@ -128,7 +127,6 @@ section { padding: 100px 0; overflow: hidden; }
     gap: 80px; 
     align-items: center; 
     width: max-content;
-    will-change: transform;
 }
 .partners-track img { 
     height: 70px; 
@@ -137,7 +135,7 @@ section { padding: 100px 0; overflow: hidden; }
     filter: grayscale(100%); 
     opacity: 0.6; 
     transition: 0.3s; 
-    pointer-events: none; /* Щоб не заважало драгу */
+    pointer-events: none; /* Щоб перетягування не конфліктувало з картинками */
 }
 .partners-track img:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.05); }
 

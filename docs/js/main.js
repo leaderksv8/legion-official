@@ -28,7 +28,7 @@ async function init() {
     refresh();
     setupContactForm();
     setupScrollLogic();
-    setupPartnerCarousel(); // НОВА ЛОГІКА КАРУСЕЛІ
+    setupPartnerCarousel(); // Безкінечна карусель
 }
 
 function refresh() {
@@ -41,16 +41,19 @@ function refresh() {
     
     render.renderGallery([
         'images/001.jpg',
-        'https://via.placeholder.com/400x300?text=Захід+1',
-        'https://via.placeholder.com/400x300?text=Захід+2',
-        'https://via.placeholder.com/400x300?text=Захід+3'
+        'https://via.placeholder.com/400x300?text=Event+1',
+        'https://via.placeholder.com/400x300?text=Event+2',
+        'https://via.placeholder.com/400x300?text=Event+3'
     ]);
 
     const c = cache.contacts;
     if (c && c.phone) {
         const block = document.getElementById('contacts-content');
         if (block) {
-            block.innerHTML = `<p style="margin-bottom:10px;"><i class="fas fa-phone"></i> ${c.phone}</p><p style="margin-bottom:10px;"><i class="fas fa-envelope"></i> ${c.email}</p><p><i class="fas fa-map-marker-alt"></i> ${c.address[currentLang]}</p>`;
+            block.innerHTML = `
+                <p style="margin-bottom:10px;"><i class="fas fa-phone"></i> ${c.phone}</p>
+                <p style="margin-bottom:10px;"><i class="fas fa-envelope"></i> ${c.email}</p>
+                <p><i class="fas fa-map-marker-alt"></i> ${c.address[currentLang]}</p>`;
         }
     }
 
@@ -61,7 +64,9 @@ function refresh() {
     setupCounters();
 }
 
-// ПЕРЕПИСАНА ЛОГІКА КАРУСЕЛІ (Auto-move + Drag)
+// ==========================================================================
+// БЕЗКІНЕЧНА ІНТЕРАКТИВНА КАРУСЕЛЬ
+// ==========================================================================
 function setupPartnerCarousel() {
     const slider = document.getElementById('partnersSlider');
     const track = document.getElementById('partners-track');
@@ -70,58 +75,74 @@ function setupPartnerCarousel() {
     let isDown = false;
     let startX;
     let scrollLeft;
-    let autoScrollSpeed = 0.5;
-    let currentScroll = 0;
-    let isPaused = false;
+    let scrollSpeed = 0.6; // Швидкість автопрокрутки
+    let animationId;
 
-    // Автоматичний рух
-    function step() {
-        if (!isPaused && !isDown) {
-            currentScroll += autoScrollSpeed;
-            if (currentScroll >= track.scrollWidth / 2) {
-                currentScroll = 0;
-            }
-            slider.scrollLeft = currentScroll;
+    // Автоматична прокрутка
+    const startAutoScroll = () => {
+        slider.scrollLeft += scrollSpeed;
+        
+        // Безкінечний перескок: коли ми пройшли третину довжини (один набір лого), вертаємось на старт
+        // Оскільки в renderPartners ми зробили [...data, ...data, ...data]
+        if (slider.scrollLeft >= track.scrollWidth / 3) {
+            slider.scrollLeft = 0;
         }
-        requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
+        animationId = requestAnimationFrame(startAutoScroll);
+    };
 
-    // Пауза при наведенні
-    slider.addEventListener('mouseenter', () => isPaused = true);
-    slider.addEventListener('mouseleave', () => isPaused = false);
+    // Запуск автопрокрутки
+    startAutoScroll();
 
-    // Логіка Drag (мишка)
+    // ПАУЗА ПРИ НАВЕДЕННІ (тільки на ПК)
+    slider.addEventListener('mouseenter', () => cancelAnimationFrame(animationId));
+    slider.addEventListener('mouseleave', () => startAutoScroll());
+
+    // ЛОГІКА DRAG (МИШКА)
     slider.addEventListener('mousedown', (e) => {
         isDown = true;
+        cancelAnimationFrame(animationId);
+        slider.classList.add('active');
         startX = e.pageX - slider.offsetLeft;
         scrollLeft = slider.scrollLeft;
-        currentScroll = scrollLeft;
     });
-    window.addEventListener('mouseup', () => isDown = false);
+
+    slider.addEventListener('mouseleave', () => {
+        isDown = false;
+    });
+
+    slider.addEventListener('mouseup', () => {
+        isDown = false;
+        slider.classList.remove('active');
+        startAutoScroll();
+    });
+
     slider.addEventListener('mousemove', (e) => {
         if (!isDown) return;
         e.preventDefault();
         const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2;
+        const walk = (x - startX) * 2; // Коефіцієнт швидкості руху мишки
         slider.scrollLeft = scrollLeft - walk;
-        currentScroll = slider.scrollLeft;
     });
 
-    // Логіка Touch (смартфон)
+    // ЛОГІКА TOUCH (СМАРТФОН)
     slider.addEventListener('touchstart', (e) => {
         isDown = true;
+        cancelAnimationFrame(animationId);
         startX = e.touches[0].pageX - slider.offsetLeft;
         scrollLeft = slider.scrollLeft;
+    }, {passive: true});
+
+    slider.addEventListener('touchend', () => {
+        isDown = false;
+        startAutoScroll();
     });
-    slider.addEventListener('touchend', () => isDown = false);
+
     slider.addEventListener('touchmove', (e) => {
         if (!isDown) return;
         const x = e.touches[0].pageX - slider.offsetLeft;
         const walk = (x - startX) * 2;
         slider.scrollLeft = scrollLeft - walk;
-        currentScroll = slider.scrollLeft;
-    });
+    }, {passive: true});
 }
 
 function setupMobileMenu() {
@@ -236,7 +257,7 @@ window.openBio = (id) => {
                 <h2 style="color:var(--primary);">${f.name[currentLang]}</h2>
                 <p style="color:var(--accent); font-weight:700; margin-bottom:15px;">${f.role[currentLang]}</p>
                 <div style="line-height:1.8;">${f.bio[currentLang]}</div>
-                <p style="margin-top:20px; border-top:1px solid #eee; padding-top:10px; font-size: 0.8rem;">
+                <p style="margin-top:20px; border-top:1px solid #eee; padding-top:15px;">
                     <b>TG:</b> ${f.tg} | <b>Тел:</b> ${f.phone}
                 </p>
             </div>

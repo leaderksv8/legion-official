@@ -53,12 +53,13 @@ export function renderNews(data, lang) {
 export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track || !data) return;
-    const list = data.length > 0 ? data : [{name: "Партнер", img: ""}];
-    // Створюємо довгий ряд для каруселі
-    const double = [...list, ...list, ...list, ...list, ...list];
+    const list = data.length > 0 ? data : [{name: "ГО", img: ""}];
+    // Створюємо потрійний набір для ідеальної безкінечності
+    const double = [...list, ...list, ...list];
     track.innerHTML = double.map(p => {
-        const imgSrc = p.img || `https://via.placeholder.com/150x60?text=${p.name}`;
-        return `<a href="${p.link || '#'}" target="_blank"><img src="${imgSrc}" alt="${p.name}"></a>`;
+        const imgSrc = p.img || `https://via.placeholder.com/200x80?text=${p.name}`;
+        // Додаємо referrerpolicy="no-referrer" щоб Wikimedia не блокувала запит
+        return `<a href="${p.link || '#'}" target="_blank"><img src="${imgSrc}" alt="${p.name}" referrerpolicy="no-referrer"></a>`;
     }).join('');
 }
 
