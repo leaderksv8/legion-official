@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ГО «ЛЕГІОН ТИТАНІВ» | Бучанський район</title>
     
-    <!-- SEO & Social Media -->
-    <meta name="description" content="Громадська організація ветеранів війни Бучанського району. Допомога, реабілітація, адаптація.">
+    <!-- SEO & Social -->
+    <meta name="description" content="Громадська організація ветеранів війни Бучанського району.">
     <meta property="og:title" content="ГО «ЛЕГІОН ТИТАНІВ»">
     <meta property="og:image" content="images/001.jpg">
 
@@ -21,7 +21,7 @@
         <div class="container header-wrapper">
             <a href="#home" class="logo">
                 <i class="fas fa-shield-alt"></i>
-                <div class="logo-text">ЛЕГІОН ТИТАНІВ</div>
+                <div class="logo-text" data-uk="ЛЕГІОН ТИТАНІВ" data-en="LEGION OF TITANS">ЛЕГІОН ТИТАНІВ</div>
             </a>
             
             <div class="header-right-controls">
@@ -32,10 +32,14 @@
                         <li><a href="#partners" class="nav-link" data-uk="Партнери" data-en="Partners">Партнери</a></li>
                         <li><a href="#contact" class="nav-link" data-uk="Контакти" data-en="Contacts">Контакти</a></li>
                     </ul>
+                    <div class="lang-switcher burger-langs">
+                        <button class="lang-btn" data-lang="uk">UA</button>
+                        <button class="lang-btn" data-lang="en">EN</button>
+                    </div>
                 </nav>
 
-                <div class="lang-switcher" id="globalLangSwitcher">
-                    <button class="lang-btn" data-lang="uk">UA</button>
+                <div class="lang-switcher desktop-langs">
+                    <button class="lang-btn active" data-lang="uk">UA</button>
                     <button class="lang-btn" data-lang="en">EN</button>
                 </div>
 
@@ -50,13 +54,10 @@
             <div class="container text-center">
                 <div class="hero-content-wrapper">
                     <span class="hero-label" data-uk="ГРОМАДСЬКА ОРГАНІЗАЦІЯ" data-en="PUBLIC ORGANIZATION">ГРОМАДСЬКА ОРГАНІЗАЦІЯ</span>
-                    <h1 class="hero-brand">«ЛЕГІОН ТИТАНІВ»</h1>
+                    <h1 class="hero-brand" data-uk="«ЛЕГІОН ТИТАНІВ»" data-en="«LEGION OF TITANS»">«ЛЕГІОН ТИТАНІВ»</h1>
                     <h2 class="hero-subtitle" data-uk="ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ" data-en="WAR VETERANS WITH DISABILITIES OF THE BUCHA DISTRICT">ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ</h2>
                     <div class="hero-description">
-                        <p data-uk="Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку тих, хто захищав нашу країну." 
-                           data-en="We unite war veterans with disabilities of the Bucha district for mutual aid and adaptation. Our mission is to support those who protected our country.">
-                            Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку тих, хто захищав нашу країну.
-                        </p>
+                        <p data-uk="Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку тих, хто захищав нашу країну." data-en="We unite war veterans with disabilities of the Bucha district for mutual aid and adaptation. Our mission is to support those who protected our country.">Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку тих, хто захищав нашу країну.</p>
                     </div>
                 </div>
             </div>
@@ -70,10 +71,7 @@
                     <div class="about-image"><img src="images/001.jpg" alt="Діяльність"></div>
                     <div class="about-text">
                         <h3 class="accent-title" data-uk="Комплексна допомога ветеранам" data-en="Comprehensive Assistance">Комплексна допомога ветеранам</h3>
-                        <p data-uk="Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів, реабілітаційними програмами та юридичним супроводом." 
-                           data-en="Our NGO provides support in adaptation to peaceful life, helps with documents, rehabilitation programs and legal support.">
-                            Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів, реабілітаційними програмами та юридичним супроводом.
-                        </p>
+                        <p data-uk="Наша організація займається допомогою колишнім військовим в адаптації до мирного життя, надаємо підтримку у оформленні документів, пільг та послуг." data-en="Our organization helps former military personnel adapt to civilian life, providing support in document processing and benefits.">Захист прав та інтересів ветеранів війни з обмеженими можливостями, допомога в реінтеграції та соціалізації.</p>
                     </div>
                 </div>
                 <div id="activities-cards" class="grid-6"></div>
@@ -81,45 +79,41 @@
         </section>
 
         <!-- БЛОК 3: НАШІ ДОСЯГНЕННЯ -->
-        <section id="reports" class="section stats-bg reveal">
+        <section id="reports" class="section stats-bg">
             <div class="container text-center">
-                <h2 class="section-title" style="color:white;" data-uk="Наші досягнення" data-en="Our Achievements">Наші досягнення</h2>
+                <h2 class="section-title white-text" data-uk="Наші досягнення" data-en="Our Achievements">Наші досягнення</h2>
                 <div id="stats-container" class="stats-grid"></div>
             </div>
         </section>
 
-        <!-- БЛОК 4: НАШІ ПАРТНЕРИ (ЗІ СТРІЛКАМИ) -->
-        <section id="partners" class="section">
+        <!-- БЛОК 4: НАШІ ПАРТНЕРИ -->
+        <section id="partners" class="section reveal">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Наші партнери" data-en="Our Partners">Наші партнери</h2>
-                <div class="slider-container">
-                    <button class="arrow-btn prev-btn" id="prevPartner"><i class="fas fa-chevron-left"></i></button>
-                    <div class="partners-slider" id="partnersSlider">
-                        <div id="partners-track" class="partners-track"></div>
-                    </div>
-                    <button class="arrow-btn next-btn" id="nextPartner"><i class="fas fa-chevron-right"></i></button>
+                <div class="partners-slider" id="partnersSlider">
+                    <div id="partners-track" class="partners-track"></div>
                 </div>
             </div>
         </section>
 
         <!-- БЛОК 5: НАШІ ДРУЗІ -->
-        <section id="friends" class="section">
+        <section id="friends" class="section reveal">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Наші друзі" data-en="Our Friends">Наші друзі</h2>
                 <div id="friends-container" class="friends-grid"></div>
             </div>
         </section>
 
-        <!-- БЛОК 6: ІСТОРІЇ ГЕРОЇВ -->
-        <section id="stories" class="section section-alt">
+        <!-- БЛОК 6: ІСТОРІЇ -->
+        <section id="stories" class="section section-alt reveal">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Історії наших героїв" data-en="Heroes Stories">Історії наших героїв</h2>
                 <div id="stories-container" class="stories-list"></div>
             </div>
         </section>
 
-        <!-- БЛОК 7: МЕДІА-ЦЕНТР (НОВИНИ ТА ЗВІТИ) -->
-        <section id="media" class="section">
+        <!-- БЛОК 7: МЕДІА-ЦЕНТР -->
+        <section id="media" class="section reveal">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Медіа-центр" data-en="Media Center">Медіа-центр</h2>
                 <div class="media-grid-layout">
@@ -128,7 +122,7 @@
                         <div id="news-container"></div>
                     </div>
                     <div class="media-col">
-                        <h3 class="media-sub-title" data-uk="Фото та Відео звіти" data-en="Photo & Video Reports">Фото та Відео звіти</h3>
+                        <h3 class="media-sub-title" data-uk="Звіти та фото" data-en="Reports & Photos">Звіти та фото</h3>
                         <div id="gallery-preview" class="gallery-grid"></div>
                     </div>
                 </div>
@@ -136,7 +130,7 @@
         </section>
 
         <!-- БЛОК 8: СПІВЗАСНОВНИКИ -->
-        <section id="founders" class="section section-alt">
+        <section id="founders" class="section section-alt reveal">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Наші співзасновники" data-en="Our Founders">Наші співзасновники</h2>
                 <div id="founders-container" class="founders-grid"></div>
@@ -152,7 +146,7 @@
                         <p><i class="fas fa-map-marker-alt"></i> <span data-uk="м. Буча, Київська обл." data-en="Bucha, Kyiv Region">м. Буча, Київська обл.</span></p>
                         <p><i class="fas fa-phone"></i> +38 (067) 123-45-67</p>
                         <p><i class="fas fa-paper-plane"></i> @legion_bucha</p>
-                        <p><i class="fas fa-envelope"></i> info@legion.org</p>
+                        <p><i class="fas fa-envelope"></i> info@legion-titaniv.org.ua</p>
                         <div class="social-links">
                             <a href="#"><i class="fab fa-facebook"></i></a>
                             <a href="#"><i class="fab fa-instagram"></i></a>
@@ -182,7 +176,7 @@
                 </div>
             </div>
             <div class="copyright-bar text-center">
-                <p>&copy; 2026 ГО «ЛЕГІОН ТИТАНІВ». All Rights Reserved.</p>
+                <p>&copy; 2026 ГО <span data-uk="«ЛЕГІОН ТИТАНІВ»" data-en="«LEGION OF TITANS»">«ЛЕГІОН ТИТАНІВ»</span>. All Rights Reserved.</p>
             </div>
         </footer>
     </main>

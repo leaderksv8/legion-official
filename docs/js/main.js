@@ -1,7 +1,7 @@
 import * as render from './render.js';
 
 let currentLang = 'uk';
-let cache = { founders: [], stats: [], partners: [], news: [], stories: [], activities: [], friends: [] };
+let cache = { founders: [], stats: [], partners: [], news: [], stories: [], contacts: {}, activities: [], friends: [] };
 
 async function getJSON(url) {
     try {
@@ -41,13 +41,11 @@ function refresh() {
     render.renderFriends(cache.friends, currentLang);
     render.renderGallery(['images/001.jpg', 'images/001.jpg', 'images/001.jpg', 'images/001.jpg']);
 
-    // ПОВНИЙ ПЕРЕКЛАД СТАТИКИ
     document.querySelectorAll('[data-uk], [data-en]').forEach(el => {
         const text = el.getAttribute(`data-${currentLang}`);
         if (text) el.innerHTML = text;
     });
 
-    // ПЕРЕКЛАД ПЛЕЙСХОЛДЕРІВ
     document.querySelectorAll('[data-uk-placeholder]').forEach(el => {
         const ph = el.getAttribute(`data-${currentLang}-placeholder`);
         if (ph) el.placeholder = ph;
@@ -71,29 +69,17 @@ function setupLanguageSwitcher() {
 function setupPartnerCarousel() {
     const slider = document.getElementById('partnersSlider');
     const track = document.getElementById('partners-track');
-    const prev = document.getElementById('prevPartner');
-    const next = document.getElementById('nextPartner');
     if (!slider || !track) return;
-
-    let autoScrollSpeed = 0.5;
-    let animationId;
-    let isPaused = false;
-
-    const startAutoScroll = () => {
-        if (!isPaused) {
-            slider.scrollLeft += autoScrollSpeed;
-            if (slider.scrollLeft >= track.scrollWidth / 3) slider.scrollLeft = 0;
-        }
-        animationId = requestAnimationFrame(startAutoScroll);
-    };
-
+    let isDown = false, startX, scrollLeft, autoScrollSpeed = 0.5, animationId, isPaused = false;
+    const startAutoScroll = () => { if (!isPaused && !isDown) { slider.scrollLeft += autoScrollSpeed; if (slider.scrollLeft >= track.scrollWidth / 3) slider.scrollLeft = 0; } animationId = requestAnimationFrame(startAutoScroll); };
     startAutoScroll();
-
     slider.addEventListener('mouseenter', () => isPaused = true);
     slider.addEventListener('mouseleave', () => isPaused = false);
-
-    if (prev) prev.onclick = () => { slider.scrollLeft -= 300; };
-    if (next) next.onclick = () => { slider.scrollLeft += 300; };
+    const startDrag = (e) => { isDown = true; startX = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; scrollLeft = slider.scrollLeft; };
+    const stopDrag = () => { isDown = false; };
+    const moveDrag = (e) => { if (!isDown) return; e.preventDefault(); const x = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 1.5; };
+    slider.addEventListener('mousedown', startDrag); window.addEventListener('mouseup', stopDrag); slider.addEventListener('mousemove', moveDrag);
+    slider.addEventListener('touchstart', startDrag, {passive: false}); slider.addEventListener('touchend', stopDrag); slider.addEventListener('touchmove', moveDrag, {passive: false});
 }
 
 function setupMobileMenu() {
@@ -113,6 +99,11 @@ function setupScrollLogic() {
                 document.querySelectorAll('.nav-menu a').forEach(a => {
                     a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
                 });
+                const title = entry.target.querySelector('.section-title');
+                if (title) title.classList.add('highlight');
+            } else {
+                const title = entry.target.querySelector('.section-title');
+                if (title) title.classList.remove('highlight');
             }
         });
     }, { threshold: 0.2 });
@@ -121,18 +112,17 @@ function setupScrollLogic() {
 
 function setupCounters() {
     const counters = document.querySelectorAll('.counter');
-    counters.forEach(c => {
-        const target = +c.dataset.target;
-        let count = 0;
-        const update = () => {
-            if (count < target) {
-                count += Math.ceil(target / 50);
-                c.innerText = count > target ? target : count;
-                setTimeout(update, 30);
-            } else c.innerText = target;
-        };
-        update();
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(en => {
+            if (en.isIntersecting) {
+                const target = +en.target.dataset.target;
+                let cValue = 0;
+                const step = () => { if (cValue < target) { cValue += Math.ceil(target / 40); en.target.innerText = cValue > target ? target : cValue; setTimeout(step, 30); } else en.target.innerText = target; };
+                step(); obs.unobserve(en.target);
+            }
+        });
     });
+    counters.forEach(c => obs.observe(c));
 }
 
 function setupBackToTop() {
