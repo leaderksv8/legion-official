@@ -32,13 +32,10 @@
                         <li><a href="#partners" class="nav-link" data-uk="Партнери" data-en="Partners">Партнери</a></li>
                         <li><a href="#contact" class="nav-link" data-uk="Контакти" data-en="Contacts">Контакти</a></li>
                     </ul>
-                    <div class="lang-switcher burger-langs">
-                        <button class="lang-btn" data-lang="uk">UA</button>
-                        <button class="lang-btn" data-lang="en">EN</button>
-                    </div>
                 </nav>
 
-                <div class="lang-switcher desktop-langs">
+                <!-- ЄДИНИЙ ПЕРЕМИКАЧ МОВ -->
+                <div class="lang-switcher" id="globalLangSwitcher">
                     <button class="lang-btn" data-lang="uk">UA</button>
                     <button class="lang-btn" data-lang="en">EN</button>
                 </div>
@@ -57,7 +54,7 @@
                     <h1 class="hero-brand">«ЛЕГІОН ТИТАНІВ»</h1>
                     <h2 class="hero-subtitle" data-uk="ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ" data-en="WAR VETERANS WITH DISABILITIES OF THE BUCHA DISTRICT">ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ</h2>
                     <div class="hero-description">
-                        <p data-uk="Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку." data-en="We unite war veterans with disabilities of the Bucha district for mutual aid and adaptation.">Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку.</p>
+                        <p data-uk="Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку тих, хто захищав нашу країну." data-en="We unite war veterans with disabilities of the Bucha district for mutual aid and adaptation.">Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку тих, хто захищав нашу країну.</p>
                     </div>
                     <div class="hero-btns-group">
                         <a href="#contact" class="shiny-button"><span>ПРИЄДНАТИСЯ</span></a>
@@ -74,14 +71,14 @@
                     <div class="about-image"><img src="images/001.jpg" alt="Діяльність"></div>
                     <div class="about-text">
                         <h3 class="accent-title" data-uk="Комплексна допомога ветеранам" data-en="Comprehensive Assistance">Комплексна допомога ветеранам</h3>
-                        <p data-uk="Наша організація займається допомогою колишнім військовим в адаптації до мирного життя, надаємо підтримку у оформленні документів, пільг та послуг." data-en="Our organization helps former military personnel adapt to civilian life, we provide support in processing documents and benefits.">Захист прав та інтересів ветеранів війни з обмеженими можливостями, допомога в реінтеграції та соціалізації.</p>
+                        <p data-uk="Захист прав та інтересів ветеранів війни з обмеженими можливостями, допомога в реінтеграції та соціалізації." data-en="Protection of the rights and interests of war veterans with disabilities.">Захист прав та інтересів ветеранів війни з обмеженими можливостями, допомога в реінтеграції та соціалізації.</p>
                     </div>
                 </div>
                 <div id="activities-cards" class="grid-6"></div>
             </div>
         </section>
 
-        <!-- БЛОК 3: НАШІ ДОСЯГНЕННЯ -->
+        <!-- БЛОК 3: ДОСЯГНЕННЯ -->
         <section id="reports" class="section stats-bg">
             <div class="container text-center">
                 <h2 class="section-title" style="color:white;" data-uk="Наші досягнення" data-en="Our Achievements">Наші досягнення</h2>
@@ -89,21 +86,17 @@
             </div>
         </section>
 
-        <!-- БЛОК 4: НАШІ ПАРТНЕРИ (ЗІ СТРІЛКАМИ) -->
+        <!-- БЛОК 4: ПАРТНЕРИ (БЕЗКІНЕЧНО) -->
         <section id="partners" class="section">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Наші партнери" data-en="Our Partners">Наші партнери</h2>
-                <div class="partners-wrapper">
-                    <button class="slider-arrow prev" id="prevPartner"><i class="fas fa-chevron-left"></i></button>
-                    <div class="partners-slider" id="partnersSlider">
-                        <div id="partners-track" class="partners-track"></div>
-                    </div>
-                    <button class="slider-arrow next" id="nextPartner"><i class="fas fa-chevron-right"></i></button>
+                <div class="partners-slider" id="partnersSlider">
+                    <div id="partners-track" class="partners-track"></div>
                 </div>
             </div>
         </section>
 
-        <!-- БЛОК 5: НАШІ ДРУЗІ -->
+        <!-- БЛОК 5: ДРУЗІ -->
         <section id="friends" class="section">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Наші друзі" data-en="Our Friends">Наші друзі</h2>
@@ -111,7 +104,7 @@
             </div>
         </section>
 
-        <!-- БЛОК 6: ІСТОРІЇ ГЕРОЇВ -->
+        <!-- БЛОК 6: ІСТОРІЇ -->
         <section id="stories" class="section section-alt">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Історії наших героїв" data-en="Heroes Stories">Історії наших героїв</h2>
@@ -119,7 +112,7 @@
             </div>
         </section>
 
-        <!-- БЛОК 7: НОВИНИ ТА ГАЛЕРЕЯ -->
+        <!-- БЛОК 7: МЕДІА -->
         <section id="media" class="section">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Медіа-центр" data-en="Media Center">Медіа-центр</h2>
@@ -144,50 +137,44 @@
             </div>
         </section>
 
-        <!-- ФУТЕР (ВІДНОВЛЕНО ТА ПОКРАЩЕНО) -->
         <footer id="contact" class="main-footer">
             <div class="container footer-grid">
-                <!-- Картка Контакти -->
                 <div class="footer-column contact-card">
                     <h3 class="footer-label" data-uk="Контакти" data-en="Contacts">Контакти</h3>
                     <div class="contact-details">
-                        <p><i class="fas fa-map-marker-alt"></i> <span data-uk="Адреса: м. Буча, Бучанський район, Київська обл." data-en="Address: Bucha, Kyiv region, Ukraine">м. Буча, Бучанський район, Київська обл.</span></p>
+                        <p><i class="fas fa-map-marker-alt"></i> <span>м. Буча, Київська обл.</span></p>
                         <p><i class="fas fa-phone"></i> +38 (067) 123-45-67</p>
-                        <p><i class="fas fa-paper-plane"></i> @legion_titans_bucha</p>
-                        <p><i class="fas fa-envelope"></i> info@legion-titaniv.org.ua</p>
+                        <p><i class="fas fa-paper-plane"></i> @legion_bucha</p>
+                        <p><i class="fas fa-envelope"></i> info@legion.org</p>
                     </div>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-telegram"></i></a>
                     </div>
                 </div>
                 
-                <!-- Швидкі посилання -->
                 <div class="footer-column links-column">
-                    <h3 class="footer-label" data-uk="Швидкі посилання" data-en="Quick Links">Швидкі посилання</h3>
+                    <h3 class="footer-label" data-uk="Посилання" data-en="Links">Посилання</h3>
                     <ul class="footer-list">
                         <li><a href="#home" data-uk="Головна" data-en="Home">Головна</a></li>
                         <li><a href="#activities" data-uk="Діяльність" data-en="Activities">Діяльність</a></li>
                         <li><a href="#reports" data-uk="Звітність" data-en="Reports">Звітність</a></li>
-                        <li><a href="#media" data-uk="Галерея" data-en="Gallery">Галерея</a></li>
-                        <li><a href="#founders" data-uk="Співзасновники" data-en="Founders">Співзасновники</a></li>
+                        <li><a href="#contact" data-uk="Контакти" data-en="Contacts">Контакти</a></li>
                     </ul>
                 </div>
 
-                <!-- Форма написати нам -->
                 <div class="footer-column form-column">
-                    <h3 class="footer-label" data-uk="Написати нам" data-en="Write to Us">Написати нам</h3>
+                    <h3 class="footer-label" data-uk="Написати нам" data-en="Message Us">Написати нам</h3>
                     <form id="contactForm">
-                        <input type="text" name="name" placeholder="Ім'я" required class="footer-input">
-                        <input type="email" name="email" placeholder="Email" required class="footer-input">
-                        <textarea name="message" placeholder="Повідомлення" required class="footer-input footer-textarea"></textarea>
-                        <button type="submit" id="formSubmit" class="btn-sm footer-btn" data-uk="Відправити" data-en="Send">Відправити</button>
+                        <input type="text" placeholder="Ім'я" required class="footer-input">
+                        <input type="email" placeholder="Email" required class="footer-input">
+                        <textarea placeholder="Повідомлення" required class="footer-input footer-textarea"></textarea>
+                        <button type="submit" class="btn-sm footer-btn">Відправити</button>
                     </form>
                 </div>
             </div>
-            <div class="copyright text-center">
+            <div class="copyright-bottom text-center">
                 <p>&copy; 2026 ГО «ЛЕГІОН ТИТАНІВ». All Rights Reserved.</p>
             </div>
         </footer>

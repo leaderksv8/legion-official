@@ -15,7 +15,6 @@ async function init() {
     setupMobileMenu(); 
     setupBackToTop();
     
-    // Завантаження всіх даних
     cache.founders = await getJSON('data/founders.json') || [];
     cache.stats = await getJSON('data/stats.json') || [];
     cache.partners = await getJSON('data/partners.json') || [];
@@ -27,12 +26,11 @@ async function init() {
     refresh();
     setupContactForm();
     setupScrollLogic();
+    setupPartnerCarousel(); 
     setupLanguageSwitcher();
-    setupPartnerSlider();
 }
 
 function refresh() {
-    // Рендеримо всі динамічні блоки
     render.renderActivities(cache.activities, currentLang);
     render.renderFounders(cache.founders, currentLang);
     render.renderStats(cache.stats, currentLang);
@@ -42,7 +40,6 @@ function refresh() {
     render.renderFriends(cache.friends, currentLang);
     render.renderGallery(['images/001.jpg', 'images/001.jpg', 'images/001.jpg', 'images/001.jpg']);
 
-    // Оновлення всіх текстових блоків з атрибутами data-uk / data-en
     document.querySelectorAll('[data-' + currentLang + ']').forEach(el => {
         el.innerHTML = el.getAttribute('data-' + currentLang);
     });
@@ -62,14 +59,20 @@ function setupLanguageSwitcher() {
     });
 }
 
-function setupPartnerSlider() {
+function setupPartnerCarousel() {
     const slider = document.getElementById('partnersSlider');
-    const prev = document.getElementById('prevPartner');
-    const next = document.getElementById('nextPartner');
-    if (!slider || !prev || !next) return;
-
-    prev.onclick = () => slider.scrollLeft -= 300;
-    next.onclick = () => slider.scrollLeft += 300;
+    const track = document.getElementById('partners-track');
+    if (!slider || !track) return;
+    let isDown = false, startX, scrollLeft, autoScrollSpeed = 0.5, animationId, isPaused = false;
+    const startAutoScroll = () => { if (!isPaused && !isDown) { slider.scrollLeft += autoScrollSpeed; if (slider.scrollLeft >= track.scrollWidth / 3) slider.scrollLeft = 0; } animationId = requestAnimationFrame(startAutoScroll); };
+    startAutoScroll();
+    slider.addEventListener('mouseenter', () => isPaused = true);
+    slider.addEventListener('mouseleave', () => isPaused = false);
+    const startDrag = (e) => { isDown = true; startX = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; scrollLeft = slider.scrollLeft; };
+    const stopDrag = () => { isDown = false; };
+    const moveDrag = (e) => { if (!isDown) return; e.preventDefault(); const x = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 1.5; };
+    slider.addEventListener('mousedown', startDrag); window.addEventListener('mouseup', stopDrag); slider.addEventListener('mousemove', moveDrag);
+    slider.addEventListener('touchstart', startDrag, {passive: false}); slider.addEventListener('touchend', stopDrag); slider.addEventListener('touchmove', moveDrag, {passive: false});
 }
 
 function setupMobileMenu() {
@@ -126,7 +129,7 @@ function setupContactForm() {
     if (!form) return;
     form.onsubmit = async (e) => {
         e.preventDefault();
-        alert(currentLang === 'uk' ? "Дякуємо! Ваше повідомлення надіслано." : "Thank you! Your message has been sent.");
+        alert(currentLang === 'uk' ? "Дякуємо! Ваше повідомлення надіслано." : "Thank you! Sent.");
         form.reset();
     };
 }
