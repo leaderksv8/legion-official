@@ -15,7 +15,6 @@ async function init() {
     setupMobileMenu(); 
     setupBackToTop();
     
-    // Завантаження всіх даних
     cache.founders = await getJSON('data/founders.json') || [];
     cache.stats = await getJSON('data/stats.json') || [];
     cache.partners = await getJSON('data/partners.json') || [];
@@ -32,7 +31,6 @@ async function init() {
 }
 
 function refresh() {
-    // Рендеримо всі динамічні блоки
     render.renderActivities(cache.activities, currentLang);
     render.renderFounders(cache.founders, currentLang);
     render.renderStats(cache.stats, currentLang);
@@ -42,16 +40,9 @@ function refresh() {
     render.renderFriends(cache.friends, currentLang);
     render.renderGallery(['images/001.jpg', 'images/001.jpg', 'images/001.jpg', 'images/001.jpg']);
 
-    // ПЕРЕКЛАД ВСЬОГО ТЕКСТУ (СТАТИКА)
     document.querySelectorAll('[data-uk], [data-en]').forEach(el => {
         const text = el.getAttribute(`data-${currentLang}`);
         if (text) el.innerHTML = text;
-    });
-
-    // ПЕРЕКЛАД ПЛЕЙСХОЛДЕРІВ
-    document.querySelectorAll('[data-uk-placeholder]').forEach(el => {
-        const ph = el.getAttribute(`data-${currentLang}-placeholder`);
-        if (ph) el.placeholder = ph;
     });
 
     setupCounters();
@@ -63,7 +54,6 @@ function setupLanguageSwitcher() {
         btn.onclick = (e) => {
             currentLang = e.currentTarget.dataset.lang;
             btns.forEach(b => b.classList.remove('active'));
-            // Синхронізуємо всі кнопки на сторінці
             document.querySelectorAll(`.lang-btn[data-lang="${currentLang}"]`).forEach(b => b.classList.add('active'));
             refresh();
         };
@@ -95,20 +85,20 @@ function setupMobileMenu() {
 
 function setupScrollLogic() {
     const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    const observerOptions = { root: null, rootMargin: '-20% 0px -50% 0px', threshold: 0 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
+            const id = entry.target.getAttribute('id');
+            const title = entry.target.querySelector('.section-title');
             if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                const id = entry.target.getAttribute('id');
-                const title = entry.target.querySelector('.section-title');
                 if (title) title.classList.add('highlight');
-            } else {
-                const title = entry.target.querySelector('.section-title');
-                if (title) title.classList.remove('highlight');
-            }
+                navLinks.forEach(link => { link.classList.remove('active'); if (link.getAttribute('href') === `#${id}`) link.classList.add('active'); });
+                if (entry.target.classList.contains('reveal')) entry.target.classList.add('active');
+            } else { if (title) title.classList.remove('highlight'); }
         });
-    }, { threshold: 0.2 });
-    sections.forEach(s => observer.observe(s));
+    }, observerOptions);
+    sections.forEach(section => observer.observe(section));
 }
 
 function setupCounters() {

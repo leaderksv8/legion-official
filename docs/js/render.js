@@ -65,7 +65,6 @@ export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track || !data) return;
     const list = data.length > 0 ? data : [{name: "ГО", img: ""}];
-    // Потрійна порція для нескінченності
     const double = [...list, ...list, ...list];
     track.innerHTML = double.map(p => {
         const imgSrc = p.img || `https://via.placeholder.com/200x80?text=${p.name}`;
