@@ -2,17 +2,14 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ГО «ЛЕГІОН ТИТАНІВ» | Бучанський район</title>
     
-    <!-- SEO & Social Media -->
-    <meta name="description" content="Громадська організація ветеранів війни з обмеженими можливостями Бучанського району. Допомога, реабілітація, соціальна адаптація.">
+    <!-- SEO & Social -->
+    <meta name="description" content="Громадська організація ветеранів війни з обмеженими можливостями Бучанського району.">
     <meta property="og:title" content="ГО «ЛЕГІОН ТИТАНІВ»">
-    <meta property="og:description" content="Ми об'єднуємо захисників для взаємодопомоги та реабілітації.">
     <meta property="og:image" content="images/001.jpg">
-    <meta property="og:type" content="website">
 
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/favicon.png">
 
     <!-- Fonts & Icons -->
@@ -24,19 +21,35 @@
 
     <header class="main-header">
         <div class="container header-wrapper">
-            <a href="#home" class="logo" style="text-decoration:none;">
+            <a href="#home" class="logo">
                 <i class="fas fa-shield-alt"></i>
                 <div class="logo-text">ЛЕГІОН ТИТАНІВ</div>
             </a>
-            <nav class="nav-menu">
+            
+            <!-- Кнопка Бургера (тільки для мобільних) -->
+            <button class="burger-btn" id="burgerBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <!-- Навігація -->
+            <nav class="nav-menu" id="navMenu">
                 <ul id="main-nav">
                     <li><a href="#home" class="nav-link" data-uk="Головна" data-en="Home">Головна</a></li>
                     <li><a href="#activities" class="nav-link" data-uk="Діяльність" data-en="Activities">Діяльність</a></li>
                     <li><a href="#partners" class="nav-link" data-uk="Партнери" data-en="Partners">Партнери</a></li>
                     <li><a href="#contact" class="nav-link" data-uk="Контакти" data-en="Contacts">Контакти</a></li>
                 </ul>
+                <!-- Мови всередині бургера -->
+                <div class="lang-switcher mobile-lang">
+                    <button class="lang-btn active" data-lang="uk">UA</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
             </nav>
-            <div class="lang-switcher">
+
+            <!-- Мови для ПК -->
+            <div class="lang-switcher desktop-lang">
                 <button class="lang-btn active" data-lang="uk">UA</button>
                 <button class="lang-btn" data-lang="en">EN</button>
             </div>
@@ -44,7 +57,7 @@
     </header>
 
     <main>
-        <!-- БЛОК 1: HERO (Дизайнерська версія) -->
+        <!-- БЛОК 1: HERO -->
         <section id="home" class="hero-block">
             <div class="container">
                 <div class="hero-content-wrapper">
@@ -54,9 +67,9 @@
                         ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ
                     </h2>
                     <div class="hero-description">
-                        <p data-uk="Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку, реабілітацію та нові можливості для тих, хто захищав нашу країну."
-                           data-en="We unite war veterans with disabilities of the Bucha district for mutual assistance, adaptation and development. Our mission is to provide support, rehabilitation and new opportunities.">
-                            Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку, реабілітацію та нові можливості для тих, хто захищав нашу країну.
+                        <p data-uk="Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку."
+                           data-en="We unite war veterans with disabilities of the Bucha district for mutual aid and rehabilitation.">
+                            Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку.
                         </p>
                     </div>
                     <div class="hero-btns-group">
@@ -78,12 +91,12 @@
                     <div class="about-text">
                         <h2 class="section-title" data-uk="Наша діяльність" data-en="Our Activities">Наша діяльність</h2>
                         <p data-uk="Захист прав та інтересів ветеранів війни з обмеженими можливостями, допомога в реінтеграції та соціалізації."
-                           data-en="Protection of the rights and interests of war veterans with disabilities, assistance in reintegration and socialization.">
+                           data-en="Protection of the rights and interests of war veterans with disabilities.">
                             Захист прав та інтересів ветеранів війни з обмеженими можливостями, допомога в реінтеграції та соціалізації.
                         </p>
                     </div>
                 </div>
-                <div id="activities-cards" class="grid-6"></div>
+                <div id="activities-cards" class="grid-container activities-grid"></div>
             </div>
         </section>
 
@@ -154,15 +167,17 @@
                         </form>
                     </div>
                 </div>
+                
                 <div class="footer-links">
                     <h3 class="footer-label" data-uk="Швидкі посилання" data-en="Quick Links">Швидкі посилання</h3>
                     <ul class="footer-list">
-                        <li><a href="#home"><i class="fas fa-chevron-right"></i> <span data-uk="Головна" data-en="Home">Головна</span></a></li>
-                        <li><a href="#activities"><i class="fas fa-chevron-right"></i> <span data-uk="Діяльність" data-en="Activities">Діяльність</span></a></li>
-                        <li><a href="#reports"><i class="fas fa-chevron-right"></i> <span data-uk="Звітність" data-en="Reports">Звітність</span></a></li>
-                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> <span data-uk="Контакти" data-en="Contacts">Контакти</span></a></li>
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Головна</a></li>
+                        <li><a href="#activities"><i class="fas fa-chevron-right"></i> Діяльність</a></li>
+                        <li><a href="#reports"><i class="fas fa-chevron-right"></i> Звітність</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Контакти</a></li>
                     </ul>
                 </div>
+                
                 <div class="footer-services">
                     <h3 class="footer-label" data-uk="Послуги" data-en="Services">Послуги</h3>
                     <ul class="footer-list">
@@ -178,7 +193,6 @@
         </footer>
     </main>
 
-    <!-- Modal System -->
     <div id="bioModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
@@ -186,13 +200,11 @@
         </div>
     </div>
 
-    <!-- ФІКСОВАНА КНОПКА ПРИЄДНАТИСЯ -->
+    <!-- Floating Buttons -->
     <a href="#contact" class="fixed-join-btn">
         <i class="fas fa-user-plus"></i>
-        <span data-uk="ПРИЄДНАТИСЯ" data-en="JOIN US">ПРИЄДНАТИСЯ</span>
+        <span>ПРИЄДНАТИСЯ</span>
     </a>
-
-    <!-- Interface Elements -->
     <button id="backToTop" title="Нагору"><i class="fas fa-arrow-up"></i></button>
 
     <script type="module" src="js/main.js"></script>
