@@ -50,9 +50,9 @@ function refresh() {
         const block = document.getElementById('contacts-content');
         if (block) {
             block.innerHTML = `
-                <p style="margin-bottom:8px; font-size:0.85rem;"><i class="fas fa-phone" style="color:var(--accent); width:18px;"></i> ${c.phone}</p>
-                <p style="margin-bottom:8px; font-size:0.85rem;"><i class="fas fa-envelope" style="color:var(--accent); width:18px;"></i> ${c.email}</p>
-                <p style="font-size:0.85rem;"><i class="fas fa-map-marker-alt" style="color:var(--accent); width:18px;"></i> ${c.address[currentLang]}</p>`;
+                <p style="margin-bottom:10px;"><i class="fas fa-phone"></i> ${c.phone}</p>
+                <p style="margin-bottom:10px;"><i class="fas fa-envelope"></i> ${c.email}</p>
+                <p><i class="fas fa-map-marker-alt"></i> ${c.address[currentLang]}</p>`;
         }
     }
 
@@ -67,29 +67,23 @@ function setupMobileMenu() {
     const toggle = document.getElementById('menuToggle');
     const menu = document.getElementById('navMenu');
     const links = document.querySelectorAll('.nav-link');
-
     if (!toggle || !menu) return;
-
-    toggle.addEventListener('click', () => {
+    toggle.onclick = () => {
         toggle.classList.toggle('active');
         menu.classList.toggle('active');
         document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
-    });
-
-    links.forEach(link => {
-        link.addEventListener('click', () => {
-            toggle.classList.remove('active');
-            menu.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
+    };
+    links.forEach(l => l.onclick = () => {
+        toggle.classList.remove('active');
+        menu.classList.remove('active');
+        document.body.style.overflow = 'auto';
     });
 }
 
 function setupScrollLogic() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-menu a');
-    const observerOptions = { root: null, rootMargin: '-30% 0px -40% 0px', threshold: 0 };
-
+    const observerOptions = { root: null, rootMargin: '-20% 0px -50% 0px', threshold: 0 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const id = entry.target.getAttribute('id');
@@ -157,12 +151,12 @@ function setupContactForm() {
             });
             if (res.ok) {
                 status.style.display = "block"; status.style.color = "#28a745";
-                status.innerText = currentLang === 'uk' ? "Успішно!" : "Success!";
+                status.innerText = currentLang === 'uk' ? "Дякуємо! Надіслано." : "Success!";
                 form.reset();
             } else throw new Error();
         } catch (error) {
             status.style.display = "block"; status.style.color = "#dc3545";
-            status.innerText = "Error.";
+            status.innerText = "Error. Try again.";
         } finally {
             submitBtn.disabled = false; submitBtn.innerText = currentLang === 'uk' ? 'Відправити' : 'Send';
         }
@@ -178,10 +172,10 @@ window.openBio = (id) => {
         <div class="bio-flex">
             <img src="${f.img}" class="bio-img">
             <div>
-                <h2 style="color:var(--primary); font-size: 1.4rem;">${f.name[currentLang]}</h2>
-                <p style="color:var(--accent); font-weight:700; margin-bottom:10px; font-size: 0.9rem;">${f.role[currentLang]}</p>
-                <div style="line-height:1.5; font-size: 0.85rem; color: #444;">${f.bio[currentLang]}</div>
-                <p style="margin-top:20px; border-top:1px solid #eee; padding-top:10px; font-size: 0.8rem;">
+                <h2 style="color:var(--primary);">${f.name[currentLang]}</h2>
+                <p style="color:var(--accent); font-weight:700; margin-bottom:15px;">${f.role[currentLang]}</p>
+                <div style="line-height:1.8;">${f.bio[currentLang]}</div>
+                <p style="margin-top:20px; border-top:1px solid #eee; padding-top:15px;">
                     <b>TG:</b> ${f.tg} | <b>Тел:</b> ${f.phone}
                 </p>
             </div>
@@ -194,7 +188,7 @@ window.openBio = (id) => {
 window.openFullImage = (src) => {
     const m = document.getElementById('bioModal');
     const data = document.getElementById('modal-data');
-    data.innerHTML = `<div style="text-align:center;"><img src="${src}" style="max-width:100%; max-height:80vh; border-radius:15px; object-fit:contain;"></div>`;
+    data.innerHTML = `<div style="text-align:center;"><img src="${src}" style="max-width:100%; max-height:85vh; border-radius:20px; box-shadow:0 20px 50px rgba(0,0,0,0.5);"></div>`;
     m.style.display = 'flex';
     setTimeout(() => m.classList.add('active'), 10);
     document.body.style.overflow = 'hidden';
@@ -202,10 +196,7 @@ window.openFullImage = (src) => {
 
 const closeModal = () => {
     const m = document.getElementById('bioModal');
-    if (m) {
-        m.classList.remove('active');
-        setTimeout(() => { m.style.display = 'none'; document.body.style.overflow = 'auto'; }, 400);
-    }
+    if (m) { m.classList.remove('active'); setTimeout(() => { m.style.display = 'none'; document.body.style.overflow = 'auto'; }, 400); }
 };
 
 document.querySelector('.close-modal').onclick = closeModal;

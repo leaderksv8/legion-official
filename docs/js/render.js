@@ -4,8 +4,8 @@ export function renderActivities(data, lang) {
     container.innerHTML = data.map(item => `
         <div class="activity-card">
             <div class="card-icon"><i class="fas fa-${item.icon}"></i></div>
-            <h3 style="color:var(--primary); font-size:1.1rem;">${item.title[lang]}</h3>
-            <p style="margin-top:10px; font-size:0.85rem; color:#444;">${item.desc[lang]}</p>
+            <h3 style="color:var(--primary);">${item.title[lang]}</h3>
+            <p style="margin-top:10px;">${item.desc[lang]}</p>
         </div>
     `).join('');
 }
@@ -16,7 +16,7 @@ export function renderStats(data, lang) {
     container.innerHTML = data.map(item => `
         <div class="stat-item">
             <h2 class="counter" data-target="${item.value}">0</h2>
-            <p style="margin-top:5px; font-weight:700; text-transform:uppercase; font-size:0.7rem; letter-spacing:1px; color:rgba(255,255,255,0.7);">${item.label[lang]}</p>
+            <p style="margin-top:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">${item.label[lang]}</p>
         </div>
     `).join('');
 }
@@ -29,8 +29,8 @@ export function renderFounders(data, lang) {
             <div class="founder-img-wrapper">
                 <img src="${f.img}" alt="${f.name[lang]}">
             </div>
-            <h4 style="margin-top:10px; color:var(--primary); font-size:0.95rem;">${f.name[lang]}</h4>
-            <p style="color:var(--accent); font-weight:700; font-size:0.75rem;">${f.role[lang]}</p>
+            <h4 style="margin-top:20px; color:var(--primary);">${f.name[lang]}</h4>
+            <p style="color:var(--accent); font-weight:700; font-size:0.9rem;">${f.role[lang]}</p>
         </div>
     `).join('');
 }
@@ -40,12 +40,12 @@ export function renderNews(data, lang) {
     if (!container || !data) return;
     container.innerHTML = data.map(n => `
         <div class="news-island">
-            <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:0.7rem; font-weight:700;">
-                <span style="background:var(--primary); color:white; padding:2px 8px; border-radius:50px;">${n.tag[lang]}</span>
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:0.8rem; font-weight:700;">
+                <span style="background:var(--primary); color:white; padding:3px 12px; border-radius:50px;">${n.tag[lang]}</span>
                 <span style="color:var(--gray);">${n.date}</span>
             </div>
-            <h4 style="color:var(--primary); font-size:0.9rem; line-height:1.3;">${n.title[lang]}</h4>
-            <p style="font-size:0.8rem; color:#666; margin-top:5px;">${n.desc[lang]}</p>
+            <h4 style="color:var(--primary);">${n.title[lang]}</h4>
+            <p style="font-size:0.85rem; color:#666; margin-top:8px;">${n.desc[lang]}</p>
         </div>
     `).join('');
 }
@@ -56,7 +56,7 @@ export function renderPartners(data) {
     const list = data.length > 0 ? data : [{name: "ГО", img: ""}];
     const double = [...list, ...list, ...list];
     track.innerHTML = double.map(p => {
-        const imgSrc = p.img || `https://via.placeholder.com/150x60?text=${p.name}`;
+        const imgSrc = p.img || `https://via.placeholder.com/200x80?text=${p.name}`;
         return `<a href="${p.link || '#'}" target="_blank"><img src="${imgSrc}" alt="${p.name}"></a>`;
     }).join('');
 }
@@ -65,11 +65,11 @@ export function renderStories(data, lang) {
     const container = document.getElementById('stories-container');
     if (!container || !data) return;
     container.innerHTML = data.map(s => `
-        <div class="story-card" style="background:white; padding:15px; border-radius:15px; margin-bottom:15px; display:flex; align-items:center; gap:15px; box-shadow:var(--shadow);">
-            <img src="${s.img}" alt="${s.name[lang]}" style="width:50px; height:50px; border-radius:50%; object-fit:cover; flex-shrink:0;">
+        <div class="story-card" style="background:white; padding:30px; border-radius:20px; display:flex; gap:25px; align-items:center; margin-bottom:20px; box-shadow:var(--shadow);">
+            <img src="${s.img}" alt="${s.name[lang]}" style="width:80px; height:80px; border-radius:50%; object-fit:cover;">
             <div style="text-align:left;">
-                <h4 style="color:var(--primary); font-size:0.9rem;">${s.name[lang]}</h4>
-                <p style="font-style:italic; font-size:0.8rem; color:#555;">"${s.text[lang]}"</p>
+                <h4 style="color:var(--primary);">${s.name[lang]}</h4>
+                <p style="font-style:italic; margin-top:5px;">"${s.text[lang]}"</p>
             </div>
         </div>
     `).join('');

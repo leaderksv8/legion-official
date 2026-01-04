@@ -12,7 +12,6 @@
     <meta property="og:image" content="images/001.jpg">
     <meta property="og:type" content="website">
 
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/favicon.png">
 
     <!-- Fonts & Icons -->
@@ -29,14 +28,12 @@
                 <div class="logo-text">ЛЕГІОН ТИТАНІВ</div>
             </a>
             
-            <!-- Кнопка Бургера -->
             <div class="menu-toggle" id="menuToggle">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
 
-            <!-- Навігація -->
             <nav class="nav-menu" id="navMenu">
                 <ul id="main-nav">
                     <li><a href="#home" class="nav-link">Головна</a></li>
@@ -50,7 +47,6 @@
                 </div>
             </nav>
 
-            <!-- Перемикач мов для ПК -->
             <div class="lang-switcher desktop-langs">
                 <button class="lang-btn active" data-lang="uk">UA</button>
                 <button class="lang-btn" data-lang="en">EN</button>
@@ -59,7 +55,6 @@
     </header>
 
     <main>
-        <!-- БЛОК 1: HERO -->
         <section id="home" class="hero-block">
             <div class="container">
                 <div class="hero-content-wrapper">
@@ -67,13 +62,17 @@
                     <h1 class="hero-brand">«ЛЕГІОН ТИТАНІВ»</h1>
                     <h2 class="hero-subtitle">ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ</h2>
                     <div class="hero-description">
-                        <p>Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку.</p>
+                        <p>Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку тих, хто захищав нашу країну.</p>
+                    </div>
+                    <div class="hero-btns-group">
+                        <a href="#contact" class="shiny-button">
+                            <span>ПРИЄДНАТИСЯ</span>
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- БЛОК 2: ДІЯЛЬНІСТЬ -->
         <section id="activities" class="section reveal">
             <div class="container">
                 <div class="about-intro">
@@ -85,11 +84,10 @@
                         <p>Захист прав та інтересів ветеранів війни з обмеженими можливостями, допомога в реінтеграції та соціалізації.</p>
                     </div>
                 </div>
-                <div id="activities-cards" class="grid-layout"></div>
+                <div id="activities-cards" class="grid-6"></div>
             </div>
         </section>
 
-        <!-- БЛОК 3: ЗВІТНІСТЬ -->
         <section id="reports" class="section stats-bg reveal">
             <div class="container text-center">
                 <h2 class="section-title" style="color:white;">Наші досягнення</h2>
@@ -97,7 +95,6 @@
             </div>
         </section>
 
-        <!-- БЛОК 4: ПАРТНЕРИ -->
         <section id="partners" class="section reveal">
             <div class="container text-center">
                 <h2 class="section-title">Наші партнери</h2>
@@ -107,7 +104,6 @@
             </div>
         </section>
 
-        <!-- БЛОК 5: ІСТОРІЇ -->
         <section id="stories" class="section section-alt reveal">
             <div class="container text-center">
                 <h2 class="section-title">Історії наших героїв</h2>
@@ -115,7 +111,6 @@
             </div>
         </section>
 
-        <!-- БЛОК 6: МЕДІА -->
         <section id="media" class="section reveal">
             <div class="container">
                 <div class="media-layout">
@@ -131,7 +126,6 @@
             </div>
         </section>
 
-        <!-- БЛОК 7: ЗАСНОВНИКИ -->
         <section id="founders" class="section section-alt reveal">
             <div class="container text-center">
                 <h2 class="section-title">Наші співзасновники</h2>
@@ -139,7 +133,6 @@
             </div>
         </section>
 
-        <!-- БЛОК 8: ФУТЕР -->
         <footer id="contact" class="main-footer">
             <div class="container footer-grid">
                 <div class="footer-info">
@@ -156,7 +149,6 @@
                         </form>
                     </div>
                 </div>
-                
                 <div class="footer-links">
                     <h3 class="footer-label">Швидкі посилання</h3>
                     <ul class="footer-list">
@@ -166,13 +158,12 @@
                         <li><a href="#contact"><i class="fas fa-chevron-right"></i> Контакти</a></li>
                     </ul>
                 </div>
-                
                 <div class="footer-services">
                     <h3 class="footer-label">Послуги</h3>
                     <ul class="footer-list">
-                        <li><i class="fas fa-check"></i> <span>Юридична допомога</span></li>
-                        <li><i class="fas fa-check"></i> <span>Реабілітація</span></li>
-                        <li><i class="fas fa-check"></i> <span>Соціальна адаптація</span></li>
+                        <li><i class="fas fa-check"></i> Юридична допомога</li>
+                        <li><i class="fas fa-check"></i> Реабілітація</li>
+                        <li><i class="fas fa-check"></i> Соціальна адаптація</li>
                     </ul>
                 </div>
             </div>
@@ -182,7 +173,6 @@
         </footer>
     </main>
 
-    <!-- Modal -->
     <div id="bioModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
@@ -190,13 +180,11 @@
         </div>
     </div>
 
-    <!-- Кнопка FAB -->
     <a href="#contact" class="fixed-join-btn">
         <i class="fas fa-user-plus"></i>
         <span>ПРИЄДНАТИСЯ</span>
     </a>
 
-    <!-- Вгору -->
     <button id="backToTop" title="Нагору"><i class="fas fa-arrow-up"></i></button>
 
     <script type="module" src="js/main.js"></script>
