@@ -65,7 +65,13 @@ function refresh() {
 function setupScrollLogic() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-menu a');
-    const observerOptions = { threshold: 0.3 };
+
+    // Налаштування: заголовок стає золотим, коли він у верхній третині екрана
+    const observerOptions = {
+        root: null,
+        rootMargin: '-10% 0px -70% 0px', // Чітка зона вгорі екрана
+        threshold: 0
+    };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -73,6 +79,7 @@ function setupScrollLogic() {
             const title = entry.target.querySelector('.section-title');
 
             if (entry.isIntersecting) {
+                // Активуємо
                 if (title) title.classList.add('highlight');
                 navLinks.forEach(link => {
                     link.classList.remove('active');
@@ -80,7 +87,11 @@ function setupScrollLogic() {
                 });
                 if (entry.target.classList.contains('reveal')) entry.target.classList.add('active');
             } else {
+                // Деактивуємо ПОВНІСТЮ, коли секція виходить із зони
                 if (title) title.classList.remove('highlight');
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href') === `#${id}`) link.classList.remove('active');
+                });
             }
         });
     }, observerOptions);
