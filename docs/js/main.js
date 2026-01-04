@@ -28,6 +28,7 @@ async function init() {
     refresh();
     setupContactForm();
     setupScrollLogic();
+    setupPartnerCarousel(); // НОВА ЛОГІКА КАРУСЕЛІ
 }
 
 function refresh() {
@@ -40,19 +41,16 @@ function refresh() {
     
     render.renderGallery([
         'images/001.jpg',
-        'https://via.placeholder.com/400x300?text=Event+1',
-        'https://via.placeholder.com/400x300?text=Event+2',
-        'https://via.placeholder.com/400x300?text=Event+3'
+        'https://via.placeholder.com/400x300?text=Захід+1',
+        'https://via.placeholder.com/400x300?text=Захід+2',
+        'https://via.placeholder.com/400x300?text=Захід+3'
     ]);
 
     const c = cache.contacts;
     if (c && c.phone) {
         const block = document.getElementById('contacts-content');
         if (block) {
-            block.innerHTML = `
-                <p style="margin-bottom:10px;"><i class="fas fa-phone"></i> ${c.phone}</p>
-                <p style="margin-bottom:10px;"><i class="fas fa-envelope"></i> ${c.email}</p>
-                <p><i class="fas fa-map-marker-alt"></i> ${c.address[currentLang]}</p>`;
+            block.innerHTML = `<p style="margin-bottom:10px;"><i class="fas fa-phone"></i> ${c.phone}</p><p style="margin-bottom:10px;"><i class="fas fa-envelope"></i> ${c.email}</p><p><i class="fas fa-map-marker-alt"></i> ${c.address[currentLang]}</p>`;
         }
     }
 
@@ -61,6 +59,69 @@ function refresh() {
     });
 
     setupCounters();
+}
+
+// ПЕРЕПИСАНА ЛОГІКА КАРУСЕЛІ (Auto-move + Drag)
+function setupPartnerCarousel() {
+    const slider = document.getElementById('partnersSlider');
+    const track = document.getElementById('partners-track');
+    if (!slider || !track) return;
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let autoScrollSpeed = 0.5;
+    let currentScroll = 0;
+    let isPaused = false;
+
+    // Автоматичний рух
+    function step() {
+        if (!isPaused && !isDown) {
+            currentScroll += autoScrollSpeed;
+            if (currentScroll >= track.scrollWidth / 2) {
+                currentScroll = 0;
+            }
+            slider.scrollLeft = currentScroll;
+        }
+        requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+
+    // Пауза при наведенні
+    slider.addEventListener('mouseenter', () => isPaused = true);
+    slider.addEventListener('mouseleave', () => isPaused = false);
+
+    // Логіка Drag (мишка)
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+        currentScroll = scrollLeft;
+    });
+    window.addEventListener('mouseup', () => isDown = false);
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2;
+        slider.scrollLeft = scrollLeft - walk;
+        currentScroll = slider.scrollLeft;
+    });
+
+    // Логіка Touch (смартфон)
+    slider.addEventListener('touchstart', (e) => {
+        isDown = true;
+        startX = e.touches[0].pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+    slider.addEventListener('touchend', () => isDown = false);
+    slider.addEventListener('touchmove', (e) => {
+        if (!isDown) return;
+        const x = e.touches[0].pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2;
+        slider.scrollLeft = scrollLeft - walk;
+        currentScroll = slider.scrollLeft;
+    });
 }
 
 function setupMobileMenu() {
@@ -175,7 +236,7 @@ window.openBio = (id) => {
                 <h2 style="color:var(--primary);">${f.name[currentLang]}</h2>
                 <p style="color:var(--accent); font-weight:700; margin-bottom:15px;">${f.role[currentLang]}</p>
                 <div style="line-height:1.8;">${f.bio[currentLang]}</div>
-                <p style="margin-top:20px; border-top:1px solid #eee; padding-top:15px;">
+                <p style="margin-top:20px; border-top:1px solid #eee; padding-top:10px; font-size: 0.8rem;">
                     <b>TG:</b> ${f.tg} | <b>Тел:</b> ${f.phone}
                 </p>
             </div>
