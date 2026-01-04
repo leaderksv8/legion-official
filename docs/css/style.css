@@ -12,6 +12,7 @@
     --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ЗАБОРОНА ФІОЛЕТОВИХ ПОСИЛАНЬ */
 a, a:visited, a:active, a:link {
     text-decoration: none !important;
     color: inherit !important;
@@ -32,6 +33,7 @@ body {
 section { padding: 100px 0; }
 .section-alt { background-color: var(--light); }
 
+/* ПІДСВІТКА ЗАГОЛОВКІВ */
 .section-title { 
     color: #1e293b !important;
     transition: all 0.4s ease-in-out; 
@@ -69,34 +71,38 @@ section { padding: 100px 0; }
     color: var(--accent) !important; 
 }
 
-/* НОВИЙ ПЕРЕМИКАЧ МОВ */
+/* ДИЗАЙНЕРСЬКИЙ ПЕРЕМИКАЧ МОВ */
 .lang-switcher {
-    display: flex;
-    gap: 0;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 3px;
-    border-radius: 30px;
-    border: 1px solid rgba(197, 160, 89, 0.3);
-    margin-left: 15px;
+    display: flex !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    padding: 4px !important;
+    border-radius: 50px !important;
+    border: 1px solid rgba(197, 160, 89, 0.4) !important;
+    margin-left: 20px !important;
 }
+
 .lang-btn {
-    background: none;
-    border: none;
-    color: rgba(255, 255, 255, 0.5) !important;
-    padding: 6px 15px;
-    font-size: 0.75rem;
-    font-weight: 800;
-    cursor: pointer;
-    border-radius: 20px;
-    transition: var(--transition);
+    background: transparent !important;
+    border: none !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    padding: 6px 16px !important;
+    font-size: 0.75rem !important;
+    font-weight: 800 !important;
+    cursor: pointer !important;
+    border-radius: 50px !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase !important;
+    line-height: 1 !important;
 }
+
 .lang-btn:hover {
-    color: white !important;
+    color: var(--white) !important;
 }
+
 .lang-btn.active {
-    background: var(--accent);
+    background: var(--accent) !important;
     color: var(--primary) !important;
-    box-shadow: 0 0 15px rgba(197, 160, 89, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
 }
 
 /* HERO BLOCK */
@@ -111,35 +117,6 @@ section { padding: 100px 0; }
 .hero-brand { font-size: 4.5rem; font-weight: 800; line-height: 1; margin-bottom: 20px; letter-spacing: -1px; color: white !important; }
 .hero-subtitle { font-size: 1.4rem; font-weight: 700; color: rgba(255,255,255,0.9) !important; max-width: 800px; margin: 0 auto 30px auto; line-height: 1.4; border-top: 1px solid rgba(197, 160, 89, 0.3); padding-top: 20px; }
 .hero-description p { font-size: 1.15rem; line-height: 1.8; color: rgba(255,255,255,0.75) !important; margin-bottom: 40px; }
-
-.shiny-button {
-    position: relative;
-    display: inline-block;
-    padding: 20px 50px;
-    background: linear-gradient(135deg, var(--accent) 0%, #b38f4d 100%);
-    color: var(--primary) !important;
-    font-weight: 800;
-    font-size: 1.1rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    border-radius: 50px;
-    overflow: hidden;
-    transition: all 0.4s ease;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    border: none;
-}
-.shiny-button::after {
-    content: '';
-    position: absolute;
-    top: -50%; left: -100%;
-    width: 20%; height: 200%;
-    background: rgba(255, 255, 255, 0.4);
-    transform: rotate(30deg);
-    animation: shine 4s infinite;
-}
-@keyframes shine { 0% { left: -60%; } 15% { left: 120%; } 100% { left: 120%; } }
-.shiny-button:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 40px rgba(197, 160, 89, 0.4); background: var(--accent); }
 
 /* REVEAL ON SCROLL */
 .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
