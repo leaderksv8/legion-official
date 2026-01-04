@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Друг Організації 1",
+    "role": { "uk": "Волонтер, меценат", "en": "Volunteer, philanthropist" },
+    "img": "https://via.placeholder.com/150x150?text=Friend1"
+  },
+  {
+    "name": "Друг Організації 2",
+    "role": { "uk": "Культурний діяч", "en": "Cultural figure" },
+    "img": "https://via.placeholder.com/150x150?text=Friend2"
+  }
+]

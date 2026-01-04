@@ -1,7 +1,7 @@
 import * as render from './render.js';
 
 let currentLang = 'uk';
-let cache = { founders: [], stats: [], partners: [], news: [], stories: [], contacts: {}, activities: [] };
+let cache = { founders: [], stats: [], partners: [], news: [], stories: [], contacts: {}, activities: [], friends: [] };
 
 async function getJSON(url) {
     try {
@@ -15,6 +15,7 @@ async function init() {
     setupMobileMenu(); 
     setupBackToTop();
     
+    // Завантаження всіх даних
     cache.founders = await getJSON('data/founders.json') || [];
     cache.stats = await getJSON('data/stats.json') || [];
     cache.partners = await getJSON('data/partners.json') || [];
@@ -22,6 +23,7 @@ async function init() {
     cache.stories = await getJSON('data/stories.json') || [];
     cache.contacts = await getJSON('data/contacts.json') || {};
     cache.activities = await getJSON('data/activities.json') || [];
+    cache.friends = await getJSON('data/friends.json') || [];
 
     refresh();
     setupContactForm();
@@ -37,14 +39,15 @@ function refresh() {
     if (cache.partners.length) render.renderPartners(cache.partners);
     if (cache.news.length) render.renderNews(cache.news, currentLang);
     if (cache.stories.length) render.renderStories(cache.stories, currentLang);
+    if (cache.friends.length) render.renderFriends(cache.friends, currentLang);
     
-    render.renderGallery(['images/001.jpg', 'images/001.jpg', 'images/001.jpg']);
+    render.renderGallery(['images/001.jpg', 'images/001.jpg', 'images/001.jpg', 'images/001.jpg']);
 
     const c = cache.contacts;
     if (c && c.phone) {
         const block = document.getElementById('contacts-content');
         if (block) {
-            block.innerHTML = `<p style="margin-bottom:10px;"><i class="fas fa-phone"></i> ${c.phone}</p><p style="margin-bottom:10px;"><i class="fas fa-envelope"></i> ${c.email}</p><p><i class="fas fa-map-marker-alt"></i> ${c.address[currentLang]}</p>`;
+            block.innerHTML = `<p style="margin-bottom:12px;"><i class="fas fa-phone" style="color:var(--accent)"></i> ${c.phone}</p><p style="margin-bottom:12px;"><i class="fas fa-envelope" style="color:var(--accent)"></i> ${c.email}</p><p><i class="fas fa-map-marker-alt" style="color:var(--accent)"></i> ${c.address[currentLang]}</p>`;
         }
     }
 
@@ -73,8 +76,8 @@ function setupPartnerCarousel() {
     startAutoScroll();
     slider.addEventListener('mouseenter', () => isPaused = true);
     slider.addEventListener('mouseleave', () => isPaused = false);
-    const startDrag = (e) => { isDown = true; cancelAnimationFrame(animationId); startX = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; scrollLeft = slider.scrollLeft; };
-    const stopDrag = () => { isDown = false; startAutoScroll(); };
+    const startDrag = (e) => { isDown = true; startX = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; scrollLeft = slider.scrollLeft; };
+    const stopDrag = () => { isDown = false; };
     const moveDrag = (e) => { if (!isDown) return; e.preventDefault(); const x = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 1.5; };
     slider.addEventListener('mousedown', startDrag); window.addEventListener('mouseup', stopDrag); slider.addEventListener('mousemove', moveDrag);
     slider.addEventListener('touchstart', startDrag, {passive: false}); slider.addEventListener('touchend', stopDrag); slider.addEventListener('touchmove', moveDrag, {passive: false});
