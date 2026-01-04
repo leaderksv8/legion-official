@@ -64,8 +64,6 @@ function setupLanguageSwitcher() {
 function setupPartnerCarousel() {
     const slider = document.getElementById('partnersSlider');
     const track = document.getElementById('partners-track');
-    const prev = document.getElementById('prevPartner');
-    const next = document.getElementById('nextPartner');
     if (!slider || !track) return;
     let isDown = false, startX, scrollLeft, autoScrollSpeed = 0.5, animationId, isPaused = false;
     const startAutoScroll = () => { if (!isPaused && !isDown) { slider.scrollLeft += autoScrollSpeed; if (slider.scrollLeft >= track.scrollWidth / 3) slider.scrollLeft = 0; } animationId = requestAnimationFrame(startAutoScroll); };
@@ -77,8 +75,6 @@ function setupPartnerCarousel() {
     const moveDrag = (e) => { if (!isDown) return; e.preventDefault(); const x = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 1.5; };
     slider.addEventListener('mousedown', startDrag); window.addEventListener('mouseup', stopDrag); slider.addEventListener('mousemove', moveDrag);
     slider.addEventListener('touchstart', startDrag, {passive: false}); slider.addEventListener('touchend', stopDrag); slider.addEventListener('touchmove', moveDrag, {passive: false});
-    if (prev) prev.onclick = () => { slider.scrollLeft -= 300; };
-    if (next) next.onclick = () => { slider.scrollLeft += 300; };
 }
 
 function setupMobileMenu() {
@@ -95,10 +91,15 @@ function setupScrollLogic() {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
                 const id = entry.target.getAttribute('id');
-                document.querySelectorAll('.nav-menu a').forEach(a => { a.classList.toggle('active', a.getAttribute('href') === `#${id}`); });
+                document.querySelectorAll('.nav-menu a').forEach(a => {
+                    a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+                });
                 const title = entry.target.querySelector('.section-title');
                 if (title) title.classList.add('highlight');
-            } else { const title = entry.target.querySelector('.section-title'); if (title) title.classList.remove('highlight'); }
+            } else {
+                const title = entry.target.querySelector('.section-title');
+                if (title) title.classList.remove('highlight');
+            }
         });
     }, { threshold: 0.2 });
     sections.forEach(s => observer.observe(s));
@@ -121,7 +122,8 @@ function setupCounters() {
 
 function setupBackToTop() {
     const btn = document.getElementById("backToTop");
-    window.onscroll = () => { if (window.pageYOffset > 400) btn.setAttribute("style", "display: flex !important"); else btn.setAttribute("style", "display: none !important"); };
+    if (!btn) return;
+    window.addEventListener('scroll', () => { if (window.pageYOffset > 400) btn.setAttribute("style", "display: flex !important"); else btn.setAttribute("style", "display: none !important"); });
     btn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
