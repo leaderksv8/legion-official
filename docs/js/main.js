@@ -5,6 +5,7 @@ let cache = {
     founders: [], stats: [], partners: [], news: [], stories: [], contacts: {}, activities: []
 };
 
+// Допоміжна функція завантаження
 async function getJSON(url) {
     try {
         const r = await fetch(url);
@@ -16,6 +17,10 @@ async function getJSON(url) {
 }
 
 async function init() {
+    // Ініціалізуємо кнопку Вгору НЕГАЙНО, не чекаючи завантаження JSON
+    setupBackToTop();
+
+    // Завантажуємо дані
     cache.founders = await getJSON('data/founders.json') || [];
     cache.stats = await getJSON('data/stats.json') || [];
     cache.partners = await getJSON('data/partners.json') || [];
@@ -25,7 +30,6 @@ async function init() {
     cache.activities = await getJSON('data/activities.json') || [];
 
     refresh();
-    setupBackToTop();
     setupContactForm();
 }
 
@@ -84,21 +88,26 @@ function setupCounters() {
     counters.forEach(c => obs.observe(c));
 }
 
+// ПЕРЕПИСАНА ФУНКЦІЯ ВГОРУ
 function setupBackToTop() {
     const btn = document.getElementById("backToTop");
     if (!btn) return;
 
-    window.addEventListener('scroll', () => {
-        // Перевіряємо скрол через різні властивості для надійності
-        const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+    const toggleBtn = () => {
+        const scrollPos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
         if (scrollPos > 300) {
-            btn.style.display = "block";
+            btn.setAttribute("style", "display: flex !important");
         } else {
-            btn.style.display = "none";
+            btn.setAttribute("style", "display: none !important");
         }
-    });
+    };
 
-    btn.onclick = () => {
+    // Слухаємо скрол
+    window.addEventListener('scroll', toggleBtn);
+    
+    // Клік
+    btn.onclick = (e) => {
+        e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 }
@@ -106,7 +115,6 @@ function setupBackToTop() {
 function setupContactForm() {
     const form = document.getElementById('contactForm');
     const status = document.getElementById('formStatus');
-
     if (!form) return;
 
     form.onsubmit = async (e) => {
@@ -144,22 +152,19 @@ function setupContactForm() {
     };
 }
 
+// Модалки
 window.openBio = (id) => {
     const f = cache.founders.find(x => x.id === id);
     if (!f) return;
     const m = document.getElementById('bioModal');
     const data = document.getElementById('modal-data');
-    data.innerHTML = `
-        <div class="bio-flex">
+    data.innerHTML = `<div class="bio-flex">
             <img src="${f.img}" class="bio-img">
             <div>
                 <h2 style="color:var(--primary);">${f.name[currentLang]}</h2>
                 <p style="color:var(--accent);font-weight:700;margin-bottom:15px;">${f.role[currentLang]}</p>
                 <div style="line-height:1.7;">${f.bio[currentLang]}</div>
-                <div style="margin-top:20px; border-top:1px solid #eee; padding-top:10px;">
-                    <p><b>Telegram:</b> ${f.tg}</p>
-                    <p><b>Тел:</b> ${f.phone}</p>
-                </div>
+                <p style="margin-top:20px;"><b>TG:</b> ${f.tg} | <b>Тел:</b> ${f.phone}</p>
             </div>
         </div>`;
     m.style.display = 'block';
@@ -169,10 +174,7 @@ window.openBio = (id) => {
 window.openFullImage = (src) => {
     const m = document.getElementById('bioModal');
     const data = document.getElementById('modal-data');
-    data.innerHTML = `
-        <div style="text-align:center;">
-            <img src="${src}" style="max-width:100%; max-height:85vh; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
-        </div>`;
+    data.innerHTML = `<div style="text-align:center;"><img src="${src}" style="max-width:100%; max-height:85vh; border-radius:15px;"></div>`;
     m.style.display = 'block';
     document.body.style.overflow = 'hidden';
 };
@@ -186,21 +188,14 @@ const closeModal = () => {
 };
 
 document.querySelector('.close-modal').onclick = closeModal;
-
-window.onclick = (e) => {
-    const m = document.getElementById('bioModal');
-    if (e.target === m) closeModal();
-};
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
-});
+window.onclick = (e) => { if (e.target === document.getElementById('bioModal')) closeModal(); };
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
 document.querySelectorAll('.lang-btn').forEach(b => {
     b.onclick = (e) => {
-        currentLang = e.target.dataset.lang;
+        currentLang = e.currentTarget.dataset.lang;
         document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-        e.target.classList.add('active');
+        e.currentTarget.classList.add('active');
         refresh();
     };
 });
