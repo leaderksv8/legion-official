@@ -41,9 +41,9 @@ function refresh() {
     
     render.renderGallery([
         'images/001.jpg',
-        'https://via.placeholder.com/400x300?text=Захід+1',
-        'https://via.placeholder.com/400x300?text=Захід+2',
-        'https://via.placeholder.com/400x300?text=Захід+3'
+        'https://via.placeholder.com/400x300?text=Event+1',
+        'https://via.placeholder.com/400x300?text=Event+2',
+        'https://via.placeholder.com/400x300?text=Event+3'
     ]);
 
     const c = cache.contacts;
@@ -64,7 +64,7 @@ function refresh() {
     setupCounters();
 }
 
-// Анімація появи та підсвітка меню
+// Анімація появи, підсвітка меню ТА підсвітка заголовків
 function setupScrollEffects() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-menu a');
@@ -74,26 +74,37 @@ function setupScrollEffects() {
         let current = "";
         const scrollPos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
 
-        // 1. Reveal effects
-        reveals.forEach(rev => {
-            const windowHeight = window.innerHeight;
-            const revealTop = rev.getBoundingClientRect().top;
-            if (revealTop < windowHeight - 150) {
-                rev.classList.add('active');
-            }
-        });
-
-        // 2. Navigation Active State
-        sections.forEach((section) => {
+        // 1. Reveal effects + Заголовки
+        sections.forEach(section => {
             const sectionTop = section.offsetTop;
-            if (scrollPos >= sectionTop - 100) {
+            const sectionHeight = section.clientHeight;
+            const windowHeight = window.innerHeight;
+            
+            // Якщо секція в центрі екрану
+            if (scrollPos >= sectionTop - 250 && scrollPos < sectionTop + sectionHeight - 250) {
                 current = section.getAttribute("id");
+                
+                // Знаходимо заголовок всередині цієї секції і додаємо клас підсвітки
+                const title = section.querySelector('.section-title');
+                if (title) title.classList.add('highlight');
+            } else {
+                // Прибираємо підсвітку, якщо вийшли з секції
+                const title = section.querySelector('.section-title');
+                if (title) title.classList.remove('highlight');
+            }
+
+            // Класична анімація появи (Reveal)
+            if (section.classList.contains('reveal')) {
+                if (section.getBoundingClientRect().top < windowHeight - 150) {
+                    section.classList.add('active');
+                }
             }
         });
 
+        // 2. Navigation Active State (Меню в хедері)
         navLinks.forEach((a) => {
             a.classList.remove("active");
-            if (a.getAttribute("href").includes(current)) {
+            if (a.getAttribute("href").includes(current) && current !== "") {
                 a.classList.add("active");
             }
         });

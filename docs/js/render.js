@@ -53,8 +53,12 @@ export function renderNews(data, lang) {
 export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track) return;
+    // Використовуємо реальні логотипи або якісні плейсхолдери, якщо дані пусті
     const double = [...data, ...data];
-    track.innerHTML = double.map(p => `<img src="${p.img}" alt="${p.name}">`).join('');
+    track.innerHTML = double.map(p => {
+        const imgSrc = p.img || `https://via.placeholder.com/200x80?text=${p.name}`;
+        return `<a href="${p.link || '#'}" target="_blank"><img src="${imgSrc}" alt="${p.name}"></a>`;
+    }).join('');
 }
 
 export function renderStories(data, lang) {
