@@ -66,7 +66,6 @@ function setupScrollLogic() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-menu a');
 
-    // Налаштування зони видимості для активації заголовка (центр екрана)
     const observerOptions = {
         root: null,
         rootMargin: '-20% 0px -50% 0px', 
@@ -79,7 +78,6 @@ function setupScrollLogic() {
             const title = entry.target.querySelector('.section-title');
 
             if (entry.isIntersecting) {
-                // ПРИ ТРАПЛЯННІ В ЦЕНТР - ДОДАЄМО ЗОЛОТИЙ
                 if (title) title.classList.add('highlight');
                 navLinks.forEach(link => {
                     link.classList.remove('active');
@@ -87,7 +85,6 @@ function setupScrollLogic() {
                 });
                 if (entry.target.classList.contains('reveal')) entry.target.classList.add('active');
             } else {
-                // ПРИ ВИХОДІ - ПРИБИРАЄМО МИТТЄВО
                 if (title) title.classList.remove('highlight');
             }
         });
