@@ -38,25 +38,17 @@ function refresh() {
     if (cache.news.length) render.renderNews(cache.news, currentLang);
     if (cache.stories.length) render.renderStories(cache.stories, currentLang);
     
-    render.renderGallery([
-        'images/001.jpg',
-        'https://via.placeholder.com/400x300?text=Event+1',
-        'https://via.placeholder.com/400x300?text=Event+2',
-        'https://via.placeholder.com/400x300?text=Event+3'
-    ]);
+    render.renderGallery(['images/001.jpg', 'images/001.jpg', 'images/001.jpg']);
 
     const c = cache.contacts;
     if (c && c.phone) {
         const block = document.getElementById('contacts-content');
         if (block) {
-            block.innerHTML = `<p style="margin-bottom:10px;"><i class="fas fa-phone" style="color:var(--accent); width:20px;"></i> ${c.phone}</p><p style="margin-bottom:10px;"><i class="fas fa-envelope" style="color:var(--accent); width:20px;"></i> ${c.email}</p><p><i class="fas fa-map-marker-alt" style="color:var(--accent); width:20px;"></i> ${c.address[currentLang]}</p>`;
+            block.innerHTML = `<p style="margin-bottom:10px;"><i class="fas fa-phone"></i> ${c.phone}</p><p style="margin-bottom:10px;"><i class="fas fa-envelope"></i> ${c.email}</p><p><i class="fas fa-map-marker-alt"></i> ${c.address[currentLang]}</p>`;
         }
     }
 
-    document.querySelectorAll('[data-' + currentLang + ']').forEach(el => {
-        el.innerHTML = el.getAttribute('data-' + currentLang);
-    });
-
+    document.querySelectorAll('[data-' + currentLang + ']').forEach(el => { el.innerHTML = el.getAttribute('data-' + currentLang); });
     setupCounters();
 }
 
@@ -76,32 +68,16 @@ function setupPartnerCarousel() {
     const slider = document.getElementById('partnersSlider');
     const track = document.getElementById('partners-track');
     if (!slider || !track) return;
-
     let isDown = false, startX, scrollLeft, autoScrollSpeed = 0.5, animationId, isPaused = false;
-
-    const startAutoScroll = () => {
-        if (!isPaused && !isDown) {
-            slider.scrollLeft += autoScrollSpeed;
-            if (slider.scrollLeft >= track.scrollWidth / 3) slider.scrollLeft = 0;
-        }
-        animationId = requestAnimationFrame(startAutoScroll);
-    };
-
+    const startAutoScroll = () => { if (!isPaused && !isDown) { slider.scrollLeft += autoScrollSpeed; if (slider.scrollLeft >= track.scrollWidth / 3) slider.scrollLeft = 0; } animationId = requestAnimationFrame(startAutoScroll); };
     startAutoScroll();
-
     slider.addEventListener('mouseenter', () => isPaused = true);
     slider.addEventListener('mouseleave', () => isPaused = false);
-
-    const startDrag = (e) => { isDown = true; startX = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; scrollLeft = slider.scrollLeft; };
-    const stopDrag = () => { isDown = false; };
+    const startDrag = (e) => { isDown = true; cancelAnimationFrame(animationId); startX = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; scrollLeft = slider.scrollLeft; };
+    const stopDrag = () => { isDown = false; startAutoScroll(); };
     const moveDrag = (e) => { if (!isDown) return; e.preventDefault(); const x = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 1.5; };
-
-    slider.addEventListener('mousedown', startDrag);
-    window.addEventListener('mouseup', stopDrag);
-    slider.addEventListener('mousemove', moveDrag);
-    slider.addEventListener('touchstart', startDrag, {passive: false});
-    slider.addEventListener('touchend', stopDrag);
-    slider.addEventListener('touchmove', moveDrag, {passive: false});
+    slider.addEventListener('mousedown', startDrag); window.addEventListener('mouseup', stopDrag); slider.addEventListener('mousemove', moveDrag);
+    slider.addEventListener('touchstart', startDrag, {passive: false}); slider.addEventListener('touchend', stopDrag); slider.addEventListener('touchmove', moveDrag, {passive: false});
 }
 
 function setupMobileMenu() {
