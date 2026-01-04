@@ -21,41 +21,32 @@ async function init() {
     cache.partners = await getJSON('data/partners.json') || [];
     cache.news = await getJSON('data/news.json') || [];
     cache.stories = await getJSON('data/stories.json') || [];
-    cache.contacts = await getJSON('data/contacts.json') || {};
     cache.activities = await getJSON('data/activities.json') || [];
     cache.friends = await getJSON('data/friends.json') || [];
 
     refresh();
     setupContactForm();
     setupScrollLogic();
-    setupPartnerCarousel(); 
     setupLanguageSwitcher();
+    setupPartnerSlider();
 }
 
 function refresh() {
-    if (cache.activities.length) render.renderActivities(cache.activities, currentLang);
-    if (cache.founders.length) render.renderFounders(cache.founders, currentLang);
-    if (cache.stats.length) render.renderStats(cache.stats, currentLang);
-    if (cache.partners.length) render.renderPartners(cache.partners);
-    if (cache.news.length) render.renderNews(cache.news, currentLang);
-    if (cache.stories.length) render.renderStories(cache.stories, currentLang);
-    if (cache.friends.length) render.renderFriends(cache.friends, currentLang);
-    
+    // Рендеримо всі динамічні блоки
+    render.renderActivities(cache.activities, currentLang);
+    render.renderFounders(cache.founders, currentLang);
+    render.renderStats(cache.stats, currentLang);
+    render.renderPartners(cache.partners);
+    render.renderNews(cache.news, currentLang);
+    render.renderStories(cache.stories, currentLang);
+    render.renderFriends(cache.friends, currentLang);
     render.renderGallery(['images/001.jpg', 'images/001.jpg', 'images/001.jpg', 'images/001.jpg']);
 
-    const c = cache.contacts;
-    if (c && c.phone) {
-        const block = document.getElementById('contacts-content');
-        if (block) {
-            block.innerHTML = `
-                <p style="margin-bottom:12px;"><i class="fas fa-map-marker-alt" style="color:var(--accent)"></i> Бучанський район, Київська обл.</p>
-                <p style="margin-bottom:12px;"><i class="fas fa-phone" style="color:var(--accent)"></i> ${c.phone}</p>
-                <p style="margin-bottom:12px;"><i class="fas fa-paper-plane" style="color:var(--accent)"></i> @legion_bucha</p>
-                <p style="margin-bottom:12px;"><i class="fas fa-envelope" style="color:var(--accent)"></i> ${c.email}</p>`;
-        }
-    }
+    // Оновлення всіх текстових блоків з атрибутами data-uk / data-en
+    document.querySelectorAll('[data-' + currentLang + ']').forEach(el => {
+        el.innerHTML = el.getAttribute('data-' + currentLang);
+    });
 
-    document.querySelectorAll('[data-' + currentLang + ']').forEach(el => { el.innerHTML = el.getAttribute('data-' + currentLang); });
     setupCounters();
 }
 
@@ -71,20 +62,14 @@ function setupLanguageSwitcher() {
     });
 }
 
-function setupPartnerCarousel() {
+function setupPartnerSlider() {
     const slider = document.getElementById('partnersSlider');
-    const track = document.getElementById('partners-track');
-    if (!slider || !track) return;
-    let isDown = false, startX, scrollLeft, autoScrollSpeed = 0.3, animationId, isPaused = false;
-    const startAutoScroll = () => { if (!isPaused && !isDown) { slider.scrollLeft += autoScrollSpeed; if (slider.scrollLeft >= track.scrollWidth / 3) slider.scrollLeft = 0; } animationId = requestAnimationFrame(startAutoScroll); };
-    startAutoScroll();
-    slider.addEventListener('mouseenter', () => isPaused = true);
-    slider.addEventListener('mouseleave', () => isPaused = false);
-    const startDrag = (e) => { isDown = true; startX = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; scrollLeft = slider.scrollLeft; };
-    const stopDrag = () => { isDown = false; };
-    const moveDrag = (e) => { if (!isDown) return; e.preventDefault(); const x = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 1.5; };
-    slider.addEventListener('mousedown', startDrag); window.addEventListener('mouseup', stopDrag); slider.addEventListener('mousemove', moveDrag);
-    slider.addEventListener('touchstart', startDrag, {passive: false}); slider.addEventListener('touchend', stopDrag); slider.addEventListener('touchmove', moveDrag, {passive: false});
+    const prev = document.getElementById('prevPartner');
+    const next = document.getElementById('nextPartner');
+    if (!slider || !prev || !next) return;
+
+    prev.onclick = () => slider.scrollLeft -= 300;
+    next.onclick = () => slider.scrollLeft += 300;
 }
 
 function setupMobileMenu() {
@@ -138,18 +123,11 @@ function setupBackToTop() {
 
 function setupContactForm() {
     const form = document.getElementById('contactForm');
-    const status = document.getElementById('formStatus');
     if (!form) return;
     form.onsubmit = async (e) => {
         e.preventDefault();
-        const data = new FormData(form), submitBtn = document.getElementById('formSubmit');
-        submitBtn.disabled = true; submitBtn.innerText = 'Sending...';
-        try {
-            const res = await fetch("https://formspree.io/f/mqkrvylk", { method: "POST", body: data, headers: { 'Accept': 'application/json' } });
-            if (res.ok) { status.style.display = "block"; status.style.color = "#28a745"; status.innerText = "Success!"; form.reset(); }
-            else throw new Error();
-        } catch (error) { status.style.display = "block"; status.style.color = "#dc3545"; status.innerText = "Error."; }
-        finally { submitBtn.disabled = false; submitBtn.innerText = 'Відправити'; }
+        alert(currentLang === 'uk' ? "Дякуємо! Ваше повідомлення надіслано." : "Thank you! Your message has been sent.");
+        form.reset();
     };
 }
 

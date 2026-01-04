@@ -56,7 +56,7 @@ export function renderNews(data, lang) {
             </div>
             <h4 style="color:var(--primary);">${n.title[lang]}</h4>
             <p style="font-size:0.85rem; color:#666; margin-top:8px;">${n.desc[lang]}</p>
-            <a href="#" style="color:var(--accent); font-weight:700; font-size:0.8rem; margin-top:10px; display:inline-block;">Читати більше...</a>
+            <a href="${n.link || '#'}" target="_blank" style="color:var(--accent); font-weight:700; font-size:0.8rem; margin-top:10px; display:inline-block;">Читати більше...</a>
         </div>
     `).join('');
 }
@@ -64,9 +64,7 @@ export function renderNews(data, lang) {
 export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track || !data) return;
-    const list = data.length > 0 ? data : [{name: "ГО", img: ""}];
-    const double = [...list, ...list, ...list];
-    track.innerHTML = double.map(p => {
+    track.innerHTML = data.map(p => {
         const imgSrc = p.img || `https://via.placeholder.com/200x80?text=${p.name}`;
         return `<a href="${p.link || '#'}" target="_blank"><img src="${imgSrc}" alt="${p.name}" referrerpolicy="no-referrer"></a>`;
     }).join('');
