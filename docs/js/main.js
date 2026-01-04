@@ -14,7 +14,7 @@ async function getJSON(url) {
 }
 
 async function init() {
-    setupBurgerMenu(); 
+    setupMobileMenu(); 
     setupBackToTop();
     
     cache.founders = await getJSON('data/founders.json') || [];
@@ -63,18 +63,18 @@ function refresh() {
     setupCounters();
 }
 
-function setupBurgerMenu() {
-    const burger = document.getElementById('burgerBtn');
+function setupMobileMenu() {
+    const toggle = document.getElementById('menuToggle');
     const menu = document.getElementById('navMenu');
     const links = document.querySelectorAll('.nav-link');
-    if (!burger || !menu) return;
-    burger.onclick = () => {
-        burger.classList.toggle('active');
+    if (!toggle || !menu) return;
+    toggle.onclick = () => {
+        toggle.classList.toggle('active');
         menu.classList.toggle('active');
         document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
     };
     links.forEach(l => l.onclick = () => {
-        burger.classList.remove('active');
+        toggle.classList.remove('active');
         menu.classList.remove('active');
         document.body.style.overflow = 'auto';
     });
