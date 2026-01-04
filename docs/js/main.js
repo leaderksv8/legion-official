@@ -1,9 +1,7 @@
 import * as render from './render.js';
 
 let currentLang = 'uk';
-let cache = {
-    founders: [], stats: [], partners: [], news: [], stories: [], contacts: {}, activities: []
-};
+let cache = { founders: [], stats: [], partners: [], news: [], stories: [], contacts: {}, activities: [] };
 
 async function getJSON(url) {
     try {
@@ -14,10 +12,9 @@ async function getJSON(url) {
 }
 
 async function init() {
-    setupBurgerMenu(); 
+    setupMobileMenu(); 
     setupBackToTop();
     
-    // Завантаження даних
     cache.founders = await getJSON('data/founders.json') || [];
     cache.stats = await getJSON('data/stats.json') || [];
     cache.partners = await getJSON('data/partners.json') || [];
@@ -30,7 +27,7 @@ async function init() {
     setupContactForm();
     setupScrollLogic();
     setupPartnerCarousel(); 
-    setupLanguageSwitcher(); // Робочий перемикач
+    setupLanguageSwitcher();
 }
 
 function refresh() {
@@ -43,37 +40,30 @@ function refresh() {
     
     render.renderGallery([
         'images/001.jpg',
-        'https://via.placeholder.com/400x300?text=Event+1',
-        'https://via.placeholder.com/400x300?text=Event+2',
-        'https://via.placeholder.com/400x300?text=Event+3'
+        'https://via.placeholder.com/400x300?text=Захід+1',
+        'https://via.placeholder.com/400x300?text=Захід+2',
+        'https://via.placeholder.com/400x300?text=Захід+3'
     ]);
 
     const c = cache.contacts;
     if (c && c.phone) {
         const block = document.getElementById('contacts-content');
         if (block) {
-            block.innerHTML = `<p style="margin-bottom:10px;"><i class="fas fa-phone"></i> ${c.phone}</p><p style="margin-bottom:10px;"><i class="fas fa-envelope"></i> ${c.email}</p><p><i class="fas fa-map-marker-alt"></i> ${c.address[currentLang]}</p>`;
+            block.innerHTML = `<p style="margin-bottom:10px;"><i class="fas fa-phone" style="color:var(--accent); width:20px;"></i> ${c.phone}</p><p style="margin-bottom:10px;"><i class="fas fa-envelope" style="color:var(--accent); width:20px;"></i> ${c.email}</p><p><i class="fas fa-map-marker-alt" style="color:var(--accent); width:20px;"></i> ${c.address[currentLang]}</p>`;
         }
     }
 
-    // Оновлення всіх текстових блоків з атрибутами data-uk / data-en
-    document.querySelectorAll('[data-' + currentLang + ']').forEach(el => {
-        el.innerHTML = el.getAttribute('data-' + currentLang);
-    });
-
+    document.querySelectorAll('[data-' + currentLang + ']').forEach(el => { el.innerHTML = el.getAttribute('data-' + currentLang); });
     setupCounters();
 }
 
-// ПЕРЕМИКАЧ МОВ (Робоча логіка)
 function setupLanguageSwitcher() {
     const btns = document.querySelectorAll('.lang-btn');
     btns.forEach(btn => {
         btn.onclick = (e) => {
             currentLang = e.currentTarget.dataset.lang;
-            // Візуальне оновлення кнопок
             btns.forEach(b => b.classList.remove('active'));
             document.querySelectorAll(`.lang-btn[data-lang="${currentLang}"]`).forEach(b => b.classList.add('active'));
-            // Перемальовуємо сайт
             refresh();
         };
     });
@@ -84,18 +74,11 @@ function setupPartnerCarousel() {
     const track = document.getElementById('partners-track');
     if (!slider || !track) return;
 
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-    let scrollSpeed = 0.6; 
-    let animationId;
-    let dragDistance = 0;
+    let isDown = false, startX, scrollLeft, autoScrollSpeed = 0.7, animationId;
 
     const startAutoScroll = () => {
-        slider.scrollLeft += scrollSpeed;
-        if (slider.scrollLeft >= track.scrollWidth / 3) {
-            slider.scrollLeft = 0;
-        }
+        slider.scrollLeft += autoScrollSpeed;
+        if (slider.scrollLeft >= track.scrollWidth / 3) { slider.scrollLeft = 0; }
         animationId = requestAnimationFrame(startAutoScroll);
     };
 
@@ -104,56 +87,16 @@ function setupPartnerCarousel() {
     slider.addEventListener('mouseenter', () => cancelAnimationFrame(animationId));
     slider.addEventListener('mouseleave', () => { if(!isDown) startAutoScroll(); });
 
-    // Drag логіка
-    slider.addEventListener('mousedown', (e) => {
-        isDown = true;
-        dragDistance = 0;
-        cancelAnimationFrame(animationId);
-        slider.classList.add('active');
-        startX = e.pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-    });
+    const startDrag = (e) => { isDown = true; cancelAnimationFrame(animationId); startX = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; scrollLeft = slider.scrollLeft; };
+    const stopDrag = () => { isDown = false; startAutoScroll(); };
+    const moveDrag = (e) => { if (!isDown) return; e.preventDefault(); const x = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 1.5; };
 
-    window.addEventListener('mouseup', () => {
-        isDown = false;
-        slider.classList.remove('active');
-    });
-
-    slider.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2;
-        dragDistance = Math.abs(walk);
-        slider.scrollLeft = scrollLeft - walk;
-    });
-
-    // Touch логіка
-    slider.addEventListener('touchstart', (e) => {
-        isDown = true;
-        cancelAnimationFrame(animationId);
-        startX = e.touches[0].pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-    }, {passive: true});
-
-    slider.addEventListener('touchend', () => {
-        isDown = false;
-        startAutoScroll();
-    });
-
-    slider.addEventListener('touchmove', (e) => {
-        if (!isDown) return;
-        const x = e.touches[0].pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2;
-        slider.scrollLeft = scrollLeft - walk;
-    }, {passive: true});
-
-    // Захист від випадкового переходу при драгу
-    track.querySelectorAll('a').forEach(link => {
-        link.onclick = (e) => {
-            if (dragDistance > 10) e.preventDefault();
-        };
-    });
+    slider.addEventListener('mousedown', startDrag);
+    window.addEventListener('mouseup', stopDrag);
+    slider.addEventListener('mousemove', moveDrag);
+    slider.addEventListener('touchstart', startDrag, {passive: false});
+    slider.addEventListener('touchend', stopDrag);
+    slider.addEventListener('touchmove', moveDrag, {passive: false});
 }
 
 function setupMobileMenu() {
@@ -161,16 +104,8 @@ function setupMobileMenu() {
     const menu = document.getElementById('navMenu');
     const links = document.querySelectorAll('.nav-link');
     if (!toggle || !menu) return;
-    toggle.onclick = () => {
-        toggle.classList.toggle('active');
-        menu.classList.toggle('active');
-        document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
-    };
-    links.forEach(l => l.onclick = () => {
-        toggle.classList.remove('active');
-        menu.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    });
+    toggle.onclick = () => { toggle.classList.toggle('active'); menu.classList.toggle('active'); document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto'; };
+    links.forEach(l => l.onclick = () => { toggle.classList.remove('active'); menu.classList.remove('active'); document.body.style.overflow = 'auto'; });
 }
 
 function setupScrollLogic() {
@@ -183,14 +118,9 @@ function setupScrollLogic() {
             const title = entry.target.querySelector('.section-title');
             if (entry.isIntersecting) {
                 if (title) title.classList.add('highlight');
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${id}`) link.classList.add('active');
-                });
+                navLinks.forEach(link => { link.classList.remove('active'); if (link.getAttribute('href') === `#${id}`) link.classList.add('active'); });
                 if (entry.target.classList.contains('reveal')) entry.target.classList.add('active');
-            } else {
-                if (title) title.classList.remove('highlight');
-            }
+            } else { if (title) title.classList.remove('highlight'); }
         });
     }, observerOptions);
     sections.forEach(section => observer.observe(section));
@@ -203,15 +133,8 @@ function setupCounters() {
             if (en.isIntersecting) {
                 const target = +en.target.dataset.target;
                 let cValue = 0;
-                const step = () => {
-                    if (cValue < target) {
-                        cValue += Math.ceil(target / 40);
-                        en.target.innerText = cValue > target ? target : cValue;
-                        setTimeout(step, 30);
-                    } else en.target.innerText = target;
-                };
-                step();
-                obs.unobserve(en.target);
+                const step = () => { if (cValue < target) { cValue += Math.ceil(target / 40); en.target.innerText = cValue > target ? target : cValue; setTimeout(step, 30); } else en.target.innerText = target; };
+                step(); obs.unobserve(en.target);
             }
         });
     });
@@ -221,10 +144,7 @@ function setupCounters() {
 function setupBackToTop() {
     const btn = document.getElementById("backToTop");
     if (!btn) return;
-    window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 400) btn.setAttribute("style", "display: flex !important");
-        else btn.setAttribute("style", "display: none !important");
-    });
+    window.addEventListener('scroll', () => { if (window.pageYOffset > 400) btn.setAttribute("style", "display: flex !important"); else btn.setAttribute("style", "display: none !important"); });
     btn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -234,64 +154,32 @@ function setupContactForm() {
     if (!form) return;
     form.onsubmit = async (e) => {
         e.preventDefault();
-        const data = new FormData(form);
-        const submitBtn = document.getElementById('formSubmit');
-        submitBtn.disabled = true;
-        submitBtn.innerText = currentLang === 'uk' ? 'Надсилається...' : 'Sending...';
+        const data = new FormData(form), submitBtn = document.getElementById('formSubmit');
+        submitBtn.disabled = true; submitBtn.innerText = 'Sending...';
         try {
-            const res = await fetch("https://formspree.io/f/mqkrvylk", {
-                method: "POST", body: data, headers: { 'Accept': 'application/json' }
-            });
-            if (res.ok) {
-                status.style.display = "block"; status.style.color = "#28a745";
-                status.innerText = currentLang === 'uk' ? "Дякуємо! Надіслано." : "Success!";
-                form.reset();
-            } else throw new Error();
-        } catch (error) {
-            status.style.display = "block"; status.style.color = "#dc3545";
-            status.innerText = "Error. Try again.";
-        } finally {
-            submitBtn.disabled = false; submitBtn.innerText = currentLang === 'uk' ? 'Відправити' : 'Send';
-        }
+            const res = await fetch("https://formspree.io/f/mqkrvylk", { method: "POST", body: data, headers: { 'Accept': 'application/json' } });
+            if (res.ok) { status.style.display = "block"; status.style.color = "#28a745"; status.innerText = "Success!"; form.reset(); }
+            else throw new Error();
+        } catch (error) { status.style.display = "block"; status.style.color = "#dc3545"; status.innerText = "Error."; }
+        finally { submitBtn.disabled = false; submitBtn.innerText = 'Відправити'; }
     };
 }
 
 window.openBio = (id) => {
     const f = cache.founders.find(x => x.id === id);
     if (!f) return;
-    const m = document.getElementById('bioModal');
-    const data = document.getElementById('modal-data');
-    data.innerHTML = `
-        <div class="bio-flex">
-            <img src="${f.img}" class="bio-img">
-            <div>
-                <h2 style="color:var(--primary);">${f.name[currentLang]}</h2>
-                <p style="color:var(--accent); font-weight:700; margin-bottom:15px;">${f.role[currentLang]}</p>
-                <div style="line-height:1.8;">${f.bio[currentLang]}</div>
-                <p style="margin-top:20px; border-top:1px solid #eee; padding-top:15px;">
-                    <b>TG:</b> ${f.tg} | <b>Тел:</b> ${f.phone}
-                </p>
-            </div>
-        </div>`;
-    m.style.display = 'flex';
-    setTimeout(() => m.classList.add('active'), 10);
-    document.body.style.overflow = 'hidden';
+    const m = document.getElementById('bioModal'), data = document.getElementById('modal-data');
+    data.innerHTML = `<div class="bio-flex"><img src="${f.img}" class="bio-img"><div><h2 style="color:var(--primary); font-size: 1.5rem;">${f.name[currentLang]}</h2><p style="color:var(--accent); font-weight:700; margin-bottom:15px;">${f.role[currentLang]}</p><div style="line-height:1.8;">${f.bio[currentLang]}</div><p style="margin-top:20px; border-top:1px solid #eee; padding-top:10px;"><b>TG:</b> ${f.tg} | <b>Тел:</b> ${f.phone}</p></div></div>`;
+    m.style.display = 'flex'; setTimeout(() => m.classList.add('active'), 10); document.body.style.overflow = 'hidden';
 };
 
 window.openFullImage = (src) => {
-    const m = document.getElementById('bioModal');
-    const data = document.getElementById('modal-data');
-    data.innerHTML = `<div style="text-align:center;"><img src="${src}" style="max-width:100%; max-height:85vh; border-radius:20px; box-shadow:0 20px 50px rgba(0,0,0,0.5);"></div>`;
-    m.style.display = 'flex';
-    setTimeout(() => m.classList.add('active'), 10);
-    document.body.style.overflow = 'hidden';
+    const m = document.getElementById('bioModal'), data = document.getElementById('modal-data');
+    data.innerHTML = `<div style="text-align:center;"><img src="${src}" style="max-width:100%; max-height:80vh; border-radius:20px; box-shadow:0 20px 50px rgba(0,0,0,0.5); object-fit:contain;"></div>`;
+    m.style.display = 'flex'; setTimeout(() => m.classList.add('active'), 10); document.body.style.overflow = 'hidden';
 };
 
-const closeModal = () => {
-    const m = document.getElementById('bioModal');
-    if (m) { m.classList.remove('active'); setTimeout(() => { m.style.display = 'none'; document.body.style.overflow = 'auto'; }, 400); }
-};
-
+const closeModal = () => { const m = document.getElementById('bioModal'); if (m) { m.classList.remove('active'); setTimeout(() => { m.style.display = 'none'; document.body.style.overflow = 'auto'; }, 400); } };
 document.querySelector('.close-modal').onclick = closeModal;
 window.onclick = (e) => { if (e.target === document.getElementById('bioModal')) closeModal(); };
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
