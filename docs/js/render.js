@@ -50,11 +50,9 @@ export function renderNews(data, lang) {
     if (!container || !data) return;
     container.innerHTML = data.map(n => `
         <div class="news-card">
-            <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:0.8rem; font-weight:700;">
-                <span style="background:var(--primary); color:white; padding:3px 12px; border-radius:50px;">${n.tag[lang]}</span>
-                <span style="color:var(--gray);">${n.date}</span>
-            </div>
-            <h4 style="color:var(--primary);">${n.title[lang]}</h4>
+            <span class="news-tag">${n.tag[lang]}</span>
+            <small style="color:var(--gray); float:right;">${n.date}</small>
+            <h4 style="color:var(--primary); margin-top:10px;">${n.title[lang]}</h4>
             <p style="font-size:0.85rem; color:#666; margin-top:8px;">${n.desc[lang]}</p>
             <a href="${n.link || '#'}" target="_blank" style="color:var(--accent); font-weight:700; font-size:0.8rem; margin-top:10px; display:inline-block;">Читати більше...</a>
         </div>
@@ -65,8 +63,9 @@ export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track || !data) return;
     const list = data.length > 0 ? data : [{name: "ГО", img: ""}];
-    const double = [...list, ...list, ...list];
-    track.innerHTML = double.map(p => {
+    // Потрійна порція для нескінченності
+    const triple = [...list, ...list, ...list];
+    track.innerHTML = triple.map(p => {
         const imgSrc = p.img || `https://via.placeholder.com/200x80?text=${p.name}`;
         return `<a href="${p.link || '#'}" target="_blank"><img src="${imgSrc}" alt="${p.name}" referrerpolicy="no-referrer"></a>`;
     }).join('');

@@ -1,7 +1,7 @@
 import * as render from './render.js';
 
 let currentLang = 'uk';
-let cache = { founders: [], stats: [], partners: [], news: [], stories: [], contacts: {}, activities: [], friends: [] };
+let cache = { founders: [], stats: [], partners: [], news: [], stories: [], activities: [], friends: [] };
 
 async function getJSON(url) {
     try {
@@ -15,6 +15,7 @@ async function init() {
     setupMobileMenu(); 
     setupBackToTop();
     
+    // Завантаження всіх даних
     cache.founders = await getJSON('data/founders.json') || [];
     cache.stats = await getJSON('data/stats.json') || [];
     cache.partners = await getJSON('data/partners.json') || [];
@@ -40,8 +41,16 @@ function refresh() {
     render.renderFriends(cache.friends, currentLang);
     render.renderGallery(['images/001.jpg', 'images/001.jpg', 'images/001.jpg', 'images/001.jpg']);
 
-    document.querySelectorAll('[data-' + currentLang + ']').forEach(el => {
-        el.innerHTML = el.getAttribute('data-' + currentLang);
+    // ПОВНИЙ ПЕРЕКЛАД СТАТИКИ
+    document.querySelectorAll('[data-uk], [data-en]').forEach(el => {
+        const text = el.getAttribute(`data-${currentLang}`);
+        if (text) el.innerHTML = text;
+    });
+
+    // ПЕРЕКЛАД ПЛЕЙСХОЛДЕРІВ
+    document.querySelectorAll('[data-uk-placeholder]').forEach(el => {
+        const ph = el.getAttribute(`data-${currentLang}-placeholder`);
+        if (ph) el.placeholder = ph;
     });
 
     setupCounters();
@@ -62,65 +71,73 @@ function setupLanguageSwitcher() {
 function setupPartnerCarousel() {
     const slider = document.getElementById('partnersSlider');
     const track = document.getElementById('partners-track');
+    const prev = document.getElementById('prevPartner');
+    const next = document.getElementById('nextPartner');
     if (!slider || !track) return;
-    let isDown = false, startX, scrollLeft, autoScrollSpeed = 0.5, animationId, isPaused = false;
-    const startAutoScroll = () => { if (!isPaused && !isDown) { slider.scrollLeft += autoScrollSpeed; if (slider.scrollLeft >= track.scrollWidth / 3) slider.scrollLeft = 0; } animationId = requestAnimationFrame(startAutoScroll); };
+
+    let autoScrollSpeed = 0.5;
+    let animationId;
+    let isPaused = false;
+
+    const startAutoScroll = () => {
+        if (!isPaused) {
+            slider.scrollLeft += autoScrollSpeed;
+            if (slider.scrollLeft >= track.scrollWidth / 3) slider.scrollLeft = 0;
+        }
+        animationId = requestAnimationFrame(startAutoScroll);
+    };
+
     startAutoScroll();
+
     slider.addEventListener('mouseenter', () => isPaused = true);
     slider.addEventListener('mouseleave', () => isPaused = false);
-    const startDrag = (e) => { isDown = true; startX = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; scrollLeft = slider.scrollLeft; };
-    const stopDrag = () => { isDown = false; };
-    const moveDrag = (e) => { if (!isDown) return; e.preventDefault(); const x = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 1.5; };
-    slider.addEventListener('mousedown', startDrag); window.addEventListener('mouseup', stopDrag); slider.addEventListener('mousemove', moveDrag);
-    slider.addEventListener('touchstart', startDrag, {passive: false}); slider.addEventListener('touchend', stopDrag); slider.addEventListener('touchmove', moveDrag, {passive: false});
+
+    if (prev) prev.onclick = () => { slider.scrollLeft -= 300; };
+    if (next) next.onclick = () => { slider.scrollLeft += 300; };
 }
 
 function setupMobileMenu() {
     const toggle = document.getElementById('menuToggle');
     const menu = document.getElementById('navMenu');
-    const links = document.querySelectorAll('.nav-link');
     if (!toggle || !menu) return;
     toggle.onclick = () => { toggle.classList.toggle('active'); menu.classList.toggle('active'); document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto'; };
-    links.forEach(l => l.onclick = () => { toggle.classList.remove('active'); menu.classList.remove('active'); document.body.style.overflow = 'auto'; });
 }
 
 function setupScrollLogic() {
     const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-menu a');
-    const observerOptions = { root: null, rootMargin: '-20% 0px -50% 0px', threshold: 0 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            const id = entry.target.getAttribute('id');
-            const title = entry.target.querySelector('.section-title');
             if (entry.isIntersecting) {
-                if (title) title.classList.add('highlight');
-                navLinks.forEach(link => { link.classList.remove('active'); if (link.getAttribute('href') === `#${id}`) link.classList.add('active'); });
-                if (entry.target.classList.contains('reveal')) entry.target.classList.add('active');
-            } else { if (title) title.classList.remove('highlight'); }
+                entry.target.classList.add('active');
+                const id = entry.target.getAttribute('id');
+                document.querySelectorAll('.nav-menu a').forEach(a => {
+                    a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+                });
+            }
         });
-    }, observerOptions);
-    sections.forEach(section => observer.observe(section));
+    }, { threshold: 0.2 });
+    sections.forEach(s => observer.observe(s));
 }
 
 function setupCounters() {
     const counters = document.querySelectorAll('.counter');
-    const obs = new IntersectionObserver(entries => {
-        entries.forEach(en => {
-            if (en.isIntersecting) {
-                const target = +en.target.dataset.target;
-                let cValue = 0;
-                const step = () => { if (cValue < target) { cValue += Math.ceil(target / 40); en.target.innerText = cValue > target ? target : cValue; setTimeout(step, 30); } else en.target.innerText = target; };
-                step(); obs.unobserve(en.target);
-            }
-        });
+    counters.forEach(c => {
+        const target = +c.dataset.target;
+        let count = 0;
+        const update = () => {
+            if (count < target) {
+                count += Math.ceil(target / 50);
+                c.innerText = count > target ? target : count;
+                setTimeout(update, 30);
+            } else c.innerText = target;
+        };
+        update();
     });
-    counters.forEach(c => obs.observe(c));
 }
 
 function setupBackToTop() {
     const btn = document.getElementById("backToTop");
-    if (!btn) return;
-    window.addEventListener('scroll', () => { if (window.pageYOffset > 400) btn.setAttribute("style", "display: flex !important"); else btn.setAttribute("style", "display: none !important"); });
+    window.onscroll = () => { if (window.pageYOffset > 400) btn.setAttribute("style", "display: flex !important"); else btn.setAttribute("style", "display: none !important"); };
     btn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -129,7 +146,7 @@ function setupContactForm() {
     if (!form) return;
     form.onsubmit = async (e) => {
         e.preventDefault();
-        alert(currentLang === 'uk' ? "Дякуємо! Ваше повідомлення надіслано." : "Thank you! Sent.");
+        alert(currentLang === 'uk' ? "Дякуємо! Ваше повідомлення надіслано." : "Thank you! Message sent.");
         form.reset();
     };
 }
