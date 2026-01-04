@@ -10,15 +10,13 @@ async function getJSON(url) {
         const r = await fetch(url);
         if (!r.ok) return null;
         return await r.json();
-    } catch (e) {
-        return null;
-    }
+    } catch (e) { return null; }
 }
 
 async function init() {
     setupBackToTop();
-    setupScrollEffects();
-
+    
+    // Завантаження даних
     cache.founders = await getJSON('data/founders.json') || [];
     cache.stats = await getJSON('data/stats.json') || [];
     cache.partners = await getJSON('data/partners.json') || [];
@@ -29,6 +27,7 @@ async function init() {
 
     refresh();
     setupContactForm();
+    setupScrollLogic();
 }
 
 function refresh() {
@@ -51,8 +50,8 @@ function refresh() {
         const block = document.getElementById('contacts-content');
         if (block) {
             block.innerHTML = `
-                <p><i class="fas fa-phone"></i> ${c.phone}</p>
-                <p><i class="fas fa-envelope"></i> ${c.email}</p>
+                <p style="margin-bottom:10px;"><i class="fas fa-phone"></i> ${c.phone}</p>
+                <p style="margin-bottom:10px;"><i class="fas fa-envelope"></i> ${c.email}</p>
                 <p><i class="fas fa-map-marker-alt"></i> ${c.address[currentLang]}</p>`;
         }
     }
@@ -64,42 +63,37 @@ function refresh() {
     setupCounters();
 }
 
-function setupScrollEffects() {
+// ПЕРЕПИСАНА ЛОГІКА СКРОЛУ (Підсвітка заголовків та меню)
+function setupScrollLogic() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-menu a');
 
-    window.addEventListener('scroll', () => {
-        let currentSectionId = "";
-        
-        sections.forEach(section => {
-            const rect = section.getBoundingClientRect();
-            const title = section.querySelector('.section-title');
-            
-            // ЛОГІКА ДЛЯ ЗАГОЛОВКІВ НА СТОРІНЦІ
-            // Якщо верх секції знаходиться в межах від 0 до 400 пікселів від верху екрана
-            if (rect.top < 400 && rect.bottom > 400) {
+    const observerOptions = { threshold: 0.3 };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const id = entry.target.getAttribute('id');
+            const title = entry.target.querySelector('.section-title');
+
+            if (entry.isIntersecting) {
+                // 1. Підсвітка заголовка на сторінці
                 if (title) title.classList.add('highlight');
-                currentSectionId = section.getAttribute("id");
+                
+                // 2. Підсвітка пункту меню
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) link.classList.add('active');
+                });
+
+                // 3. Reveal ефект
+                if (entry.target.classList.contains('reveal')) entry.target.classList.add('active');
             } else {
                 if (title) title.classList.remove('highlight');
             }
-
-            // Класична анімація появи (Reveal)
-            if (section.classList.contains('reveal')) {
-                if (rect.top < window.innerHeight - 100) {
-                    section.classList.add('active');
-                }
-            }
         });
+    }, observerOptions);
 
-        // ЛОГІКА ДЛЯ МЕНЮ В ХЕДЕРІ
-        navLinks.forEach((a) => {
-            a.classList.remove("active");
-            if (currentSectionId && a.getAttribute("href").includes(currentSectionId)) {
-                a.classList.add("active");
-            }
-        });
-    });
+    sections.forEach(section => observer.observe(section));
 }
 
 function setupCounters() {
@@ -111,8 +105,8 @@ function setupCounters() {
                 let cValue = 0;
                 const step = () => {
                     if (cValue < target) {
-                        cValue += target / 40;
-                        en.target.innerText = Math.ceil(cValue);
+                        cValue += Math.ceil(target / 40);
+                        en.target.innerText = cValue > target ? target : cValue;
                         setTimeout(step, 30);
                     } else en.target.innerText = target;
                 };
@@ -128,7 +122,7 @@ function setupBackToTop() {
     const btn = document.getElementById("backToTop");
     if (!btn) return;
     window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) btn.setAttribute("style", "display: flex !important");
+        if (window.pageYOffset > 400) btn.setAttribute("style", "display: flex !important");
         else btn.setAttribute("style", "display: none !important");
     });
     btn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -146,21 +140,18 @@ function setupContactForm() {
         submitBtn.innerText = currentLang === 'uk' ? 'Надсилається...' : 'Sending...';
         try {
             const res = await fetch("https://formspree.io/f/mqkrvylk", {
-                method: "POST",
-                body: data,
-                headers: { 'Accept': 'application/json' }
+                method: "POST", body: data, headers: { 'Accept': 'application/json' }
             });
             if (res.ok) {
                 status.style.display = "block"; status.style.color = "#28a745";
-                status.innerText = currentLang === 'uk' ? "Дякуємо! Повідомлення надіслано." : "Thanks! Message sent.";
+                status.innerText = currentLang === 'uk' ? "Дякуємо! Надіслано." : "Success!";
                 form.reset();
             } else throw new Error();
         } catch (error) {
             status.style.display = "block"; status.style.color = "#dc3545";
-            status.innerText = currentLang === 'uk' ? "Помилка. Спробуйте ще раз." : "Error. Try again.";
+            status.innerText = "Error. Try again.";
         } finally {
-            submitBtn.disabled = false;
-            submitBtn.innerText = currentLang === 'uk' ? 'Відправити' : 'Send';
+            submitBtn.disabled = false; submitBtn.innerText = currentLang === 'uk' ? 'Відправити' : 'Send';
         }
     };
 }
@@ -169,14 +160,16 @@ window.openBio = (id) => {
     const f = cache.founders.find(x => x.id === id);
     if (!f) return;
     const m = document.getElementById('bioModal');
-    const data = document.getElementById('modal-data');
-    data.innerHTML = `<div class="bio-flex">
+    document.getElementById('modal-data').innerHTML = `
+        <div class="bio-flex">
             <img src="${f.img}" class="bio-img">
             <div>
-                <h2>${f.name[currentLang]}</h2>
-                <p style="color:var(--accent);font-weight:700;margin-bottom:15px;">${f.role[currentLang]}</p>
-                <div style="line-height:1.7;">${f.bio[currentLang]}</div>
-                <p style="margin-top:20px;"><b>TG:</b> ${f.tg} | <b>Тел:</b> ${f.phone}</p>
+                <h2 style="color:var(--primary);">${f.name[currentLang]}</h2>
+                <p style="color:var(--accent); font-weight:700; margin-bottom:15px;">${f.role[currentLang]}</p>
+                <div style="line-height:1.8;">${f.bio[currentLang]}</div>
+                <p style="margin-top:20px; border-top:1px solid #eee; padding-top:15px;">
+                    <b>TG:</b> ${f.tg} | <b>Тел:</b> ${f.phone}
+                </p>
             </div>
         </div>`;
     m.style.display = 'block';
@@ -185,15 +178,14 @@ window.openBio = (id) => {
 
 window.openFullImage = (src) => {
     const m = document.getElementById('bioModal');
-    const data = document.getElementById('modal-data');
-    data.innerHTML = `<div style="text-align:center;"><img src="${src}" style="max-width:100%; max-height:85vh; border-radius:15px;"></div>`;
+    document.getElementById('modal-data').innerHTML = `<div style="text-align:center;"><img src="${src}" style="max-width:100%; max-height:85vh; border-radius:20px; box-shadow:0 20px 50px rgba(0,0,0,0.5);"></div>`;
     m.style.display = 'block';
     document.body.style.overflow = 'hidden';
 };
 
 const closeModal = () => {
-    const m = document.getElementById('bioModal');
-    if (m) { m.style.display = 'none'; document.body.style.overflow = 'auto'; }
+    document.getElementById('bioModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
 };
 
 document.querySelector('.close-modal').onclick = closeModal;

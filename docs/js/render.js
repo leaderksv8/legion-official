@@ -1,59 +1,59 @@
 export function renderActivities(data, lang) {
     const container = document.getElementById('activities-cards');
-    if (!container) return;
+    if (!container || !data) return;
     container.innerHTML = data.map(item => `
         <div class="activity-card">
             <div class="card-icon"><i class="fas fa-${item.icon}"></i></div>
-            <h3>${item.title[lang]}</h3>
-            <p>${item.desc[lang]}</p>
+            <h3 style="color:var(--primary);">${item.title[lang]}</h3>
+            <p style="margin-top:10px;">${item.desc[lang]}</p>
         </div>
     `).join('');
 }
 
 export function renderStats(data, lang) {
     const container = document.getElementById('stats-container');
-    if (!container) return;
+    if (!container || !data) return;
     container.innerHTML = data.map(item => `
         <div class="stat-item">
             <h2 class="counter" data-target="${item.value}">0</h2>
-            <p>${item.label[lang]}</p>
+            <p style="margin-top:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">${item.label[lang]}</p>
         </div>
     `).join('');
 }
 
 export function renderFounders(data, lang) {
     const container = document.getElementById('founders-container');
-    if (!container) return;
+    if (!container || !data) return;
     container.innerHTML = data.map(f => `
         <div class="founder-card" onclick="openBio('${f.id}')">
             <div class="founder-img-wrapper">
                 <img src="${f.img}" alt="${f.name[lang]}">
             </div>
-            <h4>${f.name[lang]}</h4>
-            <p>${f.role[lang]}</p>
+            <h4 style="margin-top:20px; color:var(--primary);">${f.name[lang]}</h4>
+            <p style="color:var(--accent); font-weight:700; font-size:0.9rem;">${f.role[lang]}</p>
         </div>
     `).join('');
 }
 
 export function renderNews(data, lang) {
     const container = document.getElementById('news-container');
-    if (!container) return;
+    if (!container || !data) return;
     container.innerHTML = data.map(n => `
         <div class="news-island">
-            <div class="news-meta">
-                <span class="news-tag">${n.tag[lang]}</span>
-                <span class="news-date">${n.date}</span>
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:0.8rem; font-weight:700;">
+                <span style="background:var(--primary); color:white; padding:3px 12px; border-radius:50px;">${n.tag[lang]}</span>
+                <span style="color:var(--gray);">${n.date}</span>
             </div>
-            <h4>${n.title[lang]}</h4>
-            <p style="font-size:0.85rem; color:#666;">${n.desc[lang]}</p>
+            <h4 style="color:var(--primary);">${n.title[lang]}</h4>
+            <p style="font-size:0.85rem; color:#666; margin-top:8px;">${n.desc[lang]}</p>
         </div>
     `).join('');
 }
 
 export function renderPartners(data) {
     const track = document.getElementById('partners-track');
-    if (!track) return;
-    const list = data.length > 0 ? data : [{name: "Partner 1", img: ""}, {name: "Partner 2", img: ""}];
+    if (!track || !data) return;
+    const list = data.length > 0 ? data : [{name: "ГО", img: ""}];
     const double = [...list, ...list];
     track.innerHTML = double.map(p => {
         const imgSrc = p.img || `https://via.placeholder.com/200x80?text=${p.name}`;
@@ -63,13 +63,13 @@ export function renderPartners(data) {
 
 export function renderStories(data, lang) {
     const container = document.getElementById('stories-container');
-    if (!container) return;
+    if (!container || !data) return;
     container.innerHTML = data.map(s => `
         <div class="story-card">
             <img src="${s.img}" alt="${s.name[lang]}">
-            <div>
-                <h4>${s.name[lang]}</h4>
-                <p>"${s.text[lang]}"</p>
+            <div style="text-align:left;">
+                <h4 style="color:var(--primary);">${s.name[lang]}</h4>
+                <p style="font-style:italic; margin-top:5px;">"${s.text[lang]}"</p>
             </div>
         </div>
     `).join('');
@@ -77,7 +77,7 @@ export function renderStories(data, lang) {
 
 export function renderGallery(data) {
     const container = document.getElementById('gallery-preview');
-    if (!container) return;
+    if (!container || !data) return;
     container.innerHTML = data.map(img => `
         <div class="gallery-item" onclick="openFullImage('${img}')">
             <img src="${img}" alt="Захід">
