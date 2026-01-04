@@ -32,7 +32,6 @@ async function init() {
 }
 
 function refresh() {
-    // Рендеримо всі динамічні блоки
     render.renderActivities(cache.activities, currentLang);
     render.renderFounders(cache.founders, currentLang);
     render.renderStats(cache.stats, currentLang);
@@ -42,7 +41,6 @@ function refresh() {
     render.renderFriends(cache.friends, currentLang);
     render.renderGallery(['images/001.jpg', 'images/001.jpg', 'images/001.jpg', 'images/001.jpg']);
 
-    // ПОВНИЙ ПЕРЕКЛАД СТАТИКИ ТА БРЕНДУ
     document.querySelectorAll('[data-uk], [data-en]').forEach(el => {
         const text = el.getAttribute(`data-${currentLang}`);
         if (text) el.innerHTML = text;
@@ -57,7 +55,6 @@ function setupLanguageSwitcher() {
         btn.onclick = (e) => {
             currentLang = e.currentTarget.dataset.lang;
             btns.forEach(b => b.classList.remove('active'));
-            // Синхронізуємо всі кнопки на сторінці
             document.querySelectorAll(`.lang-btn[data-lang="${currentLang}"]`).forEach(b => b.classList.add('active'));
             refresh();
         };
@@ -135,7 +132,7 @@ function setupContactForm() {
     if (!form) return;
     form.onsubmit = async (e) => {
         e.preventDefault();
-        alert(currentLang === 'uk' ? "Дякуємо! Ваше повідомлення надіслано." : "Thank you! Sent.");
+        alert(currentLang === 'uk' ? "Дякуємо! Ваше повідомлення надіслано." : "Thank you!");
         form.reset();
     };
 }
