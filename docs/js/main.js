@@ -65,18 +65,12 @@ function refresh() {
 function setupScrollLogic() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-menu a');
-
-    const observerOptions = {
-        root: null,
-        rootMargin: '-20% 0px -50% 0px', 
-        threshold: 0
-    };
+    const observerOptions = { root: null, rootMargin: '-20% 0px -50% 0px', threshold: 0 };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const id = entry.target.getAttribute('id');
             const title = entry.target.querySelector('.section-title');
-
             if (entry.isIntersecting) {
                 if (title) title.classList.add('highlight');
                 navLinks.forEach(link => {
@@ -89,7 +83,6 @@ function setupScrollLogic() {
             }
         });
     }, observerOptions);
-
     sections.forEach(section => observer.observe(section));
 }
 
@@ -153,37 +146,49 @@ function setupContactForm() {
     };
 }
 
+// МОДАЛЬНІ ВІКНА - ЦЕНТРУВАННЯ ТА АНІМАЦІЯ
 window.openBio = (id) => {
     const f = cache.founders.find(x => x.id === id);
     if (!f) return;
     const m = document.getElementById('bioModal');
-    document.getElementById('modal-data').innerHTML = `
+    const data = document.getElementById('modal-data');
+    data.innerHTML = `
         <div class="bio-flex">
             <img src="${f.img}" class="bio-img">
             <div>
-                <h2 style="color:var(--primary);">${f.name[currentLang]}</h2>
-                <p style="color:var(--accent); font-weight:700; margin-bottom:15px;">${f.role[currentLang]}</p>
-                <div style="line-height:1.8;">${f.bio[currentLang]}</div>
-                <p style="margin-top:20px; border-top:1px solid #eee; padding-top:15px;">
-                    <b>TG:</b> ${f.tg} | <b>Тел:</b> ${f.phone}
+                <h2 style="color:var(--primary); font-size: 2rem;">${f.name[currentLang]}</h2>
+                <p style="color:var(--accent); font-weight:700; margin-bottom:15px; font-size: 1.1rem;">${f.role[currentLang]}</p>
+                <div style="line-height:1.8; font-size: 1rem; color: #444;">${f.bio[currentLang]}</div>
+                <p style="margin-top:30px; border-top:1px solid #eee; padding-top:15px; color: #666;">
+                    <b>Telegram:</b> ${f.tg} | <b>Телефон:</b> ${f.phone}
                 </p>
             </div>
         </div>`;
-    m.style.display = 'block';
+    
+    m.style.display = 'flex'; // Використовуємо flex для центрування
+    setTimeout(() => m.classList.add('active'), 10); // Запуск анімації
     document.body.style.overflow = 'hidden';
 };
 
 window.openFullImage = (src) => {
     const m = document.getElementById('bioModal');
     const data = document.getElementById('modal-data');
-    data.innerHTML = `<div style="text-align:center;"><img src="${src}" style="max-width:100%; max-height:85vh; border-radius:20px; box-shadow:0 20px 50px rgba(0,0,0,0.5);"></div>`;
-    m.style.display = 'block';
+    data.innerHTML = `<div style="text-align:center;"><img src="${src}" style="max-width:100%; max-height:80vh; border-radius:20px; box-shadow:0 20px 50px rgba(0,0,0,0.5);"></div>`;
+    
+    m.style.display = 'flex';
+    setTimeout(() => m.classList.add('active'), 10);
     document.body.style.overflow = 'hidden';
 };
 
 const closeModal = () => {
-    document.getElementById('bioModal').style.display = 'none';
-    document.body.style.overflow = 'auto';
+    const m = document.getElementById('bioModal');
+    if (m) {
+        m.classList.remove('active');
+        setTimeout(() => {
+            m.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }, 400); // Чекаємо завершення анімації
+    }
 };
 
 document.querySelector('.close-modal').onclick = closeModal;
