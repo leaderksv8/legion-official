@@ -15,6 +15,7 @@ async function getJSON(url) {
 
 async function init() {
     setupBackToTop();
+    setupMobileMenu(); // Ініціалізація бургера
     
     cache.founders = await getJSON('data/founders.json') || [];
     cache.stats = await getJSON('data/stats.json') || [];
@@ -39,9 +40,9 @@ function refresh() {
     
     render.renderGallery([
         'images/001.jpg',
-        'https://via.placeholder.com/400x300?text=Event+1',
-        'https://via.placeholder.com/400x300?text=Event+2',
-        'https://via.placeholder.com/400x300?text=Event+3'
+        'https://via.placeholder.com/400x300?text=Захід+1',
+        'https://via.placeholder.com/400x300?text=Захід+2',
+        'https://via.placeholder.com/400x300?text=Захід+3'
     ]);
 
     const c = cache.contacts;
@@ -49,9 +50,9 @@ function refresh() {
         const block = document.getElementById('contacts-content');
         if (block) {
             block.innerHTML = `
-                <p style="margin-bottom:10px;"><i class="fas fa-phone"></i> ${c.phone}</p>
-                <p style="margin-bottom:10px;"><i class="fas fa-envelope"></i> ${c.email}</p>
-                <p><i class="fas fa-map-marker-alt"></i> ${c.address[currentLang]}</p>`;
+                <p style="margin-bottom:8px; font-size:0.9rem;"><i class="fas fa-phone" style="color:var(--accent); width:20px;"></i> ${c.phone}</p>
+                <p style="margin-bottom:8px; font-size:0.9rem;"><i class="fas fa-envelope" style="color:var(--accent); width:20px;"></i> ${c.email}</p>
+                <p style="font-size:0.9rem;"><i class="fas fa-map-marker-alt" style="color:var(--accent); width:20px;"></i> ${c.address[currentLang]}</p>`;
         }
     }
 
@@ -62,10 +63,33 @@ function refresh() {
     setupCounters();
 }
 
+// Burger Menu Logic
+function setupMobileMenu() {
+    const toggle = document.getElementById('menuToggle');
+    const menu = document.getElementById('navMenu');
+    const links = document.querySelectorAll('.nav-link');
+
+    if (!toggle || !menu) return;
+
+    toggle.addEventListener('click', () => {
+        toggle.classList.toggle('active');
+        menu.classList.toggle('active');
+        document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
+    });
+
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            toggle.classList.remove('active');
+            menu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+    });
+}
+
 function setupScrollLogic() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-menu a');
-    const observerOptions = { root: null, rootMargin: '-20% 0px -50% 0px', threshold: 0 };
+    const observerOptions = { root: null, rootMargin: '-25% 0px -45% 0px', threshold: 0 };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -146,7 +170,6 @@ function setupContactForm() {
     };
 }
 
-// МОДАЛЬНІ ВІКНА - ЦЕНТРУВАННЯ ТА АНІМАЦІЯ
 window.openBio = (id) => {
     const f = cache.founders.find(x => x.id === id);
     if (!f) return;
@@ -156,25 +179,23 @@ window.openBio = (id) => {
         <div class="bio-flex">
             <img src="${f.img}" class="bio-img">
             <div>
-                <h2 style="color:var(--primary); font-size: 2rem;">${f.name[currentLang]}</h2>
-                <p style="color:var(--accent); font-weight:700; margin-bottom:15px; font-size: 1.1rem;">${f.role[currentLang]}</p>
-                <div style="line-height:1.8; font-size: 1rem; color: #444;">${f.bio[currentLang]}</div>
-                <p style="margin-top:30px; border-top:1px solid #eee; padding-top:15px; color: #666;">
+                <h2 style="color:var(--primary); font-size: clamp(1.5rem, 5vw, 2rem);">${f.name[currentLang]}</h2>
+                <p style="color:var(--accent); font-weight:700; margin-bottom:15px;">${f.role[currentLang]}</p>
+                <div style="line-height:1.8; font-size: 0.95rem; color: #444;">${f.bio[currentLang]}</div>
+                <p style="margin-top:30px; border-top:1px solid #eee; padding-top:15px; color: #666; font-size: 0.85rem;">
                     <b>Telegram:</b> ${f.tg} | <b>Телефон:</b> ${f.phone}
                 </p>
             </div>
         </div>`;
-    
-    m.style.display = 'flex'; // Використовуємо flex для центрування
-    setTimeout(() => m.classList.add('active'), 10); // Запуск анімації
+    m.style.display = 'flex';
+    setTimeout(() => m.classList.add('active'), 10);
     document.body.style.overflow = 'hidden';
 };
 
 window.openFullImage = (src) => {
     const m = document.getElementById('bioModal');
     const data = document.getElementById('modal-data');
-    data.innerHTML = `<div style="text-align:center;"><img src="${src}" style="max-width:100%; max-height:80vh; border-radius:20px; box-shadow:0 20px 50px rgba(0,0,0,0.5);"></div>`;
-    
+    data.innerHTML = `<div style="text-align:center;"><img src="${src}" style="max-width:100%; max-height:80vh; border-radius:20px; box-shadow:0 20px 50px rgba(0,0,0,0.5); object-fit:contain;"></div>`;
     m.style.display = 'flex';
     setTimeout(() => m.classList.add('active'), 10);
     document.body.style.overflow = 'hidden';
@@ -184,10 +205,7 @@ const closeModal = () => {
     const m = document.getElementById('bioModal');
     if (m) {
         m.classList.remove('active');
-        setTimeout(() => {
-            m.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }, 400); // Чекаємо завершення анімації
+        setTimeout(() => { m.style.display = 'none'; document.body.style.overflow = 'auto'; }, 400);
     }
 };
 

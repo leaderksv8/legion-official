@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ГО «ЛЕГІОН ТИТАНІВ» | Бучанський район</title>
     
     <!-- SEO & Social Media -->
@@ -28,7 +28,15 @@
                 <i class="fas fa-shield-alt"></i>
                 <div class="logo-text">ЛЕГІОН ТИТАНІВ</div>
             </a>
-            <nav class="nav-menu">
+            
+            <!-- Burger Button -->
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="nav-menu" id="navMenu">
                 <ul id="main-nav">
                     <li><a href="#home" class="nav-link" data-uk="Головна" data-en="Home">Головна</a></li>
                     <li><a href="#activities" class="nav-link" data-uk="Діяльність" data-en="Activities">Діяльність</a></li>
@@ -36,6 +44,7 @@
                     <li><a href="#contact" class="nav-link" data-uk="Контакти" data-en="Contacts">Контакти</a></li>
                 </ul>
             </nav>
+
             <div class="lang-switcher">
                 <button class="lang-btn active" data-lang="uk">UA</button>
                 <button class="lang-btn" data-lang="en">EN</button>
@@ -83,7 +92,7 @@
                         </p>
                     </div>
                 </div>
-                <div id="activities-cards" class="grid-6"></div>
+                <div id="activities-cards" class="grid-layout"></div>
             </div>
         </section>
 
