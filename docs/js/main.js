@@ -14,9 +14,10 @@ async function getJSON(url) {
 }
 
 async function init() {
-    setupMobileMenu(); 
+    setupBurgerMenu(); 
     setupBackToTop();
     
+    // Завантаження даних
     cache.founders = await getJSON('data/founders.json') || [];
     cache.stats = await getJSON('data/stats.json') || [];
     cache.partners = await getJSON('data/partners.json') || [];
@@ -28,7 +29,8 @@ async function init() {
     refresh();
     setupContactForm();
     setupScrollLogic();
-    setupPartnerCarousel(); // Безкінечна карусель
+    setupPartnerCarousel(); 
+    setupLanguageSwitcher(); // Робочий перемикач
 }
 
 function refresh() {
@@ -50,13 +52,11 @@ function refresh() {
     if (c && c.phone) {
         const block = document.getElementById('contacts-content');
         if (block) {
-            block.innerHTML = `
-                <p style="margin-bottom:10px;"><i class="fas fa-phone"></i> ${c.phone}</p>
-                <p style="margin-bottom:10px;"><i class="fas fa-envelope"></i> ${c.email}</p>
-                <p><i class="fas fa-map-marker-alt"></i> ${c.address[currentLang]}</p>`;
+            block.innerHTML = `<p style="margin-bottom:10px;"><i class="fas fa-phone"></i> ${c.phone}</p><p style="margin-bottom:10px;"><i class="fas fa-envelope"></i> ${c.email}</p><p><i class="fas fa-map-marker-alt"></i> ${c.address[currentLang]}</p>`;
         }
     }
 
+    // Оновлення всіх текстових блоків з атрибутами data-uk / data-en
     document.querySelectorAll('[data-' + currentLang + ']').forEach(el => {
         el.innerHTML = el.getAttribute('data-' + currentLang);
     });
@@ -64,9 +64,21 @@ function refresh() {
     setupCounters();
 }
 
-// ==========================================================================
-// БЕЗКІНЕЧНА ІНТЕРАКТИВНА КАРУСЕЛЬ
-// ==========================================================================
+// ПЕРЕМИКАЧ МОВ (Робоча логіка)
+function setupLanguageSwitcher() {
+    const btns = document.querySelectorAll('.lang-btn');
+    btns.forEach(btn => {
+        btn.onclick = (e) => {
+            currentLang = e.currentTarget.dataset.lang;
+            // Візуальне оновлення кнопок
+            btns.forEach(b => b.classList.remove('active'));
+            document.querySelectorAll(`.lang-btn[data-lang="${currentLang}"]`).forEach(b => b.classList.add('active'));
+            // Перемальовуємо сайт
+            refresh();
+        };
+    });
+}
+
 function setupPartnerCarousel() {
     const slider = document.getElementById('partnersSlider');
     const track = document.getElementById('partners-track');
@@ -75,56 +87,48 @@ function setupPartnerCarousel() {
     let isDown = false;
     let startX;
     let scrollLeft;
-    let scrollSpeed = 0.6; // Швидкість автопрокрутки
+    let scrollSpeed = 0.6; 
     let animationId;
+    let dragDistance = 0;
 
-    // Автоматична прокрутка
     const startAutoScroll = () => {
         slider.scrollLeft += scrollSpeed;
-        
-        // Безкінечний перескок: коли ми пройшли третину довжини (один набір лого), вертаємось на старт
-        // Оскільки в renderPartners ми зробили [...data, ...data, ...data]
         if (slider.scrollLeft >= track.scrollWidth / 3) {
             slider.scrollLeft = 0;
         }
         animationId = requestAnimationFrame(startAutoScroll);
     };
 
-    // Запуск автопрокрутки
     startAutoScroll();
 
-    // ПАУЗА ПРИ НАВЕДЕННІ (тільки на ПК)
     slider.addEventListener('mouseenter', () => cancelAnimationFrame(animationId));
-    slider.addEventListener('mouseleave', () => startAutoScroll());
+    slider.addEventListener('mouseleave', () => { if(!isDown) startAutoScroll(); });
 
-    // ЛОГІКА DRAG (МИШКА)
+    // Drag логіка
     slider.addEventListener('mousedown', (e) => {
         isDown = true;
+        dragDistance = 0;
         cancelAnimationFrame(animationId);
         slider.classList.add('active');
         startX = e.pageX - slider.offsetLeft;
         scrollLeft = slider.scrollLeft;
     });
 
-    slider.addEventListener('mouseleave', () => {
-        isDown = false;
-    });
-
-    slider.addEventListener('mouseup', () => {
+    window.addEventListener('mouseup', () => {
         isDown = false;
         slider.classList.remove('active');
-        startAutoScroll();
     });
 
     slider.addEventListener('mousemove', (e) => {
         if (!isDown) return;
         e.preventDefault();
         const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2; // Коефіцієнт швидкості руху мишки
+        const walk = (x - startX) * 2;
+        dragDistance = Math.abs(walk);
         slider.scrollLeft = scrollLeft - walk;
     });
 
-    // ЛОГІКА TOUCH (СМАРТФОН)
+    // Touch логіка
     slider.addEventListener('touchstart', (e) => {
         isDown = true;
         cancelAnimationFrame(animationId);
@@ -143,6 +147,13 @@ function setupPartnerCarousel() {
         const walk = (x - startX) * 2;
         slider.scrollLeft = scrollLeft - walk;
     }, {passive: true});
+
+    // Захист від випадкового переходу при драгу
+    track.querySelectorAll('a').forEach(link => {
+        link.onclick = (e) => {
+            if (dragDistance > 10) e.preventDefault();
+        };
+    });
 }
 
 function setupMobileMenu() {
@@ -284,14 +295,5 @@ const closeModal = () => {
 document.querySelector('.close-modal').onclick = closeModal;
 window.onclick = (e) => { if (e.target === document.getElementById('bioModal')) closeModal(); };
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
-
-document.querySelectorAll('.lang-btn').forEach(b => {
-    b.onclick = (e) => {
-        currentLang = e.currentTarget.dataset.lang;
-        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-        e.currentTarget.classList.add('active');
-        refresh();
-    };
-});
 
 document.addEventListener('DOMContentLoaded', init);

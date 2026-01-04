@@ -54,12 +54,14 @@ export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track || !data) return;
     const list = data.length > 0 ? data : [{name: "ГО", img: ""}];
-    // Створюємо потрійний набір для ідеальної безкінечності
+    // Створюємо потрійний набір для безкінечного скролу
     const double = [...list, ...list, ...list];
     track.innerHTML = double.map(p => {
         const imgSrc = p.img || `https://via.placeholder.com/200x80?text=${p.name}`;
-        // Додаємо referrerpolicy="no-referrer" щоб Wikimedia не блокувала запит
-        return `<a href="${p.link || '#'}" target="_blank"><img src="${imgSrc}" alt="${p.name}" referrerpolicy="no-referrer"></a>`;
+        // ВАЖЛИВО: додаємо обробник для посилання, але дозволяємо JS каруселі керувати кліком
+        return `<a href="${p.link || '#'}" target="_blank" class="partner-link">
+            <img src="${imgSrc}" alt="${p.name}" referrerpolicy="no-referrer">
+        </a>`;
     }).join('');
 }
 
