@@ -26,7 +26,7 @@ body {
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 section { padding: 100px 0; }
 .section-alt { background-color: var(--light); }
-.text-center { text-align: center; margin-bottom: 50px; } /* Додано відступ для всіх центрованих заголовків */
+.text-center { text-align: center; margin-bottom: 50px; }
 
 /* HEADER & NAVIGATION */
 .main-header { 
@@ -124,15 +124,16 @@ section { padding: 100px 0; }
 .news-island:hover { transform: scale(1.02); }
 
 .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-.gallery-item { border-radius: 15px; overflow: hidden; height: 180px; position: relative; }
-.gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-item { border-radius: 15px; overflow: hidden; height: 180px; position: relative; cursor: pointer; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+.gallery-item:hover img { transform: scale(1.1); }
 
 /* FOUNDERS SECTION */
 .founders-grid { 
     display: grid; 
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
     gap: 30px; 
-    margin-top: 50px; /* Збільшено відстань від заголовка до карток */
+    margin-top: 50px; 
 }
 .founder-card { 
     background: white; 
@@ -157,15 +158,37 @@ section { padding: 100px 0; }
 .main-footer { background: #0a111f; color: white; padding: 100px 0 40px; }
 .footer-grid { display: grid; grid-template-columns: 1.8fr 1fr 1fr; gap: 70px; }
 .footer-info h3 { font-size: 1.6rem; color: var(--accent); margin-bottom: 25px; }
+.btn-sm { background: var(--accent); border: none; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: 700; transition: 0.3s; }
+.btn-sm:hover { background: var(--accent-hover); }
+
+/* КНОПКА ВГОРУ */
+#backToTop {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: var(--accent);
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+#backToTop:hover { background-color: var(--primary); }
 
 /* MODAL */
 .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); backdrop-filter: blur(10px); }
-.modal-content { background: white; margin: 50px auto; padding: 60px; width: 80%; max-width: 1000px; border-radius: 40px; position: relative; }
+.modal-content { background: white; margin: 50px auto; padding: 60px; width: 80%; max-width: 1000px; border-radius: 40px; position: relative; color: var(--dark); }
 .bio-flex { display: flex; gap: 50px; }
 .bio-img { width: 350px; border-radius: 25px; object-fit: cover; }
-.close-modal { position: absolute; right: 30px; top: 20px; font-size: 45px; cursor: pointer; color: #999; }
+.close-modal { position: absolute; right: 30px; top: 20px; font-size: 45px; cursor: pointer; color: #999; transition: 0.3s; }
+.close-modal:hover { color: var(--dark); }
 
-/* Адаптивність */
 @media (max-width: 992px) {
     .about-intro, .media-layout, .footer-grid, .bio-flex { grid-template-columns: 1fr; }
     .hero-block h1 { font-size: 2rem; }

@@ -25,6 +25,8 @@ async function init() {
     cache.activities = await getJSON('data/activities.json') || [];
 
     refresh();
+    setupBackToTop();
+    setupContactForm();
 }
 
 function refresh() {
@@ -35,7 +37,7 @@ function refresh() {
     if (cache.news.length) render.renderNews(cache.news, currentLang);
     if (cache.stories.length) render.renderStories(cache.stories, currentLang);
     
-    // Галерея (ваші фото)
+    // Галерея (можна додати реальні фото в масив)
     render.renderGallery([
         'images/001.jpg',
         'https://via.placeholder.com/400x300?text=Захід+1',
@@ -58,6 +60,11 @@ function refresh() {
         el.innerHTML = el.getAttribute('data-' + currentLang);
     });
 
+    setupCounters();
+}
+
+// Анімація цифр
+function setupCounters() {
     const counters = document.querySelectorAll('.counter');
     const obs = new IntersectionObserver(entries => {
         entries.forEach(en => {
@@ -79,7 +86,63 @@ function refresh() {
     counters.forEach(c => obs.observe(c));
 }
 
-// Функція для відкриття біографії
+// Кнопка Вгору
+function setupBackToTop() {
+    const btn = document.getElementById("backToTop");
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            btn.style.display = "block";
+        } else {
+            btn.style.display = "none";
+        }
+    });
+    btn.onclick = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+}
+
+// Розумна форма контактів
+function setupContactForm() {
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('formStatus');
+
+    if (!form) return;
+
+    form.onsubmit = async (e) => {
+        e.preventDefault();
+        const data = new FormData(form);
+        const submitBtn = document.getElementById('formSubmit');
+        
+        submitBtn.disabled = true;
+        submitBtn.innerText = currentLang === 'uk' ? 'Надсилається...' : 'Sending...';
+
+        try {
+            const response = await fetch("https://formspree.io/f/mqkrvylk", {
+                method: "POST",
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                status.style.display = "block";
+                status.style.color = "#28a745";
+                status.innerText = currentLang === 'uk' ? "Дякуємо! Повідомлення надіслано." : "Thanks! Your message has been sent.";
+                form.reset();
+            } else {
+                throw new Error();
+            }
+        } catch (error) {
+            status.style.display = "block";
+            status.style.color = "#dc3545";
+            status.innerText = currentLang === 'uk' ? "Помилка відправки. Спробуйте ще раз." : "Error. Please try again.";
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerText = currentLang === 'uk' ? 'Відправити' : 'Send';
+        }
+    };
+}
+
+// Глобальні функції модалок
 window.openBio = (id) => {
     const f = cache.founders.find(x => x.id === id);
     if (!f) return;
@@ -89,8 +152,8 @@ window.openBio = (id) => {
         <div class="bio-flex">
             <img src="${f.img}" class="bio-img">
             <div>
-                <h2>${f.name[currentLang]}</h2>
-                <p style="color:#c5a059;font-weight:700;margin-bottom:15px;">${f.role[currentLang]}</p>
+                <h2 style="color:var(--primary);">${f.name[currentLang]}</h2>
+                <p style="color:var(--accent);font-weight:700;margin-bottom:15px;">${f.role[currentLang]}</p>
                 <div style="line-height:1.7;">${f.bio[currentLang]}</div>
                 <div style="margin-top:20px; border-top:1px solid #eee; padding-top:10px;">
                     <p><b>Telegram:</b> ${f.tg}</p>
@@ -102,7 +165,6 @@ window.openBio = (id) => {
     document.body.style.overflow = 'hidden';
 };
 
-// НОВА ФУНКЦІЯ: Відкриття фото на весь екран
 window.openFullImage = (src) => {
     const m = document.getElementById('bioModal');
     const data = document.getElementById('modal-data');
