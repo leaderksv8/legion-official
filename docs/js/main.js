@@ -15,6 +15,7 @@ async function init() {
     setupMobileMenu(); 
     setupBackToTop();
     
+    // Завантаження всіх даних
     cache.founders = await getJSON('data/founders.json') || [];
     cache.stats = await getJSON('data/stats.json') || [];
     cache.partners = await getJSON('data/partners.json') || [];
@@ -28,7 +29,6 @@ async function init() {
     setupScrollLogic();
     setupPartnerCarousel(); 
     setupLanguageSwitcher();
-    setupVerticalCarousels(); // ЗАПУСК ВЕРТИКАЛЬНОГО СКРОЛУ
 }
 
 function refresh() {
@@ -49,37 +49,13 @@ function refresh() {
     setupCounters();
 }
 
-function setupVerticalCarousels() {
-    const ids = ['newsCarousel', 'albumsCarousel'];
-    ids.forEach(id => {
-        const container = document.getElementById(id);
-        const track = container ? container.querySelector('.vertical-track') : null;
-        if (!track) return;
-
-        let scrollPos = 0;
-        let isPaused = false;
-
-        container.onmouseenter = () => isPaused = true;
-        container.onmouseleave = () => isPaused = false;
-
-        function scroll() {
-            if (!isPaused) {
-                scrollPos += 0.5;
-                if (scrollPos >= track.scrollHeight / 2) scrollPos = 0;
-                container.scrollTop = scrollPos;
-            }
-            requestAnimationFrame(scroll);
-        }
-        requestAnimationFrame(scroll);
-    });
-}
-
 function setupLanguageSwitcher() {
     const btns = document.querySelectorAll('.lang-btn');
     btns.forEach(btn => {
         btn.onclick = (e) => {
             currentLang = e.currentTarget.dataset.lang;
             btns.forEach(b => b.classList.remove('active'));
+            // Синхронізуємо кнопки
             document.querySelectorAll(`.lang-btn[data-lang="${currentLang}"]`).forEach(b => b.classList.add('active'));
             refresh();
         };
@@ -93,13 +69,13 @@ function setupPartnerCarousel() {
     let isDown = false, startX, scrollLeft, autoScrollSpeed = 0.5, animationId, isPaused = false;
     const startAutoScroll = () => { if (!isPaused && !isDown) { slider.scrollLeft += autoScrollSpeed; if (slider.scrollLeft >= track.scrollWidth / 3) slider.scrollLeft = 0; } animationId = requestAnimationFrame(startAutoScroll); };
     startAutoScroll();
-    slider.onmouseenter = () => isPaused = true;
-    slider.onmouseleave = () => isPaused = false;
+    slider.addEventListener('mouseenter', () => isPaused = true);
+    slider.addEventListener('mouseleave', () => isPaused = false);
     const startDrag = (e) => { isDown = true; startX = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; scrollLeft = slider.scrollLeft; };
     const stopDrag = () => { isDown = false; };
     const moveDrag = (e) => { if (!isDown) return; e.preventDefault(); const x = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 1.5; };
-    slider.onmousedown = startDrag; window.onmouseup = stopDrag; slider.onmousemove = moveDrag;
-    slider.ontouchstart = startDrag; slider.ontouchend = stopDrag; slider.ontouchmove = moveDrag;
+    slider.addEventListener('mousedown', startDrag); window.addEventListener('mouseup', stopDrag); slider.addEventListener('mousemove', moveDrag);
+    slider.addEventListener('touchstart', startDrag, {passive: false}); slider.addEventListener('touchend', stopDrag); slider.addEventListener('touchmove', moveDrag, {passive: false});
 }
 
 function setupMobileMenu() {
