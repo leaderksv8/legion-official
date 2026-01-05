@@ -87,6 +87,13 @@ export function renderStories(data, lang) {
     const container = document.getElementById('stories-container');
     if (!container || !data) return;
     container.innerHTML = data.map(s => `
-        <div class="story-card"><img src="${s.img}" alt="${s.name[lang]}" style="width:70px;height:70px;border-radius:50%;object-fit:cover;"><div style="text-align:left;"><h4>${s.name[lang]}</h4><p style="font-style:italic;">"${s.text[lang]}"</p></div></div>
+        <div class="story-card">
+            <i class="fas fa-quote-left"></i>
+            <img src="${s.img}" alt="${s.name[lang]}" style="width:70px;height:70px;border-radius:50%;object-fit:cover;">
+            <div style="text-align:left;">
+                <h4>${s.name[lang]}</h4>
+                <p style="font-style:italic;">"${s.text[lang]}"</p>
+            </div>
+        </div>
     `).join('');
 }

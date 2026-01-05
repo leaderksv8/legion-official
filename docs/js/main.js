@@ -106,10 +106,15 @@ function setupScrollLogic() {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
                 const id = entry.target.getAttribute('id');
-                document.querySelectorAll('.nav-menu a').forEach(a => { a.classList.toggle('active', a.getAttribute('href') === `#${id}`); });
+                document.querySelectorAll('.nav-menu a').forEach(a => {
+                    a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+                });
                 const title = entry.target.querySelector('.section-title');
                 if (title) title.classList.add('highlight');
-            } else { const title = entry.target.querySelector('.section-title'); if (title) title.classList.remove('highlight'); }
+            } else {
+                const title = entry.target.querySelector('.section-title');
+                if (title) title.classList.remove('highlight');
+            }
         });
     }, { threshold: 0.2 });
     sections.forEach(section => observer.observe(section));
@@ -126,7 +131,7 @@ function setupCounters() {
                 step(); obs.unobserve(en.target);
             }
         });
-    });
+    }, { threshold: 0.5 });
     counters.forEach(c => obs.observe(c));
 }
 
@@ -139,7 +144,11 @@ function setupBackToTop() {
 function setupContactForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
-    form.onsubmit = async (e) => { e.preventDefault(); alert("Дякуємо! Надіслано."); form.reset(); };
+    form.onsubmit = async (e) => {
+        e.preventDefault();
+        alert("Дякуємо! Ваше повідомлення надіслано.");
+        form.reset();
+    };
 }
 
 window.openBio = (id) => {
