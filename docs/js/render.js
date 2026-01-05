@@ -16,7 +16,7 @@ export function renderStats(data, lang) {
     container.innerHTML = data.map(item => `
         <div class="stat-item">
             <h2 class="counter" data-target="${item.value}">0</h2>
-            <p style="margin-top:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">${item.label[lang]}</p>
+            <p style="margin-top:10px; font-weight:700; text-transform:uppercase;">${item.label[lang]}</p>
         </div>
     `).join('');
 }
@@ -28,20 +28,9 @@ export function renderFounders(data, lang) {
         <div class="founder-card" onclick="openBio('${f.id}')">
             <div class="founder-img-wrapper"><img src="${f.img}" alt="${f.name[lang]}"></div>
             <h4 style="margin-top:20px; color:var(--primary);">${f.name[lang]}</h4>
-            <p style="color:var(--accent); font-weight:700; font-size:0.9rem;">${f.role[lang]}</p>
+            <p style="color:var(--accent); font-weight:700;">${f.role[lang]}</p>
         </div>
     `).join('');
-}
-
-export function renderPartners(data) {
-    const track = document.getElementById('partners-track');
-    if (!track || !data) return;
-    const list = data.length > 0 ? data : [{name: "ГО", img: ""}];
-    const double = [...list, ...list, ...list];
-    track.innerHTML = double.map(p => {
-        const imgSrc = p.img || `https://via.placeholder.com/200x80?text=${p.name}`;
-        return `<a href="${p.link || '#'}" target="_blank"><img src="${imgSrc}" alt="${p.name}" referrerpolicy="no-referrer"></a>`;
-    }).join('');
 }
 
 export function renderNews(data, lang) {
@@ -69,5 +58,35 @@ export function renderGallery(data) {
             <img src="${img}" alt="Захід">
             <div style="position:absolute; bottom:0; left:0; width:100%; background:rgba(26,42,68,0.7); color:white; padding:10px; font-size:0.8rem;">Альбом ГО</div>
         </div>
+    `).join('');
+}
+
+export function renderPartners(data) {
+    const track = document.getElementById('partners-track');
+    if (!track || !data) return;
+    const list = [...data, ...data, ...data];
+    track.innerHTML = list.map(p => {
+        const imgSrc = p.img || `https://via.placeholder.com/200x80?text=${p.name}`;
+        return `<a href="${p.link || '#'}" target="_blank"><img src="${imgSrc}" alt="${p.name}" referrerpolicy="no-referrer"></a>`;
+    }).join('');
+}
+
+export function renderFriends(data, lang) {
+    const container = document.getElementById('friends-container');
+    if (!container || !data) return;
+    container.innerHTML = data.map(f => `
+        <div class="friend-card">
+            <img src="${f.img}" alt="${f.name}">
+            <h4>${f.name}</h4>
+            <p style="color:var(--accent); font-weight:600;">${f.role[lang]}</p>
+        </div>
+    `).join('');
+}
+
+export function renderStories(data, lang) {
+    const container = document.getElementById('stories-container');
+    if (!container || !data) return;
+    container.innerHTML = data.map(s => `
+        <div class="story-card"><img src="${s.img}" alt="${s.name[lang]}" style="width:70px;height:70px;border-radius:50%;object-fit:cover;"><div style="text-align:left;"><h4>${s.name[lang]}</h4><p style="font-style:italic;">"${s.text[lang]}"</p></div></div>
     `).join('');
 }
