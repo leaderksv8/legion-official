@@ -16,7 +16,7 @@ export function renderStats(data, lang) {
     container.innerHTML = data.map(item => `
         <div class="stat-item">
             <h2 class="counter" data-target="${item.value}">0</h2>
-            <p style="margin-top:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">${item.label[lang]}</p>
+            <p style="margin-top:10px; font-weight:700; text-transform:uppercase;">${item.label[lang]}</p>
         </div>
     `).join('');
 }
@@ -28,7 +28,7 @@ export function renderFounders(data, lang) {
         <div class="founder-card" onclick="openBio('${f.id}')">
             <div class="founder-img-wrapper"><img src="${f.img}" alt="${f.name[lang]}"></div>
             <h4 style="margin-top:20px; color:var(--primary);">${f.name[lang]}</h4>
-            <p style="color:var(--accent); font-weight:700; font-size:0.9rem;">${f.role[lang]}</p>
+            <p style="color:var(--accent); font-weight:700;">${f.role[lang]}</p>
         </div>
     `).join('');
 }
@@ -76,9 +76,9 @@ export function renderFriends(data, lang) {
     if (!container || !data) return;
     container.innerHTML = data.map(f => `
         <div class="friend-card">
-            <img src="${f.img}" alt="${f.name}">
+            <img src="${f.img}" alt="${f.name}" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid var(--accent);margin-bottom:15px;">
             <h4>${f.name}</h4>
-            <p style="color:var(--accent); font-size:0.85rem; font-weight:600;">${f.role[lang]}</p>
+            <p style="color:var(--accent); font-weight:600;">${f.role[lang]}</p>
         </div>
     `).join('');
 }

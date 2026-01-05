@@ -79,8 +79,6 @@ function setupLanguageSwitcher() {
 function setupPartnerCarousel() {
     const slider = document.getElementById('partnersSlider');
     const track = document.getElementById('partners-track');
-    const prev = document.getElementById('prevPartner');
-    const next = document.getElementById('nextPartner');
     if (!slider || !track) return;
     let isDown = false, startX, scrollLeft, autoScrollSpeed = 0.5, animationId, isPaused = false;
     const startAutoScroll = () => { if (!isPaused && !isDown) { slider.scrollLeft += autoScrollSpeed; if (slider.scrollLeft >= track.scrollWidth / 3) slider.scrollLeft = 0; } animationId = requestAnimationFrame(startAutoScroll); };
@@ -91,8 +89,6 @@ function setupPartnerCarousel() {
     const stopDrag = () => { isDown = false; };
     const moveDrag = (e) => { if (!isDown) return; e.preventDefault(); const x = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 1.5; };
     slider.onmousedown = startDrag; window.onmouseup = stopDrag; slider.onmousemove = moveDrag;
-    if (prev) prev.onclick = () => slider.scrollLeft -= 300;
-    if (next) next.onclick = () => slider.scrollLeft += 300;
 }
 
 function setupMobileMenu() {
@@ -115,7 +111,7 @@ function setupScrollLogic() {
             } else { const title = entry.target.querySelector('.section-title'); if (title) title.classList.remove('highlight'); }
         });
     }, { threshold: 0.2 });
-    sections.forEach(section => observer.observe(section));
+    sections.forEach(s => observer.observe(s));
 }
 
 function setupCounters() {
@@ -142,7 +138,11 @@ function setupBackToTop() {
 function setupContactForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
-    form.onsubmit = async (e) => { e.preventDefault(); alert("Дякуємо! Ваше повідомлення надіслано."); form.reset(); };
+    form.onsubmit = async (e) => {
+        e.preventDefault();
+        alert("Дякуємо! Ваше повідомлення надіслано.");
+        form.reset();
+    };
 }
 
 window.openBio = (id) => {
