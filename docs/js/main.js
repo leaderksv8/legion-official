@@ -15,7 +15,6 @@ async function init() {
     setupMobileMenu(); 
     setupBackToTop();
     
-    // Завантаження всіх даних
     cache.founders = await getJSON('data/founders.json') || [];
     cache.stats = await getJSON('data/stats.json') || [];
     cache.partners = await getJSON('data/partners.json') || [];
@@ -79,8 +78,10 @@ function setupLanguageSwitcher() {
 function setupPartnerCarousel() {
     const slider = document.getElementById('partnersSlider');
     const track = document.getElementById('partners-track');
+    const prev = document.getElementById('prevPartner');
+    const next = document.getElementById('nextPartner');
     if (!slider || !track) return;
-    let isDown = false, startX, scrollLeft, autoScrollSpeed = 0.5, animationId, isPaused = false;
+    let isDown = false, startX, scrollLeft, autoScrollSpeed = 0.4, animationId, isPaused = false;
     const startAutoScroll = () => { if (!isPaused && !isDown) { slider.scrollLeft += autoScrollSpeed; if (slider.scrollLeft >= track.scrollWidth / 3) slider.scrollLeft = 0; } animationId = requestAnimationFrame(startAutoScroll); };
     startAutoScroll();
     slider.onmouseenter = () => isPaused = true;
@@ -89,14 +90,8 @@ function setupPartnerCarousel() {
     const stopDrag = () => { isDown = false; };
     const moveDrag = (e) => { if (!isDown) return; e.preventDefault(); const x = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 1.5; };
     slider.onmousedown = startDrag; window.onmouseup = stopDrag; slider.onmousemove = moveDrag;
-    slider.ontouchstart = startDrag; slider.ontouchend = stopDrag; slider.ontouchmove = moveDrag;
-}
-
-function setupMobileMenu() {
-    const toggle = document.getElementById('menuToggle');
-    const menu = document.getElementById('navMenu');
-    if (!toggle || !menu) return;
-    toggle.onclick = () => { toggle.classList.toggle('active'); menu.classList.toggle('active'); document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto'; };
+    if (prev) prev.onclick = () => slider.scrollLeft -= 300;
+    if (next) next.onclick = () => slider.scrollLeft += 300;
 }
 
 function setupScrollLogic() {
@@ -105,10 +100,6 @@ function setupScrollLogic() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                const id = entry.target.getAttribute('id');
-                document.querySelectorAll('.nav-menu a').forEach(a => {
-                    a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
-                });
                 const title = entry.target.querySelector('.section-title');
                 if (title) title.classList.add('highlight');
             } else {
@@ -117,7 +108,7 @@ function setupScrollLogic() {
             }
         });
     }, { threshold: 0.2 });
-    sections.forEach(section => observer.observe(section));
+    sections.forEach(s => observer.observe(s));
 }
 
 function setupCounters() {
@@ -139,16 +130,6 @@ function setupBackToTop() {
     const btn = document.getElementById("backToTop");
     window.onscroll = () => { if (window.pageYOffset > 400) btn.setAttribute("style", "display: flex !important"); else btn.setAttribute("style", "display: none !important"); };
     btn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function setupContactForm() {
-    const form = document.getElementById('contactForm');
-    if (!form) return;
-    form.onsubmit = async (e) => {
-        e.preventDefault();
-        alert("Дякуємо! Ваше повідомлення надіслано.");
-        form.reset();
-    };
 }
 
 window.openBio = (id) => {

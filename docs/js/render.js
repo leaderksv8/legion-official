@@ -56,7 +56,6 @@ export function renderGallery(data) {
     container.innerHTML = list.map(img => `
         <div class="gallery-item album-card" onclick="openFullImage('${img}')">
             <img src="${img}" alt="Захід">
-            <div style="position:absolute; bottom:0; left:0; width:100%; background:rgba(26,42,68,0.7); color:white; padding:10px; font-size:0.8rem;">Альбом ГО</div>
         </div>
     `).join('');
 }
@@ -64,7 +63,7 @@ export function renderGallery(data) {
 export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track || !data) return;
-    const list = [...data, ...data, ...data];
+    const list = [...data, ...data, ...list];
     track.innerHTML = list.map(p => {
         const imgSrc = p.img || `https://via.placeholder.com/200x80?text=${p.name}`;
         return `<a href="${p.link || '#'}" target="_blank"><img src="${imgSrc}" alt="${p.name}" referrerpolicy="no-referrer"></a>`;
@@ -88,11 +87,11 @@ export function renderStories(data, lang) {
     if (!container || !data) return;
     container.innerHTML = data.map(s => `
         <div class="story-card">
-            <i class="fas fa-quote-left"></i>
-            <img src="${s.img}" alt="${s.name[lang]}" style="width:70px;height:70px;border-radius:50%;object-fit:cover;">
-            <div style="text-align:left;">
-                <h4>${s.name[lang]}</h4>
-                <p style="font-style:italic;">"${s.text[lang]}"</p>
+            <i class="fas fa-quote-left" style="font-size:3rem; opacity:0.1; position:absolute; left:20px; top:20px;"></i>
+            <img src="${s.img}" alt="${s.name[lang]}" style="width:100px;height:100px;border-radius:50%;object-fit:cover; border:4px solid var(--accent); position:relative;">
+            <div style="text-align:left; position:relative;">
+                <h4 style="color:var(--primary); font-size:1.3rem;">${s.name[lang]}</h4>
+                <p style="font-style:italic; margin-top:10px; font-size:1rem; color:#444;">"${s.text[lang]}"</p>
             </div>
         </div>
     `).join('');
