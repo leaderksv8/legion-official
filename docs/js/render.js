@@ -36,8 +36,7 @@ export function renderFounders(data, lang) {
 export function renderNews(data, lang) {
     const container = document.getElementById('news-container');
     if (!container || !data) return;
-    // Дублюємо масив для безкінечної каруселі
-    const list = [...data, ...data];
+    const list = [...data, ...data]; // Для безкінечного скролу
     container.innerHTML = list.map(n => `
         <div class="news-card">
             <div style="display:flex; justify-content:space-between;">
@@ -53,12 +52,11 @@ export function renderNews(data, lang) {
 export function renderGallery(data) {
     const container = document.getElementById('gallery-preview');
     if (!container || !data) return;
-    // Дублюємо масив для безкінечної каруселі
-    const list = [...data, ...data];
+    const list = [...data, ...data]; // Для безкінечного скролу
     container.innerHTML = list.map(img => `
         <div class="gallery-item album-card" onclick="openFullImage('${img}')">
             <img src="${img}" alt="Захід">
-            <div class="album-title-overlay">Альбом: Захід ГО</div>
+            <div class="album-title-overlay">Альбом: Подія ГО</div>
         </div>
     `).join('');
 }
@@ -78,7 +76,7 @@ export function renderFriends(data, lang) {
     if (!container || !data) return;
     container.innerHTML = data.map(f => `
         <div class="friend-card">
-            <img src="${f.img}" alt="${f.name}">
+            <img src="${f.img}" alt="${f.name}" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid var(--accent);margin-bottom:15px;">
             <h4>${f.name}</h4>
             <p style="color:var(--accent); font-weight:600;">${f.role[lang]}</p>
         </div>

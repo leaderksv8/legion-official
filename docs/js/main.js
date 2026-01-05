@@ -28,7 +28,7 @@ async function init() {
     setupScrollLogic();
     setupPartnerCarousel(); 
     setupLanguageSwitcher();
-    setupVerticalCarousels(); // ЗАПУСК ВЕРТИКАЛЬНИХ СТРІЧОК
+    setupVerticalCarousels(); // ЗАПУСК ВЕРТИКАЛЬНОГО СКРОЛУ
 }
 
 function refresh() {
@@ -50,9 +50,8 @@ function refresh() {
 }
 
 function setupVerticalCarousels() {
-    const containers = ['newsCarousel', 'albumsCarousel'];
-    
-    containers.forEach(id => {
+    const ids = ['newsCarousel', 'albumsCarousel'];
+    ids.forEach(id => {
         const container = document.getElementById(id);
         const track = container ? container.querySelector('.vertical-track') : null;
         if (!track) return;
@@ -63,15 +62,15 @@ function setupVerticalCarousels() {
         container.onmouseenter = () => isPaused = true;
         container.onmouseleave = () => isPaused = false;
 
-        function step() {
+        function scroll() {
             if (!isPaused) {
                 scrollPos += 0.5;
                 if (scrollPos >= track.scrollHeight / 2) scrollPos = 0;
                 container.scrollTop = scrollPos;
             }
-            requestAnimationFrame(step);
+            requestAnimationFrame(scroll);
         }
-        requestAnimationFrame(step);
+        requestAnimationFrame(scroll);
     });
 }
 
@@ -116,12 +115,11 @@ function setupScrollLogic() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
+                const id = entry.target.getAttribute('id');
+                document.querySelectorAll('.nav-menu a').forEach(a => { a.classList.toggle('active', a.getAttribute('href') === `#${id}`); });
                 const title = entry.target.querySelector('.section-title');
                 if (title) title.classList.add('highlight');
-            } else {
-                const title = entry.target.querySelector('.section-title');
-                if (title) title.classList.remove('highlight');
-            }
+            } else { const title = entry.target.querySelector('.section-title'); if (title) title.classList.remove('highlight'); }
         });
     }, { threshold: 0.2 });
     sections.forEach(s => observer.observe(s));
