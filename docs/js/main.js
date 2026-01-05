@@ -15,6 +15,7 @@ async function init() {
     setupMobileMenu(); 
     setupBackToTop();
     
+    // Завантаження всіх даних
     cache.founders = await getJSON('data/founders.json') || [];
     cache.stats = await getJSON('data/stats.json') || [];
     cache.partners = await getJSON('data/partners.json') || [];
@@ -81,7 +82,7 @@ function setupPartnerCarousel() {
     const prev = document.getElementById('prevPartner');
     const next = document.getElementById('nextPartner');
     if (!slider || !track) return;
-    let isDown = false, startX, scrollLeft, autoScrollSpeed = 0.4, animationId, isPaused = false;
+    let isDown = false, startX, scrollLeft, autoScrollSpeed = 0.5, animationId, isPaused = false;
     const startAutoScroll = () => { if (!isPaused && !isDown) { slider.scrollLeft += autoScrollSpeed; if (slider.scrollLeft >= track.scrollWidth / 3) slider.scrollLeft = 0; } animationId = requestAnimationFrame(startAutoScroll); };
     startAutoScroll();
     slider.onmouseenter = () => isPaused = true;
@@ -94,21 +95,27 @@ function setupPartnerCarousel() {
     if (next) next.onclick = () => slider.scrollLeft += 300;
 }
 
+function setupMobileMenu() {
+    const toggle = document.getElementById('menuToggle');
+    const menu = document.getElementById('navMenu');
+    if (!toggle || !menu) return;
+    toggle.onclick = () => { toggle.classList.toggle('active'); menu.classList.toggle('active'); document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto'; };
+}
+
 function setupScrollLogic() {
     const sections = document.querySelectorAll('section');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
+                const id = entry.target.getAttribute('id');
+                document.querySelectorAll('.nav-menu a').forEach(a => { a.classList.toggle('active', a.getAttribute('href') === `#${id}`); });
                 const title = entry.target.querySelector('.section-title');
                 if (title) title.classList.add('highlight');
-            } else {
-                const title = entry.target.querySelector('.section-title');
-                if (title) title.classList.remove('highlight');
-            }
+            } else { const title = entry.target.querySelector('.section-title'); if (title) title.classList.remove('highlight'); }
         });
     }, { threshold: 0.2 });
-    sections.forEach(s => observer.observe(s));
+    sections.forEach(section => observer.observe(section));
 }
 
 function setupCounters() {
@@ -122,7 +129,7 @@ function setupCounters() {
                 step(); obs.unobserve(en.target);
             }
         });
-    }, { threshold: 0.5 });
+    });
     counters.forEach(c => obs.observe(c));
 }
 
@@ -130,6 +137,12 @@ function setupBackToTop() {
     const btn = document.getElementById("backToTop");
     window.onscroll = () => { if (window.pageYOffset > 400) btn.setAttribute("style", "display: flex !important"); else btn.setAttribute("style", "display: none !important"); };
     btn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function setupContactForm() {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+    form.onsubmit = async (e) => { e.preventDefault(); alert("Дякуємо! Ваше повідомлення надіслано."); form.reset(); };
 }
 
 window.openBio = (id) => {
