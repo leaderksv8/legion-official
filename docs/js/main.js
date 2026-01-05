@@ -22,29 +22,34 @@ async function init() {
     cache.news = await getJSON('data/news.json') || [];
     cache.stories = await getJSON('data/stories.json') || [];
     cache.activities = await getJSON('data/activities.json') || [];
-    cache.friends = await getJSON('data/friends.json') || [];
 
     refresh();
     setupContactForm();
     setupScrollLogic();
     setupPartnerCarousel(); 
-    setupLanguageSwitcher();
-    setupVerticalCarousels(); 
+    setupVerticalCarousels();
 }
 
 function refresh() {
-    render.renderActivities(cache.activities, currentLang);
-    render.renderFounders(cache.founders, currentLang);
-    render.renderStats(cache.stats, currentLang);
-    render.renderPartners(cache.partners);
-    render.renderNews(cache.news, currentLang);
-    render.renderStories(cache.stories, currentLang);
-    render.renderFriends(cache.friends, currentLang);
+    if (cache.activities.length) render.renderActivities(cache.activities, currentLang);
+    if (cache.founders.length) render.renderFounders(cache.founders, currentLang);
+    if (cache.stats.length) render.renderStats(cache.stats, currentLang);
+    if (cache.partners.length) render.renderPartners(cache.partners);
+    if (cache.news.length) render.renderNews(cache.news, currentLang);
+    if (cache.stories.length) render.renderStories(cache.stories, currentLang);
+    
     render.renderGallery(['images/001.jpg', 'images/001.jpg', 'images/001.jpg', 'images/001.jpg']);
 
-    document.querySelectorAll('[data-uk], [data-en]').forEach(el => {
-        const text = el.getAttribute(`data-${currentLang}`);
-        if (text) el.innerHTML = text;
+    const c = cache.contacts;
+    if (c && c.phone) {
+        const block = document.getElementById('contacts-content');
+        if (block) {
+            block.innerHTML = `<p style="margin-bottom:10px;"><i class="fas fa-phone" style="color:var(--accent); width:20px;"></i> ${c.phone}</p><p style="margin-bottom:10px;"><i class="fas fa-envelope" style="color:var(--accent); width:20px;"></i> ${c.email}</p><p><i class="fas fa-map-marker-alt" style="color:var(--accent); width:20px;"></i> ${c.address[currentLang]}</p>`;
+        }
+    }
+
+    document.querySelectorAll('[data-' + currentLang + ']').forEach(el => {
+        el.innerHTML = el.getAttribute('data-' + currentLang);
     });
 
     setupCounters();
@@ -61,18 +66,6 @@ function setupVerticalCarousels() {
         container.onmouseleave = () => isPaused = false;
         function scroll() { if (!isPaused) { scrollPos += 0.5; if (scrollPos >= track.scrollHeight / 2) scrollPos = 0; container.scrollTop = scrollPos; } requestAnimationFrame(scroll); }
         requestAnimationFrame(scroll);
-    });
-}
-
-function setupLanguageSwitcher() {
-    const btns = document.querySelectorAll('.lang-btn');
-    btns.forEach(btn => {
-        btn.onclick = (e) => {
-            currentLang = e.currentTarget.dataset.lang;
-            btns.forEach(b => b.classList.remove('active'));
-            document.querySelectorAll(`.lang-btn[data-lang="${currentLang}"]`).forEach(b => b.classList.add('active'));
-            refresh();
-        };
     });
 }
 
@@ -106,13 +99,18 @@ function setupScrollLogic() {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
                 const id = entry.target.getAttribute('id');
-                document.querySelectorAll('.nav-menu a').forEach(a => { a.classList.toggle('active', a.getAttribute('href') === `#${id}`); });
+                document.querySelectorAll('.nav-menu a').forEach(a => {
+                    a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+                });
                 const title = entry.target.querySelector('.section-title');
                 if (title) title.classList.add('highlight');
-            } else { const title = entry.target.querySelector('.section-title'); if (title) title.classList.remove('highlight'); }
+            } else {
+                const title = entry.target.querySelector('.section-title');
+                if (title) title.classList.remove('highlight');
+            }
         });
     }, { threshold: 0.2 });
-    sections.forEach(s => observer.observe(s));
+    sections.forEach(section => observer.observe(section));
 }
 
 function setupCounters() {
@@ -141,7 +139,7 @@ function setupContactForm() {
     if (!form) return;
     form.onsubmit = async (e) => {
         e.preventDefault();
-        alert(currentLang === 'uk' ? "Дякуємо! Ваше повідомлення надіслано." : "Thank you!");
+        alert("Дякуємо! Ваше повідомлення надіслано.");
         form.reset();
     };
 }
