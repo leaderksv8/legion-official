@@ -33,6 +33,34 @@ export function renderFounders(data, lang) {
     `).join('');
 }
 
+export function renderFriends(data, lang) {
+    const container = document.getElementById('friends-container');
+    if (!container || !data) return;
+    container.innerHTML = data.map(f => `
+        <div class="friend-card">
+            <img src="${f.img}" alt="${f.name}">
+            <h4 style="color:var(--primary);">${f.name}</h4>
+            <p style="color:var(--accent); font-size:0.85rem; font-weight:600;">${f.role[lang]}</p>
+        </div>
+    `).join('');
+}
+
+export function renderNews(data, lang) {
+    const container = document.getElementById('news-container');
+    if (!container || !data) return;
+    container.innerHTML = data.map(n => `
+        <div class="news-card">
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                <span class="news-tag">${n.tag[lang]}</span>
+                <span style="color:var(--gray); font-size:0.8rem;">${n.date}</span>
+            </div>
+            <h4 style="color:var(--primary); font-size:1.1rem; line-height:1.4;">${n.title[lang]}</h4>
+            <p style="font-size:0.85rem; color:#666; margin-top:10px;">${n.desc[lang]}</p>
+            <a href="${n.link || '#'}" target="_blank" style="color:var(--accent); font-weight:700; font-size:0.8rem; margin-top:15px; display:inline-block; text-decoration:underline !important;">Читати новину...</a>
+        </div>
+    `).join('');
+}
+
 export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track || !data) return;
@@ -42,21 +70,6 @@ export function renderPartners(data) {
         const imgSrc = p.img || `https://via.placeholder.com/200x80?text=${p.name}`;
         return `<a href="${p.link || '#'}" target="_blank"><img src="${imgSrc}" alt="${p.name}" referrerpolicy="no-referrer"></a>`;
     }).join('');
-}
-
-export function renderNews(data, lang) {
-    const container = document.getElementById('news-container');
-    if (!container || !data) return;
-    container.innerHTML = data.map(n => `
-        <div class="news-island">
-            <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:0.8rem; font-weight:700;">
-                <span style="background:var(--primary); color:white; padding:3px 12px; border-radius:50px;">${n.tag[lang]}</span>
-                <span style="color:var(--gray);">${n.date}</span>
-            </div>
-            <h4 style="color:var(--primary);">${n.title[lang]}</h4>
-            <p style="font-size:0.85rem; color:#666; margin-top:8px;">${n.desc[lang]}</p>
-        </div>
-    `).join('');
 }
 
 export function renderStories(data, lang) {

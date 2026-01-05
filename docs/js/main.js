@@ -1,7 +1,7 @@
 import * as render from './render.js';
 
 let currentLang = 'uk';
-let cache = { founders: [], stats: [], partners: [], news: [], stories: [], contacts: {}, activities: [] };
+let cache = { founders: [], stats: [], partners: [], news: [], stories: [], contacts: {}, activities: [], friends: [] };
 
 async function getJSON(url) {
     try {
@@ -21,8 +21,8 @@ async function init() {
     cache.partners = await getJSON('data/partners.json') || [];
     cache.news = await getJSON('data/news.json') || [];
     cache.stories = await getJSON('data/stories.json') || [];
-    cache.contacts = await getJSON('data/contacts.json') || {};
     cache.activities = await getJSON('data/activities.json') || [];
+    cache.friends = await getJSON('data/friends.json') || [];
 
     refresh();
     setupContactForm();
@@ -32,25 +32,21 @@ async function init() {
 }
 
 function refresh() {
-    if (cache.activities.length) render.renderActivities(cache.activities, currentLang);
-    if (cache.founders.length) render.renderFounders(cache.founders, currentLang);
-    if (cache.stats.length) render.renderStats(cache.stats, currentLang);
-    if (cache.partners.length) render.renderPartners(cache.partners);
-    if (cache.news.length) render.renderNews(cache.news, currentLang);
-    if (cache.stories.length) render.renderStories(cache.stories, currentLang);
+    render.renderActivities(cache.activities, currentLang);
+    render.renderFounders(cache.founders, currentLang);
+    render.renderStats(cache.stats, currentLang);
+    render.renderPartners(cache.partners);
+    render.renderNews(cache.news, currentLang);
+    render.renderStories(cache.stories, currentLang);
+    render.renderFriends(cache.friends, currentLang);
     
+    // ПОРЦІЯ ФОТО ДЛЯ ГАЛЕРЕЇ
     render.renderGallery(['images/001.jpg', 'images/001.jpg', 'images/001.jpg', 'images/001.jpg']);
 
-    const c = cache.contacts;
-    if (c && c.phone) {
-        const block = document.getElementById('contacts-content');
-        if (block) {
-            block.innerHTML = `<p style="margin-bottom:10px;"><i class="fas fa-phone" style="color:var(--accent); width:20px;"></i> ${c.phone}</p><p style="margin-bottom:10px;"><i class="fas fa-envelope" style="color:var(--accent); width:20px;"></i> ${c.email}</p><p><i class="fas fa-map-marker-alt" style="color:var(--accent); width:20px;"></i> ${c.address[currentLang]}</p>`;
-        }
-    }
-
-    document.querySelectorAll('[data-' + currentLang + ']').forEach(el => {
-        el.innerHTML = el.getAttribute('data-' + currentLang);
+    // ПОВНИЙ ПЕРЕКЛАД СТАТИКИ ТА БРЕНДУ
+    document.querySelectorAll('[data-uk], [data-en]').forEach(el => {
+        const text = el.getAttribute(`data-${currentLang}`);
+        if (text) el.innerHTML = text;
     });
 
     setupCounters();
@@ -62,6 +58,7 @@ function setupLanguageSwitcher() {
         btn.onclick = (e) => {
             currentLang = e.currentTarget.dataset.lang;
             btns.forEach(b => b.classList.remove('active'));
+            // Синхронізуємо кнопки
             document.querySelectorAll(`.lang-btn[data-lang="${currentLang}"]`).forEach(b => b.classList.add('active'));
             refresh();
         };
@@ -88,25 +85,32 @@ function setupMobileMenu() {
     const toggle = document.getElementById('menuToggle');
     const menu = document.getElementById('navMenu');
     if (!toggle || !menu) return;
-    toggle.onclick = () => { toggle.classList.toggle('active'); menu.classList.toggle('active'); document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto'; };
+    toggle.onclick = () => { 
+        toggle.classList.toggle('active'); 
+        menu.classList.toggle('active'); 
+        document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto'; 
+    };
 }
 
 function setupScrollLogic() {
     const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-menu a');
-    const observerOptions = { root: null, rootMargin: '-20% 0px -50% 0px', threshold: 0 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            const id = entry.target.getAttribute('id');
-            const title = entry.target.querySelector('.section-title');
             if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                const id = entry.target.getAttribute('id');
+                document.querySelectorAll('.nav-menu a').forEach(a => {
+                    a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+                });
+                const title = entry.target.querySelector('.section-title');
                 if (title) title.classList.add('highlight');
-                navLinks.forEach(link => { link.classList.remove('active'); if (link.getAttribute('href') === `#${id}`) link.classList.add('active'); });
-                if (entry.target.classList.contains('reveal')) entry.target.classList.add('active');
-            } else { if (title) title.classList.remove('highlight'); }
+            } else {
+                const title = entry.target.querySelector('.section-title');
+                if (title) title.classList.remove('highlight');
+            }
         });
-    }, observerOptions);
-    sections.forEach(section => observer.observe(section));
+    }, { threshold: 0.2 });
+    sections.forEach(s => observer.observe(s));
 }
 
 function setupCounters() {
