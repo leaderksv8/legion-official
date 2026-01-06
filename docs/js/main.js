@@ -14,12 +14,28 @@ async function init() {
 
     setupLanguageSwitcher();
     setupMobileMenu();
+    setupScrollReveal(); // Нова функція для анімацій
     updateUI();
 }
 
 function updateUI() {
     translatePage(cache.translations, currentLang);
     renderActivities(cache.activities, currentLang);
+}
+
+// Функція для відстеження скролу
+function setupScrollReveal() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.15 });
+
+    // Відстежуємо Блок 2 (можна додати й інші блоки пізніше)
+    const b2 = document.querySelector('.b2-activities');
+    if (b2) observer.observe(b2);
 }
 
 function setupLanguageSwitcher() {
