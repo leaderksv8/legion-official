@@ -15,6 +15,7 @@ async function init() {
     setupMobileMenu(); 
     setupBackToTop();
     
+    // Завантаження всіх даних
     cache.founders = await getJSON('data/founders.json') || [];
     cache.stats = await getJSON('data/stats.json') || [];
     cache.partners = await getJSON('data/partners.json') || [];
@@ -49,14 +50,19 @@ function refresh() {
     setupCounters();
 }
 
-window.openFriendDetail = (id) => {
-    const f = cache.friends.find(x => x.id === id);
-    if (!f) return;
-    const m = document.getElementById('bioModal');
-    const data = document.getElementById('modal-data');
-    data.innerHTML = `<div class="friend-detail-card"><div class="friend-detail-header" style="background-image: url('${f.img}')"><div class="friend-header-overlay"><div class="friend-header-text"><h2>${f.name}</h2><span class="friend-tag">${f.role[currentLang]}</span></div></div></div><div class="friend-detail-body"><p>${f.bio[currentLang]}</p></div></div>`;
-    m.style.display = 'flex'; setTimeout(() => m.classList.add('active'), 10); document.body.style.overflow = 'hidden';
-};
+function setupVerticalCarousels() {
+    const ids = ['newsCarousel', 'albumsCarousel'];
+    ids.forEach(id => {
+        const container = document.getElementById(id);
+        const track = container ? container.querySelector('.vertical-track') : null;
+        if (!track) return;
+        let scrollPos = 0, isPaused = false;
+        container.onmouseenter = () => isPaused = true;
+        container.onmouseleave = () => isPaused = false;
+        function scroll() { if (!isPaused) { scrollPos += 0.5; if (scrollPos >= track.scrollHeight / 2) scrollPos = 0; container.scrollTop = scrollPos; } requestAnimationFrame(scroll); }
+        requestAnimationFrame(scroll);
+    });
+}
 
 function setupLanguageSwitcher() {
     const btns = document.querySelectorAll('.lang-btn');
@@ -83,21 +89,6 @@ function setupPartnerCarousel() {
     const stopDrag = () => { isDown = false; };
     const moveDrag = (e) => { if (!isDown) return; e.preventDefault(); const x = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 1.5; };
     slider.onmousedown = startDrag; window.onmouseup = stopDrag; slider.onmousemove = moveDrag;
-    slider.ontouchstart = startDrag; slider.ontouchend = stopDrag; slider.ontouchmove = moveDrag;
-}
-
-function setupVerticalCarousels() {
-    const ids = ['newsCarousel', 'albumsCarousel'];
-    ids.forEach(id => {
-        const container = document.getElementById(id);
-        const track = container ? container.querySelector('.vertical-track') : null;
-        if (!track) return;
-        let scrollPos = 0, isPaused = false;
-        container.onmouseenter = () => isPaused = true;
-        container.onmouseleave = () => isPaused = false;
-        function scroll() { if (!isPaused) { scrollPos += 0.5; if (scrollPos >= track.scrollHeight / 2) scrollPos = 0; container.scrollTop = scrollPos; } requestAnimationFrame(scroll); }
-        requestAnimationFrame(scroll);
-    });
 }
 
 function setupMobileMenu() {
@@ -140,7 +131,6 @@ function setupCounters() {
 
 function setupBackToTop() {
     const btn = document.getElementById("backToTop");
-    if (!btn) return;
     window.onscroll = () => { if (window.pageYOffset > 400) btn.setAttribute("style", "display: flex !important"); else btn.setAttribute("style", "display: none !important"); };
     btn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -148,7 +138,11 @@ function setupBackToTop() {
 function setupContactForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
-    form.onsubmit = async (e) => { e.preventDefault(); alert("Дякуємо!"); form.reset(); };
+    form.onsubmit = async (e) => {
+        e.preventDefault();
+        alert("Дякуємо! Ваше повідомлення надіслано.");
+        form.reset();
+    };
 }
 
 window.openBio = (id) => {
