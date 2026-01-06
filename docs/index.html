@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ГО «ЛЕГІОН ТИТАНІВ» | Бучанський район</title>
     
-    <!-- SEO & Social Media -->
-    <meta name="description" content="Громадська організація ветеранів війни Бучанського району.">
+    <!-- SEO & Meta -->
+    <meta name="description" content="Громадська організація ветеранів війни Бучанського району. Допомога, реабілітація, адаптація.">
     <meta property="og:title" content="ГО «ЛЕГІОН ТИТАНІВ»">
-    <meta property="og:image" content="images/000.png">
+    <meta property="og:image" content="images/001.jpg">
 
     <link rel="icon" type="image/png" href="images/000.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -20,9 +20,7 @@
     <header class="main-header">
         <div class="container header-wrapper">
             <a href="#home" class="logo">
-                <div class="logo-badge">
-                    <img src="images/000.png" alt="ЛЕГІОН ТИТАНІВ">
-                </div>
+                <img src="images/000.png" alt="ЛЕГІОН ТИТАНІВ" class="site-logo-img">
                 <div class="logo-text" data-uk="ЛЕГІОН ТИТАНІВ" data-en="LEGION OF TITANS">ЛЕГІОН ТИТАНІВ</div>
             </a>
             
@@ -36,7 +34,8 @@
                     </ul>
                 </nav>
 
-                <div class="lang-switcher" id="globalLangSwitcher">
+                <!-- Єдиний перемикач мов -->
+                <div class="lang-switcher" id="unifiedLangSwitcher">
                     <button class="lang-btn active" data-lang="uk">UA</button>
                     <button class="lang-btn" data-lang="en">EN</button>
                 </div>
@@ -55,7 +54,7 @@
                     <h1 class="hero-brand" data-uk="«ЛЕГІОН ТИТАНІВ»" data-en="«LEGION OF TITANS»">«ЛЕГІОН ТИТАНІВ»</h1>
                     <h2 class="hero-subtitle" data-uk="ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ" data-en="WAR VETERANS WITH DISABILITIES OF THE BUCHA DISTRICT">ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ</h2>
                     <div class="hero-description">
-                        <p data-uk="Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку тих, хто захищав нашу країну." data-en="We unite war veterans with disabilities of the Bucha district for mutual assistance, adaptation and development.">Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку тих, хто захищав нашу країну.</p>
+                        <p data-uk="Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку тих, хто захищав нашу країну." data-en="We unite war veterans with disabilities of the Bucha district for mutual aid and adaptation. Our mission is to support those who protected our country.">Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку тих, хто захищав нашу країну.</p>
                     </div>
                 </div>
             </div>
@@ -69,7 +68,7 @@
                     <div class="about-image"><img src="images/001.jpg" alt="Діяльність"></div>
                     <div class="about-text">
                         <h3 class="accent-title" data-uk="Комплексна допомога ветеранам" data-en="Comprehensive Assistance">Комплексна допомога ветеранам</h3>
-                        <p data-uk="Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів, реабілітаційними програмами та юридичним супроводом." data-en="Our NGO provides support in adaptation to peaceful life, rehabilitation, and legal assistance.">Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів, реабілітаційними програмами та юридичним супроводом.</p>
+                        <p data-uk="Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів, реабілітаційними програмами та юридичним супроводом." data-en="Our NGO provides support in adaptation to peaceful life, helps with documents and rehabilitation.">Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів, реабілітаційними програмами та юридичним супроводом.</p>
                     </div>
                 </div>
                 <div id="activities-cards" class="grid-6"></div>
@@ -88,17 +87,13 @@
         <section id="partners" class="section reveal">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Наші партнери" data-en="Our Partners">Наші партнери</h2>
-                <div class="partners-wrapper">
-                    <button class="slider-arrow prev" id="prevPartner"><i class="fas fa-chevron-left"></i></button>
-                    <div class="partners-slider" id="partnersSlider">
-                        <div id="partners-track" class="partners-track"></div>
-                    </div>
-                    <button class="slider-arrow next" id="nextPartner"><i class="fas fa-chevron-right"></i></button>
+                <div class="partners-slider" id="partnersSlider">
+                    <div id="partners-track" class="partners-track"></div>
                 </div>
             </div>
         </section>
 
-        <!-- БЛОК 5: НАШІ ДРУЗІ -->
+        <!-- БЛОК 5: ДРУЗІ -->
         <section id="friends" class="section reveal">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Наші друзі" data-en="Our Friends">Наші друзі</h2>
@@ -121,15 +116,11 @@
                 <div class="media-grid-layout">
                     <div class="media-column">
                         <h3 class="media-subtitle" data-uk="Новини" data-en="News">Новини</h3>
-                        <div class="vertical-carousel-container" id="newsCarousel">
-                            <div id="news-container" class="vertical-track"></div>
-                        </div>
+                        <div id="news-container"></div>
                     </div>
                     <div class="media-column">
-                        <h3 class="media-subtitle" data-uk="Фотоальбоми" data-en="Photo Albums">Фотоальбоми</h3>
-                        <div class="vertical-carousel-container" id="albumsCarousel">
-                            <div id="gallery-preview" class="vertical-track"></div>
-                        </div>
+                        <h3 class="media-subtitle" data-uk="Звіти та фотоальбоми" data-en="Reports & Albums">Звіти та фотоальбоми</h3>
+                        <div id="gallery-preview"></div>
                     </div>
                 </div>
             </div>
@@ -143,7 +134,7 @@
             </div>
         </section>
 
-        <!-- ФУТЕР (БЛОК 9) -->
+        <!-- БЛОК 9: ФУТЕР -->
         <footer id="contact" class="main-footer">
             <div class="container footer-grid">
                 <div class="footer-column contact-card">
@@ -177,11 +168,11 @@
                         <input type="text" placeholder="Ім'я" required class="footer-input">
                         <input type="email" placeholder="Email" required class="footer-input">
                         <textarea placeholder="Повідомлення" required class="footer-input footer-textarea"></textarea>
-                        <button type="submit" class="btn-sm footer-btn">Відправити</button>
+                        <button type="submit" class="btn-sm footer-btn" data-uk="Відправити" data-en="Send">Відправити</button>
                     </form>
                 </div>
             </div>
-            <div class="copyright-bottom text-center">
+            <div class="copyright-bar text-center">
                 <p>&copy; 2026 ГО <span data-uk="«ЛЕГІОН ТИТАНІВ»" data-en="«LEGION OF TITANS»">«ЛЕГІОН ТИТАНІВ»</span>. All Rights Reserved.</p>
             </div>
         </footer>
