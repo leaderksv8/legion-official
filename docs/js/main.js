@@ -40,26 +40,12 @@ function refresh() {
     render.renderStories(cache.stories, currentLang);
     render.renderGallery(['images/001.jpg', 'images/001.jpg', 'images/001.jpg', 'images/001.jpg']);
 
-    // ФІКС ПЕРЕКЛАДУ ТА НАЗВИ ОРГАНІЗАЦІЇ
     document.querySelectorAll('[data-uk], [data-en]').forEach(el => {
         const text = el.getAttribute(`data-${currentLang}`);
         if (text) el.innerHTML = text;
     });
 
     setupCounters();
-}
-
-function setupLanguageSwitcher() {
-    const btns = document.querySelectorAll('.lang-btn');
-    btns.forEach(btn => {
-        btn.onclick = (e) => {
-            currentLang = e.currentTarget.dataset.lang;
-            btns.forEach(b => b.classList.remove('active'));
-            // Синхронізуємо стан усіх кнопок мови
-            document.querySelectorAll(`.lang-btn[data-lang="${currentLang}"]`).forEach(b => b.classList.add('active'));
-            refresh();
-        };
-    });
 }
 
 function setupVerticalCarousels() {
@@ -73,6 +59,18 @@ function setupVerticalCarousels() {
         container.onmouseleave = () => isPaused = false;
         function scroll() { if (!isPaused) { scrollPos += 0.5; if (scrollPos >= track.scrollHeight / 2) scrollPos = 0; container.scrollTop = scrollPos; } requestAnimationFrame(scroll); }
         requestAnimationFrame(scroll);
+    });
+}
+
+function setupLanguageSwitcher() {
+    const btns = document.querySelectorAll('.lang-btn');
+    btns.forEach(btn => {
+        btn.onclick = (e) => {
+            currentLang = e.currentTarget.dataset.lang;
+            btns.forEach(b => b.classList.remove('active'));
+            document.querySelectorAll(`.lang-btn[data-lang="${currentLang}"]`).forEach(b => b.classList.add('active'));
+            refresh();
+        };
     });
 }
 
@@ -125,21 +123,14 @@ function setupCounters() {
                 step(); obs.unobserve(en.target);
             }
         });
-    });
+    }, { threshold: 0.5 });
     counters.forEach(c => obs.observe(c));
 }
 
 function setupBackToTop() {
     const btn = document.getElementById("backToTop");
-    if (!btn) return;
-    window.addEventListener('scroll', () => { if (window.pageYOffset > 400) btn.setAttribute("style", "display: flex !important"); else btn.setAttribute("style", "display: none !important"); });
+    window.onscroll = () => { if (window.pageYOffset > 400) btn.setAttribute("style", "display: flex !important"); else btn.setAttribute("style", "display: none !important"); };
     btn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function setupContactForm() {
-    const form = document.getElementById('contactForm');
-    if (!form) return;
-    form.onsubmit = async (e) => { e.preventDefault(); alert("Дякуємо! Ваше повідомлення надіслано."); form.reset(); };
 }
 
 window.openBio = (id) => {
