@@ -20,6 +20,7 @@ async function init() {
     cache.partners = await getJSON('data/partners.json') || [];
     cache.news = await getJSON('data/news.json') || [];
     cache.stories = await getJSON('data/stories.json') || [];
+    cache.contacts = await getJSON('data/contacts.json') || {};
     cache.activities = await getJSON('data/activities.json') || [];
     cache.friends = await getJSON('data/friends.json') || [];
 
@@ -39,7 +40,24 @@ function refresh() {
     render.renderNews(cache.news, currentLang);
     render.renderStories(cache.stories, currentLang);
     render.renderFriends(cache.friends, currentLang);
-    render.renderGallery(['images/001.jpg', 'images/001.jpg', 'images/001.jpg', 'images/001.jpg']);
+    
+    render.renderGallery([
+        'images/001.jpg',
+        'https://via.placeholder.com/400x300?text=Event+1',
+        'https://via.placeholder.com/400x300?text=Event+2',
+        'https://via.placeholder.com/400x300?text=Event+3'
+    ]);
+
+    const c = cache.contacts;
+    if (c && c.phone) {
+        const block = document.getElementById('contacts-content');
+        if (block) {
+            block.innerHTML = `
+                <p style="margin-bottom:10px;"><i class="fas fa-phone"></i> ${c.phone}</p>
+                <p style="margin-bottom:10px;"><i class="fas fa-envelope"></i> ${c.email}</p>
+                <p><i class="fas fa-map-marker-alt"></i> ${c.address[currentLang]}</p>`;
+        }
+    }
 
     document.querySelectorAll('[data-uk], [data-en]').forEach(el => {
         const text = el.getAttribute(`data-${currentLang}`);
@@ -86,9 +104,8 @@ function setupPartnerCarousel() {
     slider.onmouseleave = () => isPaused = false;
     const startDrag = (e) => { isDown = true; startX = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; scrollLeft = slider.scrollLeft; };
     const stopDrag = () => { isDown = false; };
-    const moveDrag = (e) => { if (!isDown) return; e.preventDefault(); const x = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 1.5; };
+    const moveDrag = (e) => { if (!isDown) return; e.preventDefault(); const x = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startStartX) * 1.5; };
     slider.onmousedown = startDrag; window.onmouseup = stopDrag; slider.onmousemove = moveDrag;
-    slider.ontouchstart = startDrag; slider.ontouchend = stopDrag; slider.ontouchmove = moveDrag;
 }
 
 function setupMobileMenu() {
@@ -105,13 +122,18 @@ function setupScrollLogic() {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
                 const id = entry.target.getAttribute('id');
-                document.querySelectorAll('.nav-menu a').forEach(a => { a.classList.toggle('active', a.getAttribute('href') === `#${id}`); });
+                document.querySelectorAll('.nav-menu a').forEach(a => {
+                    a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+                });
                 const title = entry.target.querySelector('.section-title');
                 if (title) title.classList.add('highlight');
-            } else { const title = entry.target.querySelector('.section-title'); if (title) title.classList.remove('highlight'); }
+            } else {
+                const title = entry.target.querySelector('.section-title');
+                if (title) title.classList.remove('highlight');
+            }
         });
     }, { threshold: 0.2 });
-    sections.forEach(s => observer.observe(s));
+    sections.forEach(section => observer.observe(section));
 }
 
 function setupCounters() {
@@ -139,7 +161,11 @@ function setupBackToTop() {
 function setupContactForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
-    form.onsubmit = async (e) => { e.preventDefault(); alert("Дякуємо! Ваше повідомлення надіслано."); form.reset(); };
+    form.onsubmit = async (e) => {
+        e.preventDefault();
+        alert(currentLang === 'uk' ? "Дякуємо! Ваше повідомлення надіслано." : "Thank you!");
+        form.reset();
+    };
 }
 
 window.openBio = (id) => {
