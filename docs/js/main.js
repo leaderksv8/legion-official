@@ -15,7 +15,6 @@ async function init() {
     setupMobileMenu(); 
     setupBackToTop();
     
-    // Завантаження всіх даних
     cache.founders = await getJSON('data/founders.json') || [];
     cache.stats = await getJSON('data/stats.json') || [];
     cache.partners = await getJSON('data/partners.json') || [];
@@ -29,6 +28,7 @@ async function init() {
     setupScrollLogic();
     setupPartnerCarousel(); 
     setupLanguageSwitcher();
+    setupVerticalCarousels();
 }
 
 function refresh() {
@@ -49,6 +49,20 @@ function refresh() {
     setupCounters();
 }
 
+function setupVerticalCarousels() {
+    const ids = ['newsCarousel', 'albumsCarousel'];
+    ids.forEach(id => {
+        const container = document.getElementById(id);
+        const track = container ? container.querySelector('.vertical-track') : null;
+        if (!track) return;
+        let scrollPos = 0, isPaused = false;
+        container.onmouseenter = () => isPaused = true;
+        container.onmouseleave = () => isPaused = false;
+        function scroll() { if (!isPaused) { scrollPos += 0.5; if (scrollPos >= track.scrollHeight / 2) scrollPos = 0; container.scrollTop = scrollPos; } requestAnimationFrame(scroll); }
+        requestAnimationFrame(scroll);
+    });
+}
+
 function setupLanguageSwitcher() {
     const btns = document.querySelectorAll('.lang-btn');
     btns.forEach(btn => {
@@ -65,7 +79,7 @@ function setupPartnerCarousel() {
     const slider = document.getElementById('partnersSlider');
     const track = document.getElementById('partners-track');
     if (!slider || !track) return;
-    let isDown = false, startX, scrollLeft, autoScrollSpeed = 0.4, animationId, isPaused = false;
+    let isDown = false, startX, scrollLeft, autoScrollSpeed = 0.5, animationId, isPaused = false;
     const startAutoScroll = () => { if (!isPaused && !isDown) { slider.scrollLeft += autoScrollSpeed; if (slider.scrollLeft >= track.scrollWidth / 3) slider.scrollLeft = 0; } animationId = requestAnimationFrame(startAutoScroll); };
     startAutoScroll();
     slider.onmouseenter = () => isPaused = true;
@@ -90,12 +104,11 @@ function setupScrollLogic() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
+                const id = entry.target.getAttribute('id');
+                document.querySelectorAll('.nav-menu a').forEach(a => { a.classList.toggle('active', a.getAttribute('href') === `#${id}`); });
                 const title = entry.target.querySelector('.section-title');
                 if (title) title.classList.add('highlight');
-            } else {
-                const title = entry.target.querySelector('.section-title');
-                if (title) title.classList.remove('highlight');
-            }
+            } else { const title = entry.target.querySelector('.section-title'); if (title) title.classList.remove('highlight'); }
         });
     }, { threshold: 0.2 });
     sections.forEach(s => observer.observe(s));
@@ -112,20 +125,21 @@ function setupCounters() {
                 step(); obs.unobserve(en.target);
             }
         });
-    }, { threshold: 0.5 });
+    });
     counters.forEach(c => obs.observe(c));
 }
 
 function setupBackToTop() {
     const btn = document.getElementById("backToTop");
-    window.onscroll = () => { if (window.pageYOffset > 400) btn.setAttribute("style", "display: flex !important"); else btn.setAttribute("style", "display: none !important"); };
+    if (!btn) return;
+    window.addEventListener('scroll', () => { if (window.pageYOffset > 400) btn.setAttribute("style", "display: flex !important"); else btn.setAttribute("style", "display: none !important"); });
     btn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function setupContactForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
-    form.onsubmit = async (e) => { e.preventDefault(); alert("Дякуємо!"); form.reset(); };
+    form.onsubmit = async (e) => { e.preventDefault(); alert("Дякуємо! Ваше повідомлення надіслано."); form.reset(); };
 }
 
 window.openBio = (id) => {
