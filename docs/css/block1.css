@@ -1,0 +1,91 @@
+.b1-hero {
+    position: relative;
+    height: 90vh; /* Висота на майже весь екран */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+    overflow: hidden;
+    background: #0a111f; /* Темний базовий колір */
+}
+
+/* Динамічний фон з ефектом руху градієнтів */
+.b1-bg-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 30%, rgba(26, 42, 68, 0.8) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(197, 160, 89, 0.15) 0%, transparent 40%);
+    filter: blur(60px);
+    z-index: 1;
+    animation: b1-bg-move 15s infinite alternate ease-in-out;
+}
+
+@keyframes b1-bg-move {
+    0% { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.1) translate(2%, 2%); }
+}
+
+.b1-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Типографіка з ефектами появи */
+.b1-content {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: b1-fade-up 1s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes b1-fade-up {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.b1-label {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent-gold);
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.b1-title {
+    font-size: clamp(2.5rem, 8vw, 5rem); /* Адаптивний розмір шрифту */
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    background: linear-gradient(to bottom, #ffffff, #d1d5db);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.b1-subtitle {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-weight: 700;
+    max-width: 900px;
+    margin: 0 auto 30px;
+    color: rgba(255, 255, 255, 0.9);
+    border-top: 1px solid rgba(197, 160, 89, 0.3);
+    padding-top: 25px;
+}
+
+.b1-description {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Адаптація під мобільні */
+@media (max-width: 768px) {
+    .b1-hero { height: auto; padding: 100px 0; }
+    .b1-label { font-size: 0.9rem; letter-spacing: 3px; }
+    .b1-description { font-size: 1rem; }
+}

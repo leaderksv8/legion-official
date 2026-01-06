@@ -1,5 +1,5 @@
 :root {
-    --primary-dark: #1a2a44;
+    --primary-dark: #0a111f; /* Трохи темніший для преміального вигляду */
     --accent-gold: #c5a059;
     --text-color: #1e293b;
     --white: #ffffff;
@@ -17,6 +17,7 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     overflow-x: hidden;
+    background-color: var(--white);
 }
 
 .container {

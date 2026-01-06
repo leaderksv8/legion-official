@@ -10,5 +10,17 @@
         "activities": { "uk": "Діяльність", "en": "Activity" },
         "partners": { "uk": "Партнери", "en": "Partners" },
         "contacts": { "uk": "Контакти", "en": "Contacts" }
+    },
+    "b1": {
+        "label": { "uk": "ГРОМАДСЬКА ОРГАНІЗАЦІЯ", "en": "PUBLIC ORGANIZATION" },
+        "title": { "uk": "«ЛЕГІОН ТИТАНІВ»", "en": "«LEGION OF TITANS»" },
+        "subtitle": { 
+            "uk": "ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ", 
+            "en": "WAR VETERANS WITH DISABILITIES OF THE BUCHA DISTRICT" 
+        },
+        "description": { 
+            "uk": "Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку тих, хто захищав нашу країну.", 
+            "en": "We unite war veterans with disabilities of the Bucha district for mutual aid, adaptation to peaceful life and development. Our mission is to support those who protected our country." 
+        }
     }
 }
