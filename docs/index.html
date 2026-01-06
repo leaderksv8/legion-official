@@ -37,7 +37,7 @@
                     </ul>
                 </nav>
 
-                <div class="lang-switcher" id="globalLangSwitcher">
+                <div class="lang-switcher" id="unifiedLangSwitcher">
                     <button class="lang-btn active" data-lang="uk">UA</button>
                     <button class="lang-btn" data-lang="en">EN</button>
                 </div>
@@ -48,7 +48,6 @@
     </header>
 
     <main>
-        <!-- БЛОК 1: HERO -->
         <section id="home" class="hero-block">
             <div class="container text-center">
                 <div class="hero-content-wrapper">
@@ -62,22 +61,19 @@
             </div>
         </section>
 
-        <!-- БЛОК 2: НАША ДІЯЛЬНІСТЬ -->
-        <section id="activities" class="section">
+        <section id="activities" class="section reveal">
             <div class="container">
-                <h2 class="section-title" data-uk="Наша діяльність" data-en="Our Activities">Наша діяльність</h2>
                 <div class="about-intro">
                     <div class="about-image"><img src="images/001.jpg" alt="Діяльність"></div>
                     <div class="about-text">
-                        <h3 class="accent-title" data-uk="Комплексна допомога ветеранам" data-en="Comprehensive Assistance">Комплексна допомога ветеранам</h3>
-                        <p data-uk="Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів, реабілітаційними програмами та юридичним супроводом." data-en="Our NGO provides support in adaptation to peaceful life, helping with documents and rehabilitation.">Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів, реабілітаційними програмами та юридичним супроводом.</p>
+                        <h2 class="section-title text-left" data-uk="Наша діяльність" data-en="Our Activities">Наша діяльність</h2>
+                        <p data-uk="Захист прав та інтересів ветеранів війни з обмеженими можливостями, допомога в реінтеграції та соціалізації." data-en="Protection of the rights and interests of war veterans with disabilities.">Захист прав та інтересів ветеранів війни з обмеженими можливостями, допомога в реінтеграції та соціалізації.</p>
                     </div>
                 </div>
                 <div id="activities-cards" class="grid-6"></div>
             </div>
         </section>
 
-        <!-- БЛОК 3: НАШІ ДОСЯГНЕННЯ -->
         <section id="reports" class="section stats-bg reveal">
             <div class="container text-center">
                 <h2 class="section-title white-text" data-uk="Наші досягнення" data-en="Our Achievements">Наші досягнення</h2>
@@ -85,21 +81,15 @@
             </div>
         </section>
 
-        <!-- БЛОК 4: НАШІ ПАРТНЕРИ -->
         <section id="partners" class="section reveal">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Наші партнери" data-en="Our Partners">Наші партнери</h2>
-                <div class="partners-wrapper">
-                    <button class="slider-arrow prev" id="prevPartner"><i class="fas fa-chevron-left"></i></button>
-                    <div class="partners-slider" id="partnersSlider">
-                        <div id="partners-track" class="partners-track"></div>
-                    </div>
-                    <button class="slider-arrow next" id="nextPartner"><i class="fas fa-chevron-right"></i></button>
+                <div class="partners-slider" id="partnersSlider">
+                    <div id="partners-track" class="partners-track"></div>
                 </div>
             </div>
         </section>
 
-        <!-- БЛОК 5: НАШІ ДРУЗІ -->
         <section id="friends" class="section reveal">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Наші друзі" data-en="Our Friends">Наші друзі</h2>
@@ -107,7 +97,6 @@
             </div>
         </section>
 
-        <!-- БЛОК 6: ІСТОРІЇ -->
         <section id="stories" class="section section-alt reveal">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Історії наших героїв" data-en="Heroes Stories">Історії наших героїв</h2>
@@ -115,28 +104,22 @@
             </div>
         </section>
 
-        <!-- БЛОК 7: МЕДІА-ЦЕНТР -->
         <section id="media" class="section reveal">
-            <div class="container">
+            <div class="container text-center">
                 <h2 class="section-title" data-uk="Медіа-центр" data-en="Media Center">Медіа-центр</h2>
                 <div class="media-grid-layout">
                     <div class="media-column">
                         <h3 class="media-subtitle" data-uk="Новини" data-en="News">Новини</h3>
-                        <div class="vertical-carousel-container" id="newsCarousel">
-                            <div id="news-container" class="vertical-track"></div>
-                        </div>
+                        <div id="news-container"></div>
                     </div>
                     <div class="media-column">
-                        <h3 class="media-subtitle" data-uk="Фотоальбоми" data-en="Photo Albums">Фотоальбоми</h3>
-                        <div class="vertical-carousel-container" id="albumsCarousel">
-                            <div id="gallery-preview" class="vertical-track"></div>
-                        </div>
+                        <h3 class="media-subtitle" data-uk="Фото та відео звіти" data-en="Reports & Photos">Фото та відео звіти</h3>
+                        <div id="gallery-preview" class="gallery-grid"></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- БЛОК 8: СПІВЗАСНОВНИКИ -->
         <section id="founders" class="section section-alt reveal">
             <div class="container text-center">
                 <h2 class="section-title" data-uk="Наші співзасновники" data-en="Our Founders">Наші співзасновники</h2>
@@ -144,7 +127,6 @@
             </div>
         </section>
 
-        <!-- ФУТЕР -->
         <footer id="contact" class="main-footer">
             <div class="container footer-grid">
                 <div class="footer-column contact-card">

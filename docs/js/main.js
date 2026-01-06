@@ -15,6 +15,7 @@ async function init() {
     setupMobileMenu(); 
     setupBackToTop();
     
+    // Завантаження всіх даних
     cache.founders = await getJSON('data/founders.json') || [];
     cache.stats = await getJSON('data/stats.json') || [];
     cache.partners = await getJSON('data/partners.json') || [];
@@ -86,8 +87,6 @@ function setupPartnerCarousel() {
     const stopDrag = () => { isDown = false; };
     const moveDrag = (e) => { if (!isDown) return; e.preventDefault(); const x = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 1.5; };
     slider.onmousedown = startDrag; window.onmouseup = stopDrag; slider.onmousemove = moveDrag;
-    if (prev) prev.onclick = () => slider.scrollLeft -= 300;
-    if (next) next.onclick = () => slider.scrollLeft += 300;
 }
 
 function setupMobileMenu() {
