@@ -109,7 +109,7 @@ function setupScrollLogic() {
             } else { const title = entry.target.querySelector('.section-title'); if (title) title.classList.remove('highlight'); }
         });
     }, { threshold: 0.2 });
-    sections.forEach(s => observer.observe(s));
+    sections.forEach(section => observer.observe(section));
 }
 
 function setupCounters() {
@@ -123,7 +123,7 @@ function setupCounters() {
                 step(); obs.unobserve(en.target);
             }
         });
-    }, { threshold: 0.5 });
+    });
     counters.forEach(c => obs.observe(c));
 }
 
