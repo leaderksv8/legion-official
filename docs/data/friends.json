@@ -1,12 +1,35 @@
 [
   {
-    "name": "Друг Організації 1",
-    "role": { "uk": "Волонтер, меценат", "en": "Volunteer, philanthropist" },
-    "img": "https://via.placeholder.com/150x150?text=Friend1"
+    "id": "lachen",
+    "name": "Ігор Лаченков",
+    "role": { "uk": "Блогер", "en": "Blogger" },
+    "img": "https://via.placeholder.com/300x300?text=Lachen",
+    "bio": { 
+      "uk": "Український волонтер, блогер, активно допомагає ЗСУ та ветеранам.", 
+      "en": "Ukrainian volunteer, blogger, actively helps the Armed Forces and veterans." 
+    },
+    "socials": { "instagram": "#", "telegram": "#" }
   },
   {
-    "name": "Друг Організації 2",
-    "role": { "uk": "Культурний діяч", "en": "Cultural figure" },
-    "img": "https://via.placeholder.com/150x150?text=Friend2"
+    "id": "manziuk",
+    "name": "Олена Мандзюк",
+    "role": { "uk": "Блогерка", "en": "Blogger" },
+    "img": "https://via.placeholder.com/300x300?text=Manziuk",
+    "bio": { 
+      "uk": "Інфлюенсерка, підтримує соціальні ініціативи Бучанщини.", 
+      "en": "Influencer, supports social initiatives of Bucha region." 
+    },
+    "socials": { "instagram": "#" }
+  },
+  {
+    "id": "yanovych",
+    "name": "Женя Янович",
+    "role": { "uk": "Актор, ведучий", "en": "Actor, Host" },
+    "img": "https://via.placeholder.com/300x300?text=Yanovych",
+    "bio": { 
+      "uk": "Український актор, амбасадор багатьох благодійних проектів.", 
+      "en": "Ukrainian actor, ambassador of many charity projects." 
+    },
+    "socials": { "instagram": "#", "youtube": "#" }
   }
 ]
