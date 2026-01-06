@@ -16,7 +16,7 @@ export function renderStats(data, lang) {
     container.innerHTML = data.map(item => `
         <div class="stat-item">
             <h2 class="counter" data-target="${item.value}">0</h2>
-            <p style="margin-top:10px; font-weight:700; text-transform:uppercase;">${item.label[lang]}</p>
+            <p style="margin-top:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">${item.label[lang]}</p>
         </div>
     `).join('');
 }
@@ -28,7 +28,7 @@ export function renderFounders(data, lang) {
         <div class="founder-card" onclick="openBio('${f.id}')">
             <div class="founder-img-wrapper"><img src="${f.img}" alt="${f.name[lang]}"></div>
             <h4 style="margin-top:20px; color:var(--primary);">${f.name[lang]}</h4>
-            <p style="color:var(--accent); font-weight:700;">${f.role[lang]}</p>
+            <p style="color:var(--accent); font-weight:700; font-size:0.9rem;">${f.role[lang]}</p>
         </div>
     `).join('');
 }
@@ -59,23 +59,17 @@ export function renderPartners(data) {
     }).join('');
 }
 
-export function renderFriends(data, lang) {
-    const container = document.getElementById('friends-container');
-    if (!container || !data) return;
-    container.innerHTML = data.map(f => `
-        <div class="friend-card">
-            <img src="${f.img}" alt="${f.name}">
-            <h4>${f.name}</h4>
-            <p style="color:var(--accent); font-weight:600;">${f.role[lang]}</p>
-        </div>
-    `).join('');
-}
-
 export function renderStories(data, lang) {
     const container = document.getElementById('stories-container');
     if (!container || !data) return;
     container.innerHTML = data.map(s => `
-        <div class="story-card"><img src="${s.img}" alt="${s.name[lang]}" style="width:70px;height:70px;border-radius:50%;object-fit:cover;"><div style="text-align:left;"><h4>${s.name[lang]}</h4><p style="font-style:italic;">"${s.text[lang]}"</p></div></div>
+        <div class="story-card">
+            <img src="${s.img}" alt="${s.name[lang]}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;">
+            <div style="text-align:left;">
+                <h4>${s.name[lang]}</h4>
+                <p style="font-style:italic; margin-top:5px;">"${s.text[lang]}"</p>
+            </div>
+        </div>
     `).join('');
 }
 
@@ -83,6 +77,18 @@ export function renderGallery(data) {
     const container = document.getElementById('gallery-preview');
     if (!container || !data) return;
     container.innerHTML = data.map(img => `
-        <div class="gallery-item" onclick="openFullImage('${img}')"><img src="${img}" alt="Захід"></div>
+        <div class="gallery-item album-card" onclick="openFullImage('${img}')"><img src="${img}" alt="Захід"></div>
+    `).join('');
+}
+
+export function renderFriends(data, lang) {
+    const container = document.getElementById('friends-container');
+    if (!container || !data) return;
+    container.innerHTML = data.map(f => `
+        <div class="friend-card" style="background:white; padding:25px; border-radius:20px; box-shadow:var(--shadow); text-align:center;">
+            <img src="${f.img}" alt="${f.name}" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid var(--accent);margin-bottom:15px;">
+            <h4>${f.name}</h4>
+            <p style="color:var(--accent); font-weight:600;">${f.role[lang]}</p>
+        </div>
     `).join('');
 }
