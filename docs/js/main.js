@@ -4,9 +4,7 @@ let currentLang = 'uk';
 let translations = {};
 
 async function init() {
-    // Завантаження перекладів
     translations = await loadTranslations();
-    
     setupLanguageSwitcher();
     setupMobileMenu();
     updateUI();

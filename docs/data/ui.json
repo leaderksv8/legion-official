@@ -1,4 +1,10 @@
 {
+    "header": {
+        "logo_title": {
+            "uk": "ГО «Легіон Титанів»",
+            "en": "NGO «Legion of Titans»"
+        }
+    },
     "menu": {
         "home": { "uk": "Головна", "en": "Home" },
         "activities": { "uk": "Діяльність", "en": "Activity" },

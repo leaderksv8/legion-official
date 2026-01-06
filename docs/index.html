@@ -28,15 +28,14 @@
     <!-- HEADER -->
     <header class="main-header">
         <div class="container header-wrapper">
-            <!-- Логотип: білий квадрат, чорний текст -->
             <a href="index.html" class="logo-area">
                 <div class="logo-box">
                     <img src="images/000.png" alt="Legion Titans Logo">
                 </div>
-                <span class="logo-title">ГО «Легіон Титанів»</span>
+                <!-- ВИПРАВЛЕНО: додано ключ перекладу -->
+                <span class="logo-title" data-i18n="header.logo_title">ГО «Легіон Титанів»</span>
             </a>
 
-            <!-- Навігація та перемикач -->
             <div class="header-controls">
                 <nav class="nav-menu" id="navMenu">
                     <ul>
@@ -52,7 +51,6 @@
                     <button class="lang-btn" data-lang="en">EN</button>
                 </div>
 
-                <!-- Кнопка мобільного меню -->
                 <button class="menu-toggle" id="menuToggle">
                     <span></span><span></span><span></span>
                 </button>
@@ -63,12 +61,16 @@
     <main>
         <section id="home" class="b1-hero"></section>
         <section id="activities" class="b2-activities"></section>
-        <!-- Інші блоки 3-8 будуть тут -->
+        <section id="stats" class="b3-stats"></section>
+        <section id="partners" class="b4-partners"></section>
+        <section id="friends" class="b5-friends"></section>
+        <section id="stories" class="b6-stories"></section>
+        <section id="media" class="b7-media"></section>
+        <section id="founders" class="b8-founders"></section>
     </main>
 
     <footer id="contact"></footer>
 
-    <!-- Скрипти -->
     <script type="module" src="js/main.js"></script>
 </body>
 </html>
