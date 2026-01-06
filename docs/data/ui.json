@@ -19,8 +19,9 @@
             "en": "WAR VETERANS WITH DISABILITIES OF THE BUCHA DISTRICT" 
         },
         "description": { 
-            "uk": "Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку. Наша місія - забезпечити підтримку тих, хто захищав нашу країну.", 
-            "en": "We unite war veterans with disabilities of the Bucha district for mutual aid, adaptation to peaceful life and development. Our mission is to support those who protected our country." 
-        }
+            "uk": "Ми об'єднуємо тих, хто захищав країну, для взаємодопомоги та адаптації до мирного життя.", 
+            "en": "We unite those who defended the country for mutual aid and adaptation to peaceful life." 
+        },
+        "btn": { "uk": "ДІЗНАТИСЯ БІЛЬШЕ", "en": "LEARN MORE" }
     }
 }

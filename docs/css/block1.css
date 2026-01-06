@@ -1,91 +1,151 @@
 .b1-hero {
     position: relative;
-    height: 90vh; /* Висота на майже весь екран */
+    height: 100vh; /* Повний екран для вау-ефекту */
+    min-height: 700px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
     color: var(--white);
+    background: #020617;
     overflow: hidden;
-    background: #0a111f; /* Темний базовий колір */
 }
 
-/* Динамічний фон з ефектом руху градієнтів */
-.b1-bg-animation {
+/* Фон Ken Burns */
+.b1-bg-wrapper {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 20% 30%, rgba(26, 42, 68, 0.8) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(197, 160, 89, 0.15) 0%, transparent 40%);
-    filter: blur(60px);
     z-index: 1;
-    animation: b1-bg-move 15s infinite alternate ease-in-out;
 }
 
-@keyframes b1-bg-move {
+.b1-bg-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('../images/001.jpg') center/cover no-repeat;
+    animation: b1-ken-burns 20s infinite alternate ease-in-out;
+}
+
+@keyframes b1-ken-burns {
     0% { transform: scale(1) translate(0, 0); }
-    100% { transform: scale(1.1) translate(2%, 2%); }
+    100% { transform: scale(1.15) translate(-2%, -1%); }
+}
+
+/* Затемнення для читабельності */
+.b1-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        rgba(2, 6, 23, 0.95) 0%, 
+        rgba(2, 6, 23, 0.7) 50%, 
+        rgba(2, 6, 23, 0.4) 100%);
+}
+
+/* Сітчастий паттерн (додає строгості) */
+.b1-grid-pattern {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(rgba(197, 160, 89, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.5;
 }
 
 .b1-hero .container {
     position: relative;
-    z-index: 2;
+    z-index: 10;
 }
 
-/* Типографіка з ефектами появи */
-.b1-content {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: b1-fade-up 1s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-@keyframes b1-fade-up {
-    to { opacity: 1; transform: translateY(0); }
+/* Reveal-анімації для тексту */
+.b1-label-wrap, .b1-title-wrap, .b1-subtitle-wrap {
+    overflow: hidden; /* Маска для ефекту виходу тексту */
+    margin-bottom: 10px;
 }
 
 .b1-label {
-    display: block;
-    font-size: 1.1rem;
-    font-weight: 600;
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: 700;
     color: var(--accent-gold);
-    letter-spacing: 5px;
-    margin-bottom: 20px;
+    letter-spacing: 6px;
     text-transform: uppercase;
+    transform: translateY(100%);
+    animation: b1-reveal 0.8s forwards 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .b1-title {
-    font-size: clamp(2.5rem, 8vw, 5rem); /* Адаптивний розмір шрифту */
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 20px;
-    background: linear-gradient(to bottom, #ffffff, #d1d5db);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+    transform: translateY(100%);
+    animation: b1-reveal 1s forwards 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .b1-subtitle {
-    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-size: clamp(1.2rem, 3vw, 2rem);
     font-weight: 700;
-    max-width: 900px;
-    margin: 0 auto 30px;
-    color: rgba(255, 255, 255, 0.9);
-    border-top: 1px solid rgba(197, 160, 89, 0.3);
-    padding-top: 25px;
+    color: #e2e8f0;
+    border-left: 4px solid var(--accent-gold);
+    padding-left: 20px;
+    transform: translateX(-100%);
+    opacity: 0;
+    animation: b1-slide-in 0.8s forwards 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .b1-description {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    max-width: 800px;
-    margin: 0 auto;
-    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 30px 0;
+    color: #94a3b8;
+    opacity: 0;
+    animation: b1-fade 1s forwards 1.2s;
 }
 
-/* Адаптація під мобільні */
+/* Кнопка зі сталевим відблиском */
+.b1-btn-primary {
+    position: relative;
+    display: inline-block;
+    padding: 20px 45px;
+    background: transparent;
+    border: 2px solid var(--accent-gold);
+    color: var(--white);
+    font-weight: 800;
+    letter-spacing: 2px;
+    overflow: hidden;
+    transition: 0.4s;
+    opacity: 0;
+    animation: b1-fade 1s forwards 1.5s;
+}
+
+.b1-btn-primary:hover {
+    background: var(--accent-gold);
+    color: var(--primary-dark);
+    box-shadow: 0 0 30px rgba(197, 160, 89, 0.4);
+}
+
+.b1-btn-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transform: skewX(-25deg);
+    animation: b1-shine 4s infinite;
+}
+
+/* Анімації */
+@keyframes b1-reveal { to { transform: translateY(0); } }
+@keyframes b1-slide-in { to { transform: translateX(0); opacity: 1; } }
+@keyframes b1-fade { to { opacity: 1; } }
+@keyframes b1-shine { 0% { left: -100%; } 20%, 100% { left: 150%; } }
+
+/* Мобільна адаптація */
 @media (max-width: 768px) {
-    .b1-hero { height: auto; padding: 100px 0; }
-    .b1-label { font-size: 0.9rem; letter-spacing: 3px; }
-    .b1-description { font-size: 1rem; }
+    .b1-hero { text-align: center; }
+    .b1-subtitle { border-left: none; padding-left: 0; }
+    .b1-description { margin: 30px auto; }
 }

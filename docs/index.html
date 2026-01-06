@@ -58,26 +58,44 @@
     </header>
 
     <main>
-        <!-- БЛОК 1: ГОЛОВНА СТОРІНКА -->
+        <!-- БЛОК 1: HERO (Кінематографічний) -->
         <section id="home" class="b1-hero">
-            <div class="b1-bg-animation"></div> <!-- Динамічний фон -->
+            <div class="b1-bg-wrapper">
+                <!-- Фон з ефектом Ken Burns (використовуємо 001.jpg як заглушку, замініть на фото ветеранів) -->
+                <div class="b1-bg-image"></div>
+                <div class="b1-overlay"></div>
+                <div class="b1-grid-pattern"></div>
+            </div>
+            
             <div class="container">
                 <div class="b1-content">
-                    <span class="b1-label" data-i18n="b1.label">ГРОМАДСЬКА ОРГАНІЗАЦІЯ</span>
-                    <h1 class="b1-title" data-i18n="b1.title">«ЛЕГІОН ТИТАНІВ»</h1>
-                    <h2 class="b1-subtitle" data-i18n="b1.subtitle">ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ</h2>
-                    <p class="b1-description" data-i18n="b1.description">Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги, адаптації до мирного життя та розвитку.</p>
+                    <div class="b1-label-wrap">
+                        <span class="b1-label" data-i18n="b1.label">ГРОМАДСЬКА ОРГАНІЗАЦІЯ</span>
+                    </div>
+                    
+                    <div class="b1-title-wrap">
+                        <h1 class="b1-title" data-i18n="b1.title">«ЛЕГІОН ТИТАНІВ»</h1>
+                    </div>
+                    
+                    <div class="b1-subtitle-wrap">
+                        <h2 class="b1-subtitle" data-i18n="b1.subtitle">ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ</h2>
+                    </div>
+
+                    <p class="b1-description" data-i18n="b1.description">Ми об'єднуємо ветеранів війни з обмеженими можливостями Бучанського району для взаємодопомоги та розвитку.</p>
+                    
+                    <div class="b1-actions">
+                        <a href="#contact" class="b1-btn-primary">
+                            <span data-i18n="b1.btn">ДІЗНАТИСЯ БІЛЬШЕ</span>
+                            <div class="b1-btn-shine"></div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="activities" class="b2-activities"></section>
         <section id="stats" class="b3-stats"></section>
-        <section id="partners" class="b4-partners"></section>
-        <section id="friends" class="b5-friends"></section>
-        <section id="stories" class="b6-stories"></section>
-        <section id="media" class="b7-media"></section>
-        <section id="founders" class="b8-founders"></section>
+        <!-- Порожні секції для майбутніх блоків -->
     </main>
 
     <footer id="contact"></footer>
