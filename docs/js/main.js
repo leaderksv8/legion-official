@@ -15,14 +15,12 @@ async function init() {
     setupMobileMenu(); 
     setupBackToTop();
     
-    // Завантаження всіх даних
     cache.founders = await getJSON('data/founders.json') || [];
     cache.stats = await getJSON('data/stats.json') || [];
     cache.partners = await getJSON('data/partners.json') || [];
     cache.news = await getJSON('data/news.json') || [];
     cache.stories = await getJSON('data/stories.json') || [];
     cache.activities = await getJSON('data/activities.json') || [];
-    cache.friends = await getJSON('data/friends.json') || [];
 
     refresh();
     setupContactForm();
@@ -39,7 +37,6 @@ function refresh() {
     render.renderPartners(cache.partners);
     render.renderNews(cache.news, currentLang);
     render.renderStories(cache.stories, currentLang);
-    render.renderFriends(cache.friends, currentLang);
     render.renderGallery(['images/001.jpg', 'images/001.jpg', 'images/001.jpg', 'images/001.jpg']);
 
     document.querySelectorAll('[data-uk], [data-en]').forEach(el => {
@@ -89,6 +86,8 @@ function setupPartnerCarousel() {
     const stopDrag = () => { isDown = false; };
     const moveDrag = (e) => { if (!isDown) return; e.preventDefault(); const x = (e.pageX || e.touches[0].pageX) - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 1.5; };
     slider.onmousedown = startDrag; window.onmouseup = stopDrag; slider.onmousemove = moveDrag;
+    if (prev) prev.onclick = () => slider.scrollLeft -= 300;
+    if (next) next.onclick = () => slider.scrollLeft += 300;
 }
 
 function setupMobileMenu() {
@@ -138,7 +137,7 @@ function setupBackToTop() {
 function setupContactForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
-    form.onsubmit = async (e) => { e.preventDefault(); alert("Дякуємо!"); form.reset(); };
+    form.onsubmit = async (e) => { e.preventDefault(); alert("Дякуємо! Ваше повідомлення надіслано."); form.reset(); };
 }
 
 window.openBio = (id) => {
