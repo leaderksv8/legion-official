@@ -1,0 +1,135 @@
+.main-header {
+    background: var(--primary-dark);
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+}
+
+.header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Логотип */
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-box {
+    background: var(--white);
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 2px;
+}
+
+.logo-box img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+.logo-title {
+    color: var(--white);
+    font-weight: 800;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Меню */
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-menu ul {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-link {
+    color: rgba(255,255,255,0.8);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    transition: var(--transition);
+}
+
+.nav-link:hover {
+    color: var(--accent-gold);
+}
+
+/* Перемикач мов */
+.lang-switcher {
+    display: flex;
+    gap: 5px;
+    background: rgba(255,255,255,0.1);
+    padding: 4px;
+    border-radius: 20px;
+}
+
+.lang-btn {
+    background: transparent;
+    border: none;
+    color: var(--white);
+    padding: 5px 12px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.75rem;
+    transition: var(--transition);
+}
+
+.lang-btn.active {
+    background: var(--accent-gold);
+    color: var(--primary-dark);
+}
+
+/* Мобільна кнопка */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--white);
+    border-radius: 2px;
+}
+
+/* Адаптивність */
+@media (max-width: 992px) {
+    .logo-title { font-size: 1rem; }
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: var(--primary-dark);
+        transition: 0.4s;
+    }
+    .nav-menu.active { left: 0; }
+    .nav-menu ul {
+        flex-direction: column;
+        align-items: center;
+        padding-top: 50px;
+    }
+    .menu-toggle { display: flex; }
+}

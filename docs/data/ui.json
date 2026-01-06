@@ -1,0 +1,8 @@
+{
+    "menu": {
+        "home": { "uk": "Головна", "en": "Home" },
+        "activities": { "uk": "Діяльність", "en": "Activity" },
+        "partners": { "uk": "Партнери", "en": "Partners" },
+        "contacts": { "uk": "Контакти", "en": "Contacts" }
+    }
+}
