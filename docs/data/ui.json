@@ -1,9 +1,6 @@
 {
     "header": {
-        "logo_title": {
-            "uk": "ГО «Легіон Титанів»",
-            "en": "NGO «Legion of Titans»"
-        }
+        "logo_title": { "uk": "ГО «Легіон Титанів»", "en": "NGO «Legion of Titans»" }
     },
     "menu": {
         "home": { "uk": "Головна", "en": "Home" },
@@ -14,14 +11,13 @@
     "b1": {
         "label": { "uk": "ГРОМАДСЬКА ОРГАНІЗАЦІЯ", "en": "PUBLIC ORGANIZATION" },
         "title": { "uk": "«ЛЕГІОН ТИТАНІВ»", "en": "«LEGION OF TITANS»" },
-        "subtitle": { 
-            "uk": "ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ", 
-            "en": "WAR VETERANS WITH DISABILITIES OF THE BUCHA DISTRICT" 
-        },
-        "description": { 
-            "uk": "Ми об'єднуємо тих, хто захищав країну, для взаємодопомоги та адаптації до мирного життя.", 
-            "en": "We unite those who defended the country for mutual aid and adaptation to peaceful life." 
-        },
+        "subtitle": { "uk": "ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ", "en": "WAR VETERANS WITH DISABILITIES OF THE BUCHA DISTRICT" },
+        "description": { "uk": "Ми об'єднуємо тих, хто захищав країну, для взаємодопомоги та адаптації до мирного життя.", "en": "We unite those who defended the country for mutual aid and adaptation to peaceful life." },
         "btn": { "uk": "ДІЗНАТИСЯ БІЛЬШЕ", "en": "LEARN MORE" }
+    },
+    "b2": {
+        "title": { "uk": "Наша діяльність", "en": "Our Activities" },
+        "intro_subtitle": { "uk": "Комплексна допомога ветеранам", "en": "Comprehensive Assistance" },
+        "intro_description": { "uk": "Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів, реабілітаційними програмами та юридичним супроводом.", "en": "Our NGO provides support in adaptation to peaceful life, helping with documents and rehabilitation." }
     }
 }

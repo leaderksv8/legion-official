@@ -1,26 +1,32 @@
 import { loadTranslations, translatePage } from './i18n.js';
+import { renderActivities } from './render.js';
 
 let currentLang = 'uk';
-let translations = {};
+let cache = { translations: {}, activities: [] };
 
 async function init() {
-    translations = await loadTranslations();
+    const [t, a] = await Promise.all([
+        loadTranslations(),
+        fetch('data/activities.json').then(res => res.json())
+    ]);
+    cache.translations = t;
+    cache.activities = a;
+
     setupLanguageSwitcher();
     setupMobileMenu();
     updateUI();
 }
 
 function updateUI() {
-    translatePage(translations, currentLang);
+    translatePage(cache.translations, currentLang);
+    renderActivities(cache.activities, currentLang);
 }
 
 function setupLanguageSwitcher() {
-    const btns = document.querySelectorAll('.lang-btn');
-    btns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            currentLang = btn.dataset.lang;
-            btns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            currentLang = e.target.dataset.lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b === e.target));
             updateUI();
         });
     });
@@ -29,12 +35,7 @@ function setupLanguageSwitcher() {
 function setupMobileMenu() {
     const toggle = document.getElementById('menuToggle');
     const menu = document.getElementById('navMenu');
-    if (toggle && menu) {
-        toggle.onclick = () => {
-            menu.classList.toggle('active');
-            toggle.classList.toggle('open');
-        };
-    }
+    if (toggle && menu) toggle.onclick = () => menu.classList.toggle('active');
 }
 
 document.addEventListener('DOMContentLoaded', init);
