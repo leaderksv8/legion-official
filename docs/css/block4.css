@@ -1,96 +1,82 @@
 .b4-partners {
     padding: 120px 0;
-    background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+    background: #020617;
     overflow: hidden;
-    user-select: none;
+    position: relative;
 }
 
 .b4-title {
     text-align: center;
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 800;
     color: var(--white);
-    margin-bottom: 80px;
+    margin-bottom: 60px;
     text-transform: uppercase;
-    letter-spacing: 2px;
 }
 
 .b4-slider-area {
     position: relative;
     width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
 .b4-swiper {
     width: 100%;
-    padding: 20px 0 100px !important;
-    cursor: grab;
+    padding: 40px 0 100px !important;
 }
 
-.b4-swiper:active {
-    cursor: grabbing;
-}
-
+/* Стабільний розмір слайдів */
 .swiper-slide {
-    width: 320px; 
     display: flex;
     justify-content: center;
-    /* Запобігаємо стандартному перетягуванню картинок браузером */
-    -webkit-user-drag: none;
+    align-items: center;
+    transition: transform 0.5s ease;
 }
 
 .b4-item {
-    width: 300px;
-    height: 300px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    width: 280px;
+    height: 280px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 40px;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 30px;
+    transition: all 0.5s ease;
     backdrop-filter: blur(10px);
 }
 
 .b4-item img {
-    max-width: 85%;
-    max-height: 85%;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
-    filter: brightness(0.5) grayscale(100%);
-    transition: all 0.5s ease;
-    pointer-events: none; /* Щоб мишка не "чіплялася" за картинку */
+    filter: grayscale(100%) brightness(0.6);
+    pointer-events: none;
 }
 
-/* Стан ФОКУСУ */
+/* Активний слайд */
 .swiper-slide-active .b4-item {
-    transform: scale(1.08);
-    background: rgba(255, 255, 255, 0.12);
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.1);
     border-color: var(--accent-gold);
-    box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
 
 .swiper-slide-active .b4-item img {
-    filter: brightness(1.1) grayscale(0%);
+    filter: grayscale(0%) brightness(1.1);
 }
 
-/* КЕРУВАННЯ (БЕЗ ЧИСЕЛ) */
-.b4-nav-wrapper {
+/* Навігація */
+.b4-nav-controls {
     position: absolute;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 50;
-}
-
-.b4-nav-content {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.b4-arrows {
     display: flex;
     gap: 20px;
+    z-index: 100;
 }
 
 .b4-arrow {
@@ -99,23 +85,22 @@
     background: var(--white);
     color: var(--primary-dark);
     border: none;
-    border-radius: 50%; /* Круглі кнопки виглядають професійніше */
+    border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
-    transition: all 0.3s ease;
+    transition: 0.3s;
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
 .b4-arrow:hover {
     background: var(--accent-gold);
     color: var(--white);
-    transform: scale(1.1);
 }
 
-/* Маски згасання */
+/* Градієнтні маски */
 .b4-slider-area::before,
 .b4-slider-area::after {
     content: "";
@@ -126,13 +111,9 @@
     z-index: 10;
     pointer-events: none;
 }
+.b4-slider-area::before { left: 0; background: linear-gradient(to right, #020617, transparent); }
+.b4-slider-area::after { right: 0; background: linear-gradient(to left, #020617, transparent); }
 
-.b4-slider-area::before {
-    left: 0;
-    background: linear-gradient(to right, #0a111f, transparent);
-}
-
-.b4-slider-area::after {
-    right: 0;
-    background: linear-gradient(to left, #050a16, transparent);
+@media (max-width: 768px) {
+    .b4-item { width: 220px; height: 220px; }
 }

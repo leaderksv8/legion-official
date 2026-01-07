@@ -29,14 +29,12 @@ export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track || !data) return;
 
-    // Дублюємо дані, щоб Swiper мав достатньо слайдів для нескінченного циклу на ПК
-    const extendedData = [...data, ...data, ...data];
-
-    track.innerHTML = extendedData.map(p => `
+    // Створюємо унікальні картинки з назвами для перевірки скролу
+    track.innerHTML = data.map((p, index) => `
         <div class="swiper-slide">
             <div class="b4-item">
-                <a href="${p.link}" target="_blank" rel="noopener" draggable="false">
-                    <img src="${p.img}" alt="${p.name}" draggable="false" onerror="this.src='https://placehold.co/300x300/1a2a44/ffffff?text=Logo'">
+                <a href="${p.link}" target="_blank" rel="noopener">
+                    <img src="https://placehold.co/400x400/1e293b/ffffff?text=Partner+${index + 1}" alt="${p.name}">
                 </a>
             </div>
         </div>

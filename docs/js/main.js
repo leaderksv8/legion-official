@@ -26,34 +26,35 @@ function updateUI() {
     renderStats(cache.stats, currentLang);
     renderPartners(cache.partners);
     initCounters(); 
-    setTimeout(initPartnersSwiper, 300);
+    setTimeout(initPartnersSwiper, 200);
 }
 
 function initPartnersSwiper() {
-    if (window.partnersSwiper) window.partnersSwiper.destroy();
+    if (window.partnersSwiper) window.partnersSwiper.destroy(true, true);
 
     window.partnersSwiper = new Swiper('.b4-swiper', {
         loop: true,
         centeredSlides: true,
-        slidesPerView: 'auto',
-        spaceBetween: 30,
         grabCursor: true,
         speed: 800,
         autoplay: {
-            delay: 2500,
+            delay: 2000,
             disableOnInteraction: false,
         },
         navigation: {
             nextEl: '.b4-next-btn',
             prevEl: '.b4-prev-btn',
         },
-        // ФІКС БЕСКІНЕЧНОСТІ: Додаємо велику кількість клонів слайдів
-        loopedSlides: 12,
-        loopAdditionalSlides: 12,
-        // ФІКС ЗАХВАТУ: Запобігаємо стрибкам при кліку
-        touchStartPreventDefault: false,
-        simulateTouch: true,
-        threshold: 5, // Реагувати на рух більше 5 пікселів
+        // Використовуємо фіксовану кількість для стабільності
+        breakpoints: {
+            320: { slidesPerView: 1.5, spaceBetween: 20 },
+            768: { slidesPerView: 2.5, spaceBetween: 30 },
+            1024: { slidesPerView: 3, spaceBetween: 40 },
+            1400: { slidesPerView: 4, spaceBetween: 50 }
+        },
+        // Гарантуємо клонування слайдів
+        loopAdditionalSlides: 5,
+        watchSlidesProgress: true,
     });
 }
 
