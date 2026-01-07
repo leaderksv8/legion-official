@@ -22,7 +22,7 @@ async function init() {
         setupScrollReveal();
         updateUI();
         setupGalleryModal();
-    } catch (e) { console.error("Initialization error:", e); }
+    } catch (e) { console.error("Init failed:", e); }
 }
 
 function updateUI() {
@@ -42,7 +42,7 @@ window.openGallery = (id) => {
     const album = cache.albums.find(a => a.id === id);
     if (!album) return;
     const wrapper = document.getElementById('modal-gallery-wrapper');
-    wrapper.innerHTML = album.photos.map(src => `<div class="swiper-slide"><img src="${src}" alt="Gallery Photo"></div>`).join('');
+    wrapper.innerHTML = album.photos.map(src => `<div class="swiper-slide"><img src="${src}"></div>`).join('');
     document.getElementById('galleryModal').style.display = 'flex';
     new Swiper('.b7-gallery-swiper', { navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }, loop: true });
 };

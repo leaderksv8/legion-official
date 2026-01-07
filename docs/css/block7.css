@@ -1,48 +1,44 @@
 .b7-media {
     padding: 120px 0;
-    background-color: #d1cbc0;
+    background-color: #bab5aa; /* Колір дерева або темного столу */
     position: relative;
     overflow: hidden;
 }
 
-/* МОЗАЇКА ГАЗЕТ НА ВЕСЬ ФОН */
-.b7-mosaic-background {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    display: flex;
-    gap: 10px;
-    z-index: 1;
-    transform: scale(1.1); /* Трохи збільшуємо, щоб не було білих країв при повороті */
-}
-
-.b7-mosaic-column {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.b7-mosaic-column img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    opacity: 0.8; /* ВИСОКА ЧІТКІСТЬ */
-    filter: sepia(0.2) contrast(1.1);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    border: 1px solid rgba(0,0,0,0.1);
-}
-
-/* Додаємо легку хаотичність, щоб виглядало природно */
-.b7-mosaic-column:nth-child(even) { transform: translateY(-50px); }
-.b7-mosaic-column:nth-child(odd) { transform: translateY(20px); }
-
-/* ЛЕГКИЙ ТУМАН */
-.b7-fog-layer {
+/* ХАОТИЧНО РОЗКИДАНІ ГАЗЕТИ */
+.b7-newspaper-scatter {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(209, 203, 192, 0.4); /* Напівпрозорий шар для балансу */
+    z-index: 1;
+}
+
+.b7-scatter-paper {
+    position: absolute;
+    box-shadow: 10px 10px 40px rgba(0,0,0,0.4);
+    opacity: 0.7;
+    filter: sepia(0.2) contrast(1.1);
+    max-width: 500px;
+    height: auto;
+    pointer-events: none;
+}
+
+/* Унікальні координати та повороти для кожної газети */
+.p1 { top: -5%; left: -10%; transform: rotate(-15deg); }
+.p2 { top: 10%; right: -5%; transform: rotate(12deg); width: 450px; }
+.p3 { bottom: -10%; left: 15%; transform: rotate(5deg); width: 550px; }
+.p4 { bottom: 5%; right: 10%; transform: rotate(-10deg); }
+.p5 { top: 40%; left: -5%; transform: rotate(2deg); opacity: 0.5; }
+.p6 { top: 30%; right: 20%; transform: rotate(-20deg); width: 400px; }
+.p7 { top: 70%; left: 40%; transform: rotate(15deg); width: 600px; }
+.p8 { top: 20%; left: 30%; transform: rotate(-5deg); opacity: 0.3 !important; }
+
+/* ВІНЬЄТКА (ТІНЬ ПО КРАЯХ) */
+.b7-vignette {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.4) 100%);
     z-index: 2;
+    pointer-events: none;
 }
 
 .b7-media .container { position: relative; z-index: 10; }
@@ -50,21 +46,25 @@
 .b7-title {
     text-align: center;
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-size: clamp(3rem, 7vw, 5rem);
     color: #000;
     margin-bottom: 80px;
-    text-shadow: 0 4px 15px rgba(255,255,255,0.9);
+    text-shadow: 0 5px 15px rgba(255,255,255,0.4);
+    letter-spacing: -2px;
 }
 
 .b7-main-grid {
     display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 60px;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 70px;
 }
 
 .b7-header-line {
-    border-bottom: 3px solid #000;
-    margin-bottom: 45px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid #000;
+    margin-bottom: 50px;
     padding-bottom: 10px;
 }
 
@@ -72,17 +72,27 @@
     font-family: 'Playfair Display', serif;
     font-size: 2.2rem;
     text-transform: uppercase;
+    font-weight: 900;
 }
 
-/* КАРТКИ НОВИН - ПОВНЕ ВІДОКРЕМЛЕННЯ */
+.b7-badge {
+    background: #8b0000;
+    color: #fff;
+    padding: 4px 12px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+/* НОВИНИ - ЕФЕКТ СКЛЯНИХ КАРТОК */
 .b7-news-item {
     display: block;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 35px;
-    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.92);
+    padding: 40px;
+    margin-bottom: 35px;
     text-decoration: none;
     border: 1px solid #fff;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
     backdrop-filter: blur(10px);
     transition: all 0.4s ease;
     opacity: 0;
@@ -92,50 +102,78 @@
 .b7-media.active .b7-news-item { opacity: 1; transform: translateY(0); }
 
 .b7-news-item:hover {
-    transform: scale(1.02) translateY(-5px);
+    transform: translateY(-10px) scale(1.02);
     background: #fff;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+    border-color: var(--accent-gold);
 }
 
 .b7-date {
     font-family: 'Courier New', monospace;
     font-weight: 800;
-    color: var(--accent-gold);
+    color: #8b0000;
     display: block;
-    margin-bottom: 10px;
-    font-size: 1rem;
+    margin-bottom: 12px;
 }
 
 .b7-news-item h4 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     color: #000;
-    line-height: 1.3;
+    line-height: 1.2;
 }
 
-/* ФОТОАЛЬБОМИ */
+/* ФОТОАЛЬБОМИ - ЕФЕКТ ВІЯЛА (FAN EFFECT) */
 .b7-album-stack {
     position: relative;
     background: #fff;
-    padding: 15px 15px 50px;
-    margin-bottom: 70px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    padding: 15px 15px 55px;
+    margin-bottom: 80px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
     cursor: pointer;
-    transition: all 0.5s ease;
-    border: 1px solid #fff;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 5;
 }
 
-.b7-album-stack::before {
+/* Додаткові "фотографії" у стопці */
+.b7-album-stack::before, .b7-album-stack::after {
     content: "";
     position: absolute;
-    width: 100%; height: 100%; top: 10px; left: 10px;
-    background: #fdfdfd; border: 1px solid #ddd;
-    z-index: -1; transform: rotate(4deg);
+    width: 100%; height: 100%; top: 0; left: 0;
+    background: #eee;
+    border: 1px solid #ccc;
+    z-index: -1;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ПОЧАТКОВИЙ СТАН СТОПКИ */
+.b7-album-stack::before { transform: rotate(2deg); }
+.b7-album-stack::after { transform: rotate(-3deg); }
+
+/* ЕФЕКТ ПРИ НАВЕДЕННІ: РОЗЛІТАЮТЬСЯ ВІЯЛОМ */
+.b7-album-stack:hover {
+    transform: translateY(-15px);
+    z-index: 10;
+}
+
+.b7-album-stack:hover::before {
+    transform: translate(30px, -10px) rotate(12deg);
+    background: #fff;
+}
+
+.b7-album-stack:hover::after {
+    transform: translate(-30px, -5px) rotate(-10deg);
+    background: #fff;
+}
+
+/* Ефект спалаху при наведенні */
 .b7-album-stack img {
     width: 100%; height: 300px;
     object-fit: cover;
+    transition: 0.5s;
+}
+
+.b7-album-stack:hover img {
+    filter: brightness(1.1);
 }
 
 .b7-album-stack h4 {
@@ -143,30 +181,11 @@
     font-family: 'Playfair Display', serif;
     text-align: center;
     color: #000;
-    font-size: 1.3rem;
-    font-weight: 800;
+    font-size: 1.4rem;
+    font-weight: 900;
 }
-
-.b7-album-stack:hover { transform: translateY(-20px) scale(1.03); }
-
-/* МОДАЛКА */
-.b7-modal {
-    display: none; position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.98);
-    z-index: 10000; justify-content: center; align-items: center;
-}
-
-.b7-modal-close {
-    position: absolute; top: 20px; right: 30px;
-    color: white; font-size: 50px; cursor: pointer;
-}
-
-.b7-modal-content { width: 90%; height: 85vh; }
-.b7-gallery-swiper { width: 100%; height: 100%; }
-.b7-gallery-swiper img { width: 100%; height: 100%; object-fit: contain; }
 
 @media (max-width: 992px) {
     .b7-main-grid { grid-template-columns: 1fr; }
-    .b7-mosaic-background { flex-wrap: wrap; }
+    .b7-scatter-paper { max-width: 300px; opacity: 0.4; }
 }

@@ -9,10 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Swiper.js CSS -->
+    <!-- Swiper.js -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-    <!-- Незалежні стилі -->
+    <!-- Стилі -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/block1.css">
@@ -91,45 +91,32 @@
             <div class="container"><h2 class="b6-title" data-i18n="b6.title">Історії наших героїв</h2><div id="stories-container" class="b6-grid"></div></div>
         </section>
 
-        <!-- БЛОК 7: МЕДІА (ПОВНЕ ЗАПОВНЕННЯ ГАЗЕТАМИ) -->
+        <!-- БЛОК 7: МЕДІА-ЦЕНТР (ХАОТИЧНИЙ СТІЛ) -->
         <section id="media" class="b7-media">
-            <!-- МОЗАЇКА ГАЗЕТ (ЗАПОВНЮЄ ВЕСЬ ФОН) -->
-            <div class="b7-mosaic-background">
-                <div class="b7-mosaic-column">
-                    <img src="images/newspapers/news1.jpg" alt="Paper">
-                    <img src="images/newspapers/news2.jpg" alt="Paper">
-                    <img src="images/newspapers/news3.jpg" alt="Paper">
-                </div>
-                <div class="b7-mosaic-column">
-                    <img src="images/newspapers/news4.jpg" alt="Paper">
-                    <img src="images/newspapers/news5.jpg" alt="Paper">
-                    <img src="images/newspapers/news6.jpg" alt="Paper">
-                </div>
-                <div class="b7-mosaic-column">
-                    <img src="images/newspapers/news2.jpg" alt="Paper">
-                    <img src="images/newspapers/news1.jpg" alt="Paper">
-                    <img src="images/newspapers/news4.jpg" alt="Paper">
-                </div>
-                <div class="b7-mosaic-column">
-                    <img src="images/newspapers/news3.jpg" alt="Paper">
-                    <img src="images/newspapers/news6.jpg" alt="Paper">
-                    <img src="images/newspapers/news5.jpg" alt="Paper">
-                </div>
+            <!-- ХАОТИЧНО РОЗКИДАНІ ГАЗЕТИ -->
+            <div class="b7-newspaper-scatter">
+                <img src="images/newspapers/news1.jpg" class="b7-scatter-paper p1" alt="News">
+                <img src="images/newspapers/news2.jpg" class="b7-scatter-paper p2" alt="News">
+                <img src="images/newspapers/news3.jpg" class="b7-scatter-paper p3" alt="News">
+                <img src="images/newspapers/news4.jpg" class="b7-scatter-paper p4" alt="News">
+                <img src="images/newspapers/news5.jpg" class="b7-scatter-paper p5" alt="News">
+                <img src="images/newspapers/news6.jpg" class="b7-scatter-paper p6" alt="News">
+                <img src="images/newspapers/news1.jpg" class="b7-scatter-paper p7" alt="News">
+                <img src="images/newspapers/news3.jpg" class="b7-scatter-paper p8" alt="News">
             </div>
             
-            <!-- Легкий фільтр для читабельності -->
-            <div class="b7-fog-layer"></div>
+            <div class="b7-vignette"></div>
             
             <div class="container">
                 <h2 class="b7-title" data-i18n="b7.title">Медіа-центр</h2>
                 <div class="b7-main-grid">
                     <div class="b7-col">
-                        <div class="b7-header-line"><h3 data-i18n="b7.news_title">Хроніка подій</h3></div>
+                        <div class="b7-header-line"><h3 data-i18n="b7.news_title">Хроніка</h3><span class="b7-badge">Top News</span></div>
                         <div id="news-container" class="b7-news-list"></div>
                     </div>
                     <div class="b7-col">
-                        <div class="b7-header-line"><h3 data-i18n="b7.albums_title">Фотоархів</h3></div>
-                        <div id="albums-container" class="b7-albums-stack"></div>
+                        <div class="b7-header-line"><h3 data-i18n="b7.albums_title">Архів</h3></div>
+                        <div id="albums-container" class="b7-albums-list"></div>
                     </div>
                 </div>
             </div>
