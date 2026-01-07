@@ -1,18 +1,23 @@
 .b7-media {
     padding: 120px 0;
-    background-color: #f4f1ea; /* Колір старого паперу */
+    background-color: #f4f1ea;
     position: relative;
     overflow: hidden;
 }
 
-/* Ефект паперової текстури */
-.b7-paper-texture {
+/* ФОН: Ефект старої газети */
+.b7-newspaper-overlay {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    opacity: 0.4;
+    background-image: url('https://img.freepik.com/free-photo/old-newspaper-texture-background_23-2149033355.jpg');
+    background-size: cover;
+    opacity: 0.12; /* Притуманено, щоб не різало очі */
+    filter: grayscale(100%) blur(1px);
+    z-index: 1;
     pointer-events: none;
-    background-image: url("https://www.transparenttextures.com/patterns/p6.png");
 }
+
+.b7-media .container { position: relative; z-index: 10; }
 
 .b7-title {
     text-align: center;
@@ -20,7 +25,6 @@
     font-size: clamp(2.5rem, 6vw, 4rem);
     color: #1a1a1a;
     margin-bottom: 80px;
-    font-style: italic;
 }
 
 .b7-main-grid {
@@ -33,107 +37,85 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid #1a1a1a;
+    border-bottom: 2px solid #333;
     margin-bottom: 30px;
-    padding-bottom: 10px;
 }
 
 .b7-header-line h3 {
     font-family: 'Playfair Display', serif;
     font-size: 1.8rem;
-    color: #1a1a1a;
     text-transform: uppercase;
 }
 
-.b7-stamp {
-    font-size: 0.7rem;
-    font-weight: 800;
-    border: 2px solid #c5a059;
-    color: #c5a059;
-    padding: 2px 8px;
-    text-transform: uppercase;
-    transform: rotate(-15deg);
-}
-
-/* КАРТКА НОВИНИ (EDITORIAL) */
-.b7-news-item {
-    display: block;
-    background: white;
-    padding: 30px;
-    margin-bottom: 25px;
-    text-decoration: none;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.05);
-    border: 1px solid #ddd;
-    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+/* КАРТКА АЛЬБОМУ: Ефект стопки фото */
+.b7-album-preview {
     position: relative;
-    opacity: 0;
-    transform: translateY(30px) rotate(1deg);
-}
-
-.b7-media.active .b7-news-item {
-    opacity: 1;
-    transform: translateY(0) rotate(0deg);
-}
-
-.b7-news-item:hover {
-    transform: scale(1.02) rotate(-1deg);
-    box-shadow: 15px 15px 30px rgba(0,0,0,0.1);
-    z-index: 10;
-}
-
-.b7-date {
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: 700;
-    color: #888;
-    font-size: 0.9rem;
-    margin-bottom: 10px;
-    display: block;
-}
-
-.b7-news-item h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    color: #1a1a1a;
-    line-height: 1.3;
-}
-
-/* КАРТКА АЛЬБОМУ (POLAROID STYLE) */
-.b7-album-polaroid {
-    display: block;
     background: white;
-    padding: 15px 15px 45px 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    text-decoration: none;
-    margin-bottom: 30px;
+    padding: 12px 12px 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    cursor: pointer;
     transition: all 0.4s ease;
-    border: 1px solid #eee;
-    opacity: 0;
-    transform: scale(0.9) rotate(-2deg);
+    margin-bottom: 40px;
+    border: 1px solid #ddd;
 }
 
-.b7-media.active .b7-album-polaroid {
-    opacity: 1;
-    transform: scale(1) rotate(2deg);
+/* Ефект шарів фотографій знизу */
+.b7-album-preview::before, .b7-album-preview::after {
+    content: "";
+    position: absolute;
+    width: 100%; height: 100%;
+    background: white;
+    border: 1px solid #ddd;
+    z-index: -1;
+    transition: 0.4s;
 }
+.b7-album-preview::before { top: 5px; left: 5px; transform: rotate(2deg); }
+.b7-album-preview::after { top: 10px; left: -5px; transform: rotate(-3deg); opacity: 0.5; }
 
-.b7-album-polaroid img {
-    width: 100%;
-    height: 250px;
+.b7-album-preview:hover { transform: translateY(-10px) rotate(0deg); }
+.b7-album-preview:hover::before { transform: rotate(5deg); }
+
+.b7-album-preview img {
+    width: 100%; height: 220px;
     object-fit: cover;
-    filter: sepia(0.2) contrast(1.1);
 }
 
-.b7-album-polaroid h4 {
-    font-family: 'Playfair Display', serif;
-    color: #333;
+.b7-album-preview h4 {
     margin-top: 15px;
+    font-family: 'Playfair Display', serif;
     text-align: center;
-    font-size: 1.1rem;
+    color: #1a1a1a;
 }
 
-.b7-album-polaroid:hover {
-    transform: scale(1.05) rotate(0deg) translateY(-10px);
-    z-index: 10;
+/* МОДАЛЬНА ГАЛЕРЕЯ */
+.b7-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.95);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.b7-modal-close {
+    position: absolute;
+    top: 30px; right: 40px;
+    color: white; font-size: 50px;
+    cursor: pointer; z-index: 10001;
+}
+
+.b7-modal-content {
+    width: 90%; max-width: 1200px;
+}
+
+.b7-gallery-swiper {
+    width: 100%; height: 80vh;
+}
+
+.b7-gallery-swiper img {
+    width: 100%; height: 100%;
+    object-fit: contain;
 }
 
 @media (max-width: 992px) {

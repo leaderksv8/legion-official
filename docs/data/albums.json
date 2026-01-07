@@ -1,17 +1,21 @@
 [
     {
-        "title": { "uk": "Фотозвіт: Травнева зустріч", "en": "Photo report: May meeting" },
-        "img": "https://placehold.co/600x400/1e293b/ffffff?text=Album+1",
-        "link": "#"
+        "id": "event-1",
+        "title": { "uk": "Зустріч у Бучі", "en": "Meeting in Bucha" },
+        "preview": "https://placehold.co/600x400/1e293b/ffffff?text=Main+Photo",
+        "photos": [
+            "https://placehold.co/1200x800/1e293b/ffffff?text=Photo+1",
+            "https://placehold.co/1200x800/c5a059/ffffff?text=Photo+2",
+            "https://placehold.co/1200x800/020617/ffffff?text=Photo+3"
+        ]
     },
     {
-        "title": { "uk": "Наші виїзди на реабілітацію", "en": "Our rehabilitation trips" },
-        "img": "https://placehold.co/600x400/1e293b/ffffff?text=Album+2",
-        "link": "#"
-    },
-    {
-        "title": { "uk": "Спортивні досягнення 2026", "en": "Sports achievements 2026" },
-        "img": "https://placehold.co/600x400/1e293b/ffffff?text=Album+3",
-        "link": "#"
+        "id": "rehab-1",
+        "title": { "uk": "Реабілітаційний виїзд", "en": "Rehabilitation Trip" },
+        "preview": "https://placehold.co/600x400/c5a059/ffffff?text=Main+Photo",
+        "photos": [
+            "https://placehold.co/1200x800/c5a059/ffffff?text=Photo+A",
+            "https://placehold.co/1200x800/1e293b/ffffff?text=Photo+B"
+        ]
     }
 ]

@@ -5,14 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ГО «Легіон Титанів»</title>
     
-    <!-- Шрифти -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Swiper.js -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-    <!-- Стилі -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/block1.css">
@@ -91,32 +87,28 @@
             <div class="container"><h2 class="b6-title" data-i18n="b6.title">Історії наших героїв</h2><div id="stories-container" class="b6-grid"></div></div>
         </section>
 
-        <!-- БЛОК 7: МЕДІА-ЦЕНТР (EDITORIAL STYLE) -->
+        <!-- БЛОК 7: МЕДІА-АРХІВ -->
         <section id="media" class="b7-media">
-            <div class="b7-paper-texture"></div>
+            <!-- ГАЗЕТНИЙ ФОН -->
+            <div class="b7-newspaper-overlay"></div>
+            
             <div class="container">
                 <h2 class="b7-title" data-i18n="b7.title">Медіа-центр</h2>
-                
                 <div class="b7-main-grid">
-                    <!-- Хроніка новин -->
+                    <!-- Хроніка -->
                     <div class="b7-col">
                         <div class="b7-header-line">
-                            <h3 data-i18n="b7.news_title">Хроніка подій</h3>
-                            <span class="b7-stamp">Archive 2026</span>
+                            <h3 data-i18n="b7.news_title">Хроніка</h3>
+                            <span class="b7-stamp">Official</span>
                         </div>
-                        <div id="news-container" class="b7-stack">
-                            <!-- JS Render -->
-                        </div>
+                        <div id="news-container" class="b7-stack"></div>
                     </div>
-
-                    <!-- Візуальний архів -->
+                    <!-- Альбоми -->
                     <div class="b7-col">
                         <div class="b7-header-line">
-                            <h3 data-i18n="b7.albums_title">Фотоальбоми</h3>
+                            <h3 data-i18n="b7.albums_title">Архів фото</h3>
                         </div>
-                        <div id="albums-container" class="b7-gallery">
-                            <!-- JS Render -->
-                        </div>
+                        <div id="albums-container" class="b7-gallery-stack"></div>
                     </div>
                 </div>
             </div>
@@ -124,6 +116,18 @@
 
         <section id="founders" class="b8-founders"></section>
     </main>
+
+    <!-- МОДАЛЬНА ГАЛЕРЕЯ (ПРИХОВАНА) -->
+    <div id="galleryModal" class="b7-modal">
+        <span class="b7-modal-close">&times;</span>
+        <div class="b7-modal-content">
+            <div class="swiper b7-gallery-swiper">
+                <div class="swiper-wrapper" id="modal-gallery-wrapper"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </div>
 
     <footer id="contact"></footer>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

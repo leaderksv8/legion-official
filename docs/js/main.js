@@ -21,7 +21,8 @@ async function init() {
         setupMobileMenu();
         setupScrollReveal();
         updateUI();
-    } catch (e) { console.error("Init error:", e); }
+        setupGalleryModal();
+    } catch (e) { console.error("Init failed:", e); }
 }
 
 function updateUI() {
@@ -33,33 +34,44 @@ function updateUI() {
     render.renderStories(cache.stories, currentLang);
     render.renderNews(cache.news, currentLang);
     render.renderAlbums(cache.albums, currentLang);
-    
     initCounters(); 
+    setTimeout(() => initPartnersSwiper(), 600);
+}
+
+// ФУНКЦІЯ ГАЛЕРЕЇ
+window.openGallery = (albumId) => {
+    const album = cache.albums.find(a => a.id === albumId);
+    if (!album) return;
     
-    setTimeout(() => {
-        initPartnersSwiper();
-        // ВІДМОВА ВІД ТЯЖКИХ ЦИКЛІВ: Блок 7 тепер працює на CSS анімаціях через ScrollReveal
-    }, 500);
+    const wrapper = document.getElementById('modal-gallery-wrapper');
+    wrapper.innerHTML = album.photos.map(src => `
+        <div class="swiper-slide"><img src="${src}" alt="Gallery Photo"></div>
+    `).join('');
+
+    const modal = document.getElementById('galleryModal');
+    modal.style.display = 'flex';
+
+    new Swiper('.b7-gallery-swiper', {
+        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        loop: true
+    });
+};
+
+function setupGalleryModal() {
+    const modal = document.getElementById('galleryModal');
+    const close = document.querySelector('.b7-modal-close');
+    if (close) close.onclick = () => modal.style.display = 'none';
+    window.onclick = (e) => { if (e.target == modal) modal.style.display = 'none'; };
 }
 
 function initPartnersSwiper() {
     if (window.partnersSwiper) window.partnersSwiper.destroy(true, true);
     window.partnersSwiper = new Swiper('.b4-swiper-container', {
-        loop: true,
-        centeredSlides: true,
-        speed: 1000,
-        grabCursor: true,
+        loop: true, centeredSlides: true, speed: 1000, grabCursor: true,
         autoplay: { delay: 2500, disableOnInteraction: false },
         navigation: { nextEl: '.b4-next-unique', prevEl: '.b4-prev-unique' },
-        breakpoints: {
-            320: { slidesPerView: 1, spaceBetween: 20 },
-            768: { slidesPerView: 3, spaceBetween: 30 },
-            1200: { slidesPerView: 5, spaceBetween: 40 }
-        },
-        loopedSlides: 10,
-        loopAdditionalSlides: 10,
-        observer: true,
-        observeParents: true,
+        breakpoints: { 320: { slidesPerView: 1.5, spaceBetween: 20 }, 768: { slidesPerView: 3, spaceBetween: 30 }, 1200: { slidesPerView: 5, spaceBetween: 40 } },
+        loopedSlides: 10, loopAdditionalSlides: 10, observer: true, observeParents: true,
     });
 }
 
@@ -84,9 +96,7 @@ function initCounters() {
 
 function setupScrollReveal() {
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('active');
-        });
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
     }, { threshold: 0.15 });
     document.querySelectorAll('section').forEach(s => observer.observe(s));
 }
