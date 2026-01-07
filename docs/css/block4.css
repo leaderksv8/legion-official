@@ -1,82 +1,81 @@
 .b4-partners {
     padding: 120px 0;
-    /* Градієнтний фон як на референсі */
-    background: linear-gradient(135deg, #1a2a44 0%, #020617 100%);
+    background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
     overflow: hidden;
-    position: relative;
 }
 
 .b4-title {
-    text-align: left; /* Більш сучасний вигляд для цього стилю */
+    text-align: center; /* ТЕПЕР ПО ЦЕНТРУ */
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 800;
     color: var(--white);
-    margin-bottom: 60px;
+    margin-bottom: 80px;
     text-transform: uppercase;
-    padding-left: 20px;
 }
 
-.b4-main-container {
+.b4-slider-area {
     position: relative;
     width: 100%;
 }
 
 .b4-swiper {
     width: 100%;
-    padding: 20px 0 100px !important; /* Місце для контролів знизу */
+    padding: 20px 0 120px !important;
 }
 
-/* Квадратна картка */
+/* Фіксований розмір слайда для стабільності скролу */
 .swiper-slide {
-    width: 320px; /* Фіксована ширина для квадрата */
-    transition: all 0.6s ease;
+    width: 300px; 
+    display: flex;
+    justify-content: center;
 }
 
 .b4-item {
-    aspect-ratio: 1 / 1; /* Квадрат */
+    width: 300px;
+    height: 300px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px; /* Більш гострі кути як на фото */
+    border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 40px;
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    overflow: hidden;
 }
 
 .b4-item img {
-    max-width: 85%;
-    max-height: 85%;
+    max-width: 90%;
+    max-height: 90%;
     object-fit: contain;
-    transition: all 0.6s ease;
-    filter: brightness(0.7) contrast(1.2) saturate(0.5); /* Ефект димки */
+    filter: brightness(0.6) grayscale(100%);
+    transition: all 0.5s ease;
 }
 
-/* ФОКУС: Центральна картка */
+/* Стан активного слайда */
 .swiper-slide-active .b4-item {
     transform: scale(1.05);
-    border-color: var(--white);
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--accent-gold);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
 .swiper-slide-active .b4-item img {
-    filter: brightness(1.1) saturate(1);
-    transform: scale(1.1);
+    filter: brightness(1.1) grayscale(0%);
 }
 
-/* КОНТРОЛИ ВНИЗУ СПРАВА */
-.b4-controls-container {
+/* КЕРУВАННЯ ЗНИЗУ ПРАВОРУЧ */
+.b4-nav-wrapper {
     position: absolute;
-    bottom: 20px;
-    right: 0;
-    left: 0;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
     pointer-events: none;
 }
 
-.b4-controls {
+.b4-nav-content {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -84,18 +83,17 @@
     pointer-events: auto;
 }
 
-/* Пагінація (7/10) */
 .b4-pagination {
     color: var(--white);
     font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-size: 1.1rem;
+    font-weight: 700;
+    font-size: 1.2rem;
     width: auto !important;
 }
 
 .b4-arrows {
     display: flex;
-    gap: 10px;
+    gap: 15px;
 }
 
 .b4-arrow {
@@ -104,12 +102,12 @@
     background: var(--white);
     color: var(--primary-dark);
     border: none;
-    border-radius: 4px; /* Квадратні кнопки як на референсі */
+    border-radius: 6px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     transition: 0.3s;
 }
 
@@ -118,9 +116,9 @@
     color: var(--white);
 }
 
-/* Маски для плавного зникнення по боках */
-.b4-main-container::before,
-.b4-main-container::after {
+/* Градієнтні маски */
+.b4-slider-area::before,
+.b4-slider-area::after {
     content: "";
     position: absolute;
     top: 0;
@@ -130,17 +128,18 @@
     pointer-events: none;
 }
 
-.b4-main-container::before {
+.b4-slider-area::before {
     left: 0;
-    background: linear-gradient(to right, rgba(26, 42, 68, 0.8), transparent);
+    background: linear-gradient(to right, rgba(15, 23, 42, 1), transparent);
 }
 
-.b4-main-container::after {
+.b4-slider-area::after {
     right: 0;
-    background: linear-gradient(to left, rgba(2, 6, 23, 0.8), transparent);
+    background: linear-gradient(to left, rgba(2, 6, 23, 1), transparent);
 }
 
 @media (max-width: 768px) {
-    .swiper-slide { width: 260px; }
-    .b4-controls { justify-content: center; width: 100%; padding-right: 0; }
+    .swiper-slide { width: 250px; }
+    .b4-item { width: 250px; height: 250px; }
+    .b4-nav-content { justify-content: center; }
 }
