@@ -22,7 +22,7 @@ async function init() {
         setupScrollReveal();
         updateUI();
         setupGalleryModal();
-    } catch (e) { console.error("Init failed:", e); }
+    } catch (e) { console.error("Initialization failed:", e); }
 }
 
 function updateUI() {
@@ -34,8 +34,11 @@ function updateUI() {
     render.renderStories(cache.stories, currentLang);
     render.renderNews(cache.news, currentLang);
     render.renderAlbums(cache.albums, currentLang);
+    
     initCounters(); 
-    setTimeout(() => initPartnersSwiper(), 600);
+    setTimeout(() => {
+        initPartnersSwiper();
+    }, 600);
 }
 
 window.openGallery = (id) => {
@@ -60,7 +63,7 @@ function initPartnersSwiper() {
         loop: true, centeredSlides: true, speed: 1000, grabCursor: true,
         autoplay: { delay: 2500, disableOnInteraction: false },
         navigation: { nextEl: '.b4-next-unique', prevEl: '.b4-prev-unique' },
-        breakpoints: { 320: { slidesPerView: 1.5, spaceBetween: 20 }, 768: { slidesPerView: 3, spaceBetween: 30 }, 1200: { slidesPerView: 5, spaceBetween: 40 } },
+        breakpoints: { 320: { slidesPerView: 1, spaceBetween: 20 }, 768: { slidesPerView: 3, spaceBetween: 30 }, 1200: { slidesPerView: 5, spaceBetween: 40 } },
         loopedSlides: 10, loopAdditionalSlides: 10, observer: true, observeParents: true,
     });
 }
