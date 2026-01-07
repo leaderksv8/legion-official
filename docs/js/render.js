@@ -29,7 +29,7 @@ export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track || !data) return;
 
-    // Рендеримо дані рівно один раз. Swiper сам зробить клони для loop.
+    // Рендеримо 10 слайдів один раз. Swiper сам клонує їх для нескінченності.
     track.innerHTML = data.map(p => `
         <div class="swiper-slide">
             <div class="b4-item">
