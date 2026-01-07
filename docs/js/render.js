@@ -28,14 +28,30 @@ export function renderStats(data, lang) {
 export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track || !data) return;
-
-    track.innerHTML = data.map(p => `
+    const tripledData = [...data, ...data, ...data];
+    track.innerHTML = tripledData.map((p, index) => `
         <div class="swiper-slide">
             <div class="b4-item">
                 <a href="${p.link}" target="_blank" rel="noopener">
-                    <img src="${p.img}" alt="${p.name}" draggable="false" onerror="this.src='https://placehold.co/400x400/1e293b/ffffff?text=Logo'">
+                    <img src="https://placehold.co/400x400/1e293b/ffffff?text=${(index % 10) + 1}" alt="${p.name}">
                 </a>
             </div>
         </div>
+    `).join('');
+}
+
+export function renderFriends(data, lang) {
+    const container = document.getElementById('friends-container');
+    if (!container || !data) return;
+    container.innerHTML = data.map(f => `
+        <a href="${f.link}" class="b5-link" target="_blank" rel="noopener">
+            <div class="b5-card">
+                <div class="b5-image-wrapper">
+                    <img src="${f.img}" alt="${f.name}">
+                </div>
+                <h3>${f.name}</h3>
+                <p>${f.role[lang]}</p>
+            </div>
+        </a>
     `).join('');
 }

@@ -1,18 +1,19 @@
 import { loadTranslations, translatePage } from './i18n.js';
-import { renderActivities, renderStats, renderPartners } from './render.js';
+import { renderActivities, renderStats, renderPartners, renderFriends } from './render.js';
 
 let currentLang = 'uk';
-let cache = { translations: {}, activities: [], stats: [], partners: [] };
+let cache = { translations: {}, activities: [], stats: [], partners: [], friends: [] };
 
 async function init() {
     try {
-        const [t, a, s, p] = await Promise.all([
+        const [t, a, s, p, f] = await Promise.all([
             loadTranslations(),
             fetch('data/activities.json').then(res => res.json()),
             fetch('data/stats.json').then(res => res.json()),
-            fetch('data/partners.json').then(res => res.json())
+            fetch('data/partners.json').then(res => res.json()),
+            fetch('data/friends.json').then(res => res.json())
         ]);
-        cache.translations = t; cache.activities = a; cache.stats = s; cache.partners = p;
+        cache.translations = t; cache.activities = a; cache.stats = s; cache.partners = p; cache.friends = f;
         setupLanguageSwitcher();
         setupMobileMenu();
         setupScrollReveal();
@@ -25,39 +26,28 @@ function updateUI() {
     renderActivities(cache.activities, currentLang);
     renderStats(cache.stats, currentLang);
     renderPartners(cache.partners);
+    renderFriends(cache.friends, currentLang);
     initCounters(); 
     setTimeout(initPartnersSwiper, 300);
 }
 
 function initPartnersSwiper() {
-    // Повне очищення старого екземпляра
-    if (window.partnersSwiper) {
-        window.partnersSwiper.destroy(true, true);
-    }
-
+    if (window.partnersSwiper) window.partnersSwiper.destroy(true, true);
     window.partnersSwiper = new Swiper('.b4-swiper', {
         loop: true,
         centeredSlides: true,
         speed: 1000,
-        grabCursor: true,
-        autoplay: {
-            delay: 2500,
-            disableOnInteraction: false,
-        },
-        navigation: {
-            nextEl: '.b4-next-btn',
-            prevEl: '.b4-prev-btn',
-        },
-        // Кількість слайдів залежно від екрану (для стабільності)
+        autoplay: { delay: 2500, disableOnInteraction: false },
+        navigation: { nextEl: '.b4-next-btn', prevEl: '.b4-prev-btn' },
         breakpoints: {
             320: { slidesPerView: 1, spaceBetween: 20 },
-            600: { slidesPerView: 2, spaceBetween: 30 },
+            640: { slidesPerView: 2, spaceBetween: 30 },
             1024: { slidesPerView: 3, spaceBetween: 40 },
-            1400: { slidesPerView: 5, spaceBetween: 50 }
+            1440: { slidesPerView: 5, spaceBetween: 50 }
         },
-        // Покращена бескінечність
-        loopedSlides: 10,
-        watchSlidesProgress: true,
+        observer: true,
+        observeParents: true,
+        loopAdditionalSlides: 10,
     });
 }
 

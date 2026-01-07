@@ -1,35 +1,26 @@
 [
-  {
-    "id": "lachen",
-    "name": "Ігор Лаченков",
-    "role": { "uk": "Блогер", "en": "Blogger" },
-    "img": "https://via.placeholder.com/300x300?text=Lachen",
-    "bio": { 
-      "uk": "Український волонтер, блогер, активно допомагає ЗСУ та ветеранам.", 
-      "en": "Ukrainian volunteer, blogger, actively helps the Armed Forces and veterans." 
+    {
+        "name": "Андрій Ковальчук",
+        "role": { "uk": "Меценат", "en": "Patron" },
+        "img": "https://placehold.co/400x400/1e293b/ffffff?text=Photo+1",
+        "link": "https://facebook.com"
     },
-    "socials": { "instagram": "#", "telegram": "#" }
-  },
-  {
-    "id": "manziuk",
-    "name": "Олена Мандзюк",
-    "role": { "uk": "Блогерка", "en": "Blogger" },
-    "img": "https://via.placeholder.com/300x300?text=Manziuk",
-    "bio": { 
-      "uk": "Інфлюенсерка, підтримує соціальні ініціативи Бучанщини.", 
-      "en": "Influencer, supports social initiatives of Bucha region." 
+    {
+        "name": "Олена Марченко",
+        "role": { "uk": "Волонтер", "en": "Volunteer" },
+        "img": "https://placehold.co/400x400/1e293b/ffffff?text=Photo+2",
+        "link": "#"
     },
-    "socials": { "instagram": "#" }
-  },
-  {
-    "id": "yanovych",
-    "name": "Женя Янович",
-    "role": { "uk": "Актор, ведучий", "en": "Actor, Host" },
-    "img": "https://via.placeholder.com/300x300?text=Yanovych",
-    "bio": { 
-      "uk": "Український актор, амбасадор багатьох благодійних проектів.", 
-      "en": "Ukrainian actor, ambassador of many charity projects." 
+    {
+        "name": "Сергій Іванов",
+        "role": { "uk": "Юрист", "en": "Lawyer" },
+        "img": "https://placehold.co/400x400/1e293b/ffffff?text=Photo+3",
+        "link": "#"
     },
-    "socials": { "instagram": "#", "youtube": "#" }
-  }
+    {
+        "name": "Дмитро Сидоренко",
+        "role": { "uk": "Партнер", "en": "Partner" },
+        "img": "https://placehold.co/400x400/1e293b/ffffff?text=Photo+4",
+        "link": "#"
+    }
 ]

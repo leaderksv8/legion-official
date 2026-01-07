@@ -1,0 +1,102 @@
+.b5-friends {
+    padding: 120px 0;
+    background-color: #f8fafc; /* Світлий м'який фон для контрасту */
+    overflow: hidden;
+}
+
+.b5-title {
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin-bottom: 80px;
+    text-transform: uppercase;
+}
+
+.b5-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+}
+
+.b5-card {
+    text-align: center;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* Анімація при скролі */
+.b5-friends.active .b5-card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Каскадна поява карток */
+.b5-card:nth-child(1) { transition-delay: 0.1s; }
+.b5-card:nth-child(2) { transition-delay: 0.2s; }
+.b5-card:nth-child(3) { transition-delay: 0.3s; }
+.b5-card:nth-child(4) { transition-delay: 0.4s; }
+
+.b5-image-wrapper {
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    padding: 10px;
+    border: 2px solid transparent;
+    transition: all 0.5s ease;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, var(--accent-gold), transparent) border-box;
+}
+
+.b5-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    filter: grayscale(100%);
+    transition: all 0.5s ease;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.b5-card:hover {
+    transform: translateY(-15px);
+}
+
+.b5-card:hover .b5-image-wrapper {
+    border-color: var(--accent-gold);
+    transform: scale(1.05);
+}
+
+.b5-card:hover img {
+    filter: grayscale(0%);
+    box-shadow: 0 20px 45px rgba(197, 160, 89, 0.3);
+}
+
+.b5-card h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+}
+
+.b5-card p {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent-gold);
+}
+
+.b5-link {
+    display: block;
+    text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+    .b5-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 500px) {
+    .b5-grid { grid-template-columns: 1fr; }
+    .b5-image-wrapper { width: 180px; height: 180px; }
+}
