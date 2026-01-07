@@ -10,7 +10,7 @@
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 800;
     color: var(--white);
-    margin-bottom: 60px;
+    margin-bottom: 80px;
     text-transform: uppercase;
 }
 
@@ -23,27 +23,26 @@
 
 .b4-swiper {
     width: 100%;
-    padding: 40px 0 100px !important;
+    padding: 40px 0 120px !important;
 }
 
-/* Стабільний розмір слайдів */
 .swiper-slide {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform 0.5s ease;
 }
 
 .b4-item {
-    width: 280px;
-    height: 280px;
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 1 / 1;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 30px;
+    padding: 40px;
     transition: all 0.5s ease;
     backdrop-filter: blur(10px);
 }
@@ -53,22 +52,22 @@
     max-height: 100%;
     object-fit: contain;
     filter: grayscale(100%) brightness(0.6);
-    pointer-events: none;
+    transition: 0.5s;
 }
 
-/* Активний слайд */
+/* ФОКУС-ЕФЕКТ */
 .swiper-slide-active .b4-item {
     transform: scale(1.1);
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.12);
     border-color: var(--accent-gold);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
 }
 
 .swiper-slide-active .b4-item img {
     filter: grayscale(0%) brightness(1.1);
 }
 
-/* Навігація */
+/* НАВІГАЦІЯ */
 .b4-nav-controls {
     position: absolute;
     bottom: 20px;
@@ -80,8 +79,8 @@
 }
 
 .b4-arrow {
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
     background: var(--white);
     color: var(--primary-dark);
     border: none;
@@ -90,17 +89,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     transition: 0.3s;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
 }
 
 .b4-arrow:hover {
     background: var(--accent-gold);
     color: var(--white);
+    transform: scale(1.1);
 }
 
-/* Градієнтні маски */
+/* МАСКИ ЗГАСАННЯ */
 .b4-slider-area::before,
 .b4-slider-area::after {
     content: "";
@@ -115,5 +115,5 @@
 .b4-slider-area::after { right: 0; background: linear-gradient(to left, #020617, transparent); }
 
 @media (max-width: 768px) {
-    .b4-item { width: 220px; height: 220px; }
+    .b4-item { max-width: 240px; }
 }

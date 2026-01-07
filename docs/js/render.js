@@ -29,12 +29,11 @@ export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track || !data) return;
 
-    // Створюємо унікальні картинки з назвами для перевірки скролу
-    track.innerHTML = data.map((p, index) => `
+    track.innerHTML = data.map(p => `
         <div class="swiper-slide">
             <div class="b4-item">
                 <a href="${p.link}" target="_blank" rel="noopener">
-                    <img src="https://placehold.co/400x400/1e293b/ffffff?text=Partner+${index + 1}" alt="${p.name}">
+                    <img src="${p.img}" alt="${p.name}" draggable="false" onerror="this.src='https://placehold.co/400x400/1e293b/ffffff?text=Logo'">
                 </a>
             </div>
         </div>
