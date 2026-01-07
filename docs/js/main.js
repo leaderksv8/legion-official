@@ -52,12 +52,15 @@ function initPartnersCarousel() {
     }
     requestAnimationFrame(step);
 
-    // Взаємодія мишкою
+    // ПОКРАЩЕНИЙ DRAG-ФУНКЦІОНАЛ
     slider.addEventListener('mousedown', (e) => {
         isDown = true;
         isPaused = true;
+        slider.classList.add('active');
         startX = e.pageX - slider.offsetLeft;
         scrollLeft = slider.scrollLeft;
+        // Забороняємо стандартне перетягування (важливо!)
+        e.preventDefault();
     });
 
     slider.addEventListener('mouseleave', () => {
@@ -74,13 +77,22 @@ function initPartnersCarousel() {
         if (!isDown) return;
         e.preventDefault();
         const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2; // Швидкість скролу мишкою
+        const walk = (x - startX) * 2; 
         slider.scrollLeft = scrollLeft - walk;
     });
 
-    // Взаємодія тачем (телефон)
-    slider.addEventListener('touchstart', () => { isPaused = true; });
+    // Підтримка тачу (мобільні)
+    slider.addEventListener('touchstart', (e) => {
+        isPaused = true;
+        startX = e.touches[0].pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
     slider.addEventListener('touchend', () => { isPaused = false; });
+    slider.addEventListener('touchmove', (e) => {
+        const x = e.touches[0].pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2;
+        slider.scrollLeft = scrollLeft - walk;
+    });
 }
 
 function initCounters() {
