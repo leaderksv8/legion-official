@@ -1,0 +1,17 @@
+[
+    {
+        "title": { "uk": "Фотозвіт: Травнева зустріч", "en": "Photo report: May meeting" },
+        "img": "https://placehold.co/600x400/1e293b/ffffff?text=Album+1",
+        "link": "#"
+    },
+    {
+        "title": { "uk": "Наші виїзди на реабілітацію", "en": "Our rehabilitation trips" },
+        "img": "https://placehold.co/600x400/1e293b/ffffff?text=Album+2",
+        "link": "#"
+    },
+    {
+        "title": { "uk": "Спортивні досягнення 2026", "en": "Sports achievements 2026" },
+        "img": "https://placehold.co/600x400/1e293b/ffffff?text=Album+3",
+        "link": "#"
+    }
+]

@@ -1,25 +1,22 @@
 import { loadTranslations, translatePage } from './i18n.js';
-import { renderActivities, renderStats, renderPartners, renderFriends, renderStories } from './render.js';
+import * as render from './render.js';
 
 let currentLang = 'uk';
-let cache = { translations: {}, activities: [], stats: [], partners: [], friends: [], stories: [] };
+let cache = { translations: {}, activities: [], stats: [], partners: [], friends: [], stories: [], news: [], albums: [] };
 
 async function init() {
     try {
-        const [t, a, s, p, f, st] = await Promise.all([
+        const [t, a, s, p, f, st, n, al] = await Promise.all([
             loadTranslations(),
             fetch('data/activities.json').then(res => res.json()),
             fetch('data/stats.json').then(res => res.json()),
             fetch('data/partners.json').then(res => res.json()),
             fetch('data/friends.json').then(res => res.json()),
-            fetch('data/stories.json').then(res => res.json())
+            fetch('data/stories.json').then(res => res.json()),
+            fetch('data/news.json').then(res => res.json()),
+            fetch('data/albums.json').then(res => res.json())
         ]);
-        cache.translations = t;
-        cache.activities = a;
-        cache.stats = s;
-        cache.partners = p;
-        cache.friends = f;
-        cache.stories = st;
+        cache = { translations: t, activities: a, stats: s, partners: p, friends: f, stories: st, news: n, albums: al };
 
         setupLanguageSwitcher();
         setupMobileMenu();
@@ -30,13 +27,49 @@ async function init() {
 
 function updateUI() {
     translatePage(cache.translations, currentLang);
-    renderActivities(cache.activities, currentLang);
-    renderStats(cache.stats, currentLang);
-    renderPartners(cache.partners);
-    renderFriends(cache.friends, currentLang);
-    renderStories(cache.stories, currentLang);
+    render.renderActivities(cache.activities, currentLang);
+    render.renderStats(cache.stats, currentLang);
+    render.renderPartners(cache.partners);
+    render.renderFriends(cache.friends, currentLang);
+    render.renderStories(cache.stories, currentLang);
+    render.renderNews(cache.news, currentLang);
+    render.renderAlbums(cache.albums, currentLang);
+    
     initCounters(); 
-    setTimeout(initPartnersSwiper, 300);
+    setTimeout(() => {
+        initPartnersSwiper();
+        initVerticalCarousels();
+    }, 300);
+}
+
+function initVerticalCarousels() {
+    const configs = [
+        { id: 'newsViewport', trackId: 'news-container' },
+        { id: 'albumsViewport', trackId: 'albums-container' }
+    ];
+
+    configs.forEach(config => {
+        const viewport = document.getElementById(config.id);
+        const track = document.getElementById(config.trackId);
+        if (!viewport || !track) return;
+
+        let scrollPos = 0;
+        let speed = 0.6;
+        let isPaused = false;
+
+        viewport.onmouseenter = () => isPaused = true;
+        viewport.onmouseleave = () => isPaused = false;
+
+        function animate() {
+            if (!isPaused) {
+                scrollPos += speed;
+                if (scrollPos >= track.scrollHeight / 2) scrollPos = 0;
+                viewport.scrollTop = scrollPos;
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+    });
 }
 
 function initPartnersSwiper() {
@@ -49,9 +82,9 @@ function initPartnersSwiper() {
         navigation: { nextEl: '.b4-next-btn', prevEl: '.b4-prev-btn' },
         breakpoints: {
             320: { slidesPerView: 1, spaceBetween: 20 },
-            640: { slidesPerView: 2, spaceBetween: 30 },
+            768: { slidesPerView: 2, spaceBetween: 30 },
             1024: { slidesPerView: 3, spaceBetween: 40 },
-            1440: { slidesPerView: 5, spaceBetween: 50 }
+            1400: { slidesPerView: 5, spaceBetween: 50 }
         },
         observer: true,
         observeParents: true,
@@ -83,12 +116,9 @@ function initCounters() {
 function setupScrollReveal() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
+            if (entry.isIntersecting) entry.target.classList.add('active');
         });
     }, { threshold: 0.15 });
-
     document.querySelectorAll('section').forEach(s => observer.observe(s));
 }
 

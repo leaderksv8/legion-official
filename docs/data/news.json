@@ -1,14 +1,26 @@
 [
-  {
-    "tag": { "uk": "Буча", "en": "Bucha" },
-    "title": { "uk": "Зустріч ветеранів з головою громади", "en": "Veterans meeting with community head" },
-    "date": "12.12.2025",
-    "desc": { "uk": "Обговорено питання реабілітації...", "en": "Rehabilitation issues discussed..." }
-  },
-  {
-    "tag": { "uk": "Україна", "en": "Ukraine" },
-    "title": { "uk": "Новий закон про підтримку ветеранів", "en": "New law on veteran support" },
-    "date": "10.12.2025",
-    "desc": { "uk": "Парламент прийняв рішення...", "en": "Parliament made a decision..." }
-  }
+    {
+        "tag": { "uk": "Подія", "en": "Event" },
+        "date": "24.05.2026",
+        "title": { "uk": "Зустріч ветеранів Бучанської громади", "en": "Meeting of veterans of the Bucha community" },
+        "link": "https://google.com"
+    },
+    {
+        "tag": { "uk": "Допомога", "en": "Aid" },
+        "date": "20.05.2026",
+        "title": { "uk": "Нова програма юридичної підтримки", "en": "New legal support program" },
+        "link": "#"
+    },
+    {
+        "tag": { "uk": "Спорт", "en": "Sport" },
+        "date": "15.05.2026",
+        "title": { "uk": "Турнір з настільного тенісу серед ветеранів", "en": "Table tennis tournament among veterans" },
+        "link": "#"
+    },
+    {
+        "tag": { "uk": "Важливо", "en": "Important" },
+        "date": "10.05.2026",
+        "title": { "uk": "Розширення списку партнерських реабілітаційних центрів", "en": "Expansion of partner rehabilitation centers" },
+        "link": "#"
+    }
 ]

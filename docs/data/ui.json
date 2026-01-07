@@ -21,5 +21,10 @@
     "b3": { "title": { "uk": "Наші досягнення", "en": "Our Achievements" } },
     "b4": { "title": { "uk": "Наші партнери", "en": "Our Partners" } },
     "b5": { "title": { "uk": "Наші друзі", "en": "Our Friends" } },
-    "b6": { "title": { "uk": "Історії наших героїв", "en": "Heroes Stories" } }
+    "b6": { "title": { "uk": "Історії наших героїв", "en": "Heroes Stories" } },
+    "b7": {
+        "title": { "uk": "Медіа-центр", "en": "Media Center" },
+        "news_title": { "uk": "Новини", "en": "News" },
+        "albums_title": { "uk": "Фотоальбоми", "en": "Photo Albums" }
+    }
 }

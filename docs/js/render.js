@@ -28,8 +28,7 @@ export function renderStats(data, lang) {
 export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track || !data) return;
-    const tripledData = [...data, ...data, ...data];
-    track.innerHTML = tripledData.map((p, index) => `
+    const list = data.map(p => `
         <div class="swiper-slide">
             <div class="b4-item">
                 <a href="${p.link}" target="_blank" rel="noopener">
@@ -38,13 +37,14 @@ export function renderPartners(data) {
             </div>
         </div>
     `).join('');
+    track.innerHTML = list;
 }
 
 export function renderFriends(data, lang) {
     const container = document.getElementById('friends-container');
     if (!container || !data) return;
     container.innerHTML = data.map(f => `
-        <a href="${f.link}" class="b5-link" target="_blank" rel="noopener">
+        <a href="${f.link}" class="b5-link" target="_blank">
             <div class="b5-card">
                 <div class="b5-image-wrapper"><img src="${f.img}" alt="${f.name}"></div>
                 <h3>${f.name}</h3>
@@ -59,14 +59,42 @@ export function renderStories(data, lang) {
     if (!container || !data) return;
     container.innerHTML = data.map(s => `
         <div class="b6-card">
-            <div class="b6-image-box">
-                <img src="${s.img}" alt="${s.name}">
-            </div>
+            <div class="b6-image-box"><img src="${s.img}" alt="${s.name}"></div>
             <div class="b6-info">
                 <h3>${s.name}</h3>
                 <span class="b6-rank">${s.rank[lang]}</span>
                 <p class="b6-text">"${s.text[lang]}"</p>
             </div>
         </div>
+    `).join('');
+}
+
+export function renderNews(data, lang) {
+    const container = document.getElementById('news-container');
+    if (!container || !data) return;
+    // Клонуємо для безкінечності
+    const list = [...data, ...data];
+    container.innerHTML = list.map(n => `
+        <a href="${n.link}" class="b7-news-card" target="_blank">
+            <div class="b7-news-meta">
+                <span class="b7-news-tag">${n.tag[lang]}</span>
+                <span class="b7-news-date">${n.date}</span>
+            </div>
+            <h4>${n.title[lang]}</h4>
+        </a>
+    `).join('');
+}
+
+export function renderAlbums(data, lang) {
+    const container = document.getElementById('albums-container');
+    if (!container || !data) return;
+    const list = [...data, ...data];
+    container.innerHTML = list.map(a => `
+        <a href="${a.link}" class="b7-album-card" target="_blank">
+            <img src="${a.img}" alt="Album">
+            <div class="b7-album-overlay">
+                <h4>${a.title[lang]}</h4>
+            </div>
+        </a>
     `).join('');
 }
