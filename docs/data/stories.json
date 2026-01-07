@@ -1,18 +1,20 @@
 [
-  {
-    "name": { "uk": "Олександр", "en": "Oleksandr" },
-    "text": { 
-      "uk": "Після поранення було важко знайти юридичну підтримку. ГО допомогла з документами за тиждень.", 
-      "en": "After being wounded, it was hard to find legal support. The NGO helped with documents in a week." 
+    {
+        "name": "Олександр В.",
+        "rank": { "uk": "Ветеран 72-ї ОМБр", "en": "Veteran of the 72nd Brigade" },
+        "img": "https://placehold.co/200x200/1e293b/ffffff?text=Hero+1",
+        "text": { 
+            "uk": "Завдяки «Легіону Титанів» я отримав не лише юридичну допомогу, а й підтримку побратимів, якої так бракувало в цивільному житті.", 
+            "en": "Thanks to the Legion of Titans, I received not only legal aid but also the support of brothers-in-arms that was so missing in civilian life." 
+        }
     },
-    "img": "https://via.placeholder.com/100x100?text=Hero1"
-  },
-  {
-    "name": { "uk": "Михайло", "en": "Mykhailo" },
-    "text": { 
-      "uk": "Завдяки реабілітаційній програмі я зміг повернутися до активного життя.", 
-      "en": "Thanks to the rehabilitation program, I was able to return to an active life." 
-    },
-    "img": "https://via.placeholder.com/100x100?text=Hero2"
-  }
+    {
+        "name": "Михайло К.",
+        "rank": { "uk": "Захисник Бучі", "en": "Defender of Bucha" },
+        "img": "https://placehold.co/200x200/1e293b/ffffff?text=Hero+2",
+        "text": { 
+            "uk": "Реабілітація та спільні поїздки допомогли мені знову повірити у власні сили та почати новий етап життя після поранення.", 
+            "en": "Rehabilitation and joint trips helped me believe in my own strength again and start a new stage of life after being wounded." 
+        }
+    }
 ]

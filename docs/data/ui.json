@@ -16,9 +16,10 @@
     "b2": {
         "title": { "uk": "Наша діяльність", "en": "Our Activities" },
         "intro_subtitle": { "uk": "Комплексна допомога ветеранам", "en": "Comprehensive Assistance" },
-        "intro_description": { "uk": "Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів та реабілітацією.", "en": "Our NGO provides support in adaptation to peaceful life, helping with documents and rehabilitation." }
+        "intro_description": { "uk": "Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів та реабілітаційними програмами.", "en": "Our NGO provides support in adaptation to peaceful life, helping with documents and rehabilitation." }
     },
     "b3": { "title": { "uk": "Наші досягнення", "en": "Our Achievements" } },
     "b4": { "title": { "uk": "Наші партнери", "en": "Our Partners" } },
-    "b5": { "title": { "uk": "Наші друзі", "en": "Our Friends" } }
+    "b5": { "title": { "uk": "Наші друзі", "en": "Our Friends" } },
+    "b6": { "title": { "uk": "Історії наших героїв", "en": "Heroes Stories" } }
 }

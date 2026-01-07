@@ -1,19 +1,26 @@
 import { loadTranslations, translatePage } from './i18n.js';
-import { renderActivities, renderStats, renderPartners, renderFriends } from './render.js';
+import { renderActivities, renderStats, renderPartners, renderFriends, renderStories } from './render.js';
 
 let currentLang = 'uk';
-let cache = { translations: {}, activities: [], stats: [], partners: [], friends: [] };
+let cache = { translations: {}, activities: [], stats: [], partners: [], friends: [], stories: [] };
 
 async function init() {
     try {
-        const [t, a, s, p, f] = await Promise.all([
+        const [t, a, s, p, f, st] = await Promise.all([
             loadTranslations(),
             fetch('data/activities.json').then(res => res.json()),
             fetch('data/stats.json').then(res => res.json()),
             fetch('data/partners.json').then(res => res.json()),
-            fetch('data/friends.json').then(res => res.json())
+            fetch('data/friends.json').then(res => res.json()),
+            fetch('data/stories.json').then(res => res.json())
         ]);
-        cache.translations = t; cache.activities = a; cache.stats = s; cache.partners = p; cache.friends = f;
+        cache.translations = t;
+        cache.activities = a;
+        cache.stats = s;
+        cache.partners = p;
+        cache.friends = f;
+        cache.stories = st;
+
         setupLanguageSwitcher();
         setupMobileMenu();
         setupScrollReveal();
@@ -27,6 +34,7 @@ function updateUI() {
     renderStats(cache.stats, currentLang);
     renderPartners(cache.partners);
     renderFriends(cache.friends, currentLang);
+    renderStories(cache.stories, currentLang);
     initCounters(); 
     setTimeout(initPartnersSwiper, 300);
 }
@@ -75,9 +83,12 @@ function initCounters() {
 function setupScrollReveal() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('active');
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.15 });
+
     document.querySelectorAll('section').forEach(s => observer.observe(s));
 }
 
