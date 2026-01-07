@@ -9,9 +9,7 @@ export function renderActivities(data, lang) {
                     <h4>${item.title[lang]}</h4>
                     <div class="b2-flip-hint"><i class="fa-solid fa-rotate"></i></div>
                 </div>
-                <div class="b2-card-back">
-                    <p>${item.desc[lang]}</p>
-                </div>
+                <div class="b2-card-back"><p>${item.desc[lang]}</p></div>
             </div>
         </div>
     `).join('');
@@ -30,12 +28,17 @@ export function renderStats(data, lang) {
 
 export function renderPartners(data) {
     const track = document.getElementById('partners-track');
+    const trackCopy = document.getElementById('partners-track-copy');
     if (!track || !data) return;
-    // 4-кратне дублювання для безшовності
-    const list = [...data, ...data, ...data, ...data];
-    track.innerHTML = list.map(p => `
+
+    // Створюємо контент один раз
+    const html = data.map(p => `
         <a href="${p.link}" class="b4-item" target="_blank" rel="noopener">
-            <img src="${p.img}" alt="${p.name}" onerror="this.src='https://placehold.co/220x100/1a2a44/ffffff?text=Partner'">
+            <img src="${p.img}" alt="${p.name}" onerror="this.src='https://placehold.co/220x100/1a2a44/ffffff?text=Logo'">
         </a>
     `).join('');
+
+    // Вставляємо в обидва контейнери для нескінченного циклу
+    track.innerHTML = html;
+    trackCopy.innerHTML = html;
 }

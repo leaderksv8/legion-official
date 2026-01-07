@@ -21,9 +21,7 @@ async function init() {
         setupMobileMenu();
         setupScrollReveal();
         updateUI();
-    } catch (error) {
-        console.error("Initialization failed:", error);
-    }
+    } catch (e) { console.error("Init error:", e); }
 }
 
 function updateUI() {
@@ -31,37 +29,7 @@ function updateUI() {
     renderActivities(cache.activities, currentLang);
     renderStats(cache.stats, currentLang);
     renderPartners(cache.partners);
-    
     initCounters(); 
-    setTimeout(initPartnersCarousel, 600); 
-}
-
-function initPartnersCarousel() {
-    const slider = document.getElementById('partnersSlider');
-    const track = document.getElementById('partners-track');
-    if (!slider || !track) return;
-
-    let scrollPos = 0;
-    const speed = 0.7; // Оптимальна плавна швидкість
-    let isPaused = false;
-
-    function animate() {
-        if (!isPaused) {
-            scrollPos += speed;
-            if (scrollPos >= track.scrollWidth / 4) {
-                scrollPos = 0;
-            }
-            slider.scrollLeft = scrollPos;
-        }
-        requestAnimationFrame(animate);
-    }
-
-    slider.onmouseenter = () => isPaused = true;
-    slider.onmouseleave = () => isPaused = false;
-    slider.ontouchstart = () => isPaused = true;
-    slider.ontouchend = () => isPaused = false;
-
-    animate();
 }
 
 function initCounters() {
@@ -76,9 +44,7 @@ function initCounters() {
                     if (current >= target) {
                         entry.target.innerText = target;
                         clearInterval(timer);
-                    } else {
-                        entry.target.innerText = Math.ceil(current);
-                    }
+                    } else { entry.target.innerText = Math.ceil(current); }
                 }, 30);
                 observer.unobserve(entry.target);
             }
@@ -90,12 +56,9 @@ function initCounters() {
 function setupScrollReveal() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
+            if (entry.isIntersecting) entry.target.classList.add('active');
         });
-    }, { threshold: 0.15 });
-
+    }, { threshold: 0.1 });
     document.querySelectorAll('section').forEach(s => observer.observe(s));
 }
 

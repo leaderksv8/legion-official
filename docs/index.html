@@ -4,12 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ГО «Легіон Титанів»</title>
-    
-    <!-- Шрифти та іконки -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Незалежні стилі -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/block1.css">
@@ -24,17 +20,12 @@
     <link rel="stylesheet" href="css/ui-elements.css">
 </head>
 <body>
-
-    <!-- HEADER -->
     <header class="main-header">
         <div class="container header-wrapper">
             <a href="index.html" class="logo-area">
-                <div class="logo-box">
-                    <img src="images/000.png" alt="Legion Titans Logo">
-                </div>
+                <div class="logo-box"><img src="images/000.png" alt="Logo"></div>
                 <span class="logo-title" data-i18n="header.logo_title">ГО «Легіон Титанів»</span>
             </a>
-
             <div class="header-controls">
                 <nav class="nav-menu" id="navMenu">
                     <ul>
@@ -44,27 +35,18 @@
                         <li><a href="#contact" class="nav-link" data-i18n="menu.contacts">Контакти</a></li>
                     </ul>
                 </nav>
-
                 <div class="lang-switcher">
                     <button class="lang-btn active" data-lang="uk">UA</button>
                     <button class="lang-btn" data-lang="en">EN</button>
                 </div>
-
-                <button class="menu-toggle" id="menuToggle">
-                    <span></span><span></span><span></span>
-                </button>
+                <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
             </div>
         </div>
     </header>
 
     <main>
-        <!-- БЛОК 1: HERO -->
         <section id="home" class="b1-hero">
-            <div class="b1-bg-wrapper">
-                <div class="b1-bg-image"></div>
-                <div class="b1-overlay"></div>
-                <div class="b1-grid-pattern"></div>
-            </div>
+            <div class="b1-bg-wrapper"><div class="b1-bg-image"></div><div class="b1-overlay"></div><div class="b1-grid-pattern"></div></div>
             <div class="container">
                 <div class="b1-content">
                     <div class="b1-label-wrap"><span class="b1-label" data-i18n="b1.label">ГРОМАДСЬКА ОРГАНІЗАЦІЯ</span></div>
@@ -76,24 +58,20 @@
             </div>
         </section>
 
-        <!-- БЛОК 2: НАША ДІЯЛЬНІСТЬ -->
         <section id="activities" class="b2-activities">
             <div class="container">
                 <h2 class="b2-title-center" data-i18n="b2.title">Наша діяльність</h2>
                 <div class="b2-intro-grid">
-                    <div class="b2-intro-card b2-card-img">
-                        <img src="images/001.jpg" alt="Activity Intro">
-                    </div>
+                    <div class="b2-intro-card b2-card-img"><img src="images/001.jpg" alt="Activity"></div>
                     <div class="b2-intro-card b2-card-text">
                         <h3 data-i18n="b2.intro_subtitle">Комплексна допомога ветеранам</h3>
-                        <p data-i18n="b2.intro_description">Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів, реабілітаційними програмами та юридичним супроводом.</p>
+                        <p data-i18n="b2.intro_description">Наша ГО надає підтримку в адаптації до мирного життя, допомагає з оформленням документів та реабілітацією.</p>
                     </div>
                 </div>
                 <div id="activities-container" class="b2-grid-6"></div>
             </div>
         </section>
 
-        <!-- БЛОК 3: НАШІ ДОСЯГНЕННЯ -->
         <section id="stats" class="b3-stats">
             <div class="container">
                 <h2 class="b3-title" data-i18n="b3.title">Наші досягнення</h2>
@@ -101,27 +79,23 @@
             </div>
         </section>
 
-        <!-- БЛОК 4: НАШІ ПАРТНЕРИ -->
         <section id="partners" class="b4-partners">
-            <div class="container">
-                <h2 class="b4-title" data-i18n="b4.title">Наші партнери</h2>
-            </div>
-            <div class="b4-slider-viewport" id="partnersSlider">
-                <div class="b4-track" id="partners-track">
-                    <!-- JS Render -->
+            <div class="container"><h2 class="b4-title" data-i18n="b4.title">Наші партнери</h2></div>
+            <div class="b4-slider-viewport">
+                <!-- Контейнер для CSS анімації -->
+                <div class="b4-marquee">
+                    <div class="b4-track" id="partners-track"></div>
+                    <div class="b4-track" id="partners-track-copy"></div>
                 </div>
             </div>
         </section>
 
-        <!-- Порожні секції для майбутнього -->
         <section id="friends" class="b5-friends"></section>
         <section id="stories" class="b6-stories"></section>
         <section id="media" class="b7-media"></section>
         <section id="founders" class="b8-founders"></section>
     </main>
-
     <footer id="contact"></footer>
-
     <script type="module" src="js/main.js"></script>
 </body>
 </html>
