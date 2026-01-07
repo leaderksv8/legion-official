@@ -17,14 +17,16 @@ async function init() {
             fetch('data/albums.json').then(res => res.json())
         ]);
         cache = { translations: t, activities: a, stats: s, partners: p, friends: f, stories: st, news: n, albums: al };
+        
         setupLanguageSwitcher();
         setupMobileMenu();
         setupScrollReveal();
         updateUI();
-    } catch (e) { console.error("Init error:", e); }
+    } catch (e) { console.error("Initialization failed:", e); }
 }
 
 function updateUI() {
+    // Рендер всіх блоків
     translatePage(cache.translations, currentLang);
     render.renderActivities(cache.activities, currentLang);
     render.renderStats(cache.stats, currentLang);
@@ -33,23 +35,32 @@ function updateUI() {
     render.renderStories(cache.stories, currentLang);
     render.renderNews(cache.news, currentLang);
     render.renderAlbums(cache.albums, currentLang);
+    
     initCounters(); 
+
+    // КЛЮЧОВИЙ ФІКС: Sequential initialization (Послідовний запуск)
+    // Спочатку запускаємо Swiper, даємо йому 500мс, потім запускаємо Блок 7
     setTimeout(() => {
         initPartnersSwiper();
+    }, 300);
+
+    setTimeout(() => {
         initVerticalCarousels();
-    }, 600);
+    }, 800);
 }
 
 function initPartnersSwiper() {
+    const swiperElem = document.querySelector('.b4-swiper-container');
+    if (!swiperElem) return;
+
     if (window.partnersSwiper) {
         window.partnersSwiper.destroy(true, true);
     }
 
-    // Створюємо Swiper з жорсткими параметрами
     window.partnersSwiper = new Swiper('.b4-swiper-container', {
         loop: true,
         centeredSlides: true,
-        speed: 900,
+        speed: 1000,
         grabCursor: true,
         autoplay: {
             delay: 2500,
@@ -59,18 +70,17 @@ function initPartnersSwiper() {
             nextEl: '.b4-next-unique',
             prevEl: '.b4-prev-unique',
         },
-        // ФІКС: Тільки фіксовані значення slidesPerView для loop
+        // Фіксована кількість слайдів для стабільності математики Swiper
         breakpoints: {
-            320: { slidesPerView: 1 },
-            768: { slidesPerView: 3 },
-            1200: { slidesPerView: 5 }
+            320: { slidesPerView: 1, spaceBetween: 20 },
+            768: { slidesPerView: 3, spaceBetween: 30 },
+            1200: { slidesPerView: 5, spaceBetween: 40 }
         },
-        // Величезний запас для бескінечності
-        loopedSlides: 20,
-        loopAdditionalSlides: 20,
+        // Масштабне клонування для запобігання зупинкам
+        loopedSlides: 10,
+        loopAdditionalSlides: 10,
         observer: true,
         observeParents: true,
-        watchSlidesProgress: true
     });
 }
 
@@ -80,13 +90,21 @@ function initVerticalCarousels() {
         const viewport = document.getElementById(config.id);
         const track = document.getElementById(config.trackId);
         if (!viewport || !track) return;
-        let scrollPos = 0, speed = 0.6, isPaused = false;
+        
+        let scrollPos = 0;
+        const speed = 0.5;
+        let isPaused = false;
+
         viewport.onmouseenter = () => isPaused = true;
         viewport.onmouseleave = () => isPaused = false;
+
         function animate() {
             if (!isPaused) {
                 scrollPos += speed;
-                if (scrollPos >= track.scrollHeight / 2) scrollPos = 0;
+                // Скидання на середину (так як дані в render.js дубльовані)
+                if (scrollPos >= track.scrollHeight / 2) {
+                    scrollPos = 0;
+                }
                 viewport.scrollTop = scrollPos;
             }
             requestAnimationFrame(animate);
