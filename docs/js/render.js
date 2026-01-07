@@ -43,7 +43,7 @@ export function renderNews(data, lang) {
     const container = document.getElementById('news-container');
     if (!container || !data) return;
     container.innerHTML = data.map((n, index) => `
-        <a href="${n.link}" class="b7-news-item" style="transition-delay: ${index * 0.1}s">
+        <a href="${n.link}" class="b7-news-card b7-news-item" style="transition-delay: ${index * 0.1}s">
             <span class="b7-date">${n.date}</span>
             <h4>${n.title[lang]}</h4>
         </a>

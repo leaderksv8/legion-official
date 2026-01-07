@@ -53,7 +53,6 @@
     </header>
 
     <main>
-        <!-- БЛОК 1: HERO -->
         <section id="home" class="b1-hero">
             <div class="b1-bg-wrapper"><div class="b1-bg-image"></div><div class="b1-overlay"></div><div class="b1-grid-pattern"></div></div>
             <div class="container"><div class="b1-content">
@@ -92,25 +91,40 @@
             <div class="container"><h2 class="b6-title" data-i18n="b6.title">Історії наших героїв</h2><div id="stories-container" class="b6-grid"></div></div>
         </section>
 
-        <!-- БЛОК 7: МЕДІА-АРХІВ (ЧІТКИЙ КОЛАЖ) -->
+        <!-- БЛОК 7: МЕДІА (ПОВНЕ ЗАПОВНЕННЯ ГАЗЕТАМИ) -->
         <section id="media" class="b7-media">
-            <!-- ЧІТКИЙ КОЛАЖ ГАЗЕТ -->
-            <div class="b7-newspaper-collage">
-                <img src="images/newspapers/news1.jpg" class="paper p1" alt="Newspaper">
-                <img src="images/newspapers/news2.jpg" class="paper p2" alt="Newspaper">
-                <img src="images/newspapers/news3.jpg" class="paper p3" alt="Newspaper">
-                <img src="images/newspapers/news4.jpg" class="paper p4" alt="Newspaper">
-                <img src="images/newspapers/news5.jpg" class="paper p5" alt="Newspaper">
-                <img src="images/newspapers/news6.jpg" class="paper p6" alt="Newspaper">
+            <!-- МОЗАЇКА ГАЗЕТ (ЗАПОВНЮЄ ВЕСЬ ФОН) -->
+            <div class="b7-mosaic-background">
+                <div class="b7-mosaic-column">
+                    <img src="images/newspapers/news1.jpg" alt="Paper">
+                    <img src="images/newspapers/news2.jpg" alt="Paper">
+                    <img src="images/newspapers/news3.jpg" alt="Paper">
+                </div>
+                <div class="b7-mosaic-column">
+                    <img src="images/newspapers/news4.jpg" alt="Paper">
+                    <img src="images/newspapers/news5.jpg" alt="Paper">
+                    <img src="images/newspapers/news6.jpg" alt="Paper">
+                </div>
+                <div class="b7-mosaic-column">
+                    <img src="images/newspapers/news2.jpg" alt="Paper">
+                    <img src="images/newspapers/news1.jpg" alt="Paper">
+                    <img src="images/newspapers/news4.jpg" alt="Paper">
+                </div>
+                <div class="b7-mosaic-column">
+                    <img src="images/newspapers/news3.jpg" alt="Paper">
+                    <img src="images/newspapers/news6.jpg" alt="Paper">
+                    <img src="images/newspapers/news5.jpg" alt="Paper">
+                </div>
             </div>
             
+            <!-- Легкий фільтр для читабельності -->
             <div class="b7-fog-layer"></div>
             
             <div class="container">
                 <h2 class="b7-title" data-i18n="b7.title">Медіа-центр</h2>
                 <div class="b7-main-grid">
                     <div class="b7-col">
-                        <div class="b7-header-line"><h3 data-i18n="b7.news_title">Хроніка</h3></div>
+                        <div class="b7-header-line"><h3 data-i18n="b7.news_title">Хроніка подій</h3></div>
                         <div id="news-container" class="b7-news-list"></div>
                     </div>
                     <div class="b7-col">
