@@ -1,6 +1,7 @@
 .b4-partners {
     padding: 100px 0;
-    background-color: #ffffff;
+    /* Світло-сіро-синій професійний фон */
+    background-color: #f1f5f9; 
     overflow: hidden;
 }
 
@@ -26,8 +27,8 @@
 .b4-track {
     display: flex;
     align-items: center;
-    width: max-content; /* Ширина залежить від кількості логотипів */
-    gap: 60px;
+    width: max-content;
+    gap: 80px; /* Трохи збільшив відступ для "повітря" */
     will-change: transform;
 }
 
@@ -47,7 +48,7 @@
     max-height: 80%;
     object-fit: contain;
     filter: grayscale(100%);
-    opacity: 0.5;
+    opacity: 0.6; /* Трохи збільшив видимість на сірому фоні */
     transition: all 0.4s ease;
 }
 
@@ -57,13 +58,13 @@
     transform: scale(1.1);
 }
 
-/* Ефект градієнтного згасання по боках */
+/* Ефект градієнтного згасання по боках — тепер під колір фону #f1f5f9 */
 .b4-slider-viewport::before,
 .b4-slider-viewport::after {
     content: "";
     position: absolute;
     top: 0;
-    width: 150px;
+    width: 200px; /* Збільшив зону згасання для м'якості */
     height: 100%;
     z-index: 2;
     pointer-events: none;
@@ -71,10 +72,16 @@
 
 .b4-slider-viewport::before {
     left: 0;
-    background: linear-gradient(to right, rgba(255,255,255,1), transparent);
+    background: linear-gradient(to right, #f1f5f9 10%, transparent);
 }
 
 .b4-slider-viewport::after {
     right: 0;
-    background: linear-gradient(to left, rgba(255,255,255,1), transparent);
+    background: linear-gradient(to left, #f1f5f9 10%, transparent);
+}
+
+/* Адаптація швидкості для мобільних (опціонально) */
+@media (max-width: 768px) {
+    .b4-track { gap: 40px; }
+    .b4-item { width: 160px; }
 }
