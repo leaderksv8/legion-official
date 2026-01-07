@@ -2,6 +2,7 @@
     padding: 120px 0;
     background-color: #020617;
     overflow: hidden;
+    user-select: none; /* Щоб картинки не виділялися при драгу */
 }
 
 .b4-title {
@@ -15,32 +16,36 @@
 
 .b4-slider-viewport {
     width: 100%;
+    overflow-x: scroll; /* Дозволяємо скрол */
+    overflow-y: hidden;
     position: relative;
     padding: 40px 0;
-    display: flex;
-    overflow: hidden;
+    cursor: grab; /* Курсор "рука" */
+    scrollbar-width: none; /* Ховаємо скроллбар Firefox */
+    -ms-overflow-style: none; /* Ховаємо скроллбар IE */
 }
 
-/* Контейнер каруселі */
-.b4-marquee {
-    display: flex;
-    width: max-content;
-    animation: b4-scroll 30s linear infinite; /* Плавна CSS анімація */
+.b4-slider-viewport::-webkit-scrollbar {
+    display: none; /* Ховаємо скроллбар Chrome/Safari */
 }
 
-.b4-marquee:hover {
-    animation-play-state: paused; /* Зупинка при наведенні */
+.b4-slider-viewport:active {
+    cursor: grabbing; /* Курсор при драгу */
 }
 
-/* Трек з логотипами */
 .b4-track {
     display: flex;
     align-items: center;
+    width: max-content;
     gap: 60px;
-    padding: 0 30px;
+    padding: 0 50px;
+    pointer-events: none; /* Щоб картинки не заважали драгу контейнера */
 }
 
-/* Картка партнера */
+.b4-track a {
+    pointer-events: auto; /* Але кліки на посилання працюють */
+}
+
 .b4-item {
     flex: 0 0 auto;
     width: 240px;
@@ -52,7 +57,7 @@
     align-items: center;
     justify-content: center;
     padding: 25px;
-    transition: 0.4s ease;
+    transition: all 0.4s ease;
     backdrop-filter: blur(5px);
 }
 
@@ -68,18 +73,11 @@
 .b4-item:hover {
     border-color: var(--accent-gold);
     background: rgba(197, 160, 89, 0.08);
-    transform: scale(1.05);
 }
 
 .b4-item:hover img {
     filter: grayscale(0%) brightness(1.1);
     opacity: 1;
-}
-
-/* CSS Анімація для ідеальної безшовності */
-@keyframes b4-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* Рівно половина загальної довжини */
 }
 
 /* Маски згасання */

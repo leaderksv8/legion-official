@@ -12,11 +12,7 @@ async function init() {
             fetch('data/stats.json').then(res => res.json()),
             fetch('data/partners.json').then(res => res.json())
         ]);
-        cache.translations = t;
-        cache.activities = a;
-        cache.stats = s;
-        cache.partners = p;
-
+        cache.translations = t; cache.activities = a; cache.stats = s; cache.partners = p;
         setupLanguageSwitcher();
         setupMobileMenu();
         setupScrollReveal();
@@ -30,6 +26,61 @@ function updateUI() {
     renderStats(cache.stats, currentLang);
     renderPartners(cache.partners);
     initCounters(); 
+    setTimeout(initPartnersCarousel, 500);
+}
+
+function initPartnersCarousel() {
+    const slider = document.getElementById('partnersSlider');
+    const track = document.getElementById('partners-track');
+    if (!slider || !track) return;
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let autoScrollSpeed = 0.7;
+    let isPaused = false;
+
+    // Автопрокрутка
+    function step() {
+        if (!isPaused && !isDown) {
+            slider.scrollLeft += autoScrollSpeed;
+            if (slider.scrollLeft >= track.scrollWidth / 3) {
+                slider.scrollLeft = 0;
+            }
+        }
+        requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+
+    // Взаємодія мишкою
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        isPaused = true;
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', () => {
+        isDown = false;
+        isPaused = false;
+    });
+
+    slider.addEventListener('mouseup', () => {
+        isDown = false;
+        isPaused = false;
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2; // Швидкість скролу мишкою
+        slider.scrollLeft = scrollLeft - walk;
+    });
+
+    // Взаємодія тачем (телефон)
+    slider.addEventListener('touchstart', () => { isPaused = true; });
+    slider.addEventListener('touchend', () => { isPaused = false; });
 }
 
 function initCounters() {
