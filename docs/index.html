@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ГО «Легіон Титанів»</title>
+    
+    <!-- Шрифти та іконки -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Swiper.js CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- Незалежні стилі -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/block1.css">
@@ -21,6 +27,7 @@
     <link rel="stylesheet" href="css/ui-elements.css">
 </head>
 <body>
+
     <header class="main-header">
         <div class="container header-wrapper">
             <a href="index.html" class="logo-area">
@@ -46,6 +53,7 @@
     </header>
 
     <main>
+        <!-- БЛОК 1: HERO -->
         <section id="home" class="b1-hero">
             <div class="b1-bg-wrapper"><div class="b1-bg-image"></div><div class="b1-overlay"></div><div class="b1-grid-pattern"></div></div>
             <div class="container"><div class="b1-content">
@@ -57,6 +65,7 @@
             </div></div>
         </section>
 
+        <!-- БЛОК 2: ДІЯЛЬНІСТЬ -->
         <section id="activities" class="b2-activities">
             <div class="container">
                 <h2 class="b2-title-center" data-i18n="b2.title">Наша діяльність</h2>
@@ -64,6 +73,7 @@
             </div>
         </section>
 
+        <!-- БЛОК 3: ДОСЯГНЕННЯ -->
         <section id="stats" class="b3-stats">
             <div class="container">
                 <h2 class="b3-title" data-i18n="b3.title">Наші досягнення</h2>
@@ -71,17 +81,28 @@
             </div>
         </section>
 
+        <!-- БЛОК 4: ПАРТНЕРИ (ІДЕАЛЬНА ВЕРСІЯ) -->
         <section id="partners" class="b4-partners">
-            <div class="container"><h2 class="b4-title" data-i18n="b4.title">Наші партнери</h2></div>
-            <div class="b4-slider-area">
-                <div class="swiper b4-swiper"><div class="swiper-wrapper" id="partners-track"></div></div>
-                <div class="b4-nav-controls">
-                    <button class="b4-arrow b4-prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
-                    <button class="b4-arrow b4-next-btn"><i class="fa-solid fa-chevron-right"></i></button>
+            <div class="container">
+                <h2 class="b4-title" data-i18n="b4.title">Наші партнери</h2>
+            </div>
+            
+            <div class="b4-slider-outer">
+                <div class="swiper b4-swiper">
+                    <div class="swiper-wrapper" id="partners-track">
+                        <!-- JS Render -->
+                    </div>
+                </div>
+                
+                <!-- Навігація чітко під слайдером -->
+                <div class="b4-navigation">
+                    <button class="b4-btn b4-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="b4-btn b4-next"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
             </div>
         </section>
 
+        <!-- БЛОК 5: ДРУЗІ -->
         <section id="friends" class="b5-friends">
             <div class="container">
                 <h2 class="b5-title" data-i18n="b5.title">Наші друзі</h2>
@@ -89,6 +110,7 @@
             </div>
         </section>
 
+        <!-- БЛОК 6: ІСТОРІЇ -->
         <section id="stories" class="b6-stories">
             <div class="container">
                 <h2 class="b6-title" data-i18n="b6.title">Історії наших героїв</h2>
@@ -96,19 +118,17 @@
             </div>
         </section>
 
-        <!-- БЛОК 7: МЕДІА-ЦЕНТР -->
+        <!-- БЛОК 7: МЕДІА -->
         <section id="media" class="b7-media">
             <div class="container">
                 <h2 class="b7-title" data-i18n="b7.title">Медіа-центр</h2>
                 <div class="b7-main-grid">
-                    <!-- Колонка Новин -->
                     <div class="b7-col">
                         <h3 class="b7-subtitle" data-i18n="b7.news_title">Новини</h3>
                         <div class="b7-vertical-viewport" id="newsViewport">
                             <div class="b7-vertical-track" id="news-container"></div>
                         </div>
                     </div>
-                    <!-- Колонка Альбомів -->
                     <div class="b7-col">
                         <h3 class="b7-subtitle" data-i18n="b7.albums_title">Фотоальбоми</h3>
                         <div class="b7-vertical-viewport" id="albumsViewport">
@@ -121,7 +141,10 @@
 
         <section id="founders" class="b8-founders"></section>
     </main>
+
     <footer id="contact"></footer>
+
+    <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module" src="js/main.js"></script>
 </body>

@@ -37,25 +37,24 @@ function updateUI() {
     
     initCounters(); 
     
-    // Ініціалізація каруселей після рендеру
+    // Ініціалізація каруселей з невеликою затримкою для промальовки DOM
     setTimeout(() => {
         initPartnersSwiper();
         initVerticalCarousels();
-    }, 300);
+    }, 500);
 }
 
 function initPartnersSwiper() {
-    // Якщо Swiper вже існує - видаляємо його
     if (window.partnersSwiper) {
         window.partnersSwiper.destroy(true, true);
     }
 
     window.partnersSwiper = new Swiper('.b4-swiper', {
-        // Основні налаштування для стабільності
         loop: true,
         centeredSlides: true,
+        speed: 1000,
         grabCursor: true,
-        speed: 800,
+        slideToClickedSlide: true,
         
         autoplay: {
             delay: 3000,
@@ -63,19 +62,20 @@ function initPartnersSwiper() {
         },
 
         navigation: {
-            nextEl: '.b4-next-btn',
-            prevEl: '.b4-prev-btn',
+            nextEl: '.b4-next',
+            prevEl: '.b4-prev',
         },
 
-        // Чітка кількість слайдів (вирішує проблему стрибків на ПК)
+        // Фіксована кількість слайдів гарантує відсутність стрибків
         breakpoints: {
-            320: { slidesPerView: 1.2, spaceBetween: 20 },
+            320: { slidesPerView: 1.5, spaceBetween: 20 },
             768: { slidesPerView: 3, spaceBetween: 30 },
             1200: { slidesPerView: 5, spaceBetween: 40 }
         },
 
-        // Гарантуємо клонування для безшовності
-        loopAdditionalSlides: 5,
+        // Клонування слайдів для безшовного циклу
+        loopedSlides: 10,
+        loopAdditionalSlides: 10,
         observer: true,
         observeParents: true
     });
