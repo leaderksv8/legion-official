@@ -1,6 +1,6 @@
 .b4-partners {
     padding: 120px 0;
-    background: #020617; /* Глибокий темний фон */
+    background: #020617;
     overflow: hidden;
     position: relative;
 }
@@ -10,70 +10,77 @@
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 800;
     color: var(--white);
-    margin-bottom: 60px;
+    margin-bottom: 80px;
     text-transform: uppercase;
 }
 
-.b4-slider-outer {
+.b4-slider-wrapper {
     position: relative;
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
 }
 
-.b4-swiper {
+.b4-swiper-container {
     width: 100%;
-    padding: 50px 0 100px !important;
+    padding: 40px 0 100px !important;
 }
 
-/* Картка партнера */
-.b4-item-box {
-    width: 260px;
-    height: 260px;
-    background: rgba(255, 255, 255, 0.03);
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    transition: 0.5s ease;
+}
+
+.b4-card-item {
+    width: 250px;
+    height: 250px;
+    background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 40px;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 30px;
+    transition: all 0.5s ease;
     backdrop-filter: blur(10px);
 }
 
-.b4-item-box img {
-    max-width: 100%;
-    max-height: 100%;
+.b4-card-item img {
+    max-width: 80%;
+    max-height: 80%;
     object-fit: contain;
-    filter: grayscale(100%) brightness(0.7);
-    transition: 0.5s;
+    filter: grayscale(100%) brightness(0.6);
 }
 
-/* Ефект фокусу на активному слайді */
-.swiper-slide-active .b4-item-box {
+/* Активний фокус */
+.swiper-slide-active .b4-card-item {
     transform: scale(1.15);
     background: rgba(255, 255, 255, 0.1);
     border-color: var(--accent-gold);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 20px rgba(197, 160, 89, 0.2);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
 }
 
-.swiper-slide-active .b4-item-box img {
+.swiper-slide-active .b4-card-item img {
     filter: grayscale(0%) brightness(1.1);
 }
 
-/* Кнопки навігації */
-.b4-navigation {
+/* Керування */
+.b4-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    justify-content: center;
-    gap: 25px;
-    margin-top: -30px;
-    position: relative;
+    gap: 20px;
     z-index: 100;
 }
 
-.b4-btn {
-    width: 60px;
-    height: 60px;
+.b4-nav-btn {
+    width: 55px;
+    height: 55px;
     background: var(--white);
     color: var(--primary-dark);
     border: none;
@@ -83,19 +90,18 @@
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    transition: 0.3s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
 }
 
-.b4-btn:hover {
+.b4-nav-btn:hover {
     background: var(--accent-gold);
     color: var(--white);
-    transform: scale(1.1);
 }
 
-/* Маски згасання по боках */
-.b4-slider-outer::before,
-.b4-slider-outer::after {
+/* Градієнти */
+.b4-slider-wrapper::before,
+.b4-slider-wrapper::after {
     content: "";
     position: absolute;
     top: 0;
@@ -104,10 +110,9 @@
     z-index: 10;
     pointer-events: none;
 }
-.b4-slider-outer::before { left: 0; background: linear-gradient(to right, #020617, transparent); }
-.b4-slider-outer::after { right: 0; background: linear-gradient(to left, #020617, transparent); }
+.b4-slider-wrapper::before { left: 0; background: linear-gradient(to right, #020617, transparent); }
+.b4-slider-wrapper::after { right: 0; background: linear-gradient(to left, #020617, transparent); }
 
 @media (max-width: 768px) {
-    .b4-item-box { width: 200px; height: 200px; }
-    .b4-swiper { padding-bottom: 80px !important; }
+    .b4-card-item { width: 200px; height: 200px; }
 }

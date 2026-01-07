@@ -17,7 +17,6 @@ async function init() {
             fetch('data/albums.json').then(res => res.json())
         ]);
         cache = { translations: t, activities: a, stats: s, partners: p, friends: f, stories: st, news: n, albums: al };
-
         setupLanguageSwitcher();
         setupMobileMenu();
         setupScrollReveal();
@@ -34,14 +33,11 @@ function updateUI() {
     render.renderStories(cache.stories, currentLang);
     render.renderNews(cache.news, currentLang);
     render.renderAlbums(cache.albums, currentLang);
-    
     initCounters(); 
-    
-    // Ініціалізація каруселей з невеликою затримкою для промальовки DOM
     setTimeout(() => {
         initPartnersSwiper();
         initVerticalCarousels();
-    }, 500);
+    }, 600);
 }
 
 function initPartnersSwiper() {
@@ -49,50 +45,42 @@ function initPartnersSwiper() {
         window.partnersSwiper.destroy(true, true);
     }
 
-    window.partnersSwiper = new Swiper('.b4-swiper', {
+    // Створюємо Swiper з жорсткими параметрами
+    window.partnersSwiper = new Swiper('.b4-swiper-container', {
         loop: true,
         centeredSlides: true,
-        speed: 1000,
+        speed: 900,
         grabCursor: true,
-        slideToClickedSlide: true,
-        
         autoplay: {
-            delay: 3000,
+            delay: 2500,
             disableOnInteraction: false,
         },
-
         navigation: {
-            nextEl: '.b4-next',
-            prevEl: '.b4-prev',
+            nextEl: '.b4-next-unique',
+            prevEl: '.b4-prev-unique',
         },
-
-        // Фіксована кількість слайдів гарантує відсутність стрибків
+        // ФІКС: Тільки фіксовані значення slidesPerView для loop
         breakpoints: {
-            320: { slidesPerView: 1.5, spaceBetween: 20 },
-            768: { slidesPerView: 3, spaceBetween: 30 },
-            1200: { slidesPerView: 5, spaceBetween: 40 }
+            320: { slidesPerView: 1 },
+            768: { slidesPerView: 3 },
+            1200: { slidesPerView: 5 }
         },
-
-        // Клонування слайдів для безшовного циклу
-        loopedSlides: 10,
-        loopAdditionalSlides: 10,
+        // Величезний запас для бескінечності
+        loopedSlides: 20,
+        loopAdditionalSlides: 20,
         observer: true,
-        observeParents: true
+        observeParents: true,
+        watchSlidesProgress: true
     });
 }
 
 function initVerticalCarousels() {
-    const configs = [
-        { id: 'newsViewport', trackId: 'news-container' },
-        { id: 'albumsViewport', trackId: 'albums-container' }
-    ];
+    const configs = [{ id: 'newsViewport', trackId: 'news-container' }, { id: 'albumsViewport', trackId: 'albums-container' }];
     configs.forEach(config => {
         const viewport = document.getElementById(config.id);
         const track = document.getElementById(config.trackId);
         if (!viewport || !track) return;
-        let scrollPos = 0;
-        let speed = 0.6;
-        let isPaused = false;
+        let scrollPos = 0, speed = 0.6, isPaused = false;
         viewport.onmouseenter = () => isPaused = true;
         viewport.onmouseleave = () => isPaused = false;
         function animate() {
@@ -116,10 +104,8 @@ function initCounters() {
                 let current = 0;
                 const timer = setInterval(() => {
                     current += target / 50;
-                    if (current >= target) {
-                        entry.target.innerText = target;
-                        clearInterval(timer);
-                    } else { entry.target.innerText = Math.ceil(current); }
+                    if (current >= target) { entry.target.innerText = target; clearInterval(timer); }
+                    else { entry.target.innerText = Math.ceil(current); }
                 }, 30);
                 observer.unobserve(entry.target);
             }
@@ -130,9 +116,7 @@ function initCounters() {
 
 function setupScrollReveal() {
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('active');
-        });
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
     }, { threshold: 0.15 });
     document.querySelectorAll('section').forEach(s => observer.observe(s));
 }
