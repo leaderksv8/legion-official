@@ -1,70 +1,97 @@
 .b4-partners {
-    padding: 100px 0;
-    /* Світло-сіро-синій професійний фон */
-    background-color: #f1f5f9; 
+    padding: 120px 0;
+    background-color: #020617; /* Найтемніший преміальний фон */
     overflow: hidden;
+    position: relative;
 }
 
 .b4-title {
     text-align: center;
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 800;
-    color: var(--primary-dark);
-    margin-bottom: 60px;
+    color: var(--accent-gold); /* Золотий заголовок на темному фоні */
+    margin-bottom: 80px;
     text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
 }
 
-/* Вікно перегляду каруселі */
+/* Активація заголовка при скролі */
+.b4-partners.active .b4-title {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .b4-slider-viewport {
     width: 100%;
     overflow: hidden;
     position: relative;
-    padding: 20px 0;
-    cursor: pointer;
+    padding: 40px 0;
+    /* Ефект появи всього блоку каруселі */
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s;
 }
 
-/* Трек каруселі */
+.b4-partners.active .b4-slider-viewport {
+    opacity: 1;
+    transform: scale(1);
+}
+
 .b4-track {
     display: flex;
     align-items: center;
     width: max-content;
-    gap: 80px; /* Трохи збільшив відступ для "повітря" */
+    gap: 50px;
     will-change: transform;
 }
 
-/* Картка партнера */
+/* Картка партнера з ефектом скла */
 .b4-item {
     flex: 0 0 auto;
-    width: 220px;
-    height: 100px;
+    width: 240px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(197, 160, 89, 0.1);
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.4s ease;
+    padding: 25px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
 }
 
 .b4-item img {
     max-width: 100%;
-    max-height: 80%;
+    max-height: 100%;
     object-fit: contain;
-    filter: grayscale(100%);
-    opacity: 0.6; /* Трохи збільшив видимість на сірому фоні */
-    transition: all 0.4s ease;
+    filter: grayscale(100%) brightness(0.8);
+    opacity: 0.5;
+    transition: all 0.5s ease;
+}
+
+/* Ефект при наведенні: Золоте сяйво та колір */
+.b4-item:hover {
+    background: rgba(197, 160, 89, 0.08);
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 30px rgba(197, 160, 89, 0.15);
+    transform: translateY(-5px) scale(1.05);
 }
 
 .b4-item:hover img {
-    filter: grayscale(0%);
+    filter: grayscale(0%) brightness(1.1);
     opacity: 1;
-    transform: scale(1.1);
 }
 
-/* Ефект градієнтного згасання по боках — тепер під колір фону #f1f5f9 */
+/* Градієнтні маски під колір фону #020617 */
 .b4-slider-viewport::before,
 .b4-slider-viewport::after {
     content: "";
     position: absolute;
     top: 0;
-    width: 200px; /* Збільшив зону згасання для м'якості */
+    width: 250px;
     height: 100%;
     z-index: 2;
     pointer-events: none;
@@ -72,16 +99,15 @@
 
 .b4-slider-viewport::before {
     left: 0;
-    background: linear-gradient(to right, #f1f5f9 10%, transparent);
+    background: linear-gradient(to right, #020617 20%, transparent);
 }
 
 .b4-slider-viewport::after {
     right: 0;
-    background: linear-gradient(to left, #f1f5f9 10%, transparent);
+    background: linear-gradient(to left, #020617 20%, transparent);
 }
 
-/* Адаптація швидкості для мобільних (опціонально) */
 @media (max-width: 768px) {
-    .b4-track { gap: 40px; }
-    .b4-item { width: 160px; }
+    .b4-slider-viewport::before, .b4-slider-viewport::after { width: 100px; }
+    .b4-item { width: 180px; height: 90px; }
 }

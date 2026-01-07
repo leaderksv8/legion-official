@@ -5,21 +5,25 @@ let currentLang = 'uk';
 let cache = { translations: {}, activities: [], stats: [], partners: [] };
 
 async function init() {
-    const [t, a, s, p] = await Promise.all([
-        loadTranslations(),
-        fetch('data/activities.json').then(res => res.json()),
-        fetch('data/stats.json').then(res => res.json()),
-        fetch('data/partners.json').then(res => res.json())
-    ]);
-    cache.translations = t;
-    cache.activities = a;
-    cache.stats = s;
-    cache.partners = p;
+    try {
+        const [t, a, s, p] = await Promise.all([
+            loadTranslations(),
+            fetch('data/activities.json').then(res => res.json()),
+            fetch('data/stats.json').then(res => res.json()),
+            fetch('data/partners.json').then(res => res.json())
+        ]);
+        cache.translations = t;
+        cache.activities = a;
+        cache.stats = s;
+        cache.partners = p;
 
-    setupLanguageSwitcher();
-    setupMobileMenu();
-    setupScrollReveal();
-    updateUI();
+        setupLanguageSwitcher();
+        setupMobileMenu();
+        setupScrollReveal();
+        updateUI();
+    } catch (error) {
+        console.error("Initialization failed:", error);
+    }
 }
 
 function updateUI() {
@@ -27,8 +31,9 @@ function updateUI() {
     renderActivities(cache.activities, currentLang);
     renderStats(cache.stats, currentLang);
     renderPartners(cache.partners);
+    
     initCounters(); 
-    initPartnersCarousel();
+    setTimeout(initPartnersCarousel, 600); 
 }
 
 function initPartnersCarousel() {
@@ -37,13 +42,13 @@ function initPartnersCarousel() {
     if (!slider || !track) return;
 
     let scrollPos = 0;
-    let speed = 0.5; // Ваша швидкість
+    const speed = 0.7; // Оптимальна плавна швидкість
     let isPaused = false;
 
     function animate() {
         if (!isPaused) {
             scrollPos += speed;
-            if (scrollPos >= track.scrollWidth / 3) {
+            if (scrollPos >= track.scrollWidth / 4) {
                 scrollPos = 0;
             }
             slider.scrollLeft = scrollPos;
@@ -51,8 +56,10 @@ function initPartnersCarousel() {
         requestAnimationFrame(animate);
     }
 
-    slider.addEventListener('mouseenter', () => isPaused = true);
-    slider.addEventListener('mouseleave', () => isPaused = false);
+    slider.onmouseenter = () => isPaused = true;
+    slider.onmouseleave = () => isPaused = false;
+    slider.ontouchstart = () => isPaused = true;
+    slider.ontouchend = () => isPaused = false;
 
     animate();
 }
@@ -83,9 +90,12 @@ function initCounters() {
 function setupScrollReveal() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('active');
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.15 });
+
     document.querySelectorAll('section').forEach(s => observer.observe(s));
 }
 
