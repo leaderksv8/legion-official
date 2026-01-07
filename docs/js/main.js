@@ -1,41 +1,70 @@
 import { loadTranslations, translatePage } from './i18n.js';
-import { renderActivities } from './render.js';
+import { renderActivities, renderStats } from './render.js';
 
 let currentLang = 'uk';
-let cache = { translations: {}, activities: [] };
+let cache = { translations: {}, activities: [], stats: [] };
 
 async function init() {
-    const [t, a] = await Promise.all([
+    const [t, a, s] = await Promise.all([
         loadTranslations(),
-        fetch('data/activities.json').then(res => res.json())
+        fetch('data/activities.json').then(res => res.json()),
+        fetch('data/stats.json').then(res => res.json())
     ]);
     cache.translations = t;
     cache.activities = a;
+    cache.stats = s;
 
     setupLanguageSwitcher();
     setupMobileMenu();
-    setupScrollReveal(); // Нова функція для анімацій
+    setupScrollReveal();
     updateUI();
 }
 
 function updateUI() {
     translatePage(cache.translations, currentLang);
     renderActivities(cache.activities, currentLang);
+    renderStats(cache.stats, currentLang);
+    initCounters(); 
 }
 
-// Функція для відстеження скролу
-function setupScrollReveal() {
+function initCounters() {
+    const counters = document.querySelectorAll('.b3-number');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('active');
+                const target = +entry.target.dataset.target;
+                const duration = 2000; // 2 секунди
+                const stepTime = 30;
+                const steps = duration / stepTime;
+                const increment = target / steps;
+                let current = 0;
+
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        entry.target.innerText = target;
+                        clearInterval(timer);
+                    } else {
+                        entry.target.innerText = Math.ceil(current);
+                    }
+                }, stepTime);
+                
+                observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.5 });
 
-    // Відстежуємо Блок 2 (можна додати й інші блоки пізніше)
-    const b2 = document.querySelector('.b2-activities');
-    if (b2) observer.observe(b2);
+    counters.forEach(c => observer.observe(c));
+}
+
+function setupScrollReveal() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('active');
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section').forEach(s => observer.observe(s));
 }
 
 function setupLanguageSwitcher() {

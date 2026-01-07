@@ -1,6 +1,18 @@
 [
-  { "label": { "uk": "Допомогли ветеранам", "en": "Veterans helped" }, "value": 150, "suffix": "+" },
-  { "label": { "uk": "Юридичних консультацій", "en": "Legal consultations" }, "value": 340, "suffix": "" },
-  { "label": { "uk": "Реабілітаційних виїздів", "en": "Rehabilitation trips" }, "value": 12, "suffix": "" },
-  { "label": { "uk": "Залучено партнерів", "en": "Partners involved" }, "value": 25, "suffix": "+" }
+    {
+        "value": 150,
+        "label": { "uk": "Допомогли ветеранам", "en": "Veterans Assisted" }
+    },
+    {
+        "value": 340,
+        "label": { "uk": "Юридичних консультацій", "en": "Legal Consultations" }
+    },
+    {
+        "value": 12,
+        "label": { "uk": "Реабілітаційних виїздів", "en": "Rehabilitation Trips" }
+    },
+    {
+        "value": 25,
+        "label": { "uk": "Залучено партнерів", "en": "Partners Involved" }
+    }
 ]
