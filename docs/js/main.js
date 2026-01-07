@@ -38,23 +38,14 @@ function updateUI() {
     setTimeout(() => initPartnersSwiper(), 600);
 }
 
-// ФУНКЦІЯ ГАЛЕРЕЇ
-window.openGallery = (albumId) => {
-    const album = cache.albums.find(a => a.id === albumId);
+// ГАЛЕРЕЯ
+window.openGallery = (id) => {
+    const album = cache.albums.find(a => a.id === id);
     if (!album) return;
-    
     const wrapper = document.getElementById('modal-gallery-wrapper');
-    wrapper.innerHTML = album.photos.map(src => `
-        <div class="swiper-slide"><img src="${src}" alt="Gallery Photo"></div>
-    `).join('');
-
-    const modal = document.getElementById('galleryModal');
-    modal.style.display = 'flex';
-
-    new Swiper('.b7-gallery-swiper', {
-        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-        loop: true
-    });
+    wrapper.innerHTML = album.photos.map(src => `<div class="swiper-slide"><img src="${src}"></div>`).join('');
+    document.getElementById('galleryModal').style.display = 'flex';
+    new Swiper('.b7-gallery-swiper', { navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }, loop: true });
 };
 
 function setupGalleryModal() {

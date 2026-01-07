@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ГО «Легіон Титанів»</title>
     
+    <!-- Шрифти -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Swiper.js CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
+    <!-- Незалежні стилі -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/block1.css">
@@ -87,28 +91,32 @@
             <div class="container"><h2 class="b6-title" data-i18n="b6.title">Історії наших героїв</h2><div id="stories-container" class="b6-grid"></div></div>
         </section>
 
-        <!-- БЛОК 7: МЕДІА-АРХІВ -->
+        <!-- БЛОК 7: МЕДІА-АРХІВ (NEWSPAPER VERSION) -->
         <section id="media" class="b7-media">
-            <!-- ГАЗЕТНИЙ ФОН -->
-            <div class="b7-newspaper-overlay"></div>
+            <!-- Стіна з газет на фоні -->
+            <div class="b7-newspaper-wall"></div>
+            <!-- Туман для читабельності -->
+            <div class="b7-fog-overlay"></div>
             
             <div class="container">
                 <h2 class="b7-title" data-i18n="b7.title">Медіа-центр</h2>
+                
                 <div class="b7-main-grid">
-                    <!-- Хроніка -->
+                    <!-- Хроніка подій -->
                     <div class="b7-col">
                         <div class="b7-header-line">
                             <h3 data-i18n="b7.news_title">Хроніка</h3>
-                            <span class="b7-stamp">Official</span>
+                            <span class="b7-stamp">Archive</span>
                         </div>
-                        <div id="news-container" class="b7-stack"></div>
+                        <div id="news-container" class="b7-news-list"></div>
                     </div>
-                    <!-- Альбоми -->
+
+                    <!-- Фотоархів -->
                     <div class="b7-col">
                         <div class="b7-header-line">
-                            <h3 data-i18n="b7.albums_title">Архів фото</h3>
+                            <h3 data-i18n="b7.albums_title">Фотоархів</h3>
                         </div>
-                        <div id="albums-container" class="b7-gallery-stack"></div>
+                        <div id="albums-container" class="b7-albums-stack"></div>
                     </div>
                 </div>
             </div>
@@ -117,7 +125,7 @@
         <section id="founders" class="b8-founders"></section>
     </main>
 
-    <!-- МОДАЛЬНА ГАЛЕРЕЯ (ПРИХОВАНА) -->
+    <!-- МОДАЛЬНА ГАЛЕРЕЯ ДЛЯ АЛЬБОМІВ -->
     <div id="galleryModal" class="b7-modal">
         <span class="b7-modal-close">&times;</span>
         <div class="b7-modal-content">
@@ -130,6 +138,8 @@
     </div>
 
     <footer id="contact"></footer>
+
+    <!-- СКРИПТИ -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module" src="js/main.js"></script>
 </body>
