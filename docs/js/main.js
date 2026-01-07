@@ -1,18 +1,20 @@
 import { loadTranslations, translatePage } from './i18n.js';
-import { renderActivities, renderStats } from './render.js';
+import { renderActivities, renderStats, renderPartners } from './render.js';
 
 let currentLang = 'uk';
-let cache = { translations: {}, activities: [], stats: [] };
+let cache = { translations: {}, activities: [], stats: [], partners: [] };
 
 async function init() {
-    const [t, a, s] = await Promise.all([
+    const [t, a, s, p] = await Promise.all([
         loadTranslations(),
         fetch('data/activities.json').then(res => res.json()),
-        fetch('data/stats.json').then(res => res.json())
+        fetch('data/stats.json').then(res => res.json()),
+        fetch('data/partners.json').then(res => res.json())
     ]);
     cache.translations = t;
     cache.activities = a;
     cache.stats = s;
+    cache.partners = p;
 
     setupLanguageSwitcher();
     setupMobileMenu();
@@ -24,7 +26,35 @@ function updateUI() {
     translatePage(cache.translations, currentLang);
     renderActivities(cache.activities, currentLang);
     renderStats(cache.stats, currentLang);
+    renderPartners(cache.partners);
     initCounters(); 
+    initPartnersCarousel();
+}
+
+function initPartnersCarousel() {
+    const slider = document.getElementById('partnersSlider');
+    const track = document.getElementById('partners-track');
+    if (!slider || !track) return;
+
+    let scrollPos = 0;
+    let speed = 0.5; // Ваша швидкість
+    let isPaused = false;
+
+    function animate() {
+        if (!isPaused) {
+            scrollPos += speed;
+            if (scrollPos >= track.scrollWidth / 3) {
+                scrollPos = 0;
+            }
+            slider.scrollLeft = scrollPos;
+        }
+        requestAnimationFrame(animate);
+    }
+
+    slider.addEventListener('mouseenter', () => isPaused = true);
+    slider.addEventListener('mouseleave', () => isPaused = false);
+
+    animate();
 }
 
 function initCounters() {
@@ -33,27 +63,20 @@ function initCounters() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const target = +entry.target.dataset.target;
-                const duration = 2000; // 2 секунди
-                const stepTime = 30;
-                const steps = duration / stepTime;
-                const increment = target / steps;
                 let current = 0;
-
                 const timer = setInterval(() => {
-                    current += increment;
+                    current += target / 50;
                     if (current >= target) {
                         entry.target.innerText = target;
                         clearInterval(timer);
                     } else {
                         entry.target.innerText = Math.ceil(current);
                     }
-                }, stepTime);
-                
+                }, 30);
                 observer.unobserve(entry.target);
             }
         });
     }, { threshold: 0.5 });
-
     counters.forEach(c => observer.observe(c));
 }
 
@@ -63,7 +86,6 @@ function setupScrollReveal() {
             if (entry.isIntersecting) entry.target.classList.add('active');
         });
     }, { threshold: 0.1 });
-
     document.querySelectorAll('section').forEach(s => observer.observe(s));
 }
 

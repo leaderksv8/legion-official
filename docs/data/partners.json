@@ -1,27 +1,27 @@
 [
-  {
-    "name": "Бучанська районна державна адміністрація",
-    "img": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Coat_of_Arms_of_Bucha.png",
-    "link": "https://buchanska-rda.gov.ua/"
-  },
-  {
-    "name": "Партнер 2",
-    "img": "https://via.placeholder.com/200x80?text=Partner+2",
-    "link": "#"
-  },
-  {
-    "name": "Партнер 3",
-    "img": "https://via.placeholder.com/200x80?text=Partner+3",
-    "link": "#"
-  },
-  {
-    "name": "Партнер 4",
-    "img": "https://via.placeholder.com/200x80?text=Partner+4",
-    "link": "#"
-  },
-  {
-    "name": "Партнер 5",
-    "img": "https://via.placeholder.com/200x80?text=Partner+5",
-    "link": "#"
-  }
+    {
+        "name": "Partner 1",
+        "img": "https://via.placeholder.com/220x100?text=PARTNER+1",
+        "link": "https://google.com"
+    },
+    {
+        "name": "Partner 2",
+        "img": "https://via.placeholder.com/220x100?text=PARTNER+2",
+        "link": "#"
+    },
+    {
+        "name": "Partner 3",
+        "img": "https://via.placeholder.com/220x100?text=PARTNER+3",
+        "link": "#"
+    },
+    {
+        "name": "Partner 4",
+        "img": "https://via.placeholder.com/220x100?text=PARTNER+4",
+        "link": "#"
+    },
+    {
+        "name": "Partner 5",
+        "img": "https://via.placeholder.com/220x100?text=PARTNER+5",
+        "link": "#"
+    }
 ]

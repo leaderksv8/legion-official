@@ -1,0 +1,80 @@
+.b4-partners {
+    padding: 100px 0;
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+.b4-title {
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin-bottom: 60px;
+    text-transform: uppercase;
+}
+
+/* Вікно перегляду каруселі */
+.b4-slider-viewport {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 20px 0;
+    cursor: pointer;
+}
+
+/* Трек каруселі */
+.b4-track {
+    display: flex;
+    align-items: center;
+    width: max-content; /* Ширина залежить від кількості логотипів */
+    gap: 60px;
+    will-change: transform;
+}
+
+/* Картка партнера */
+.b4-item {
+    flex: 0 0 auto;
+    width: 220px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+}
+
+.b4-item img {
+    max-width: 100%;
+    max-height: 80%;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.5;
+    transition: all 0.4s ease;
+}
+
+.b4-item:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Ефект градієнтного згасання по боках */
+.b4-slider-viewport::before,
+.b4-slider-viewport::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 150px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.b4-slider-viewport::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(255,255,255,1), transparent);
+}
+
+.b4-slider-viewport::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(255,255,255,1), transparent);
+}
