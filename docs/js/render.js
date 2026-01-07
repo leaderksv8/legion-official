@@ -28,7 +28,9 @@ export function renderStats(data, lang) {
 export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track || !data) return;
-    const list = data.map(p => `
+
+    // Рендеримо дані рівно один раз. Swiper сам зробить клони для loop.
+    track.innerHTML = data.map(p => `
         <div class="swiper-slide">
             <div class="b4-item">
                 <a href="${p.link}" target="_blank" rel="noopener">
@@ -37,7 +39,6 @@ export function renderPartners(data) {
             </div>
         </div>
     `).join('');
-    track.innerHTML = list;
 }
 
 export function renderFriends(data, lang) {
@@ -72,7 +73,6 @@ export function renderStories(data, lang) {
 export function renderNews(data, lang) {
     const container = document.getElementById('news-container');
     if (!container || !data) return;
-    // Клонуємо для безкінечності
     const list = [...data, ...data];
     container.innerHTML = list.map(n => `
         <a href="${n.link}" class="b7-news-card" target="_blank">
@@ -92,9 +92,7 @@ export function renderAlbums(data, lang) {
     container.innerHTML = list.map(a => `
         <a href="${a.link}" class="b7-album-card" target="_blank">
             <img src="${a.img}" alt="Album">
-            <div class="b7-album-overlay">
-                <h4>${a.title[lang]}</h4>
-            </div>
+            <div class="b7-album-overlay"><h4>${a.title[lang]}</h4></div>
         </a>
     `).join('');
 }

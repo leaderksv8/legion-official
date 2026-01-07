@@ -36,10 +36,49 @@ function updateUI() {
     render.renderAlbums(cache.albums, currentLang);
     
     initCounters(); 
+    
+    // Важливо: спочатку даємо час DOM-дереву оновитися
     setTimeout(() => {
         initPartnersSwiper();
         initVerticalCarousels();
-    }, 300);
+    }, 400);
+}
+
+function initPartnersSwiper() {
+    // Жорстке видалення старого екземпляра перед створенням нового
+    const swiperContainer = document.querySelector('.b4-swiper');
+    if (!swiperContainer) return;
+
+    if (window.partnersSwiper) {
+        window.partnersSwiper.destroy(true, true);
+    }
+
+    window.partnersSwiper = new Swiper('.b4-swiper', {
+        loop: true,
+        centeredSlides: true,
+        grabCursor: true,
+        speed: 1000,
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+        },
+        navigation: {
+            nextEl: '.b4-next-btn',
+            prevEl: '.b4-prev-btn',
+        },
+        // Фіксована кількість слайдів для стабільності на ПК
+        breakpoints: {
+            320: { slidesPerView: 1.2, spaceBetween: 20 },
+            768: { slidesPerView: 2.2, spaceBetween: 30 },
+            1024: { slidesPerView: 3, spaceBetween: 40 },
+            1400: { slidesPerView: 4, spaceBetween: 50 }
+        },
+        // Збільшуємо кількість клонів для заповнення порожнечі на ПК
+        loopAdditionalSlides: 5,
+        observer: true,
+        observeParents: true,
+        updateOnWindowResize: true
+    });
 }
 
 function initVerticalCarousels() {
@@ -47,19 +86,15 @@ function initVerticalCarousels() {
         { id: 'newsViewport', trackId: 'news-container' },
         { id: 'albumsViewport', trackId: 'albums-container' }
     ];
-
     configs.forEach(config => {
         const viewport = document.getElementById(config.id);
         const track = document.getElementById(config.trackId);
         if (!viewport || !track) return;
-
         let scrollPos = 0;
         let speed = 0.6;
         let isPaused = false;
-
         viewport.onmouseenter = () => isPaused = true;
         viewport.onmouseleave = () => isPaused = false;
-
         function animate() {
             if (!isPaused) {
                 scrollPos += speed;
@@ -69,26 +104,6 @@ function initVerticalCarousels() {
             requestAnimationFrame(animate);
         }
         animate();
-    });
-}
-
-function initPartnersSwiper() {
-    if (window.partnersSwiper) window.partnersSwiper.destroy(true, true);
-    window.partnersSwiper = new Swiper('.b4-swiper', {
-        loop: true,
-        centeredSlides: true,
-        speed: 1000,
-        autoplay: { delay: 2500, disableOnInteraction: false },
-        navigation: { nextEl: '.b4-next-btn', prevEl: '.b4-prev-btn' },
-        breakpoints: {
-            320: { slidesPerView: 1, spaceBetween: 20 },
-            768: { slidesPerView: 2, spaceBetween: 30 },
-            1024: { slidesPerView: 3, spaceBetween: 40 },
-            1400: { slidesPerView: 5, spaceBetween: 50 }
-        },
-        observer: true,
-        observeParents: true,
-        loopAdditionalSlides: 10,
     });
 }
 
