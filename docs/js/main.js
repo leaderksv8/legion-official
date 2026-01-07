@@ -17,16 +17,14 @@ async function init() {
             fetch('data/albums.json').then(res => res.json())
         ]);
         cache = { translations: t, activities: a, stats: s, partners: p, friends: f, stories: st, news: n, albums: al };
-        
         setupLanguageSwitcher();
         setupMobileMenu();
         setupScrollReveal();
         updateUI();
-    } catch (e) { console.error("Initialization failed:", e); }
+    } catch (e) { console.error("Init error:", e); }
 }
 
 function updateUI() {
-    // Рендер всіх блоків
     translatePage(cache.translations, currentLang);
     render.renderActivities(cache.activities, currentLang);
     render.renderStats(cache.stats, currentLang);
@@ -37,79 +35,31 @@ function updateUI() {
     render.renderAlbums(cache.albums, currentLang);
     
     initCounters(); 
-
-    // КЛЮЧОВИЙ ФІКС: Sequential initialization (Послідовний запуск)
-    // Спочатку запускаємо Swiper, даємо йому 500мс, потім запускаємо Блок 7
+    
     setTimeout(() => {
         initPartnersSwiper();
-    }, 300);
-
-    setTimeout(() => {
-        initVerticalCarousels();
-    }, 800);
+        // ВІДМОВА ВІД ТЯЖКИХ ЦИКЛІВ: Блок 7 тепер працює на CSS анімаціях через ScrollReveal
+    }, 500);
 }
 
 function initPartnersSwiper() {
-    const swiperElem = document.querySelector('.b4-swiper-container');
-    if (!swiperElem) return;
-
-    if (window.partnersSwiper) {
-        window.partnersSwiper.destroy(true, true);
-    }
-
+    if (window.partnersSwiper) window.partnersSwiper.destroy(true, true);
     window.partnersSwiper = new Swiper('.b4-swiper-container', {
         loop: true,
         centeredSlides: true,
         speed: 1000,
         grabCursor: true,
-        autoplay: {
-            delay: 2500,
-            disableOnInteraction: false,
-        },
-        navigation: {
-            nextEl: '.b4-next-unique',
-            prevEl: '.b4-prev-unique',
-        },
-        // Фіксована кількість слайдів для стабільності математики Swiper
+        autoplay: { delay: 2500, disableOnInteraction: false },
+        navigation: { nextEl: '.b4-next-unique', prevEl: '.b4-prev-unique' },
         breakpoints: {
             320: { slidesPerView: 1, spaceBetween: 20 },
             768: { slidesPerView: 3, spaceBetween: 30 },
             1200: { slidesPerView: 5, spaceBetween: 40 }
         },
-        // Масштабне клонування для запобігання зупинкам
         loopedSlides: 10,
         loopAdditionalSlides: 10,
         observer: true,
         observeParents: true,
-    });
-}
-
-function initVerticalCarousels() {
-    const configs = [{ id: 'newsViewport', trackId: 'news-container' }, { id: 'albumsViewport', trackId: 'albums-container' }];
-    configs.forEach(config => {
-        const viewport = document.getElementById(config.id);
-        const track = document.getElementById(config.trackId);
-        if (!viewport || !track) return;
-        
-        let scrollPos = 0;
-        const speed = 0.5;
-        let isPaused = false;
-
-        viewport.onmouseenter = () => isPaused = true;
-        viewport.onmouseleave = () => isPaused = false;
-
-        function animate() {
-            if (!isPaused) {
-                scrollPos += speed;
-                // Скидання на середину (так як дані в render.js дубльовані)
-                if (scrollPos >= track.scrollHeight / 2) {
-                    scrollPos = 0;
-                }
-                viewport.scrollTop = scrollPos;
-            }
-            requestAnimationFrame(animate);
-        }
-        animate();
     });
 }
 
@@ -134,7 +84,9 @@ function initCounters() {
 
 function setupScrollReveal() {
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('active');
+        });
     }, { threshold: 0.15 });
     document.querySelectorAll('section').forEach(s => observer.observe(s));
 }

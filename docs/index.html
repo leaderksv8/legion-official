@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ГО «Легіон Титанів»</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Шрифти -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Swiper.js -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- Стилі -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/block1.css">
@@ -21,6 +27,7 @@
     <link rel="stylesheet" href="css/ui-elements.css">
 </head>
 <body>
+
     <header class="main-header">
         <div class="container header-wrapper">
             <a href="index.html" class="logo-area">
@@ -58,25 +65,17 @@
         </section>
 
         <section id="activities" class="b2-activities">
-            <div class="container">
-                <h2 class="b2-title-center" data-i18n="b2.title">Наша діяльність</h2>
-                <div id="activities-container" class="b2-grid-6"></div>
-            </div>
+            <div class="container"><h2 class="b2-title-center" data-i18n="b2.title">Наша діяльність</h2><div id="activities-container" class="b2-grid-6"></div></div>
         </section>
 
         <section id="stats" class="b3-stats">
-            <div class="container">
-                <h2 class="b3-title" data-i18n="b3.title">Наші досягнення</h2>
-                <div id="stats-container" class="b3-grid"></div>
-            </div>
+            <div class="container"><h2 class="b3-title" data-i18n="b3.title">Наші досягнення</h2><div id="stats-container" class="b3-grid"></div></div>
         </section>
 
         <section id="partners" class="b4-partners">
             <div class="container"><h2 class="b4-title" data-i18n="b4.title">Наші партнери</h2></div>
             <div class="b4-slider-wrapper">
-                <div class="swiper b4-swiper-container">
-                    <div class="swiper-wrapper" id="partners-track"></div>
-                </div>
+                <div class="swiper b4-swiper-container"><div class="swiper-wrapper" id="partners-track"></div></div>
                 <div class="b4-controls">
                     <button class="b4-nav-btn b4-prev-unique"><i class="fa-solid fa-chevron-left"></i></button>
                     <button class="b4-nav-btn b4-next-unique"><i class="fa-solid fa-chevron-right"></i></button>
@@ -92,17 +91,32 @@
             <div class="container"><h2 class="b6-title" data-i18n="b6.title">Історії наших героїв</h2><div id="stories-container" class="b6-grid"></div></div>
         </section>
 
+        <!-- БЛОК 7: МЕДІА-ЦЕНТР (EDITORIAL STYLE) -->
         <section id="media" class="b7-media">
+            <div class="b7-paper-texture"></div>
             <div class="container">
                 <h2 class="b7-title" data-i18n="b7.title">Медіа-центр</h2>
+                
                 <div class="b7-main-grid">
+                    <!-- Хроніка новин -->
                     <div class="b7-col">
-                        <h3 class="b7-subtitle" data-i18n="b7.news_title">Новини</h3>
-                        <div class="b7-vertical-viewport" id="newsViewport"><div class="b7-vertical-track" id="news-container"></div></div>
+                        <div class="b7-header-line">
+                            <h3 data-i18n="b7.news_title">Хроніка подій</h3>
+                            <span class="b7-stamp">Archive 2026</span>
+                        </div>
+                        <div id="news-container" class="b7-stack">
+                            <!-- JS Render -->
+                        </div>
                     </div>
+
+                    <!-- Візуальний архів -->
                     <div class="b7-col">
-                        <h3 class="b7-subtitle" data-i18n="b7.albums_title">Фотоальбоми</h3>
-                        <div class="b7-vertical-viewport" id="albumsViewport"><div class="b7-vertical-track" id="albums-container"></div></div>
+                        <div class="b7-header-line">
+                            <h3 data-i18n="b7.albums_title">Фотоальбоми</h3>
+                        </div>
+                        <div id="albums-container" class="b7-gallery">
+                            <!-- JS Render -->
+                        </div>
                     </div>
                 </div>
             </div>

@@ -28,10 +28,7 @@ export function renderStats(data, lang) {
 export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track || !data) return;
-
-    // Створюємо 20 карток (10 оригінальних + 10 копій) для залізобетонної роботи loop
     const doubledData = [...data, ...data];
-
     track.innerHTML = doubledData.map((p, index) => `
         <div class="swiper-slide">
             <div class="b4-item-box">
@@ -71,13 +68,21 @@ export function renderStories(data, lang) {
 export function renderNews(data, lang) {
     const container = document.getElementById('news-container');
     if (!container || !data) return;
-    const list = [...data, ...data];
-    container.innerHTML = list.map(n => `<a href="${n.link}" class="b7-news-card" target="_blank"><div class="b7-news-meta"><span class="b7-news-tag">${n.tag[lang]}</span><span class="b7-news-date">${n.date}</span></div><h4>${n.title[lang]}</h4></a>`).join('');
+    container.innerHTML = data.map((n, index) => `
+        <a href="${n.link}" class="b7-news-item" style="transition-delay: ${index * 0.1}s">
+            <span class="b7-date">${n.date}</span>
+            <h4>${n.title[lang]}</h4>
+        </a>
+    `).join('');
 }
 
 export function renderAlbums(data, lang) {
     const container = document.getElementById('albums-container');
     if (!container || !data) return;
-    const list = [...data, ...data];
-    container.innerHTML = list.map(a => `<a href="${a.link}" class="b7-album-card" target="_blank"><img src="${a.img}" alt="Album"><div class="b7-album-overlay"><h4>${a.title[lang]}</h4></div></a>`).join('');
+    container.innerHTML = data.map((a, index) => `
+        <a href="${a.link}" class="b7-album-polaroid" style="transition-delay: ${0.3 + index * 0.1}s">
+            <img src="${a.img}" alt="Album">
+            <h4>${a.title[lang]}</h4>
+        </a>
+    `).join('');
 }
