@@ -53,6 +53,7 @@
     </header>
 
     <main>
+        <!-- БЛОК 1: HERO -->
         <section id="home" class="b1-hero">
             <div class="b1-bg-wrapper"><div class="b1-bg-image"></div><div class="b1-overlay"></div><div class="b1-grid-pattern"></div></div>
             <div class="container">
@@ -66,6 +67,7 @@
             </div>
         </section>
 
+        <!-- БЛОК 2: НАША ДІЯЛЬНІСТЬ -->
         <section id="activities" class="b2-activities">
             <div class="container">
                 <h2 class="b2-title-center" data-i18n="b2.title">Наша діяльність</h2>
@@ -73,6 +75,7 @@
             </div>
         </section>
 
+        <!-- БЛОК 3: НАШІ ДОСЯГНЕННЯ -->
         <section id="stats" class="b3-stats">
             <div class="container">
                 <h2 class="b3-title" data-i18n="b3.title">Наші досягнення</h2>
@@ -80,12 +83,28 @@
             </div>
         </section>
 
-        <!-- БЛОК 4: БЕЗШОВНА КАРУСЕЛЬ -->
+        <!-- БЛОК 4: CINEMA КАРУСЕЛЬ (ЗГІДНО З РЕФЕРЕНСОМ) -->
         <section id="partners" class="b4-partners">
-            <div class="container"><h2 class="b4-title" data-i18n="b4.title">Наші партнери</h2></div>
-            <div class="swiper b4-swiper">
-                <div class="swiper-wrapper" id="partners-track">
-                    <!-- JS Render -->
+            <div class="container">
+                <h2 class="b4-title" data-i18n="b4.title">Наші партнери</h2>
+            </div>
+            
+            <div class="b4-main-container">
+                <div class="swiper b4-swiper">
+                    <div class="swiper-wrapper" id="partners-track">
+                        <!-- JS Render -->
+                    </div>
+                </div>
+
+                <!-- Контроли у нижньому правому куті (як на фото) -->
+                <div class="container b4-controls-container">
+                    <div class="b4-controls">
+                        <div class="b4-pagination"></div>
+                        <div class="b4-arrows">
+                            <button class="b4-arrow b4-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="b4-arrow b4-next"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

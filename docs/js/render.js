@@ -31,9 +31,11 @@ export function renderPartners(data) {
 
     track.innerHTML = data.map(p => `
         <div class="swiper-slide">
-            <a href="${p.link}" class="b4-item" target="_blank" rel="noopener">
-                <img src="${p.img}" alt="${p.name}" onerror="this.src='https://placehold.co/220x100/1a2a44/ffffff?text=Partner'">
-            </a>
+            <div class="b4-item">
+                <a href="${p.link}" target="_blank" rel="noopener">
+                    <img src="${p.img}" alt="${p.name}" draggable="false" onerror="this.src='https://placehold.co/300x300/1a2a44/ffffff?text=Logo'">
+                </a>
+            </div>
         </div>
     `).join('');
 }

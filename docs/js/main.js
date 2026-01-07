@@ -32,22 +32,27 @@ function updateUI() {
 function initPartnersSwiper() {
     new Swiper('.b4-swiper', {
         loop: true,
-        speed: 6000, 
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        spaceBetween: 20,
+        speed: 1000,
         autoplay: {
-            delay: 0,
+            delay: 2500,
             disableOnInteraction: false,
         },
-        slidesPerView: 'auto',
-        spaceBetween: 0, // КЛЮЧОВИЙ ФІКС: 0 розривів між слайдами
-        roundLengths: true, // КЛЮЧОВИЙ ФІКС: заокруглення пікселів
-        allowTouchMove: true,
-        freeMode: true,
+        pagination: {
+            el: '.b4-pagination',
+            type: 'fraction', // Формат 1/5 як на фото
+        },
+        navigation: {
+            nextEl: '.b4-next',
+            prevEl: '.b4-prev',
+        },
         grabCursor: true,
-        // Гарантуємо достатню кількість клонів слайдів для нескінченності
-        loopAdditionalSlides: 5,
-        breakpoints: {
-            320: { slidesPerView: 'auto' },
-            1024: { slidesPerView: 'auto' }
+        on: {
+            init: function () {
+                // Додаткова логіка при ініціалізації якщо потрібна
+            }
         }
     });
 }
