@@ -84,41 +84,39 @@
             <div class="container"><h2 class="b6-title" data-i18n="b6.title">Історії наших героїв</h2><div id="stories-container" class="b6-grid"></div></div>
         </section>
 
-        <!-- БЛОК 7 -->
+        <!-- БЛОК 7: ПРОФЕСІЙНИЙ МЕДІА-АРХІВ -->
         <section id="media" class="b7-media">
-            <div class="b7-newspaper-scatter">
-                <img src="images/newspapers/news1.jpg" class="paper p1" alt="News">
-                <img src="images/newspapers/news2.jpg" class="paper p2" alt="News">
-                <img src="images/newspapers/news3.jpg" class="paper p3" alt="News">
-                <img src="images/newspapers/news4.jpg" class="paper p4" alt="News">
-                <img src="images/newspapers/news5.jpg" class="paper p5" alt="News">
-                <img src="images/newspapers/news6.jpg" class="paper p6" alt="News">
-                <img src="images/newspapers/news1.jpg" class="paper p7" alt="News">
-                <img src="images/newspapers/news4.jpg" class="paper p8" alt="News">
+            <!-- РІВНОМІРНИЙ ФОН З ГАЗЕТ -->
+            <div class="b7-newspaper-grid">
+                <img src="images/newspapers/news1.jpg" alt="P">
+                <img src="images/newspapers/news2.jpg" alt="P">
+                <img src="images/newspapers/news3.jpg" alt="P">
+                <img src="images/newspapers/news4.jpg" alt="P">
+                <img src="images/newspapers/news5.jpg" alt="P">
+                <img src="images/newspapers/news6.jpg" alt="P">
+                <img src="images/newspapers/news2.jpg" alt="P">
+                <img src="images/newspapers/news4.jpg" alt="P">
             </div>
-            <div class="b7-vignette"></div>
+            
+            <div class="b7-overlay-light"></div>
             
             <div class="container">
-                <!-- Заголовок як преміальна табличка -->
-                <div class="b7-title-card">
-                    <h2 class="b7-title-text" data-i18n="b7.title">Медіа-центр</h2>
+                <!-- ПЕЧАТКА -->
+                <div class="b7-wax-seal">
+                    <span data-i18n="b7.title">Медіа центр</span>
                 </div>
 
                 <div class="b7-main-grid">
-                    <!-- Скляна картка Новин -->
-                    <div class="b7-glass-panel">
-                        <div class="b7-panel-header">
-                            <span class="b7-panel-label" data-i18n="b7.news_title">Хроніка подій</span>
-                        </div>
-                        <div id="news-container" class="b7-content-scroll"></div>
+                    <!-- НОВИНИ ЯК КАРТКА -->
+                    <div class="b7-section-card">
+                        <div class="b7-stamp-header"><h3 data-i18n="b7.news_title">Новини</h3></div>
+                        <div id="news-container" class="b7-list"></div>
                     </div>
 
-                    <!-- Скляна картка Архіву -->
-                    <div class="b7-glass-panel">
-                        <div class="b7-panel-header">
-                            <span class="b7-panel-label" data-i18n="b7.albums_title">Фотоархів</span>
-                        </div>
-                        <div id="albums-container" class="b7-content-scroll"></div>
+                    <!-- ФОТОАРХІВ ЯК КАРТКА -->
+                    <div class="b7-section-card">
+                        <div class="b7-stamp-header"><h3 data-i18n="b7.albums_title">Фотоархів</h3></div>
+                        <div id="albums-container" class="b7-list"></div>
                     </div>
                 </div>
             </div>
@@ -127,13 +125,14 @@
         <section id="founders" class="b8-founders"></section>
     </main>
 
+    <!-- ГАЛЕРЕЯ (ФІКС СТРІЛОК) -->
     <div id="galleryModal" class="b7-modal">
         <span class="b7-modal-close">&times;</span>
         <div class="b7-modal-content">
             <div class="swiper b7-gallery-swiper">
                 <div class="swiper-wrapper" id="modal-gallery-wrapper"></div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
+                <div class="b7-swiper-next"><i class="fas fa-chevron-right"></i></div>
+                <div class="b7-swiper-prev"><i class="fas fa-chevron-left"></i></div>
             </div>
         </div>
     </div>
