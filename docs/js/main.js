@@ -26,72 +26,29 @@ function updateUI() {
     renderStats(cache.stats, currentLang);
     renderPartners(cache.partners);
     initCounters(); 
-    setTimeout(initPartnersCarousel, 500);
+    setTimeout(initPartnersSwiper, 150);
 }
 
-function initPartnersCarousel() {
-    const slider = document.getElementById('partnersSlider');
-    const track = document.getElementById('partners-track');
-    if (!slider || !track) return;
-
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-    let autoScrollSpeed = 0.7;
-    let isPaused = false;
-
-    // Автопрокрутка
-    function step() {
-        if (!isPaused && !isDown) {
-            slider.scrollLeft += autoScrollSpeed;
-            if (slider.scrollLeft >= track.scrollWidth / 3) {
-                slider.scrollLeft = 0;
-            }
+function initPartnersSwiper() {
+    new Swiper('.b4-swiper', {
+        loop: true,
+        speed: 6000, 
+        autoplay: {
+            delay: 0,
+            disableOnInteraction: false,
+        },
+        slidesPerView: 'auto',
+        spaceBetween: 0, // КЛЮЧОВИЙ ФІКС: 0 розривів між слайдами
+        roundLengths: true, // КЛЮЧОВИЙ ФІКС: заокруглення пікселів
+        allowTouchMove: true,
+        freeMode: true,
+        grabCursor: true,
+        // Гарантуємо достатню кількість клонів слайдів для нескінченності
+        loopAdditionalSlides: 5,
+        breakpoints: {
+            320: { slidesPerView: 'auto' },
+            1024: { slidesPerView: 'auto' }
         }
-        requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-
-    // ПОКРАЩЕНИЙ DRAG-ФУНКЦІОНАЛ
-    slider.addEventListener('mousedown', (e) => {
-        isDown = true;
-        isPaused = true;
-        slider.classList.add('active');
-        startX = e.pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-        // Забороняємо стандартне перетягування (важливо!)
-        e.preventDefault();
-    });
-
-    slider.addEventListener('mouseleave', () => {
-        isDown = false;
-        isPaused = false;
-    });
-
-    slider.addEventListener('mouseup', () => {
-        isDown = false;
-        isPaused = false;
-    });
-
-    slider.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2; 
-        slider.scrollLeft = scrollLeft - walk;
-    });
-
-    // Підтримка тачу (мобільні)
-    slider.addEventListener('touchstart', (e) => {
-        isPaused = true;
-        startX = e.touches[0].pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-    });
-    slider.addEventListener('touchend', () => { isPaused = false; });
-    slider.addEventListener('touchmove', (e) => {
-        const x = e.touches[0].pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2;
-        slider.scrollLeft = scrollLeft - walk;
     });
 }
 

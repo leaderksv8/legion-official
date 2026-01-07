@@ -29,11 +29,11 @@ export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track || !data) return;
 
-    // Дублюємо дані 3 рази для нескінченності
-    const list = [...data, ...data, ...data];
-    track.innerHTML = list.map(p => `
-        <a href="${p.link}" class="b4-item" target="_blank" rel="noopener" draggable="false">
-            <img src="${p.img}" alt="${p.name}" draggable="false">
-        </a>
+    track.innerHTML = data.map(p => `
+        <div class="swiper-slide">
+            <a href="${p.link}" class="b4-item" target="_blank" rel="noopener">
+                <img src="${p.img}" alt="${p.name}" onerror="this.src='https://placehold.co/220x100/1a2a44/ffffff?text=Partner'">
+            </a>
+        </div>
     `).join('');
 }

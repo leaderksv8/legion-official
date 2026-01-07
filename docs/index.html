@@ -4,8 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ГО «Легіон Титанів»</title>
+    
+    <!-- Шрифти та іконки -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Swiper.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- Незалежні стилі -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/block1.css">
@@ -20,6 +27,7 @@
     <link rel="stylesheet" href="css/ui-elements.css">
 </head>
 <body>
+
     <header class="main-header">
         <div class="container header-wrapper">
             <a href="index.html" class="logo-area">
@@ -72,10 +80,13 @@
             </div>
         </section>
 
+        <!-- БЛОК 4: БЕЗШОВНА КАРУСЕЛЬ -->
         <section id="partners" class="b4-partners">
             <div class="container"><h2 class="b4-title" data-i18n="b4.title">Наші партнери</h2></div>
-            <div class="b4-slider-viewport" id="partnersSlider">
-                <div class="b4-track" id="partners-track"></div>
+            <div class="swiper b4-swiper">
+                <div class="swiper-wrapper" id="partners-track">
+                    <!-- JS Render -->
+                </div>
             </div>
         </section>
 
@@ -84,7 +95,12 @@
         <section id="media" class="b7-media"></section>
         <section id="founders" class="b8-founders"></section>
     </main>
+
     <footer id="contact"></footer>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Main JS -->
     <script type="module" src="js/main.js"></script>
 </body>
 </html>
