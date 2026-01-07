@@ -22,7 +22,7 @@ async function init() {
         setupScrollReveal();
         updateUI();
         setupGalleryModal();
-    } catch (e) { console.error("Initialization failed:", e); }
+    } catch (e) { console.error("Init error:", e); }
 }
 
 function updateUI() {
@@ -35,7 +35,9 @@ function updateUI() {
     render.renderNews(cache.news, currentLang);
     render.renderAlbums(cache.albums, currentLang);
     initCounters(); 
-    setTimeout(() => initPartnersSwiper(), 600);
+    setTimeout(() => {
+        initPartnersSwiper();
+    }, 600);
 }
 
 window.openGallery = (id) => {
