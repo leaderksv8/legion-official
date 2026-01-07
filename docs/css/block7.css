@@ -1,11 +1,11 @@
 .b7-media {
     padding: 120px 0;
-    background-color: #dcd7ca;
+    background-color: #c9c3b8; /* Більш насичений базовий колір */
     position: relative;
     overflow: hidden;
 }
 
-/* КОЛАЖ ГАЗЕТ - НЕ РОЗТЯГУЄТЬСЯ */
+/* КОЛАЖ ГАЗЕТ - ТЕПЕР ЧІТКИЙ */
 .b7-newspaper-collage {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -14,28 +14,32 @@
 
 .b7-newspaper-collage .paper {
     position: absolute;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-    border: 1px solid rgba(0,0,0,0.1);
-    opacity: 0.25;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.2);
+    opacity: 0.65; /* ПІДВИЩЕНО ЧІТКІСТЬ */
     pointer-events: none;
-    max-width: 550px; /* Реалістичний розмір шпальти */
+    max-width: 600px;
     height: auto;
     object-fit: contain;
+    filter: sepia(0.2) contrast(1.1); /* Натуральний колір паперу */
 }
 
-/* Розташування кожної газети окремо (ніби на столі) */
-.p1 { top: -5%; left: -5%; transform: rotate(-10deg); }
-.p2 { top: 5%; right: -2%; transform: rotate(7deg); }
-.p3 { bottom: -10%; left: 5%; transform: rotate(5deg); }
-.p4 { bottom: -5%; right: 5%; transform: rotate(-8deg); }
-.p5 { top: 45%; left: -10%; transform: rotate(-3deg); }
-.p6 { top: 35%; right: 10%; transform: rotate(12deg); opacity: 0.15 !important; }
+/* Розстановка */
+.p1 { top: -10%; left: -5%; transform: rotate(-8deg); }
+.p2 { top: 0%; right: -5%; transform: rotate(6deg); }
+.p3 { bottom: -15%; left: 0%; transform: rotate(4deg); }
+.p4 { bottom: -10%; right: 0%; transform: rotate(-5deg); }
+.p5 { top: 40%; left: -15%; transform: rotate(-2deg); }
+.p6 { top: 30%; right: -10%; transform: rotate(10deg); opacity: 0.4 !important; }
 
-/* ТУМАН - ДЛЯ ЧИТАБЕЛЬНОСТІ ТЕКСТУ */
+/* ТУМАН - ТЕПЕР ТІЛЬКИ ДЛЯ ЛЕГКОГО КОНТРАСТУ */
 .b7-fog-layer {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle, rgba(220, 215, 202, 0.4) 0%, rgba(220, 215, 202, 0.9) 80%);
+    background: linear-gradient(to bottom, 
+        rgba(201, 195, 184, 0.4) 0%, 
+        rgba(201, 195, 184, 0.1) 50%, 
+        rgba(201, 195, 184, 0.4) 100%);
     z-index: 2;
 }
 
@@ -44,123 +48,105 @@
 .b7-title {
     text-align: center;
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    color: #1a1a1a;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: #000;
     margin-bottom: 80px;
-    text-shadow: 2px 2px 0px rgba(255,255,255,0.8);
+    text-shadow: 0 4px 10px rgba(255,255,255,0.8);
 }
 
 .b7-main-grid {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 60px;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 70px;
 }
 
 .b7-header-line {
-    border-bottom: 2px solid #1a1a1a;
-    margin-bottom: 40px;
+    border-bottom: 3px solid #000;
+    margin-bottom: 45px;
     padding-bottom: 10px;
 }
 
 .b7-header-line h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
+    font-size: 2rem;
     text-transform: uppercase;
 }
 
-/* НОВИНИ */
+/* КАРТКИ НОВИН - ВІДОКРЕМЛЕННЯ ВІД ФОНУ */
 .b7-news-item {
     display: block;
-    background: #fff;
-    padding: 30px;
-    margin-bottom: 25px;
+    background: rgba(255, 255, 255, 0.96); /* Майже непрозорий білий */
+    padding: 35px;
+    margin-bottom: 30px;
     text-decoration: none;
-    border: 1px solid #ccc;
-    box-shadow: 10px 10px 0px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
+    border: 1px solid #fff;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15); /* Сильна тінь для глибини */
+    backdrop-filter: blur(8px); /* Скляний ефект */
+    transition: all 0.4s ease;
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
 }
 
 .b7-media.active .b7-news-item { opacity: 1; transform: translateY(0); }
 
 .b7-news-item:hover {
-    transform: scale(1.02);
-    box-shadow: 15px 15px 0px var(--accent-gold);
+    transform: scale(1.03) translateY(-5px);
     border-color: var(--accent-gold);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.25);
 }
 
 .b7-date {
     font-family: 'Courier New', monospace;
-    font-weight: 700;
-    color: #888;
+    font-weight: 800;
+    color: var(--accent-gold);
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .b7-news-item h4 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.35rem;
-    color: #1a1a1a;
+    font-size: 1.5rem;
+    color: #000;
     line-height: 1.3;
 }
 
-/* ФОТОАЛЬБОМИ (POLAROID STACK) */
+/* КАРТКИ АЛЬБОМІВ - ВІДОКРЕМЛЕННЯ */
 .b7-album-stack {
     position: relative;
     background: #fff;
     padding: 15px 15px 50px;
-    margin-bottom: 60px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    margin-bottom: 70px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     cursor: pointer;
-    transition: all 0.4s ease;
-    border: 1px solid #ddd;
+    transition: all 0.5s ease;
+    border: 1px solid #fff;
 }
 
-.b7-album-stack::before, .b7-album-stack::after {
+.b7-album-stack::before {
     content: "";
     position: absolute;
-    width: 100%; height: 100%; top: 0; left: 0;
-    background: #fff; border: 1px solid #ddd;
-    z-index: -1; transition: 0.4s;
+    width: 100%; height: 100%; top: 8px; left: 8px;
+    background: #fdfdfd; border: 1px solid #ddd;
+    z-index: -1; transform: rotate(4deg);
 }
-.b7-album-stack::before { transform: rotate(4deg); }
-.b7-album-stack::after { transform: rotate(-3deg); opacity: 0.5; }
 
 .b7-album-stack img {
-    width: 100%; height: 260px;
+    width: 100%; height: 280px;
     object-fit: cover;
-    filter: sepia(0.1) contrast(1.05);
 }
 
 .b7-album-stack h4 {
-    margin-top: 15px;
+    margin-top: 20px;
     font-family: 'Playfair Display', serif;
     text-align: center;
-    color: #1a1a1a;
-    font-size: 1.2rem;
+    color: #000;
+    font-size: 1.3rem;
+    font-weight: 800;
 }
 
-.b7-album-stack:hover { transform: translateY(-12px) rotate(1deg); }
-
-/* МОДАЛКА ГАЛЕРЕЇ */
-.b7-modal {
-    display: none; position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.98);
-    z-index: 10000; justify-content: center; align-items: center;
-}
-
-.b7-modal-close {
-    position: absolute; top: 20px; right: 30px;
-    color: white; font-size: 50px; cursor: pointer;
-}
-
-.b7-modal-content { width: 90%; height: 85vh; }
-.b7-gallery-swiper { width: 100%; height: 100%; }
-.b7-gallery-swiper img { width: 100%; height: 100%; object-fit: contain; }
+.b7-album-stack:hover { transform: translateY(-15px) scale(1.02); }
 
 @media (max-width: 992px) {
     .b7-main-grid { grid-template-columns: 1fr; }
-    .b7-newspaper-collage .paper { max-width: 350px; }
+    .b7-newspaper-collage .paper { max-width: 400px; opacity: 0.5; }
 }

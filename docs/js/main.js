@@ -22,7 +22,7 @@ async function init() {
         setupScrollReveal();
         updateUI();
         setupGalleryModal();
-    } catch (e) { console.error("Initialization failed:", e); }
+    } catch (e) { console.error("Init error:", e); }
 }
 
 function updateUI() {
@@ -34,17 +34,15 @@ function updateUI() {
     render.renderStories(cache.stories, currentLang);
     render.renderNews(cache.news, currentLang);
     render.renderAlbums(cache.albums, currentLang);
-    
     initCounters(); 
     setTimeout(() => initPartnersSwiper(), 600);
 }
 
-// ГАЛЕРЕЯ
 window.openGallery = (id) => {
     const album = cache.albums.find(a => a.id === id);
     if (!album) return;
     const wrapper = document.getElementById('modal-gallery-wrapper');
-    wrapper.innerHTML = album.photos.map(src => `<div class="swiper-slide"><img src="${src}" alt="Photo"></div>`).join('');
+    wrapper.innerHTML = album.photos.map(src => `<div class="swiper-slide"><img src="${src}"></div>`).join('');
     document.getElementById('galleryModal').style.display = 'flex';
     new Swiper('.b7-gallery-swiper', { navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }, loop: true });
 };
