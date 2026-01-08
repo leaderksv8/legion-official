@@ -40,8 +40,8 @@ export function renderNews(data, lang) {
     const container = document.getElementById('news-container');
     if (!container || !data) return;
     container.innerHTML = data.map((n, index) => `
-        <a href="${n.link}" class="b7-news-clipping" style="transition-delay: ${index * 0.1}s">
-            <span class="b7-clipping-date">${n.date}</span>
+        <a href="${n.link}" class="b7-news-clipping" target="_blank">
+            <span class="b7-date-badge">${n.date}</span>
             <h4>${n.title[lang]}</h4>
         </a>
     `).join('');
@@ -52,19 +52,13 @@ export function renderAlbums(data, lang) {
     const fullGrid = document.getElementById('full-albums-grid');
     if (!container || !data) return;
 
-    // 3 прев'ю для головної сторінки
-    container.innerHTML = data.slice(0, 3).map((a) => `
-        <div class="b7-album-folder" onclick="window.openGallery('${a.id}')">
-            <img src="${a.preview}" alt="Album">
-            <h4>${a.title[lang]}</h4>
+    const html = (item) => `
+        <div class="b7-album-folder" onclick="window.openGallery('${item.id}')">
+            <img src="${item.preview}" alt="Album">
+            <h4>${item.title[lang]}</h4>
         </div>
-    `).join('');
+    `;
 
-    // Повний список для порталу
-    fullGrid.innerHTML = data.map((a) => `
-        <div class="b7-album-folder" onclick="window.openGallery('${a.id}')">
-            <img src="${a.preview}" alt="Album">
-            <h4>${a.title[lang]}</h4>
-        </div>
-    `).join('');
+    container.innerHTML = data.slice(0, 3).map(html).join('');
+    fullGrid.innerHTML = data.map(html).join('');
 }

@@ -19,7 +19,6 @@ async function init() {
         setupScrollReveal();
         updateUI();
         setupGalleryModal();
-        setupImmersiveEffect();
     } catch (e) { console.error("Init failed:", e); }
 }
 
@@ -36,32 +35,12 @@ function updateUI() {
     setTimeout(() => initPartnersSwiper(), 600);
 }
 
-// 3D ПАРАЛАКС ЕФЕКТ
-function setupImmersiveEffect() {
-    window.addEventListener('scroll', () => {
-        const mediaSection = document.getElementById('media');
-        if (!mediaSection) return;
-        const rect = mediaSection.getBoundingClientRect();
-        const scrolled = window.scrollY - mediaSection.offsetTop;
-        
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-            const papers = document.querySelectorAll('.b7-bg-item');
-            papers.forEach((p, idx) => {
-                const speed = (idx + 1) * 0.1;
-                p.style.transform = `translateY(${scrolled * speed}px) rotate(${(idx % 2 === 0 ? 1 : -1) * 5}deg)`;
-            });
-        }
-    });
-}
-
-// ПЕРЕМИКАЧ ПОРТАЛУ АРХІВУ
 window.toggleAllAlbums = () => {
     const portal = document.getElementById('archivePortal');
     portal.style.display = (portal.style.display === 'block') ? 'none' : 'block';
     document.body.style.overflow = (portal.style.display === 'block') ? 'hidden' : 'auto';
 };
 
-// ГАЛЕРЕЯ
 window.openGallery = (id) => {
     const album = cache.albums.find(a => a.id === id);
     if (!album) return;
