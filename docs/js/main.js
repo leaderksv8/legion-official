@@ -22,7 +22,7 @@ async function init() {
         setupScrollReveal();
         updateUI();
         setupGalleryModal();
-    } catch (e) { console.error("Init failed:", e); }
+    } catch (e) { console.error("Initialization failed:", e); }
 }
 
 function updateUI() {
@@ -38,14 +38,19 @@ function updateUI() {
     setTimeout(() => initPartnersSwiper(), 600);
 }
 
+// ГАЛЕРЕЯ
 window.openGallery = (id) => {
     const album = cache.albums.find(a => a.id === id);
     if (!album) return;
     const wrapper = document.getElementById('modal-gallery-wrapper');
     wrapper.innerHTML = album.photos.map(src => `<div class="swiper-slide"><img src="${src}"></div>`).join('');
     document.getElementById('galleryModal').style.display = 'flex';
+    
     if (window.gallerySwiper) window.gallerySwiper.destroy();
-    window.gallerySwiper = new Swiper('.b7-gallery-swiper', { navigation: { nextEl: '.b7-swiper-next', prevEl: '.b7-swiper-prev' }, loop: true });
+    window.gallerySwiper = new Swiper('.b7-gallery-swiper', {
+        navigation: { nextEl: '.b7-swiper-next', prevEl: '.b7-swiper-prev' },
+        loop: true
+    });
 };
 
 function setupGalleryModal() {
