@@ -46,6 +46,7 @@
     </header>
 
     <main>
+        <!-- БЛОК 1: HERO -->
         <section id="home" class="b1-hero">
             <div class="b1-bg-wrapper"><div class="b1-bg-image"></div><div class="b1-overlay"></div><div class="b1-grid-pattern"></div></div>
             <div class="container"><div class="b1-content">
@@ -57,14 +58,20 @@
             </div></div>
         </section>
 
+        <!-- БЛОК 2: ДІЯЛЬНІСТЬ -->
         <section id="activities" class="b2-activities">
-            <div class="container"><h2 class="b2-title-center" data-i18n="b2.title">Наша діяльність</h2><div id="activities-container" class="b2-grid-6"></div></div>
+            <div class="container">
+                <h2 class="b2-title-center" data-i18n="b2.title">Наша діяльність</h2>
+                <div id="activities-container" class="b2-grid-6"></div>
+            </div>
         </section>
 
+        <!-- БЛОК 3: ДОСЯГНЕННЯ -->
         <section id="stats" class="b3-stats">
             <div class="container"><h2 class="b3-title" data-i18n="b3.title">Наші досягнення</h2><div id="stats-container" class="b3-grid"></div></div>
         </section>
 
+        <!-- БЛОК 4: ПАРТНЕРИ -->
         <section id="partners" class="b4-partners">
             <div class="container"><h2 class="b4-title" data-i18n="b4.title">Наші партнери</h2></div>
             <div class="b4-slider-wrapper">
@@ -76,39 +83,50 @@
             </div>
         </section>
 
-        <!-- БЛОК 5: НАША КОМАНДА ТА СПЕЦІАЛІСТИ -->
+        <!-- БЛОК 5: КОМАНДА -->
         <section id="team" class="b5-team-section">
             <div class="container">
-                <div class="b5-header">
-                    <span class="b5-pretitle" data-i18n="b5.label">ЕКСПЕРТНА ПІДТРИМКА</span>
-                    <h2 class="b5-title" data-i18n="b5.title">Наша команда та Спеціалісти</h2>
-                </div>
-                <div id="team-container" class="b5-team-grid">
-                    <!-- JS Render -->
-                </div>
+                <div class="b5-header"><span class="b5-pretitle" data-i18n="b5.label">ЕКСПЕРТНА ПІДТРИМКА</span><h2 class="b5-title" data-i18n="b5.title">Наша команда та Спеціалісти</h2></div>
+                <div id="team-container" class="b5-team-grid"></div>
             </div>
         </section>
 
+        <!-- БЛОК 6: ВІДГУКИ -->
         <section id="stories" class="b6-impact-wall">
             <div class="container">
-                <div class="b6-header"><span class="b6-subtitle" data-i18n="b6.label">ВІДГУКИ ТА ПОДЯКИ</span><h2 class="b6-title" data-i18n="b6.title">Історії наших героїв</h2></div>
+                <div class="b6-header"><span class="b6-subtitle" data-i18n="b6.label">ВІДГУКИ</span><h2 class="b6-title" data-i18n="b6.title">Історії героїв</h2></div>
                 <div id="stories-container" class="b6-masonry-grid"></div>
             </div>
         </section>
 
+        <!-- БЛОК 7: МЕДІА -->
         <section id="media" class="b7-media">
             <div class="b7-stone-texture"></div>
             <div class="container b7-relative">
-                <div class="b7-header-center"><div class="b7-brass-plaque"><div class="b7-plaque-bolt tl"></div><div class="b7-plaque-bolt tr"></div><div class="b7-plaque-bolt bl"></div><div class="b7-plaque-bolt br"></div><h2 class="b7-main-title" data-i18n="b7.title">Медіа-центр</h2><div class="b7-plaque-shine"></div></div></div>
+                <div class="b7-header-block">
+                    <h2 class="b7-display-title" data-i18n="b7.title">Медіа-центр</h2>
+                    <div class="b7-divider"><span>EST 2026</span></div>
+                </div>
                 <div class="b7-main-layout">
-                    <div class="b7-news-glass"><div class="b7-glass-header"><span class="b7-accent-tag">Live Feed</span><h3 data-i18n="b7.news_title">Новини</h3></div><div id="news-container" class="b7-news-feed"></div></div>
-                    <div class="b7-albums-glass"><div class="b7-glass-header"><span class="b7-accent-tag">Archive</span><h3 data-i18n="b7.albums_title">Фотоальбоми</h3></div><div id="albums-container" class="b7-albums-grid"></div><div class="b7-portal-trigger" onclick="window.toggleAllAlbums()"><span data-i18n="b7.all_albums">Відкрити весь архів</span><i class="fas fa-arrow-right-long"></i></div></div>
+                    <div class="b7-news-glass">
+                        <div class="b7-glass-header"><span class="b7-accent-tag">Live</span><h3 data-i18n="b7.news_title">Новини</h3></div>
+                        <div id="news-container" class="b7-news-feed"></div>
+                    </div>
+                    <div class="b7-albums-glass">
+                        <div class="b7-glass-header"><span class="b7-accent-tag">Archive</span><h3 data-i18n="b7.albums_title">Альбоми</h3></div>
+                        <div id="albums-container" class="b7-albums-grid"></div>
+                        <div class="b7-portal-trigger" onclick="window.toggleAllAlbums()">
+                            <span data-i18n="b7.all_albums">Весь архів</span><i class="fas fa-arrow-right-long"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
+        
+        <section id="founders" class="b8-founders"></section>
     </main>
 
-    <!-- ПОРТАЛ ТА МОДАЛКИ -->
+    <!-- МОДАЛКИ -->
     <div id="archivePortal" class="b7-portal-overlay">
         <div class="b7-portal-content"><div class="b7-portal-top"><h2 data-i18n="b7.full_archive">Офіційний архів</h2><button class="b7-portal-close" onclick="window.toggleAllAlbums()">&times;</button></div><div id="full-albums-grid" class="b7-portal-items"></div></div>
     </div>
