@@ -46,6 +46,7 @@
     </header>
 
     <main>
+        <!-- БЛОК 1 -->
         <section id="home" class="b1-hero">
             <div class="b1-bg-wrapper"><div class="b1-bg-image"></div><div class="b1-overlay"></div><div class="b1-grid-pattern"></div></div>
             <div class="container"><div class="b1-content">
@@ -57,20 +58,17 @@
             </div></div>
         </section>
 
+        <!-- БЛОК 2 -->
         <section id="activities" class="b2-activities">
-            <div class="container">
-                <h2 class="b2-title-center" data-i18n="b2.title">Наша діяльність</h2>
-                <div id="activities-container" class="b2-grid-6"></div>
-            </div>
+            <div class="container"><h2 class="b2-title-center" data-i18n="b2.title">Наша діяльність</h2><div id="activities-container" class="b2-grid-6"></div></div>
         </section>
 
+        <!-- БЛОК 3 -->
         <section id="stats" class="b3-stats">
-            <div class="container">
-                <h2 class="b3-title" data-i18n="b3.title">Наші досягнення</h2>
-                <div id="stats-container" class="b3-grid"></div>
-            </div>
+            <div class="container"><h2 class="b3-title" data-i18n="b3.title">Наші досягнення</h2><div id="stats-container" class="b3-grid"></div></div>
         </section>
 
+        <!-- БЛОК 4 -->
         <section id="partners" class="b4-partners">
             <div class="container"><h2 class="b4-title" data-i18n="b4.title">Наші партнери</h2></div>
             <div class="b4-slider-wrapper">
@@ -82,50 +80,48 @@
             </div>
         </section>
 
+        <!-- БЛОК 5 -->
         <section id="friends" class="b5-friends">
             <div class="container"><h2 class="b5-title" data-i18n="b5.title">Наші друзі</h2><div id="friends-container" class="b5-grid"></div></div>
         </section>
 
+        <!-- БЛОК 6 -->
         <section id="stories" class="b6-stories">
             <div class="container"><h2 class="b6-title" data-i18n="b6.title">Історії наших героїв</h2><div id="stories-container" class="b6-grid"></div></div>
         </section>
 
-        <!-- БЛОК 7 -->
+        <!-- БЛОК 7: TITAN MEDIA GALLERY (PREMIUM DESIGN) -->
         <section id="media" class="b7-media">
-            <div class="b7-immersive-bg">
-                <img src="images/newspapers/news1.jpg" class="b7-bg-item i1">
-                <img src="images/newspapers/news2.jpg" class="b7-bg-item i2">
-                <img src="images/newspapers/news3.jpg" class="b7-bg-item i3">
-                <img src="images/newspapers/news4.jpg" class="b7-bg-item i4">
-                <img src="images/newspapers/news5.jpg" class="b7-bg-item i5">
-                <img src="images/newspapers/news6.jpg" class="b7-bg-item i6">
-            </div>
-            <div class="b7-vignette-overlay"></div>
+            <div class="b7-stone-texture"></div>
             
-            <div class="container b7-relative">
-                <!-- ПРЕМІАЛЬНИЙ ЗАГОЛОВОК-ТАБЛИЧКА -->
-                <div class="b7-header-center">
-                    <div class="b7-brass-plaque">
-                        <div class="b7-plaque-bolt tl"></div>
-                        <div class="b7-plaque-bolt tr"></div>
-                        <div class="b7-plaque-bolt bl"></div>
-                        <div class="b7-plaque-bolt br"></div>
-                        <h2 class="b7-main-title" data-i18n="b7.title">Медіа-центр</h2>
-                        <div class="b7-plaque-shine"></div>
-                    </div>
+            <div class="container">
+                <!-- ПРЕМІАЛЬНИЙ ЗАГОЛОВОК -->
+                <div class="b7-header-block">
+                    <h2 class="b7-display-title" data-i18n="b7.title">Медіа-центр</h2>
+                    <div class="b7-divider"><span>EST 2026</span></div>
                 </div>
 
                 <div class="b7-main-layout">
-                    <div class="b7-news-column">
-                        <div class="b7-label-stamp">ХРОНІКА</div>
-                        <div id="news-container" class="b7-clippings-pile"></div>
+                    <!-- КОЛОНКА НОВИН -->
+                    <div class="b7-news-glass">
+                        <div class="b7-glass-header">
+                            <span class="b7-accent-tag">Journal</span>
+                            <h3 data-i18n="b7.news_title">Новини</h3>
+                        </div>
+                        <div id="news-container" class="b7-news-feed"></div>
                     </div>
-                    <div class="b7-albums-column">
-                        <div class="b7-label-stamp">АРХІВ ФОТО</div>
-                        <div id="albums-container" class="b7-folders-stack"></div>
-                        <div class="b7-archive-portal-btn" onclick="window.toggleAllAlbums()">
-                            <i class="fas fa-box-archive"></i>
-                            <span data-i18n="b7.all_albums">Відкрити весь архів</span>
+
+                    <!-- КОЛОНКА АЛЬБОМІВ -->
+                    <div class="b7-albums-glass">
+                        <div class="b7-glass-header">
+                            <span class="b7-accent-tag">Archive</span>
+                            <h3 data-i18n="b7.albums_title">Фотоальбоми</h3>
+                        </div>
+                        <div id="albums-container" class="b7-albums-grid"></div>
+                        
+                        <div class="b7-portal-trigger" onclick="window.toggleAllAlbums()">
+                            <span data-i18n="b7.all_albums">Переглянути весь архів</span>
+                            <i class="fas fa-arrow-right-long"></i>
                         </div>
                     </div>
                 </div>
@@ -135,21 +131,25 @@
         <section id="founders" class="b8-founders"></section>
     </main>
 
-    <div id="archivePortal" class="b7-portal">
-        <div class="b7-portal-header">
-            <h2 data-i18n="b7.full_archive">Повний фотоархів</h2>
-            <span class="b7-portal-close" onclick="window.toggleAllAlbums()">&times;</span>
+    <!-- ПОРТАЛ АРХІВУ -->
+    <div id="archivePortal" class="b7-portal-overlay">
+        <div class="b7-portal-content">
+            <div class="b7-portal-top">
+                <h2 data-i18n="b7.full_archive">Офіційний архів</h2>
+                <button class="b7-portal-close" onclick="window.toggleAllAlbums()">&times;</button>
+            </div>
+            <div id="full-albums-grid" class="b7-portal-items"></div>
         </div>
-        <div id="full-albums-grid" class="b7-portal-grid"></div>
     </div>
 
-    <div id="galleryModal" class="b7-modal">
-        <span class="b7-modal-close">&times;</span>
-        <div class="b7-modal-content">
-            <div class="swiper b7-gallery-swiper">
+    <!-- МОДАЛЬНА ГАЛЕРЕЯ -->
+    <div id="galleryModal" class="b7-gallery-modal">
+        <span class="b7-modal-close-btn">&times;</span>
+        <div class="b7-gallery-content">
+            <div class="swiper b7-gallery-swiper-engine">
                 <div class="swiper-wrapper" id="modal-gallery-wrapper"></div>
-                <div class="b7-swiper-next"><i class="fas fa-arrow-right"></i></div>
-                <div class="b7-swiper-prev"><i class="fas fa-arrow-left"></i></div>
+                <div class="b7-swiper-nav next"><i class="fas fa-chevron-right"></i></div>
+                <div class="b7-swiper-nav prev"><i class="fas fa-chevron-left"></i></div>
             </div>
         </div>
     </div>

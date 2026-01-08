@@ -8,9 +8,12 @@ async function init() {
     try {
         const [t, a, s, p, f, st, n, al] = await Promise.all([
             loadTranslations(),
-            fetch('data/activities.json').then(res => res.json()), fetch('data/stats.json').then(res => res.json()),
-            fetch('data/partners.json').then(res => res.json()), fetch('data/friends.json').then(res => res.json()),
-            fetch('data/stories.json').then(res => res.json()), fetch('data/news.json').then(res => res.json()),
+            fetch('data/activities.json').then(res => res.json()),
+            fetch('data/stats.json').then(res => res.json()),
+            fetch('data/partners.json').then(res => res.json()),
+            fetch('data/friends.json').then(res => res.json()),
+            fetch('data/stories.json').then(res => res.json()),
+            fetch('data/news.json').then(res => res.json()),
             fetch('data/albums.json').then(res => res.json())
         ]);
         cache = { translations: t, activities: a, stats: s, partners: p, friends: f, stories: st, news: n, albums: al };
@@ -19,7 +22,7 @@ async function init() {
         setupScrollReveal();
         updateUI();
         setupGalleryModal();
-    } catch (e) { console.error("Init failed:", e); }
+    } catch (e) { console.error("Init error:", e); }
 }
 
 function updateUI() {
@@ -37,8 +40,9 @@ function updateUI() {
 
 window.toggleAllAlbums = () => {
     const portal = document.getElementById('archivePortal');
-    portal.style.display = (portal.style.display === 'block') ? 'none' : 'block';
-    document.body.style.overflow = (portal.style.display === 'block') ? 'hidden' : 'auto';
+    const isVisible = portal.style.display === 'block';
+    portal.style.display = isVisible ? 'none' : 'block';
+    document.body.style.overflow = isVisible ? 'auto' : 'hidden';
 };
 
 window.openGallery = (id) => {
@@ -48,13 +52,17 @@ window.openGallery = (id) => {
     wrapper.innerHTML = album.photos.map(src => `<div class="swiper-slide"><img src="${src}"></div>`).join('');
     document.getElementById('galleryModal').style.display = 'flex';
     if (window.gallerySwiper) window.gallerySwiper.destroy();
-    window.gallerySwiper = new Swiper('.b7-gallery-swiper', { navigation: { nextEl: '.b7-swiper-next', prevEl: '.b7-swiper-prev' }, loop: true });
+    window.gallerySwiper = new Swiper('.b7-gallery-swiper-engine', {
+        navigation: { nextEl: '.next', prevEl: '.prev' },
+        loop: true
+    });
 };
 
 function setupGalleryModal() {
     const modal = document.getElementById('galleryModal');
-    const close = document.querySelector('.b7-modal-close');
+    const close = document.querySelector('.b7-modal-close-btn');
     if (close) close.onclick = () => modal.style.display = 'none';
+    window.onclick = (e) => { if (e.target == modal) modal.style.display = 'none'; };
 }
 
 function initPartnersSwiper() {
