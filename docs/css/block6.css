@@ -1,138 +1,122 @@
-.b6-hall-of-honor {
-    padding: 160px 0;
-    background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+.b6-impact-wall {
+    padding: 120px 0;
+    background-color: #0f172a; /* Темний професійний фон */
     position: relative;
     overflow: hidden;
 }
 
-.b6-aura-bg {
-    position: absolute;
-    top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 100%; height: 100%;
-    background: radial-gradient(circle, rgba(197, 160, 89, 0.05) 0%, transparent 70%);
-    z-index: 1;
-    pointer-events: none;
+.b6-header {
+    text-align: center;
+    margin-bottom: 80px;
 }
 
-.b6-hall-of-honor .container { position: relative; z-index: 10; }
-
-.b6-header-box { text-align: center; margin-bottom: 120px; }
+.b6-subtitle {
+    color: var(--accent-gold);
+    font-weight: 800;
+    letter-spacing: 4px;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 15px;
+}
 
 .b6-title {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2.5rem, 6vw, 4rem);
     color: var(--white);
-    text-transform: uppercase;
-    letter-spacing: 5px;
     font-weight: 900;
 }
 
-.b6-line {
-    width: 150px; height: 3px; background: var(--accent-gold);
-    margin: 30px auto 0;
-    position: relative;
-}
-
-.b6-line::before {
-    content: ""; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
-    width: 12px; height: 12px; background: var(--accent-gold); border-radius: 50%;
-}
-
-/* СІТКА ІСТОРІЙ */
-.b6-stories-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 120px; /* Великі відступи для фокусу на кожній історії */
-}
-
-.b6-hero-card {
+/* BENTO MASONRY GRID */
+.b6-masonry-grid {
     display: grid;
-    grid-template-columns: 450px 1fr;
-    gap: 80px;
-    align-items: center;
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    align-items: start;
 }
 
-.b6-hall-of-honor.active .b6-hero-card {
+.b6-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 40px;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.b6-impact-wall.active .b6-card {
     opacity: 1;
     transform: translateY(0);
 }
 
-.b6-hero-card:nth-child(even) { grid-template-columns: 1fr 450px; }
-.b6-hero-card:nth-child(even) .b6-image-part { order: 2; }
+/* Різні затримки для ефекту хвилі */
+.b6-card:nth-child(1) { transition-delay: 0.1s; }
+.b6-card:nth-child(2) { transition-delay: 0.2s; }
+.b6-card:nth-child(3) { transition-delay: 0.3s; }
+.b6-card:nth-child(4) { transition-delay: 0.4s; }
 
-/* ОБРАЗ ГЕРОЯ */
-.b6-image-part {
-    position: relative;
-    height: 550px;
+.b6-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--accent-gold);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
 }
 
-.b6-image-frame {
-    width: 100%; height: 100%;
-    border-radius: 30px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-    position: relative;
-    z-index: 5;
+/* Іконка цитати */
+.b6-quote-mark {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 2rem;
+    color: rgba(197, 160, 89, 0.2);
+    font-family: 'Playfair Display', serif;
 }
 
-.b6-image-frame img {
-    width: 100%; height: 100%;
+.b6-card-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    font-style: italic;
+    margin-bottom: 30px;
+}
+
+.b6-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.b6-author-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
     object-fit: cover;
-    filter: grayscale(100%);
-    transition: 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+    border: 2px solid var(--accent-gold);
 }
 
-.b6-hero-card:hover .b6-image-frame img {
-    filter: grayscale(0%);
-    transform: scale(1.1);
+.b6-author-info h4 {
+    color: var(--white);
+    font-size: 1.1rem;
+    font-weight: 700;
 }
 
-/* СЯЙВО ЗА ФОТО */
-.b6-image-part::after {
-    content: ""; position: absolute; inset: -20px;
-    background: radial-gradient(circle, rgba(197, 160, 89, 0.2) 0%, transparent 70%);
-    z-index: 1; opacity: 0; transition: 0.8s;
-}
-.b6-hero-card:hover .b6-image-part::after { opacity: 1; }
-
-/* ТЕКСТОВА ЧАСТИНА */
-.b6-text-part { position: relative; }
-
-.b6-quote-icon {
-    font-size: 8rem;
-    font-family: 'Playfair Display', serif;
-    color: rgba(197, 160, 89, 0.1);
-    position: absolute; top: -60px; left: -40px;
-    z-index: -1;
+.b6-author-info p {
+    color: var(--accent-gold);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
-.b6-hero-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem; color: var(--white);
-    margin-bottom: 10px; font-weight: 900;
+/* МОБІЛЬНА АДАПТАЦІЯ - ТЕПЕР ПРАЦЮЄ ЧІТКО */
+@media (max-width: 1024px) {
+    .b6-masonry-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-.b6-hero-rank {
-    font-weight: 800; color: var(--accent-gold);
-    letter-spacing: 3px; text-transform: uppercase;
-    font-size: 0.9rem; margin-bottom: 40px; display: block;
-}
-
-.b6-hero-quote {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem; line-height: 1.5; color: rgba(255,255,255,0.9);
-    font-style: italic; border-left: 4px solid var(--accent-gold);
-    padding-left: 30px;
-}
-
-@media (max-width: 1200px) {
-    .b6-hero-card, .b6-hero-card:nth-child(even) { grid-template-columns: 1fr; text-align: center; gap: 40px; }
-    .b6-image-part { height: 400px; max-width: 400px; margin: 0 auto; }
-    .b6-image-part { order: 1 !important; }
-    .b6-text-part { order: 2 !important; }
-    .b6-hero-quote { border-left: none; padding-left: 0; font-size: 1.4rem; }
+@media (max-width: 768px) {
+    .b6-masonry-grid { grid-template-columns: 1fr; gap: 20px; }
+    .b6-card { padding: 30px; }
+    .b6-card-text { font-size: 1.1rem; }
 }

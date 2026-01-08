@@ -30,19 +30,15 @@ export function renderStories(data, lang) {
     if (!container || !data) return;
 
     container.innerHTML = data.map(s => `
-        <div class="b6-hero-card">
-            <div class="b6-image-part">
-                <div class="b6-image-frame">
-                    <img src="${s.img}" alt="${s.name}">
+        <div class="b6-card">
+            <div class="b6-quote-mark">“</div>
+            <p class="b6-card-text">${s.text[lang]}</p>
+            <div class="b6-author">
+                <img src="${s.img}" class="b6-author-img" alt="${s.name}">
+                <div class="b6-author-info">
+                    <h4>${s.name}</h4>
+                    <p>${s.rank[lang]}</p>
                 </div>
-            </div>
-            <div class="b6-text-part">
-                <div class="b6-quote-icon">“</div>
-                <h3 class="b6-hero-name">${s.name}</h3>
-                <span class="b6-hero-rank">${s.rank[lang]}</span>
-                <blockquote class="b6-hero-quote">
-                    ${s.text[lang]}
-                </blockquote>
             </div>
         </div>
     `).join('');

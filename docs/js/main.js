@@ -19,7 +19,7 @@ async function init() {
         setupScrollReveal();
         updateUI();
         setupGalleryModal();
-    } catch (e) { console.error("Init error:", e); }
+    } catch (e) { console.error("Init failed:", e); }
 }
 
 function updateUI() {
@@ -54,7 +54,8 @@ window.openGallery = (id) => {
 
 function setupGalleryModal() {
     const modal = document.getElementById('galleryModal');
-    window.onclick = (e) => { if (e.target == modal) modal.style.display = 'none'; };
+    const close = document.querySelector('.b7-modal-close-btn');
+    if (close) close.onclick = () => modal.style.display = 'none';
 }
 
 function initPartnersSwiper() {
