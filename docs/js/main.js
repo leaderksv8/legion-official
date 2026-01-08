@@ -8,9 +8,12 @@ async function init() {
     try {
         const [t, a, s, p, f, st, n, al] = await Promise.all([
             loadTranslations(),
-            fetch('data/activities.json').then(res => res.json()), fetch('data/stats.json').then(res => res.json()),
-            fetch('data/partners.json').then(res => res.json()), fetch('data/friends.json').then(res => res.json()),
-            fetch('data/stories.json').then(res => res.json()), fetch('data/news.json').then(res => res.json()),
+            fetch('data/activities.json').then(res => res.json()),
+            fetch('data/stats.json').then(res => res.json()),
+            fetch('data/partners.json').then(res => res.json()),
+            fetch('data/friends.json').then(res => res.json()),
+            fetch('data/stories.json').then(res => res.json()),
+            fetch('data/news.json').then(res => res.json()),
             fetch('data/albums.json').then(res => res.json())
         ]);
         cache = { translations: t, activities: a, stats: s, partners: p, friends: f, stories: st, news: n, albums: al };
@@ -19,7 +22,7 @@ async function init() {
         setupScrollReveal();
         updateUI();
         setupGalleryModal();
-        setupParallax(); // ЗАПУСК ПАРАЛАКСУ
+        setupParallax();
     } catch (e) { console.error("Init failed:", e); }
 }
 
@@ -35,12 +38,12 @@ function updateUI() {
     initCounters(); 
     setTimeout(() => {
         initPartnersSwiper();
-        initVerticalAlbums(); // ЗАПУСК ВЕРТИКАЛЬНИХ АЛЬБОМІВ
+        initVerticalAlbums();
     }, 600);
 }
 
-// ПАРАЛАКС ЕФЕКТ ФОНУ
 function setupParallax() {
+    if (window.innerWidth < 1024) return;
     document.addEventListener("mousemove", (e) => {
         const layers = document.querySelectorAll(".b7-p-layer");
         const x = (window.innerWidth - e.pageX * 2) / 100;
@@ -52,14 +55,16 @@ function setupParallax() {
     });
 }
 
-// ВЕРТИКАЛЬНІ АЛЬБОМИ
 function initVerticalAlbums() {
+    const isMobile = window.innerWidth < 992;
+    
     new Swiper('.b7-albums-swiper', {
-        direction: 'vertical',
-        slidesPerView: 2,
+        direction: isMobile ? 'horizontal' : 'vertical', // ГОРИЗОНТАЛЬНО НА МОБІЛЬНИХ
+        slidesPerView: isMobile ? 1.2 : 2,
         spaceBetween: 20,
-        mousewheel: true,
+        mousewheel: !isMobile,
         grabCursor: true,
+        nested: true, // ВАЖЛИВО: не перехоплює скрол сторінки
         autoplay: { delay: 3000 }
     });
 }
