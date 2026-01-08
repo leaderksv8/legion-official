@@ -40,8 +40,8 @@ export function renderNews(data, lang) {
     const container = document.getElementById('news-container');
     if (!container || !data) return;
     container.innerHTML = data.map(n => `
-        <a href="${n.link}" class="b7-news-item" target="_blank">
-            <span class="b7-item-date">${n.date}</span>
+        <a href="${n.link}" class="b7-news-item" target="_blank" rel="noopener noreferrer">
+            <span class="b7-item-date">${n.tag[lang]} | ${n.date}</span>
             <h4>${n.title[lang]}</h4>
         </a>
     `).join('');

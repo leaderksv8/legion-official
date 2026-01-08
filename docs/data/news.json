@@ -1,26 +1,56 @@
 [
     {
-        "tag": { "uk": "Подія", "en": "Event" },
-        "date": "24.05.2026",
-        "title": { "uk": "Зустріч ветеранів Бучанської громади", "en": "Meeting of veterans of the Bucha community" },
-        "link": "https://google.com"
+        "tag": { "uk": "СМІ", "en": "Media" },
+        "date": "Сьогодні",
+        "title": { 
+            "uk": "Українська правда: Головні новини політики та фронту", 
+            "en": "Ukrainska Pravda: Main politics and frontline news" 
+        },
+        "link": "https://www.pravda.com.ua/news/"
     },
     {
-        "tag": { "uk": "Допомога", "en": "Aid" },
-        "date": "20.05.2026",
-        "title": { "uk": "Нова програма юридичної підтримки", "en": "New legal support program" },
-        "link": "#"
+        "tag": { "uk": "Події", "en": "Events" },
+        "date": "Сьогодні",
+        "title": { 
+            "uk": "ТСН: Останні новини України та світу в реальному часі", 
+            "en": "TSN: Latest news of Ukraine and the world in real time" 
+        },
+        "link": "https://tsn.ua/"
     },
     {
-        "tag": { "uk": "Спорт", "en": "Sport" },
-        "date": "15.05.2026",
-        "title": { "uk": "Турнір з настільного тенісу серед ветеранів", "en": "Table tennis tournament among veterans" },
-        "link": "#"
+        "tag": { "uk": "Аналітика", "en": "Analytics" },
+        "date": "Сьогодні",
+        "title": { 
+            "uk": "Кореспондент: Огляд найважливіших подій дня", 
+            "en": "Korrespondent: Overview of the most important events" 
+        },
+        "link": "https://ua.korrespondent.net/"
     },
     {
         "tag": { "uk": "Важливо", "en": "Important" },
-        "date": "10.05.2026",
-        "title": { "uk": "Розширення списку партнерських реабілітаційних центрів", "en": "Expansion of partner rehabilitation centers" },
-        "link": "#"
+        "date": "Сьогодні",
+        "title": { 
+            "uk": "УНІАН: Оперативні новини та ексклюзивні репортажі", 
+            "en": "UNIAN: breaking news and exclusive reports" 
+        },
+        "link": "https://www.unian.ua/"
+    },
+    {
+        "tag": { "uk": "Економіка", "en": "Economy" },
+        "date": "Сьогодні",
+        "title": { 
+            "uk": "iPress: Незалежний погляд на події в Україні", 
+            "en": "iPress: Independent look at events in Ukraine" 
+        },
+        "link": "https://ipress.ua/"
+    },
+    {
+        "tag": { "uk": "Стрічка", "en": "Feed" },
+        "date": "Сьогодні",
+        "title": { 
+            "uk": "УНІАН: Повна стрічка актуальних новин", 
+            "en": "UNIAN: Full feed of current news" 
+        },
+        "link": "https://www.unian.ua/detail/all_news"
     }
 ]
