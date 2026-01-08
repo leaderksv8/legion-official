@@ -2,12 +2,7 @@ export function renderActivities(data, lang) {
     const container = document.getElementById('activities-container');
     if (!container || !data) return;
     container.innerHTML = data.map(item => `
-        <div class="b2-item-card">
-            <div class="b2-card-inner">
-                <div class="b2-card-front"><div class="b2-icon-box"><i class="fa-solid fa-${item.icon}"></i></div><h4>${item.title[lang]}</h4></div>
-                <div class="b2-card-back"><p>${item.desc[lang]}</p></div>
-            </div>
-        </div>
+        <div class="b2-item-card"><div class="b2-card-inner"><div class="b2-card-front"><div class="b2-icon-box"><i class="fa-solid fa-${item.icon}"></i></div><h4>${item.title[lang]}</h4></div><div class="b2-card-back"><p>${item.desc[lang]}</p></div></div></div>
     `).join('');
 }
 
@@ -33,26 +28,32 @@ export function renderFriends(data, lang) {
 export function renderStories(data, lang) {
     const container = document.getElementById('stories-container');
     if (!container || !data) return;
-    container.innerHTML = data.map(s => `<div class="b6-card"><div class="b6-image-box"><img src="${s.img}" alt="${s.name}"></div><div class="b6-info"><h3>${s.name}</h3><span class="b6-rank">${s.rank[lang]}</span><p class="b6-text">"${s.text[lang]}"</p></div></div>`).join('');
+
+    container.innerHTML = data.map(s => `
+        <div class="b6-hero-card">
+            <div class="b6-image-part">
+                <div class="b6-image-frame">
+                    <img src="${s.img}" alt="${s.name}">
+                </div>
+            </div>
+            <div class="b6-text-part">
+                <div class="b6-quote-icon">“</div>
+                <h3 class="b6-hero-name">${s.name}</h3>
+                <span class="b6-hero-rank">${s.rank[lang]}</span>
+                <blockquote class="b6-hero-quote">
+                    ${s.text[lang]}
+                </blockquote>
+            </div>
+        </div>
+    `).join('');
 }
 
 export function renderNews(data, lang) {
     const container = document.getElementById('news-container');
     if (!container || !data) return;
-
     container.innerHTML = data.map(n => {
-        // Витягуємо назву домену для красивого тегу
         const domain = new URL(n.link).hostname.replace('www.', '').split('.')[0].toUpperCase();
-        
-        return `
-            <a href="${n.link}" class="b7-news-item" target="_blank" rel="noopener noreferrer">
-                <div class="b7-item-meta">
-                    <div class="b7-live-dot"></div>
-                    <span class="b7-source-label">${domain} | ${n.date}</span>
-                </div>
-                <h4>${n.title[lang]}</h4>
-            </a>
-        `;
+        return `<a href="${n.link}" class="b7-news-item" target="_blank" rel="noopener noreferrer"><div class="b7-item-meta"><div class="b7-live-dot"></div><span class="b7-source-label">${domain} | ${n.date}</span></div><h4>${n.title[lang]}</h4></a>`;
     }).join('');
 }
 
@@ -60,16 +61,7 @@ export function renderAlbums(data, lang) {
     const container = document.getElementById('albums-container');
     const fullGrid = document.getElementById('full-albums-grid');
     if (!container || !data) return;
-
-    const html = (a) => `
-        <div class="b7-album-tile" onclick="window.openGallery('${a.id}')">
-            <img src="${a.preview}" alt="Gallery">
-            <div class="b7-album-tile-overlay">
-                <h4>${a.title[lang]}</h4>
-            </div>
-        </div>
-    `;
-
+    const html = (a) => `<div class="b7-album-tile" onclick="window.openGallery('${a.id}')"><img src="${a.preview}" alt="Gallery"><div class="b7-album-tile-overlay"><h4>${a.title[lang]}</h4></div></div>`;
     container.innerHTML = data.slice(0, 3).map(html).join('');
     fullGrid.innerHTML = data.map(html).join('');
 }

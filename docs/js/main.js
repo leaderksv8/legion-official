@@ -49,10 +49,7 @@ window.openGallery = (id) => {
     wrapper.innerHTML = album.photos.map(src => `<div class="swiper-slide"><img src="${src}"></div>`).join('');
     document.getElementById('galleryModal').style.display = 'flex';
     if (window.gallerySwiper) window.gallerySwiper.destroy();
-    window.gallerySwiper = new Swiper('.b7-gallery-swiper-engine', {
-        navigation: { nextEl: '.next', prevEl: '.prev' },
-        loop: true
-    });
+    window.gallerySwiper = new Swiper('.b7-gallery-swiper-engine', { navigation: { nextEl: '.next', prevEl: '.prev' }, loop: true });
 };
 
 function setupGalleryModal() {
