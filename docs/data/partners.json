@@ -1,12 +1,12 @@
 [
-    { "name": "Partner 1", "img": "https://placehold.co/400x400/1e293b/ffffff?text=1", "link": "#" },
-    { "name": "Partner 2", "img": "https://placehold.co/400x400/1e293b/ffffff?text=2", "link": "#" },
-    { "name": "Partner 3", "img": "https://placehold.co/400x400/1e293b/ffffff?text=3", "link": "#" },
-    { "name": "Partner 4", "img": "https://placehold.co/400x400/1e293b/ffffff?text=4", "link": "#" },
-    { "name": "Partner 5", "img": "https://placehold.co/400x400/1e293b/ffffff?text=5", "link": "#" },
-    { "name": "Partner 6", "img": "https://placehold.co/400x400/1e293b/ffffff?text=6", "link": "#" },
-    { "name": "Partner 7", "img": "https://placehold.co/400x400/1e293b/ffffff?text=7", "link": "#" },
-    { "name": "Partner 8", "img": "https://placehold.co/400x400/1e293b/ffffff?text=8", "link": "#" },
-    { "name": "Partner 9", "img": "https://placehold.co/400x400/1e293b/ffffff?text=9", "link": "#" },
-    { "name": "Partner 10", "img": "https://placehold.co/400x400/1e293b/ffffff?text=10", "link": "#" }
+    { "name": "Rozetka", "img": "https://placehold.co/400x400/22c55e/ffffff?text=Rozetka", "link": "https://rozetka.com.ua/" },
+    { "name": "ATB Market", "img": "https://placehold.co/400x400/ef4444/ffffff?text=ATB", "link": "https://www.atbmarket.com/" },
+    { "name": "Kyivstar", "img": "https://placehold.co/400x400/0ea5e9/ffffff?text=Kyivstar", "link": "https://kyivstar.ua/" },
+    { "name": "Lanet", "img": "https://placehold.co/400x400/f59e0b/ffffff?text=Lanet", "link": "https://www.lanet.ua/" },
+    { "name": "Kyiv Digital", "img": "https://placehold.co/400x400/3b82f6/ffffff?text=Kyiv+Digital", "link": "https://portal.kyiv.digital/" },
+    { "name": "MVA", "img": "https://placehold.co/400x400/1e293b/ffffff?text=MVA", "link": "https://mva.gov.ua/" },
+    { "name": "Comfy", "img": "https://placehold.co/400x400/fbbf24/000000?text=Comfy", "link": "https://comfy.ua/" },
+    { "name": "RNBO", "img": "https://placehold.co/400x400/064e3b/ffffff?text=RNBO", "link": "https://www.rnbo.gov.ua/ua/Ukazy/" },
+    { "name": "Hotline", "img": "https://placehold.co/400x400/dc2626/ffffff?text=Hotline", "link": "https://hotline.ua/" },
+    { "name": "Allo", "img": "https://placehold.co/400x400/000000/ffffff?text=Allo", "link": "https://allo.ua/" }
 ]

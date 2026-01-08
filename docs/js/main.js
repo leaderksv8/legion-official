@@ -11,7 +11,7 @@ async function init() {
             fetch('data/activities.json').then(res => res.json()),
             fetch('data/stats.json').then(res => res.json()),
             fetch('data/partners.json').then(res => res.json()),
-            fetch('data/friends.json').then(res => res.json()), // Файл за замовчуванням
+            fetch('data/friends.json').then(res => res.json()),
             fetch('data/stories.json').then(res => res.json()),
             fetch('data/news.json').then(res => res.json()),
             fetch('data/albums.json').then(res => res.json())
@@ -22,7 +22,7 @@ async function init() {
         setupScrollReveal();
         updateUI();
         setupGalleryModal();
-    } catch (e) { console.error("Init failed:", e); }
+    } catch (e) { console.error("Init error:", e); }
 }
 
 function updateUI() {
@@ -30,12 +30,46 @@ function updateUI() {
     render.renderActivities(cache.activities, currentLang);
     render.renderStats(cache.stats, currentLang);
     render.renderPartners(cache.partners);
+    render.renderFriends(cache.friends, currentLang); // Fallback for old name
     render.renderTeam(cache.team, currentLang);
     render.renderStories(cache.stories, currentLang);
     render.renderNews(cache.news, currentLang);
     render.renderAlbums(cache.albums, currentLang);
     initCounters(); 
-    setTimeout(() => initPartnersSwiper(), 600);
+    setTimeout(() => {
+        initPartnersSwiper();
+    }, 600);
+}
+
+function initPartnersSwiper() {
+    if (window.partnersSwiper) {
+        window.partnersSwiper.destroy(true, true);
+    }
+
+    window.partnersSwiper = new Swiper('.b4-swiper-container', {
+        loop: true,
+        centeredSlides: true,
+        speed: 1000,
+        grabCursor: true,
+        slideToClickedSlide: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        navigation: {
+            nextEl: '.b4-next-unique',
+            prevEl: '.b4-prev-unique',
+        },
+        breakpoints: {
+            320: { slidesPerView: 1.5, spaceBetween: 20 },
+            768: { slidesPerView: 3, spaceBetween: 30 },
+            1200: { slidesPerView: 5, spaceBetween: 40 }
+        },
+        loopedSlides: 10,
+        loopAdditionalSlides: 10,
+        observer: true,
+        observeParents: true,
+    });
 }
 
 window.toggleAllAlbums = () => {
@@ -58,17 +92,6 @@ window.openGallery = (id) => {
 function setupGalleryModal() {
     const modal = document.getElementById('galleryModal');
     window.onclick = (e) => { if (e.target == modal) modal.style.display = 'none'; };
-}
-
-function initPartnersSwiper() {
-    if (window.partnersSwiper) window.partnersSwiper.destroy(true, true);
-    window.partnersSwiper = new Swiper('.b4-swiper-container', {
-        loop: true, centeredSlides: true, speed: 1000, grabCursor: true,
-        autoplay: { delay: 2500, disableOnInteraction: false },
-        navigation: { nextEl: '.b4-next-unique', prevEl: '.b4-prev-unique' },
-        breakpoints: { 320: { slidesPerView: 1.5, spaceBetween: 20 }, 768: { slidesPerView: 3, spaceBetween: 30 }, 1200: { slidesPerView: 5, spaceBetween: 40 } },
-        loopedSlides: 10, loopAdditionalSlides: 10, observer: true, observeParents: true,
-    });
 }
 
 function initCounters() {

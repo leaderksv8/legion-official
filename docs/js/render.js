@@ -15,8 +15,17 @@ export function renderStats(data, lang) {
 export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track || !data) return;
-    const doubledData = [...data, ...data];
-    track.innerHTML = doubledData.map((p, index) => `<div class="swiper-slide"><div class="b4-item-box"><a href="${p.link}" target="_blank"><img src="${p.img}" alt="${p.name}" onerror="this.src='https://placehold.co/400x400/1e293b/ffffff?text=${(index % 10) + 1}'"></a></div></div>`).join('');
+
+    // Рендеримо 10 унікальних слайдів
+    track.innerHTML = data.map((p) => `
+        <div class="swiper-slide">
+            <div class="b4-item-box">
+                <a href="${p.link}" target="_blank" rel="noopener">
+                    <img src="${p.img}" alt="${p.name}">
+                </a>
+            </div>
+        </div>
+    `).join('');
 }
 
 export function renderTeam(data, lang) {
@@ -24,11 +33,8 @@ export function renderTeam(data, lang) {
     if (!container || !data) return;
     container.innerHTML = data.map(m => `
         <div class="b5-specialist-card">
-            <div class="b5-photo-container">
-                <img src="${m.img}" alt="${m.name}">
-            </div>
-            <h3>${m.name}</h3>
-            <span class="b5-role-badge">${m.role[lang]}</span>
+            <div class="b5-photo-container"><img src="${m.img}" alt="${m.name}"></div>
+            <h3>${m.name}</h3><span class="b5-role-badge">${m.role[lang]}</span>
             <div class="b5-social-links">
                 <a href="${m.social}" target="_blank" class="b5-social-btn"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" class="b5-social-btn"><i class="fab fa-telegram-plane"></i></a>
