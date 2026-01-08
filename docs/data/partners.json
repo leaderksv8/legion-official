@@ -1,12 +1,12 @@
 [
-    { "name": "Rozetka", "img": "https://placehold.co/400x400/22c55e/ffffff?text=Rozetka", "link": "https://rozetka.com.ua/" },
-    { "name": "ATB Market", "img": "https://placehold.co/400x400/ef4444/ffffff?text=ATB", "link": "https://www.atbmarket.com/" },
-    { "name": "Kyivstar", "img": "https://placehold.co/400x400/0ea5e9/ffffff?text=Kyivstar", "link": "https://kyivstar.ua/" },
-    { "name": "Lanet", "img": "https://placehold.co/400x400/f59e0b/ffffff?text=Lanet", "link": "https://www.lanet.ua/" },
-    { "name": "Kyiv Digital", "img": "https://placehold.co/400x400/3b82f6/ffffff?text=Kyiv+Digital", "link": "https://portal.kyiv.digital/" },
-    { "name": "MVA", "img": "https://placehold.co/400x400/1e293b/ffffff?text=MVA", "link": "https://mva.gov.ua/" },
-    { "name": "Comfy", "img": "https://placehold.co/400x400/fbbf24/000000?text=Comfy", "link": "https://comfy.ua/" },
-    { "name": "RNBO", "img": "https://placehold.co/400x400/064e3b/ffffff?text=RNBO", "link": "https://www.rnbo.gov.ua/ua/Ukazy/" },
-    { "name": "Hotline", "img": "https://placehold.co/400x400/dc2626/ffffff?text=Hotline", "link": "https://hotline.ua/" },
-    { "name": "Allo", "img": "https://placehold.co/400x400/000000/ffffff?text=Allo", "link": "https://allo.ua/" }
+    { "name": "Allo", "img": "images/partners/allo.png", "link": "https://allo.ua/" },
+    { "name": "ATB Market", "img": "images/partners/atb.png", "link": "https://www.atbmarket.com/" },
+    { "name": "Comfy", "img": "images/partners/comfi.png", "link": "https://comfy.ua/" },
+    { "name": "Kyiv Digital", "img": "images/partners/digital.png", "link": "https://portal.kyiv.digital/" },
+    { "name": "Hotline", "img": "images/partners/hotline.png", "link": "https://hotline.ua/" },
+    { "name": "Kyivstar", "img": "images/partners/kyivstar.png", "link": "https://kyivstar.ua/" },
+    { "name": "Lanet", "img": "images/partners/lanet.png", "link": "https://www.lanet.ua/" },
+    { "name": "MVA", "img": "images/partners/mv.png", "link": "https://mva.gov.ua/" },
+    { "name": "RNBO", "img": "images/partners/rnbo.png", "link": "https://www.rnbo.gov.ua/ua/Ukazy/" },
+    { "name": "Rozetka", "img": "images/partners/rozetka.png", "link": "https://rozetka.com.ua/" }
 ]

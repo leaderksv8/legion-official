@@ -20,11 +20,19 @@ export function renderStats(data, lang) {
 export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track || !data) return;
-    const doubledData = [...data, ...data];
-    track.innerHTML = doubledData.map((p, index) => `<div class="swiper-slide"><div class="b4-item-box"><a href="${p.link}" target="_blank"><img src="${p.img}" alt="${p.name}" onerror="this.src='https://placehold.co/400x400/1e293b/ffffff?text=${(index % 10) + 1}'"></a></div></div>`).join('');
+
+    // Рендеримо ваші реальні логотипи з папки images/partners/
+    track.innerHTML = data.map((p) => `
+        <div class="swiper-slide">
+            <div class="b4-item-box">
+                <a href="${p.link}" target="_blank" rel="noopener">
+                    <img src="${p.img}" alt="${p.name}" draggable="false" onerror="this.src='https://placehold.co/400x400/1e293b/ffffff?text=Logo'">
+                </a>
+            </div>
+        </div>
+    `).join('');
 }
 
-// ПЕРЕЙМЕНОВАНО: Тепер чітко renderTeam
 export function renderTeam(data, lang) {
     const container = document.getElementById('team-container');
     if (!container || !data) return;
@@ -61,9 +69,8 @@ export function renderNews(data, lang) {
     container.innerHTML = data.map(n => {
         const domain = new URL(n.link).hostname.replace('www.', '').split('.')[0].toUpperCase();
         return `
-            <a href="${n.link}" class="b7-news-item" target="_blank">
-                <div class="b7-live-dot"></div>
-                <div class="b7-item-meta"><span class="b7-source-label">${domain} | ${n.date}</span></div>
+            <a href="${n.link}" class="b7-news-item" target="_blank" rel="noopener noreferrer">
+                <div class="b7-item-meta"><div class="b7-live-dot"></div><span class="b7-source-label">${domain} | ${n.date}</span></div>
                 <h4>${n.title[lang]}</h4>
             </a>`;
     }).join('');
