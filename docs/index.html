@@ -84,31 +84,42 @@
             <div class="container"><h2 class="b6-title" data-i18n="b6.title">Історії наших героїв</h2><div id="stories-container" class="b6-grid"></div></div>
         </section>
 
-        <!-- БЛОК 7: ІНТЕРАКТИВНИЙ АРХІВ -->
+        <!-- БЛОК 7: ІМЕРСИВНИЙ МЕДІА-АРХІВ -->
         <section id="media" class="b7-media">
-            <div class="b7-parallax-bg">
-                <img src="images/newspapers/news1.jpg" class="b7-p-layer l1" data-speed="2">
-                <img src="images/newspapers/news2.jpg" class="b7-p-layer l2" data-speed="-3">
-                <img src="images/newspapers/news3.jpg" class="b7-p-layer l3" data-speed="4">
-                <img src="images/newspapers/news4.jpg" class="b7-p-layer l4" data-speed="-2">
-                <img src="images/newspapers/news5.jpg" class="b7-p-layer l5" data-speed="5">
-                <img src="images/newspapers/news6.jpg" class="b7-p-layer l6" data-speed="-4">
+            <!-- ПОВНИЙ ГАЗЕТНИЙ ФОН -->
+            <div class="b7-immersive-bg">
+                <img src="images/newspapers/news1.jpg" class="b7-bg-item i1">
+                <img src="images/newspapers/news2.jpg" class="b7-bg-item i2">
+                <img src="images/newspapers/news3.jpg" class="b7-bg-item i3">
+                <img src="images/newspapers/news4.jpg" class="b7-bg-item i4">
+                <img src="images/newspapers/news5.jpg" class="b7-bg-item i5">
+                <img src="images/newspapers/news6.jpg" class="b7-bg-item i6">
             </div>
-            <div class="b7-vignette-deep"></div>
-            <div class="container">
-                <div class="b7-wax-seal">
-                    <span data-i18n="b7.title">Медіа центр</span>
+            
+            <div class="b7-vignette-overlay"></div>
+            
+            <div class="container b7-relative">
+                <div class="b7-top-info">
+                    <h2 class="b7-main-title" data-i18n="b7.title">Медіа-центр</h2>
+                    <div class="b7-official-stamp">TOP SECRET</div>
                 </div>
-                <div class="b7-main-grid">
-                    <div class="b7-archive-sheet">
-                        <div class="b7-sheet-header"><span class="b7-rubber-stamp" data-i18n="b7.news_title">Новини</span></div>
-                        <div id="news-container" class="b7-list"></div>
+
+                <div class="b7-grid-layout">
+                    <!-- ЛІВА КОЛОНКА: НОВИНИ (ВИРІЗКИ) -->
+                    <div class="b7-news-area">
+                        <div class="b7-category-tag">Хроніка</div>
+                        <div id="news-container" class="b7-news-pile"></div>
                     </div>
-                    <div class="b7-archive-sheet">
-                        <div class="b7-sheet-header"><span class="b7-rubber-stamp" data-i18n="b7.albums_title">Архів</span></div>
-                        <div class="swiper b7-albums-swiper">
-                            <div class="swiper-wrapper" id="albums-container"></div>
-                            <div class="b7-swiper-hint"><i class="fas fa-chevron-down"></i> <span data-i18n="b7.scroll_hint">Більше</span></div>
+
+                    <!-- ПРАВА КОЛОНКА: АЛЬБОМИ (ПАПКИ) -->
+                    <div class="b7-albums-area">
+                        <div class="b7-category-tag">Архів</div>
+                        <div id="albums-container" class="b7-albums-deck"></div>
+                        
+                        <!-- ПРИХОВАНА КНОПКА ВСІХ АЛЬБОМІВ -->
+                        <div class="b7-all-albums-trigger" onclick="window.toggleAllAlbums()">
+                            <i class="fas fa-folder-open"></i>
+                            <span data-i18n="b7.all_albums">Відкрити весь архів</span>
                         </div>
                     </div>
                 </div>
@@ -118,13 +129,23 @@
         <section id="founders" class="b8-founders"></section>
     </main>
 
+    <!-- ПОВНОЕКРАННИЙ АРХІВ (ПРИХОВАНИЙ) -->
+    <div id="archivePortal" class="b7-portal">
+        <div class="b7-portal-header">
+            <h2 data-i18n="b7.full_archive">Повний фотоархів</h2>
+            <span class="b7-portal-close" onclick="window.toggleAllAlbums()">&times;</span>
+        </div>
+        <div id="full-albums-grid" class="b7-portal-grid"></div>
+    </div>
+
+    <!-- ГАЛЕРЕЯ ДЛЯ ОДНОГО АЛЬБОМУ -->
     <div id="galleryModal" class="b7-modal">
         <span class="b7-modal-close">&times;</span>
         <div class="b7-modal-content">
             <div class="swiper b7-gallery-swiper">
                 <div class="swiper-wrapper" id="modal-gallery-wrapper"></div>
-                <div class="b7-swiper-next"><i class="fas fa-chevron-right"></i></div>
-                <div class="b7-swiper-prev"><i class="fas fa-chevron-left"></i></div>
+                <div class="b7-swiper-next"><i class="fas fa-arrow-right"></i></div>
+                <div class="b7-swiper-prev"><i class="fas fa-arrow-left"></i></div>
             </div>
         </div>
     </div>
