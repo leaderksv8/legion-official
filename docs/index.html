@@ -4,15 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ГО «Легіон Титанів»</title>
-    
-    <!-- Шрифти -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Swiper.js CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
-    <!-- Стилі -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/block1.css">
@@ -27,7 +21,6 @@
     <link rel="stylesheet" href="css/ui-elements.css">
 </head>
 <body>
-
     <header class="main-header">
         <div class="container header-wrapper">
             <a href="index.html" class="logo-area">
@@ -91,48 +84,48 @@
             <div class="container"><h2 class="b6-title" data-i18n="b6.title">Історії наших героїв</h2><div id="stories-container" class="b6-grid"></div></div>
         </section>
 
-        <!-- БЛОК 7: ІДЕАЛЬНИЙ МЕДІА-АРХІВ -->
+        <!-- БЛОК 7: ІНТЕРАКТИВНИЙ АРХІВ -->
         <section id="media" class="b7-media">
-            <!-- ПОВНИЙ ГАЗЕТНИЙ ФОН (ЩІЛЬНИЙ КОЛАЖ) -->
-            <div class="b7-newspaper-table">
-                <img src="images/newspapers/news1.jpg" class="b7-bg-paper p1">
-                <img src="images/newspapers/news2.jpg" class="b7-bg-paper p2">
-                <img src="images/newspapers/news3.jpg" class="b7-bg-paper p3">
-                <img src="images/newspapers/news4.jpg" class="b7-bg-paper p4">
-                <img src="images/newspapers/news5.jpg" class="b7-bg-paper p5">
-                <img src="images/newspapers/news6.jpg" class="b7-bg-paper p6">
-                <img src="images/newspapers/news1.jpg" class="b7-bg-paper p7">
-                <img src="images/newspapers/news2.jpg" class="b7-bg-paper p8">
-                <img src="images/newspapers/news3.jpg" class="b7-bg-paper p9">
-                <img src="images/newspapers/news4.jpg" class="b7-bg-paper p10">
-                <img src="images/newspapers/news5.jpg" class="b7-bg-paper p11">
-                <img src="images/newspapers/news6.jpg" class="b7-bg-paper p12">
+            <!-- ПАРАЛАКС ГАЗЕТИ -->
+            <div class="b7-parallax-bg">
+                <img src="images/newspapers/news1.jpg" class="b7-p-layer l1" data-speed="2">
+                <img src="images/newspapers/news2.jpg" class="b7-p-layer l2" data-speed="-3">
+                <img src="images/newspapers/news3.jpg" class="b7-p-layer l3" data-speed="4">
+                <img src="images/newspapers/news4.jpg" class="b7-p-layer l4" data-speed="-2">
+                <img src="images/newspapers/news5.jpg" class="b7-p-layer l5" data-speed="5">
+                <img src="images/newspapers/news6.jpg" class="b7-p-layer l6" data-speed="-4">
             </div>
             
-            <div class="b7-lighting-vignette"></div>
+            <div class="b7-vignette-deep"></div>
             
             <div class="container">
-                <div class="b7-wax-seal-container">
-                    <div class="b7-wax-seal">
-                        <span data-i18n="b7.title">Медіа центр</span>
-                    </div>
+                <div class="b7-wax-seal">
+                    <span data-i18n="b7.title">Медіа центр</span>
                 </div>
 
                 <div class="b7-main-grid">
-                    <!-- ПАНЕЛЬ НОВИН -->
+                    <!-- НОВИНИ -->
                     <div class="b7-archive-sheet">
-                        <div class="b7-stamp-box">
+                        <div class="b7-sheet-header">
                             <span class="b7-rubber-stamp" data-i18n="b7.news_title">Новини</span>
                         </div>
-                        <div id="news-container" class="b7-data-list"></div>
+                        <div id="news-container" class="b7-list"></div>
                     </div>
 
-                    <!-- ПАНЕЛЬ ФОТО -->
+                    <!-- АЛЬБОМИ З ВЕРТИКАЛЬНИМ СКРОЛОМ -->
                     <div class="b7-archive-sheet">
-                        <div class="b7-stamp-box">
+                        <div class="b7-sheet-header">
                             <span class="b7-rubber-stamp" data-i18n="b7.albums_title">Архів</span>
                         </div>
-                        <div id="albums-container" class="b7-data-list"></div>
+                        <div class="swiper b7-albums-swiper">
+                            <div class="swiper-wrapper" id="albums-container">
+                                <!-- Сюди JS вставить слайди-альбоми -->
+                            </div>
+                            <div class="b7-swiper-hint">
+                                <i class="fas fa-chevron-down"></i>
+                                <span data-i18n="b7.scroll_hint">Більше альбомів</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

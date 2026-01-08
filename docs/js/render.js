@@ -39,16 +39,19 @@ export function renderStories(data, lang) {
 export function renderNews(data, lang) {
     const container = document.getElementById('news-container');
     if (!container || !data) return;
-    container.innerHTML = data.map((n, index) => `<a href="${n.link}" class="b7-news-item" style="transition-delay: ${index * 0.1}s"><span class="b7-date">${n.date}</span><h4>${n.title[lang]}</h4></a>`).join('');
+    container.innerHTML = data.map((n, index) => `<a href="${n.link}" class="b7-news-item"><span class="b7-date">${n.date}</span><h4>${n.title[lang]}</h4></a>`).join('');
 }
 
 export function renderAlbums(data, lang) {
     const container = document.getElementById('albums-container');
     if (!container || !data) return;
-    container.innerHTML = data.slice(0, 3).map((a, index) => `
-        <div class="b7-album-stack" onclick="window.openGallery('${a.id}')" style="transition-delay: ${0.3 + index * 0.1}s">
-            <img src="${a.preview}" alt="Album">
-            <h4>${a.title[lang]}</h4>
+    // Тепер рендеримо слайди для Swiper
+    container.innerHTML = data.map(a => `
+        <div class="swiper-slide">
+            <div class="b7-album-stack" onclick="window.openGallery('${a.id}')">
+                <img src="${a.preview}" alt="Album">
+                <h4>${a.title[lang]}</h4>
+            </div>
         </div>
     `).join('');
 }

@@ -8,12 +8,9 @@ async function init() {
     try {
         const [t, a, s, p, f, st, n, al] = await Promise.all([
             loadTranslations(),
-            fetch('data/activities.json').then(res => res.json()),
-            fetch('data/stats.json').then(res => res.json()),
-            fetch('data/partners.json').then(res => res.json()),
-            fetch('data/friends.json').then(res => res.json()),
-            fetch('data/stories.json').then(res => res.json()),
-            fetch('data/news.json').then(res => res.json()),
+            fetch('data/activities.json').then(res => res.json()), fetch('data/stats.json').then(res => res.json()),
+            fetch('data/partners.json').then(res => res.json()), fetch('data/friends.json').then(res => res.json()),
+            fetch('data/stories.json').then(res => res.json()), fetch('data/news.json').then(res => res.json()),
             fetch('data/albums.json').then(res => res.json())
         ]);
         cache = { translations: t, activities: a, stats: s, partners: p, friends: f, stories: st, news: n, albums: al };
@@ -22,7 +19,8 @@ async function init() {
         setupScrollReveal();
         updateUI();
         setupGalleryModal();
-    } catch (e) { console.error("Initialization failed:", e); }
+        setupParallax(); // ЗАПУСК ПАРАЛАКСУ
+    } catch (e) { console.error("Init failed:", e); }
 }
 
 function updateUI() {
@@ -35,29 +33,51 @@ function updateUI() {
     render.renderNews(cache.news, currentLang);
     render.renderAlbums(cache.albums, currentLang);
     initCounters(); 
-    setTimeout(() => initPartnersSwiper(), 600);
+    setTimeout(() => {
+        initPartnersSwiper();
+        initVerticalAlbums(); // ЗАПУСК ВЕРТИКАЛЬНИХ АЛЬБОМІВ
+    }, 600);
 }
 
-// ГАЛЕРЕЯ
+// ПАРАЛАКС ЕФЕКТ ФОНУ
+function setupParallax() {
+    document.addEventListener("mousemove", (e) => {
+        const layers = document.querySelectorAll(".b7-p-layer");
+        const x = (window.innerWidth - e.pageX * 2) / 100;
+        const y = (window.innerHeight - e.pageY * 2) / 100;
+        layers.forEach(layer => {
+            const speed = layer.getAttribute('data-speed');
+            layer.style.transform = `translateX(${x * speed}px) translateY(${y * speed}px) rotate(${speed * 2}deg)`;
+        });
+    });
+}
+
+// ВЕРТИКАЛЬНІ АЛЬБОМИ
+function initVerticalAlbums() {
+    new Swiper('.b7-albums-swiper', {
+        direction: 'vertical',
+        slidesPerView: 2,
+        spaceBetween: 20,
+        mousewheel: true,
+        grabCursor: true,
+        autoplay: { delay: 3000 }
+    });
+}
+
 window.openGallery = (id) => {
     const album = cache.albums.find(a => a.id === id);
     if (!album) return;
     const wrapper = document.getElementById('modal-gallery-wrapper');
     wrapper.innerHTML = album.photos.map(src => `<div class="swiper-slide"><img src="${src}"></div>`).join('');
     document.getElementById('galleryModal').style.display = 'flex';
-    
     if (window.gallerySwiper) window.gallerySwiper.destroy();
-    window.gallerySwiper = new Swiper('.b7-gallery-swiper', {
-        navigation: { nextEl: '.b7-swiper-next', prevEl: '.b7-swiper-prev' },
-        loop: true
-    });
+    window.gallerySwiper = new Swiper('.b7-gallery-swiper', { navigation: { nextEl: '.b7-swiper-next', prevEl: '.b7-swiper-prev' }, loop: true });
 };
 
 function setupGalleryModal() {
     const modal = document.getElementById('galleryModal');
     const close = document.querySelector('.b7-modal-close');
     if (close) close.onclick = () => modal.style.display = 'none';
-    window.onclick = (e) => { if (e.target == modal) modal.style.display = 'none'; };
 }
 
 function initPartnersSwiper() {
