@@ -41,7 +41,7 @@ export function renderNews(data, lang) {
     if (!container || !data) return;
     container.innerHTML = data.map((n, index) => `
         <a href="${n.link}" class="b7-news-clipping" target="_blank">
-            <span class="b7-date-badge">${n.date}</span>
+            <span class="b7-clipping-date">${n.date}</span>
             <h4>${n.title[lang]}</h4>
         </a>
     `).join('');
@@ -51,14 +51,7 @@ export function renderAlbums(data, lang) {
     const container = document.getElementById('albums-container');
     const fullGrid = document.getElementById('full-albums-grid');
     if (!container || !data) return;
-
-    const html = (item) => `
-        <div class="b7-album-folder" onclick="window.openGallery('${item.id}')">
-            <img src="${item.preview}" alt="Album">
-            <h4>${item.title[lang]}</h4>
-        </div>
-    `;
-
+    const html = (item) => `<div class="b7-album-folder" onclick="window.openGallery('${item.id}')"><img src="${item.preview}" alt="Album"><h4>${item.title[lang]}</h4></div>`;
     container.innerHTML = data.slice(0, 3).map(html).join('');
     fullGrid.innerHTML = data.map(html).join('');
 }
