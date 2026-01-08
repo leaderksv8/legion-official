@@ -8,12 +8,9 @@ async function init() {
     try {
         const [t, a, s, p, f, st, n, al] = await Promise.all([
             loadTranslations(),
-            fetch('data/activities.json').then(res => res.json()),
-            fetch('data/stats.json').then(res => res.json()),
-            fetch('data/partners.json').then(res => res.json()),
-            fetch('data/friends.json').then(res => res.json()),
-            fetch('data/stories.json').then(res => res.json()),
-            fetch('data/news.json').then(res => res.json()),
+            fetch('data/activities.json').then(res => res.json()), fetch('data/stats.json').then(res => res.json()),
+            fetch('data/partners.json').then(res => res.json()), fetch('data/friends.json').then(res => res.json()),
+            fetch('data/stories.json').then(res => res.json()), fetch('data/news.json').then(res => res.json()),
             fetch('data/albums.json').then(res => res.json())
         ]);
         cache = { translations: t, activities: a, stats: s, partners: p, friends: f, stories: st, news: n, albums: al };
@@ -60,8 +57,6 @@ window.openGallery = (id) => {
 
 function setupGalleryModal() {
     const modal = document.getElementById('galleryModal');
-    const close = document.querySelector('.b7-modal-close-btn');
-    if (close) close.onclick = () => modal.style.display = 'none';
     window.onclick = (e) => { if (e.target == modal) modal.style.display = 'none'; };
 }
 

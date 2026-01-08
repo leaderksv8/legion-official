@@ -39,12 +39,21 @@ export function renderStories(data, lang) {
 export function renderNews(data, lang) {
     const container = document.getElementById('news-container');
     if (!container || !data) return;
-    container.innerHTML = data.map(n => `
-        <a href="${n.link}" class="b7-news-item" target="_blank" rel="noopener noreferrer">
-            <span class="b7-item-date">${n.tag[lang]} | ${n.date}</span>
-            <h4>${n.title[lang]}</h4>
-        </a>
-    `).join('');
+
+    container.innerHTML = data.map(n => {
+        // Витягуємо назву домену для красивого тегу
+        const domain = new URL(n.link).hostname.replace('www.', '').split('.')[0].toUpperCase();
+        
+        return `
+            <a href="${n.link}" class="b7-news-item" target="_blank" rel="noopener noreferrer">
+                <div class="b7-item-meta">
+                    <div class="b7-live-dot"></div>
+                    <span class="b7-source-label">${domain} | ${n.date}</span>
+                </div>
+                <h4>${n.title[lang]}</h4>
+            </a>
+        `;
+    }).join('');
 }
 
 export function renderAlbums(data, lang) {
