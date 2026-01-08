@@ -2,18 +2,21 @@ import { loadTranslations, translatePage } from './i18n.js';
 import * as render from './render.js';
 
 let currentLang = 'uk';
-let cache = { translations: {}, activities: [], stats: [], partners: [], friends: [], stories: [], news: [], albums: [] };
+let cache = { translations: {}, activities: [], stats: [], partners: [], team: [], stories: [], news: [], albums: [] };
 
 async function init() {
     try {
-        const [t, a, s, p, f, st, n, al] = await Promise.all([
+        const [t, a, s, p, tm, st, n, al] = await Promise.all([
             loadTranslations(),
-            fetch('data/activities.json').then(res => res.json()), fetch('data/stats.json').then(res => res.json()),
-            fetch('data/partners.json').then(res => res.json()), fetch('data/friends.json').then(res => res.json()),
-            fetch('data/stories.json').then(res => res.json()), fetch('data/news.json').then(res => res.json()),
+            fetch('data/activities.json').then(res => res.json()),
+            fetch('data/stats.json').then(res => res.json()),
+            fetch('data/partners.json').then(res => res.json()),
+            fetch('data/friends.json').then(res => res.json()), // Файл за замовчуванням
+            fetch('data/stories.json').then(res => res.json()),
+            fetch('data/news.json').then(res => res.json()),
             fetch('data/albums.json').then(res => res.json())
         ]);
-        cache = { translations: t, activities: a, stats: s, partners: p, friends: f, stories: st, news: n, albums: al };
+        cache = { translations: t, activities: a, stats: s, partners: p, team: tm, stories: st, news: n, albums: al };
         setupLanguageSwitcher();
         setupMobileMenu();
         setupScrollReveal();
@@ -27,7 +30,7 @@ function updateUI() {
     render.renderActivities(cache.activities, currentLang);
     render.renderStats(cache.stats, currentLang);
     render.renderPartners(cache.partners);
-    render.renderFriends(cache.friends, currentLang);
+    render.renderTeam(cache.team, currentLang);
     render.renderStories(cache.stories, currentLang);
     render.renderNews(cache.news, currentLang);
     render.renderAlbums(cache.albums, currentLang);
@@ -54,8 +57,7 @@ window.openGallery = (id) => {
 
 function setupGalleryModal() {
     const modal = document.getElementById('galleryModal');
-    const close = document.querySelector('.b7-modal-close-btn');
-    if (close) close.onclick = () => modal.style.display = 'none';
+    window.onclick = (e) => { if (e.target == modal) modal.style.display = 'none'; };
 }
 
 function initPartnersSwiper() {

@@ -19,29 +19,28 @@ export function renderPartners(data) {
     track.innerHTML = doubledData.map((p, index) => `<div class="swiper-slide"><div class="b4-item-box"><a href="${p.link}" target="_blank"><img src="${p.img}" alt="${p.name}" onerror="this.src='https://placehold.co/400x400/1e293b/ffffff?text=${(index % 10) + 1}'"></a></div></div>`).join('');
 }
 
-export function renderFriends(data, lang) {
-    const container = document.getElementById('friends-container');
+export function renderTeam(data, lang) {
+    const container = document.getElementById('team-container');
     if (!container || !data) return;
-    container.innerHTML = data.map(f => `<a href="${f.link}" class="b5-link" target="_blank"><div class="b5-card"><div class="b5-image-wrapper"><img src="${f.img}" alt="${f.name}"></div><h3>${f.name}</h3><p>${f.role[lang]}</p></div></a>`).join('');
+    container.innerHTML = data.map(m => `
+        <div class="b5-specialist-card">
+            <div class="b5-photo-container">
+                <img src="${m.img}" alt="${m.name}">
+            </div>
+            <h3>${m.name}</h3>
+            <span class="b5-role-badge">${m.role[lang]}</span>
+            <div class="b5-social-links">
+                <a href="${m.social}" target="_blank" class="b5-social-btn"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="b5-social-btn"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+        </div>
+    `).join('');
 }
 
 export function renderStories(data, lang) {
     const container = document.getElementById('stories-container');
     if (!container || !data) return;
-
-    container.innerHTML = data.map(s => `
-        <div class="b6-card">
-            <div class="b6-quote-mark">“</div>
-            <p class="b6-card-text">${s.text[lang]}</p>
-            <div class="b6-author">
-                <img src="${s.img}" class="b6-author-img" alt="${s.name}">
-                <div class="b6-author-info">
-                    <h4>${s.name}</h4>
-                    <p>${s.rank[lang]}</p>
-                </div>
-            </div>
-        </div>
-    `).join('');
+    container.innerHTML = data.map(s => `<div class="b6-card"><div class="b6-quote-mark">“</div><p class="b6-card-text">${s.text[lang]}</p><div class="b6-author"><img src="${s.img}" class="b6-author-img" alt="${s.name}"><div class="b6-author-info"><h4>${s.name}</h4><p>${s.rank[lang]}</p></div></div></div>`).join('');
 }
 
 export function renderNews(data, lang) {

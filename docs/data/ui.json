@@ -20,11 +20,10 @@
     },
     "b3": { "title": { "uk": "Наші досягнення", "en": "Our Achievements" } },
     "b4": { "title": { "uk": "Наші партнери", "en": "Our Partners" } },
-    "b5": { "title": { "uk": "Наші друзі", "en": "Our Friends" } },
-    "b6": { "title": { "uk": "Історії наших героїв", "en": "Heroes Stories" } },
-    "b7": {
-        "title": { "uk": "Медіа-центр", "en": "Media Center" },
-        "news_title": { "uk": "Новини", "en": "News" },
-        "albums_title": { "uk": "Фотоальбоми", "en": "Photo Albums" }
-    }
+    "b5": { 
+        "title": { "uk": "Наша команда та Спеціалісти", "en": "Our Team & Specialists" },
+        "label": { "uk": "ЕКСПЕРТНА ПІДТРИМКА", "en": "EXPERT SUPPORT" }
+    },
+    "b6": { "title": { "uk": "Історії наших героїв", "en": "Heroes Stories" }, "label": { "uk": "ВІДГУКИ ТА ПОДЯКИ", "en": "REVIEWS & GRATITUDE" } },
+    "b7": { "title": { "uk": "Медіа-центр", "en": "Media Center" }, "news_title": { "uk": "Новини", "en": "News" }, "albums_title": { "uk": "Фотоальбоми", "en": "Photo Albums" }, "all_albums": { "uk": "Весь архів", "en": "Full Archive" }, "full_archive": { "uk": "Офіційний архів", "en": "Official Archive" } }
 }
