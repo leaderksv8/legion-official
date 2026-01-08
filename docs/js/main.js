@@ -6,7 +6,6 @@ let cache = { translations: {}, activities: [], stats: [], partners: [], team: [
 
 async function init() {
     try {
-        // Завантаження всіх даних з обробкою помилок для кожного файлу
         const load = async (url) => {
             const r = await fetch(url);
             return r.ok ? await r.json() : [];
@@ -17,7 +16,7 @@ async function init() {
             load('data/activities.json'),
             load('data/stats.json'),
             load('data/partners.json'),
-            load('data/friends.json'), // Це наша команда
+            load('data/team.json'), // ТЕПЕР ТУТ TEAM.JSON
             load('data/stories.json'),
             load('data/news.json'),
             load('data/albums.json')
@@ -30,7 +29,7 @@ async function init() {
         setupScrollReveal();
         updateUI();
         setupGalleryModal();
-    } catch (e) { console.error("Critical Init Error:", e); }
+    } catch (e) { console.error("Init Error:", e); }
 }
 
 function updateUI() {
@@ -38,7 +37,7 @@ function updateUI() {
     render.renderActivities(cache.activities, currentLang);
     render.renderStats(cache.stats, currentLang);
     render.renderPartners(cache.partners);
-    render.renderTeam(cache.team, currentLang);
+    render.renderTeam(cache.team, currentLang); // ТЕПЕР ТУТ TEAM
     render.renderStories(cache.stories, currentLang);
     render.renderNews(cache.news, currentLang);
     render.renderAlbums(cache.albums, currentLang);
@@ -79,11 +78,7 @@ function initPartnersSwiper() {
         loop: true, centeredSlides: true, speed: 1000, grabCursor: true,
         autoplay: { delay: 3000, disableOnInteraction: false },
         navigation: { nextEl: '.b4-next-unique', prevEl: '.b4-prev-unique' },
-        breakpoints: { 
-            320: { slidesPerView: 1.5, spaceBetween: 20 }, 
-            768: { slidesPerView: 3, spaceBetween: 30 }, 
-            1200: { slidesPerView: 5, spaceBetween: 40 } 
-        },
+        breakpoints: { 320: { slidesPerView: 1.5, spaceBetween: 20 }, 768: { slidesPerView: 3, spaceBetween: 30 }, 1200: { slidesPerView: 5, spaceBetween: 40 } },
         loopedSlides: 10, loopAdditionalSlides: 10, observer: true, observeParents: true
     });
 }
