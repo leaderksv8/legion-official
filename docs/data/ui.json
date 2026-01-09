@@ -1,16 +1,12 @@
 {
-    "header": {
-        "logo_title": { "uk": "ГО «Легіон Титанів»", "en": "NGO «Legion of Titans»" }
-    },
+    "header": { "logo_title": { "uk": "ГО «Легіон Титанів»", "en": "NGO «Legion of Titans»" } },
     "menu": {
         "home": { "uk": "Головна", "en": "Home" },
         "activities": { "uk": "Діяльність", "en": "Activity" },
         "partners": { "uk": "Партнери", "en": "Partners" },
         "contacts": { "uk": "Контакти", "en": "Contacts" }
     },
-    "ui": {
-        "join": { "uk": "Приєднатися", "en": "Join Us" }
-    },
+    "ui": { "join": { "uk": "Приєднатися", "en": "Join" } },
     "b1": {
         "label": { "uk": "ГРОМАДСЬКА ОРГАНІЗАЦІЯ", "en": "PUBLIC ORGANIZATION" },
         "title": { "uk": "«ЛЕГІОН ТИТАНІВ»", "en": "«LEGION OF TITANS»" },
@@ -18,34 +14,13 @@
         "description": { "uk": "Ми об'єднуємо тих, хто захищав країну, для взаємодопомоги та адаптації до мирного життя.", "en": "We unite those who defended the country for mutual aid and adaptation to peaceful life." },
         "btn": { "uk": "ДІЗНАТИСЯ БІЛЬШЕ", "en": "LEARN MORE" }
     },
-    "b2": {
-        "title": { "uk": "Наша діяльність", "en": "Our Activities" }
-    },
-    "b3": {
-        "title": { "uk": "Наші досягнення", "en": "Our Achievements" }
-    },
-    "b4": {
-        "title": { "uk": "Наші партнери", "en": "Our Partners" }
-    },
-    "b5": { 
-        "title": { "uk": "Наша команда та Спеціалісти", "en": "Our Team & Specialists" },
-        "label": { "uk": "ЕКСПЕРТНА ПІДТРИМКА", "en": "EXPERT SUPPORT" }
-    },
-    "b6": { 
-        "title": { "uk": "Історії наших героїв", "en": "Heroes Stories" }, 
-        "label": { "uk": "ВІДГУКИ", "en": "REVIEWS" } 
-    },
-    "b7": { 
-        "title": { "uk": "Медіа-центр", "en": "Media Center" }, 
-        "news_title": { "uk": "Новини", "en": "News" }, 
-        "albums_title": { "uk": "Фотоальбоми", "en": "Archive" },
-        "all_albums": { "uk": "Відкрити весь архів", "en": "Full Archive" },
-        "full_archive": { "uk": "Офіційний архів", "en": "Official Archive" }
-    },
-    "b8": {
-        "label": { "uk": "ЗАСНОВНИКИ ОРГАНІЗАЦІЇ", "en": "ORGANIZATION FOUNDERS" },
-        "title": { "uk": "Наші співзасновники", "en": "Our Co-founders" }
-    },
+    "b2": { "title": { "uk": "Наша діяльність", "en": "Our Activities" } },
+    "b3": { "title": { "uk": "Наші досягнення", "en": "Our Achievements" } },
+    "b4": { "title": { "uk": "Наші партнери", "en": "Our Partners" } },
+    "b5": { "title": { "uk": "Наша команда та Спеціалісти", "en": "Our Team & Specialists" }, "label": { "uk": "ЕКСПЕРТНА ПІДТРИМКА", "en": "EXPERT SUPPORT" } },
+    "b6": { "title": { "uk": "Історії наших героїв", "en": "Heroes Stories" }, "label": { "uk": "ВІДГУКИ", "en": "REVIEWS" } },
+    "b7": { "title": { "uk": "Медіа-центр", "en": "Media Center" }, "news_title": { "uk": "Новини", "en": "News" }, "albums_title": { "uk": "Архів", "en": "Archive" }, "all_albums": { "uk": "Весь архів", "en": "Full Archive" }, "full_archive": { "uk": "Офіційний архів", "en": "Official Archive" } },
+    "b8": { "label": { "uk": "ЗАСНОВНИКИ", "en": "FOUNDERS" }, "title": { "uk": "Наші співзасновники", "en": "Our Co-founders" } },
     "footer": {
         "address": { "uk": "м. Буча, Київська обл.", "en": "Bucha, Kyiv Region" },
         "nav_title": { "uk": "Навігація", "en": "Navigation" },
