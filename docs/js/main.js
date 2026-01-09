@@ -16,14 +16,13 @@ async function init() {
             load('data/activities.json'),
             load('data/stats.json'),
             load('data/partners.json'),
-            load('data/team.json'), // ТЕПЕР ТУТ TEAM.JSON
+            load('data/team.json'),
             load('data/stories.json'),
             load('data/news.json'),
             load('data/albums.json')
         ]);
 
         cache = { translations: t, activities: a, stats: s, partners: p, team: tm, stories: st, news: n, albums: al };
-        
         setupLanguageSwitcher();
         setupMobileMenu();
         setupScrollReveal();
@@ -37,13 +36,40 @@ function updateUI() {
     render.renderActivities(cache.activities, currentLang);
     render.renderStats(cache.stats, currentLang);
     render.renderPartners(cache.partners);
-    render.renderTeam(cache.team, currentLang); // ТЕПЕР ТУТ TEAM
+    render.renderTeam(cache.team, currentLang);
     render.renderStories(cache.stories, currentLang);
     render.renderNews(cache.news, currentLang);
     render.renderAlbums(cache.albums, currentLang);
     
     initCounters(); 
     setTimeout(() => initPartnersSwiper(), 600);
+}
+
+function initPartnersSwiper() {
+    if (window.partnersSwiper) window.partnersSwiper.destroy(true, true);
+    
+    window.partnersSwiper = new Swiper('.b4-main-swiper', {
+        loop: true,
+        centeredSlides: true,
+        speed: 1200, // Плавний преміальний перехід
+        grabCursor: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        navigation: {
+            nextEl: '.b4-next',
+            prevEl: '.b4-prev',
+        },
+        // Математично точна кількість слайдів для безшовного циклу
+        breakpoints: {
+            320: { slidesPerView: 1.5, spaceBetween: 20 },
+            768: { slidesPerView: 3, spaceBetween: 40 },
+            1200: { slidesPerView: 5, spaceBetween: 50 }
+        },
+        loopAdditionalSlides: 5,
+        watchSlidesProgress: true
+    });
 }
 
 window.toggleAllAlbums = () => {
@@ -70,17 +96,6 @@ function setupGalleryModal() {
     const modal = document.getElementById('galleryModal');
     if (!modal) return;
     window.onclick = (e) => { if (e.target == modal) modal.style.display = 'none'; };
-}
-
-function initPartnersSwiper() {
-    if (window.partnersSwiper) window.partnersSwiper.destroy(true, true);
-    window.partnersSwiper = new Swiper('.b4-swiper-container', {
-        loop: true, centeredSlides: true, speed: 1000, grabCursor: true,
-        autoplay: { delay: 3000, disableOnInteraction: false },
-        navigation: { nextEl: '.b4-next-unique', prevEl: '.b4-prev-unique' },
-        breakpoints: { 320: { slidesPerView: 1.5, spaceBetween: 20 }, 768: { slidesPerView: 3, spaceBetween: 30 }, 1200: { slidesPerView: 5, spaceBetween: 40 } },
-        loopedSlides: 10, loopAdditionalSlides: 10, observer: true, observeParents: true
-    });
 }
 
 function initCounters() {
