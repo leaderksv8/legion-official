@@ -1,52 +1,52 @@
 [
     {
         "id": "founder_1",
-        "name": "Олександр ТИТАН",
-        "role": { "uk": "Голова правління", "en": "Chairman of the Board" },
+        "name": "Дмитро ПАУСТОВСЬКИЙ",
+        "role": { "uk": "Голова ГО", "en": "Chairman of the NGO" },
         "img": "images/founders/founder_1.jpg",
         "bio": {
-            "uk": "Ветеран бойових дій, засновник стратегії розвитку ГО. Має понад 10 років досвіду в управлінні соціальними проектами.",
-            "en": "Combat veteran, founder of the NGO's development strategy. Has over 10 years of experience in managing social projects."
+            "uk": "Паустовський Дмитро Леонідович, 08.07.1979 р.н. — ветеран АТО/ООС та учасник повномасштабного вторгнення, має інвалідність, отриману внаслідок захисту Батьківщини. У 2022 році брав безпосередню участь у визволенні Київської області, зокрема міста Буча, яке стало одним із ключових символів спротиву російській агресії.\n\nГолова громадської організації «Легіон Титанів». Відповідає за стратегічний розвиток організації, формування її бачення та розбудову партнерств. Має досвід лідерства, стратегічного планування та ухвалення рішень у кризових умовах, спрямованих на розвиток ветеранських ініціатив, посилення інституційної спроможності організації та реалізацію суспільно важливих проєктів.",
+            "en": "Paustovskyi Dmytro Leonidovych, born 07/08/1979 — veteran of ATO/OOS and participant of the full-scale invasion, has a disability received as a result of defending the Motherland. In 2022, he took a direct part in the liberation of the Kyiv region, in particular the city of Bucha.\n\nChairman of the non-governmental organization «Legion of Titans». Responsible for the strategic development of the organization, forming its vision and building partnerships. Has experience in leadership, strategic planning and decision-making in crisis conditions aimed at developing veteran initiatives and social projects."
         }
     },
     {
         "id": "founder_2",
-        "name": "Михайло ПРАВО",
-        "role": { "uk": "Керівник юридичного відділу", "en": "Head of Legal Department" },
+        "name": "Сергій САЛІХОВ",
+        "role": { "uk": "Секретар / Керуючий справами ГО", "en": "Secretary / Chief of Staff" },
         "img": "images/founders/founder_2.jpg",
         "bio": {
-            "uk": "Спеціаліст з міжнародного права, ветеран, який присвятив життя захисту прав побратимів.",
-            "en": "Specialist in international law, a veteran who dedicated his life to protecting the rights of brothers-in-arms."
+            "uk": "Саліхов Сергій Ігорович, 19.10.1979 р.н. — ветеран АТО/ООС та учасник повномасштабного вторгнення, підполковник запасу. Отримав інвалідність унаслідок виконання бойових завдань із захисту територіальної цілісності України. У 2022 році брав участь у визволенні Київщини, зокрема Ірпеня, Бучі та Бородянки.\n\nСпівзасновник громадської організації «Легіон Титанів». Як секретар та координатор забезпечує стратегічне планування, внутрішню комунікацію та координацію команд і проєктів. Має досвід лідерства в умовах підвищеної відповідальності, ухвалення рішень у кризових ситуаціях та організації роботи колективів, спрямованих на захист прав ветеранів.",
+            "en": "Salikhov Serhii Ihorovych, born 10/19/1979 — veteran of ATO/OOS and participant of the full-scale invasion, lieutenant colonel of the reserve. Received a disability as a result of performing combat missions to protect the territorial integrity of Ukraine. In 2022, he participated in the liberation of the Kyiv region, including Irpin, Bucha and Borodyanka.\n\nCo-founder of the NGO «Legion of Titans». As secretary and coordinator, he provides strategic planning, internal communication, and coordination of teams and projects."
         }
     },
     {
         "id": "founder_3",
-        "name": "Дмитро ПСИХОЛОГ",
-        "role": { "uk": "Директор центру реабілітації", "en": "Director of Rehabilitation Center" },
+        "name": "Анатолій ГРИЦЬКІВ",
+        "role": { "uk": "Член правління ГО", "en": "Member of the Board" },
         "img": "images/founders/founder_3.jpg",
         "bio": {
-            "uk": "Провідний фахівець із посттравматичного відновлення, автор методик адаптації до мирного життя.",
-            "en": "Leading specialist in post-traumatic recovery, author of methods for adaptation to peaceful life."
+            "uk": "Грицьків Анатолій Васильович, 30.05.1978 р.н. — ветеран АТО/ООС. Один із співзасновників організації, що бере активну участь у прийнятті стратегічних рішень та розвитку ветеранського руху.",
+            "en": "Hrytskiv Anatolii Vasyliovych, born 05/30/1978 — veteran of ATO/OOS. One of the co-founders of the organization, taking an active part in strategic decision-making and development of the veteran movement."
         }
     },
     {
         "id": "founder_4",
-        "name": "Сергій МЕДІА",
-        "role": { "uk": "Координатор зв'язків з громадськістю", "en": "Public Relations Coordinator" },
+        "name": "Олександр ЛАРІН",
+        "role": { "uk": "Член правління ГО", "en": "Member of the Board" },
         "img": "images/founders/founder_4.jpg",
         "bio": {
-            "uk": "Відповідає за прозорість діяльності організації та комунікацію з міжнародними партнерами.",
-            "en": "Responsible for the transparency of the organization's activities and communication with international partners."
+            "uk": "Ларін Олександр Сергійович, 26.05.1991 р.н. — ветеран АТО/ООС. Забезпечує координацію з ветеранськими спільнотами та відповідає за окремі напрямки соціальної підтримки членів організації.",
+            "en": "Larin Oleksandr Serhiiovych, born 05/26/1991 — veteran of ATO/OOS. Ensures coordination with veteran communities and is responsible for specific areas of social support for members of the organization."
         }
     },
     {
         "id": "founder_5",
-        "name": "Іван СОЦ",
-        "role": { "uk": "Керівник соціальних програм", "en": "Head of Social Programs" },
+        "name": "Олексій МЕЛЬНИЧЕНКО",
+        "role": { "uk": "Член правління ГО", "en": "Member of the Board" },
         "img": "images/founders/founder_5.jpg",
         "bio": {
-            "uk": "Організатор численних виїздів та заходів з дозвілля для сімей ветеранів.",
-            "en": "Organizer of numerous trips and leisure events for the families of veterans."
+            "uk": "Мельниченко Олексій Валерійович, 04.11.1999 р.н. — ветеран АТО/ООС. Наймолодший представник правління, який фокусується на залученні молодих ветеранів та розвитку цифрових ініціатив ГО.",
+            "en": "Melnychenko Oleksii Valeriiovych, born 11/04/1999 — veteran of ATO/OOS. The youngest representative of the board, focusing on engaging young veterans and developing the NGO's digital initiatives."
         }
     }
 ]
