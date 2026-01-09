@@ -30,7 +30,7 @@ function updateUI() {
     render.renderNews(cache.news, currentLang);
     render.renderAlbums(cache.albums, currentLang);
     initCounters(); 
-    setTimeout(() => initPartnersSwiper(), 500);
+    setTimeout(() => initPartnersSwiper(), 600);
 }
 
 function initPartnersSwiper() {
@@ -42,7 +42,10 @@ function initPartnersSwiper() {
         speed: 1000,
         grabCursor: true,
         autoplay: { delay: 3000, disableOnInteraction: false },
-        navigation: { nextEl: '.b4-next', prevEl: '.b4-prev' },
+        navigation: { 
+            nextEl: '.b4-next', 
+            prevEl: '.b4-prev' 
+        },
         breakpoints: {
             320: { slidesPerView: 1.3, spaceBetween: 20 },
             768: { slidesPerView: 2.5, spaceBetween: 40 },
@@ -50,6 +53,7 @@ function initPartnersSwiper() {
             1600: { slidesPerView: 4.5, spaceBetween: 80 }
         },
         loopedSlides: 10,
+        loopAdditionalSlides: 10,
         observer: true,
         observeParents: true
     });
@@ -57,8 +61,9 @@ function initPartnersSwiper() {
 
 window.toggleAllAlbums = () => {
     const portal = document.getElementById('archivePortal');
-    portal.style.display = portal.style.display === 'block' ? 'none' : 'block';
-    document.body.style.overflow = portal.style.display === 'block' ? 'hidden' : 'auto';
+    const isVisible = portal.style.display === 'block';
+    portal.style.display = isVisible ? 'none' : 'block';
+    document.body.style.overflow = isVisible ? 'auto' : 'hidden';
 };
 
 window.openGallery = (id) => {
@@ -68,9 +73,7 @@ window.openGallery = (id) => {
     wrapper.innerHTML = album.photos.map(src => `<div class="swiper-slide"><img src="${src}"></div>`).join('');
     document.getElementById('galleryModal').style.display = 'flex';
     if (window.gallerySwiper) window.gallerySwiper.destroy();
-    window.gallerySwiper = new Swiper('.b7-gallery-swiper-engine', {
-        navigation: { nextEl: '.b7-swiper-nav.next', prevEl: '.b7-swiper-nav.prev' }, loop: true
-    });
+    window.gallerySwiper = new Swiper('.b7-gallery-swiper-engine', { navigation: { nextEl: '.next', prevEl: '.prev' }, loop: true });
 };
 
 function setupGalleryModal() {
