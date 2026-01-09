@@ -6,11 +6,9 @@
 }
 
 .b8-fog-effect {
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background: radial-gradient(circle at 50% -20%, rgba(197, 160, 89, 0.1) 0%, transparent 60%);
-    opacity: 0.6;
-    pointer-events: none;
+    opacity: 0.6; pointer-events: none;
 }
 
 .b8-header { text-align: center; margin-bottom: 120px; position: relative; }
@@ -27,56 +25,44 @@
 .b8-img-wrap img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.2) brightness(0.7); transition: 0.8s ease; }
 .b8-titan-card:hover img { filter: grayscale(0%) brightness(1); transform: scale(1.05); }
 
-.b8-titan-card::after { content: ""; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.1), transparent); transform: skewX(-25deg); }
-.b8-titan-card:hover::after { left: 150%; transition: 0.8s ease; }
-
 .b8-info-box { position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px 20px; background: linear-gradient(to top, #020617 30%, transparent 100%); text-align: center; }
-.b8-info-box h4 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.4rem; font-weight: 800; margin-bottom: 5px; }
-.b8-info-box p { color: var(--accent-gold); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+.b8-info-box h4 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.2rem; font-weight: 800; margin-bottom: 5px; }
+.b8-info-box p { color: var(--accent-gold); font-size: 0.7rem; font-weight: 800; text-transform: uppercase; }
 
-/* ПРЕМІАЛЬНА МОДАЛКА (DOSSIER) */
+/* ПОВНОЕКРАННЕ ДОСЬЄ (MOBILE FIRST) */
 .b8-dossier-overlay {
-    display: none; 
-    position: fixed; 
-    inset: 0;
-    background: rgba(0,0,0,0.95); 
-    z-index: 20000;
-    align-items: center; 
-    justify-content: center; 
-    padding: 20px;
-    cursor: pointer; /* Підказка, що можна клікнути для закриття */
+    display: none; position: fixed; inset: 0;
+    background: #020617; z-index: 99999;
+    align-items: center; justify-content: center;
+    cursor: pointer;
 }
 
 .b8-dossier-card {
-    background: #0f172a;
-    max-width: 1000px; 
-    width: 100%;
+    background: #0f172a; width: 100%; height: 100%;
+    max-width: 1100px; max-height: 90vh;
     border: 1px solid var(--accent-gold);
-    border-radius: 4px;
-    position: relative;
-    box-shadow: 0 0 100px rgba(197, 160, 89, 0.15);
-    cursor: default; /* Щоб клік на саму картку не закривав її */
+    display: grid; grid-template-columns: 1fr 1.5fr;
+    position: relative; cursor: default;
+    box-shadow: 0 0 100px rgba(197, 160, 89, 0.2);
 }
 
-.b8-dossier-grid { display: grid; grid-template-columns: 1fr 1.5fr; }
-.b8-dossier-image { position: relative; height: 600px; }
+.b8-dossier-image { position: relative; height: 100%; background: #000; }
 .b8-dossier-image img { width: 100%; height: 100%; object-fit: cover; }
 .b8-image-glow { position: absolute; inset: 0; box-shadow: inset 0 0 100px #0f172a; }
-.b8-dossier-info { padding: 80px 60px; color: var(--white); }
-.b8-dossier-stamp { color: var(--accent-gold); border: 2px solid var(--accent-gold); padding: 5px 15px; font-weight: 900; font-size: 0.8rem; display: inline-block; transform: rotate(-5deg); margin-bottom: 40px; }
-.b8-dossier-info h2 { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 10px; line-height: 1; }
-.b8-dossier-info h3 { color: var(--accent-gold); font-size: 1rem; text-transform: uppercase; margin-bottom: 40px; }
-.b8-dossier-line { width: 100%; height: 1px; background: rgba(255,255,255,0.1); margin-bottom: 40px; }
-.b8-dossier-info p { font-size: 1.25rem; line-height: 1.8; color: rgba(255,255,255,0.7); font-style: italic; }
 
-.b8-close-dossier { position: absolute; top: 20px; right: 30px; background: none; border: none; color: white; font-size: 50px; cursor: pointer; z-index: 10; }
+.b8-dossier-info { padding: 60px; color: var(--white); overflow-y: auto; }
+.b8-dossier-stamp { color: var(--accent-gold); border: 2px solid var(--accent-gold); padding: 5px 15px; font-weight: 900; font-size: 0.8rem; display: inline-block; transform: rotate(-5deg); margin-bottom: 30px; }
+.b8-dossier-info h2 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 10px; }
+.b8-dossier-info h3 { color: var(--accent-gold); font-size: 1rem; text-transform: uppercase; margin-bottom: 30px; }
+.b8-dossier-info p { font-size: 1.15rem; line-height: 1.6; color: rgba(255,255,255,0.8); }
 
-@media (max-width: 1200px) { .b8-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 768px) {
-    .b8-grid { grid-template-columns: 1fr; gap: 40px; }
-    .b8-dossier-grid { grid-template-columns: 1fr; }
-    .b8-dossier-image { height: 350px; }
-    .b8-dossier-info { padding: 40px 30px; }
-    .b8-dossier-info h2 { font-size: 2.2rem; }
-    .b8-close-dossier { top: 10px; right: 15px; font-size: 40px; }
+.b8-close-dossier { position: absolute; top: 20px; right: 30px; background: #fff; color: #000; border: none; width: 50px; height: 50px; border-radius: 50%; font-size: 30px; cursor: pointer; z-index: 100; }
+
+@media (max-width: 992px) {
+    .b8-grid { grid-template-columns: repeat(2, 1fr); }
+    .b8-dossier-card { grid-template-columns: 1fr; max-height: 100vh; border: none; overflow-y: auto; }
+    .b8-dossier-image { height: 40vh; }
+    .b8-dossier-info { padding: 40px 25px; overflow-y: visible; }
+    .b8-dossier-info h2 { font-size: 2rem; }
+    .b8-close-dossier { top: 15px; right: 15px; width: 40px; height: 40px; font-size: 24px; }
 }
