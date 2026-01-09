@@ -4,66 +4,69 @@ import * as render from './render.js';
 let currentLang = 'uk';
 let cache = { translations: {}, activities: [], stats: [], partners: [], team: [], stories: [], news: [], albums: [], founders: [] };
 
+// ГОЛОВНИЙ ЗАПУСК - ПОВНА ІЗОЛЯЦІЯ КОЖНОГО КРОКУ
 async function init() {
-    try {
-        const load = async (url) => {
-            try { const r = await fetch(url); return r.ok ? await r.json() : []; } catch { return []; }
-        };
+    // 1. Спроба завантажити дані (кожен файл вантажиться незалежно)
+    const load = async (url) => {
+        try {
+            const r = await fetch(url);
+            return r.ok ? await r.json() : [];
+        } catch (e) {
+            console.error(`Data load error: ${url}`, e);
+            return [];
+        }
+    };
 
-        const data = await Promise.allSettled([
-            loadTranslations(), load('data/activities.json'), load('data/stats.json'),
-            load('data/partners.json'), load('data/team.json'), load('data/stories.json'),
-            load('data/news.json'), load('data/albums.json'), load('data/founders.json')
-        ]);
+    const dataResults = await Promise.allSettled([
+        loadTranslations(), load('data/activities.json'), load('data/stats.json'),
+        load('data/partners.json'), load('data/team.json'), load('data/stories.json'),
+        load('data/news.json'), load('data/albums.json'), load('data/founders.json')
+    ]);
 
-        cache = {
-            translations: data[0].value || {},
-            activities: data[1].value || [],
-            stats: data[2].value || [],
-            partners: data[3].value || [],
-            team: data[4].value || [],
-            stories: data[5].value || [],
-            news: data[6].value || [],
-            albums: data[7].value || [],
-            founders: data[8].value || []
-        };
+    cache = {
+        translations: dataResults[0].value || {},
+        activities: dataResults[1].value || [],
+        stats: dataResults[2].value || [],
+        partners: dataResults[3].value || [],
+        team: dataResults[4].value || [],
+        stories: dataResults[5].value || [],
+        news: dataResults[6].value || [],
+        albums: dataResults[7].value || [],
+        founders: dataResults[8].value || []
+    };
 
-        setupGlobalEvents();
-        updateUI();
-    } catch (e) { console.error("Critical System Failure", e); }
+    // 2. Ізольований запуск системних модулів
+    const runModule = (name, fn) => {
+        try { fn(); } catch (e) { console.error(`Module Failed: ${name}`, e); }
+    };
+
+    runModule("Global Events", setupGlobalEvents);
+    runModule("UI Update", updateUI);
 }
 
 function updateUI() {
-    try { translatePage(cache.translations, currentLang); } catch(e){}
-    try { render.renderActivities(cache.activities, currentLang); } catch(e){}
-    try { render.renderStats(cache.stats, currentLang); } catch(e){}
-    try { render.renderPartners(cache.partners); } catch(e){}
-    try { render.renderTeam(cache.team, currentLang); } catch(e){}
-    try { render.renderStories(cache.stories, currentLang); } catch(e){}
-    try { render.renderNews(cache.news, currentLang); } catch(e){}
-    try { render.renderAlbums(cache.albums, currentLang); } catch(e){}
-    try { render.renderFounders(cache.founders, currentLang); } catch(e){}
-    
-    initIndependentModules();
+    // Рендер кожного блоку - ПОВНА ІЗОЛЯЦІЯ
+    const safeRender = (name, fn) => {
+        try { fn(); } catch (e) { console.error(`Render Failed: ${name}`, e); }
+    };
+
+    safeRender("Translations", () => translatePage(cache.translations, currentLang));
+    safeRender("Block 2 (Activities)", () => render.renderActivities(cache.activities, currentLang));
+    safeRender("Block 3 (Stats)", () => render.renderStats(cache.stats, currentLang));
+    safeRender("Block 4 (Partners)", () => render.renderPartners(cache.partners));
+    safeRender("Block 5 (Team)", () => render.renderTeam(cache.team, currentLang));
+    safeRender("Block 6 (Stories)", () => render.renderStories(cache.stories, currentLang));
+    safeRender("Block 7 (News)", () => render.renderNews(cache.news, currentLang));
+    safeRender("Block 7 (Albums)", () => render.renderAlbums(cache.albums, currentLang));
+    safeRender("Block 8 (Founders)", () => render.renderFounders(cache.founders, currentLang));
+
+    // Ініціалізація динаміки
+    safeRender("Counters", initCounters);
+    safeRender("Scroll UI", setupScrollUI);
+    safeRender("Vertical Albums", () => setTimeout(initVerticalAlbums, 600));
 }
 
-function initIndependentModules() {
-    try { initCounters(); } catch(e){}
-    try { setupScrollUI(); } catch(e){}
-}
-
-function setupScrollUI() {
-    const btn = document.getElementById('scrollTopBtn');
-    if (!btn) return;
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 500) btn.classList.add('visible');
-        else btn.classList.remove('visible');
-    });
-}
-
-window.scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-window.scrollToFooter = () => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-
+// BLOCK 3: COUNTERS (ІЗОЛЬОВАНО)
 function initCounters() {
     const statItems = document.querySelectorAll('.b3-stat-item');
     statItems.forEach(item => {
@@ -85,7 +88,36 @@ function initCounters() {
     });
 }
 
+// BLOCK 7: VERTICAL ALBUMS (ІЗОЛЬОВАНО)
+function initVerticalAlbums() {
+    const isMobile = window.innerWidth < 992;
+    new Swiper('.b7-albums-swiper', { 
+        direction: isMobile ? 'horizontal' : 'vertical', 
+        slidesPerView: isMobile ? 1.2 : 2, 
+        spaceBetween: 20, 
+        mousewheel: !isMobile, 
+        grabCursor: true, 
+        nested: true, 
+        autoplay: { delay: 3000 } 
+    });
+}
+
+// UI & NAVIGATION (ІЗОЛЬОВАНО)
+function setupScrollUI() {
+    const btn = document.getElementById('scrollTopBtn');
+    if (btn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) btn.classList.add('visible');
+            else btn.classList.remove('visible');
+        });
+    }
+}
+
+window.scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+window.scrollToFooter = () => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+
 function setupGlobalEvents() {
+    // Мови
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             currentLang = e.target.dataset.lang;
@@ -94,24 +126,28 @@ function setupGlobalEvents() {
         });
     });
 
+    // Меню
     const toggle = document.getElementById('menuToggle');
     const menu = document.getElementById('navMenu');
     if (toggle && menu) toggle.onclick = () => menu.classList.toggle('active');
 
+    // Скрол-анімація
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('section').forEach(s => observer.observe(s));
     
+    // Форма
     const form = document.getElementById('footerForm');
     if (form) form.onsubmit = (e) => { e.preventDefault(); alert("Дякуємо! Запит отримано."); form.reset(); };
 }
 
+// ПУБЛІЧНІ ФУНКЦІЇ ВЗАЄМОДІЇ
 window.toggleAllAlbums = () => {
     const portal = document.getElementById('archivePortal');
-    const isVisible = portal.style.display === 'block';
-    portal.style.display = isVisible ? 'none' : 'block';
-    document.body.style.overflow = isVisible ? 'auto' : 'hidden';
+    if (!portal) return;
+    portal.style.display = portal.style.display === 'block' ? 'none' : 'block';
+    document.body.style.overflow = portal.style.display === 'block' ? 'hidden' : 'auto';
 };
 
 window.openGallery = (id) => {
@@ -120,7 +156,8 @@ window.openGallery = (id) => {
     const wrapper = document.getElementById('modal-gallery-wrapper');
     wrapper.innerHTML = album.photos.map(src => `<div class="swiper-slide"><img src="${src}"></div>`).join('');
     document.getElementById('galleryModal').style.display = 'flex';
-    new Swiper('.b7-gallery-swiper-engine', { navigation: { nextEl: '.b7-swiper-nav.next', prevEl: '.b7-swiper-nav.prev' }, loop: true });
+    if (window.gallerySwiper) window.gallerySwiper.destroy();
+    window.gallerySwiper = new Swiper('.b7-gallery-swiper-engine', { navigation: { nextEl: '.next', prevEl: '.prev' }, loop: true });
 };
 
 window.openFounderBio = (id) => {

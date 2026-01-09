@@ -1,3 +1,4 @@
+// UNIT: ACTIVITIES (BLOCK 2)
 export function renderActivities(data, lang) {
     const container = document.getElementById('activities-container');
     if (!container || !data.length) return;
@@ -9,6 +10,7 @@ export function renderActivities(data, lang) {
     `).join('');
 }
 
+// UNIT: STATS (BLOCK 3)
 export function renderStats(data, lang) {
     const container = document.getElementById('stats-container');
     if (!container || !data.length) return;
@@ -37,6 +39,7 @@ export function renderPartners(data) {
     row2.innerHTML = createMarqueeContent(group2);
 }
 
+// UNIT: TEAM (BLOCK 5)
 export function renderTeam(data, lang) {
     const container = document.getElementById('team-container');
     if (!container || !data.length) return;
@@ -49,17 +52,21 @@ export function renderTeam(data, lang) {
     `).join('');
 }
 
+// UNIT: STORIES (BLOCK 6)
 export function renderStories(data, lang) {
     const container = document.getElementById('stories-container');
     if (!container || !data.length) return;
     container.innerHTML = data.map(s => `
         <div class="b6-card">
             <div class="b6-quote-mark">“</div><p class="b6-card-text">${s.text[lang]}</p>
-            <div class="b6-author"><img src="${s.img}" class="b6-author-img" alt="H"><div class="b6-author-info"><h4>${s.name}</h4><p>${s.rank[lang]}</p></div></div>
+            <div class="b6-author"><img src="${s.img}" class="b6-author-img" alt="H">
+                <div class="b6-author-info"><h4>${s.name}</h4><p>${s.rank[lang]}</p></div>
+            </div>
         </div>
     `).join('');
 }
 
+// UNIT: NEWS & ALBUMS (BLOCK 7)
 export function renderNews(data, lang) {
     const container = document.getElementById('news-container');
     if (!container || !data.length) return;
@@ -73,11 +80,12 @@ export function renderAlbums(data, lang) {
     const container = document.getElementById('albums-container');
     const fullGrid = document.getElementById('full-albums-grid');
     if (!container || !data.length) return;
-    const html = (a) => `<div class="b7-album-tile" onclick="window.openGallery('${a.id}')"><img src="${a.preview}" alt="G"><div class="b7-album-tile-overlay"><h4>${a.title[lang]}</h4></div></div>`;
-    container.innerHTML = data.slice(0, 3).map(html).join('');
+    const html = (a) => `<div class="swiper-slide"><div class="b7-album-stack" onclick="window.openGallery('${a.id}')"><img src="${a.preview}" alt="G"><h4>${a.title[lang]}</h4></div></div>`;
+    container.innerHTML = data.map(html).join('');
     fullGrid.innerHTML = data.map(html).join('');
 }
 
+// UNIT: FOUNDERS (BLOCK 8)
 export function renderFounders(data, lang) {
     const container = document.getElementById('founders-container');
     if (!container || !data.length) return;
