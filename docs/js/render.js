@@ -2,10 +2,7 @@ export function renderActivities(data, lang) {
     const container = document.getElementById('activities-container');
     if (!container || !data.length) return;
     container.innerHTML = data.map(item => `
-        <div class="b2-item-card"><div class="b2-card-inner">
-            <div class="b2-card-front"><div class="b2-icon-box"><i class="fa-solid fa-${item.icon}"></i></div><h4>${item.title[lang]}</h4></div>
-            <div class="b2-card-back"><p>${item.desc[lang]}</p></div>
-        </div></div>
+        <div class="b2-item-card"><div class="b2-card-inner"><div class="b2-card-front"><div class="b2-icon-box"><i class="fa-solid fa-${item.icon}"></i></div><h4>${item.title[lang]}</h4></div><div class="b2-card-back"><p>${item.desc[lang]}</p></div></div></div>
     `).join('');
 }
 
@@ -15,45 +12,43 @@ export function renderStats(data, lang) {
     container.innerHTML = data.map(item => `<div class="b3-stat-item"><span class="b3-number" data-target="${item.value}">0</span><span class="b3-label">${item.label[lang]}</span></div>`).join('');
 }
 
-// РЕНДЕР ПАРТНЕРІВ ПІД SWIPER (ВАРІАНТ 2)
+// НОВИЙ РЕНДЕР ПАРТНЕРІВ (КІНЕТИЧНА МОЗАЇКА)
 export function renderPartners(data) {
-    const track = document.getElementById('partners-track');
-    if (!track || !data.length) return;
-    
-    track.innerHTML = data.map(p => `
-        <div class="swiper-slide">
-            <div class="b4-item-box">
+    const row1 = document.getElementById('partners-row-1');
+    const row2 = document.getElementById('partners-row-2');
+    if (!row1 || !row2 || !data.length) return;
+
+    // Розділяємо 10 партнерів на дві групи
+    const group1 = data.slice(0, 5);
+    const group2 = data.slice(5, 10);
+
+    // Функція створення HTML з дублюванням для безшовності
+    const createMarqueeContent = (items) => {
+        const content = items.map(p => `
+            <div class="b4-kinetic-item">
                 <a href="${p.link}" target="_blank" rel="noopener">
                     <img src="${p.img}" alt="${p.name}">
                 </a>
             </div>
-        </div>
-    `).join('');
+        `).join('');
+        // Повторюємо 4 рази для гарантованого заповнення будь-якої ширини
+        return content + content + content + content;
+    };
+
+    row1.innerHTML = createMarqueeContent(group1);
+    row2.innerHTML = createMarqueeContent(group2);
 }
 
 export function renderTeam(data, lang) {
     const container = document.getElementById('team-container');
     if (!container || !data.length) return;
-    container.innerHTML = data.map(m => `
-        <div class="b5-specialist-card">
-            <div class="b5-photo-container"><img src="${m.img}" alt="${m.name}"></div>
-            <h3>${m.name}</h3><span class="b5-role-badge">${m.role[lang]}</span>
-            <div class="b5-social-links"><a href="${m.social || '#'}" target="_blank" class="b5-social-btn"><i class="fab fa-facebook-f"></i></a><a href="#" class="b5-social-btn"><i class="fab fa-telegram-plane"></i></a></div>
-        </div>
-    `).join('');
+    container.innerHTML = data.map(m => `<div class="b5-specialist-card"><div class="b5-photo-container"><img src="${m.img}" alt="${m.name}"></div><h3>${m.name}</h3><span class="b5-role-badge">${m.role[lang]}</span><div class="b5-social-links"><a href="${m.social || '#'}" target="_blank" class="b5-social-btn"><i class="fab fa-facebook-f"></i></a><a href="#" class="b5-social-btn"><i class="fab fa-telegram-plane"></i></a></div></div>`).join('');
 }
 
 export function renderStories(data, lang) {
     const container = document.getElementById('stories-container');
     if (!container || !data.length) return;
-    container.innerHTML = data.map(s => `
-        <div class="b6-card">
-            <div class="b6-quote-mark">“</div><p class="b6-card-text">${s.text[lang]}</p>
-            <div class="b6-author"><img src="${s.img}" class="b6-author-img" alt="H">
-                <div class="b6-author-info"><h4>${s.name}</h4><p>${s.rank[lang]}</p></div>
-            </div>
-        </div>
-    `).join('');
+    container.innerHTML = data.map(s => `<div class="b6-card"><div class="b6-quote-mark">“</div><p class="b6-card-text">${s.text[lang]}</p><div class="b6-author"><img src="${s.img}" class="b6-author-img" alt="H"><div class="b6-author-info"><h4>${s.name}</h4><p>${s.rank[lang]}</p></div></div></div>`).join('');
 }
 
 export function renderNews(data, lang) {
@@ -61,7 +56,7 @@ export function renderNews(data, lang) {
     if (!container || !data.length) return;
     container.innerHTML = data.map(n => {
         const domain = new URL(n.link).hostname.replace('www.', '').split('.')[0].toUpperCase();
-        return `<a href="${n.link}" class="b7-news-item" target="_blank"><div class="b7-item-meta"><div class="b7-live-dot"></div><span class="b7-source-label">${domain} | ${n.date}</span></div><h4>${n.title[lang]}</h4></a>`;
+        return `<a href="${n.link}" class="b7-news-item" target="_blank" rel="noopener noreferrer"><div class="b7-item-meta"><div class="b7-live-dot"></div><span class="b7-source-label">${domain} | ${n.date}</span></div><h4>${n.title[lang]}</h4></a>`;
     }).join('');
 }
 
@@ -77,10 +72,5 @@ export function renderAlbums(data, lang) {
 export function renderFounders(data, lang) {
     const container = document.getElementById('founders-container');
     if (!container || !data.length) return;
-    container.innerHTML = data.map(f => `
-        <div class="b8-titan-card" onclick="window.openFounderBio('${f.id}')">
-            <div class="b8-img-wrap"><img src="${f.img}" alt="${f.name}"></div>
-            <div class="b8-info-box"><h4>${f.name}</h4><p>${f.role[lang]}</p></div>
-        </div>
-    `).join('');
+    container.innerHTML = data.map(f => `<div class="b8-titan-card" onclick="window.openFounderBio('${f.id}')"><div class="b8-img-wrap"><img src="${f.img}" alt="${f.name}"></div><div class="b8-info-box"><h4>${f.name}</h4><p>${f.role[lang]}</p></div></div>`).join('');
 }

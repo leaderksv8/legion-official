@@ -1,16 +1,8 @@
-.b4-partners-orbit {
+.b4-partners-kinetic {
     padding: 140px 0;
     background-color: #020617;
-    position: relative;
     overflow: hidden;
-}
-
-.b4-orbit-glow {
-    position: absolute;
-    top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 1000px; height: 600px;
-    background: radial-gradient(ellipse at center, rgba(197, 160, 89, 0.05) 0%, transparent 70%);
-    z-index: 1;
+    position: relative;
 }
 
 .b4-title {
@@ -23,98 +15,85 @@
     margin-bottom: 80px;
 }
 
-.b4-3d-scene {
+.b4-kinetic-viewport {
     width: 100%;
-    position: relative;
-    z-index: 5;
-    perspective: 1200px; /* Глибина 3D сцени */
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 40px 0;
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
 }
 
-.b4-orbit-swiper {
-    width: 100%;
-    padding: 100px 0 !important;
+/* МЕХАНІКА БЕЗКІНЕЧНОЇ СТРІЧКИ */
+.b4-marquee-row {
+    display: flex;
+    width: max-content;
+    gap: 30px;
 }
 
-.swiper-slide {
-    width: 320px; /* Фіксована ширина для ПК */
-    transition: 0.6s ease;
+/* Анімація вліво */
+.ltr {
+    animation: b4-scroll-left 60s linear infinite;
 }
 
-/* КАРТКА ПАРТНЕРА (3D NODE) */
-.b4-item-box {
-    width: 100%;
-    height: 240px;
+/* Анімація вправо */
+.rtl {
+    animation: b4-scroll-right 60s linear infinite;
+}
+
+.b4-marquee-row:hover {
+    animation-play-state: paused;
+}
+
+@keyframes b4-scroll-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+@keyframes b4-scroll-right {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+}
+
+/* КАРТКА ЛОГОТИПА */
+.b4-kinetic-item {
+    flex: 0 0 auto;
+    width: 280px;
+    height: 160px;
     background: rgba(255, 255, 255, 0.02);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 45px;
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
+    padding: 30px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
 }
 
-.b4-item-box img {
-    max-width: 90%;
-    max-height: 80%;
+.b4-kinetic-item img {
+    max-width: 80%;
+    max-height: 70%;
     object-fit: contain;
     filter: grayscale(100%) brightness(0.6);
     transition: 0.5s ease;
 }
 
-/* ФОКУС ПРИ ОБЕРТАННІ */
-.swiper-slide-active .b4-item-box {
+.b4-kinetic-item:hover {
+    background: rgba(255, 255, 255, 0.08);
     border-color: var(--accent-gold);
-    background: rgba(255, 255, 255, 0.05);
-    box-shadow: 
-        0 25px 60px rgba(0,0,0,0.6),
-        0 0 40px rgba(197, 160, 89, 0.15);
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    z-index: 10;
 }
 
-.swiper-slide-active .b4-item-box img {
+.b4-kinetic-item:hover img {
     filter: grayscale(0%) brightness(1.1);
-    transform: scale(1.1);
-}
-
-/* Золота підставка для активного слайда */
-.swiper-slide-active .b4-item-box::after {
-    content: "";
-    position: absolute;
-    bottom: -40px; left: 50%; transform: translateX(-50%);
-    width: 60%; height: 5px;
-    background: var(--accent-gold);
-    filter: blur(10px);
-    opacity: 0.5;
-}
-
-/* НАВІГАЦІЯ */
-.b4-orbit-nav {
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    margin-top: 40px;
-}
-
-.b4-orbit-btn {
-    width: 60px; height: 60px;
-    background: transparent;
-    border: 2px solid rgba(197, 160, 89, 0.4);
-    color: var(--accent-gold);
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.2rem;
-    transition: 0.4s;
-}
-
-.b4-orbit-btn:hover {
-    background: var(--accent-gold);
-    color: #020617;
-    transform: scale(1.15);
 }
 
 @media (max-width: 768px) {
-    .swiper-slide { width: 280px; }
+    .b4-kinetic-item { width: 200px; height: 120px; padding: 20px; }
+    .b4-kinetic-viewport { gap: 20px; }
 }

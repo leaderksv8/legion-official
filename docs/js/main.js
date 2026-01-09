@@ -21,7 +21,7 @@ async function init() {
         };
         setupGlobalEvents();
         updateUI();
-    } catch (e) { console.error("Global Error", e); }
+    } catch (e) { console.error("Critical Failure", e); }
 }
 
 function updateUI() {
@@ -40,34 +40,8 @@ function updateUI() {
 
 function initIndependentModules() {
     try { initCounters(); } catch(e){}
-    try { setTimeout(initOrbitSwiper, 600); } catch(e){}
     try { setupScrollUI(); } catch(e){}
-}
-
-// SWIPER ВАРІАНТ 2: 3D ORBIT (COVERFLOW)
-function initOrbitSwiper() {
-    if (window.partnersSwiper) window.partnersSwiper.destroy(true, true);
-    
-    window.partnersSwiper = new Swiper('.b4-orbit-swiper', {
-        effect: 'coverflow',
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-        loop: true,
-        speed: 1000,
-        autoplay: { delay: 3000, disableOnInteraction: false },
-        coverflowEffect: {
-            rotate: 35,      // Кут повороту слайдів
-            stretch: 0,      // Розтягування слайдів
-            depth: 250,      // Глибина 3D
-            modifier: 1,     // Множник ефекту
-            slideShadows: false, // Тіні Swiper (ми використовуємо свої для кращого дизайну)
-        },
-        navigation: {
-            nextEl: '.b4-next',
-            prevEl: '.b4-prev',
-        }
-    });
+    // ПАРТНЕРИ ТЕПЕР ПРАЦЮЮТЬ НА CSS АНІМАЦІЇ, JS НЕ ПОТРІБЕН
 }
 
 function setupScrollUI() {
