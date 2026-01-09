@@ -21,7 +21,7 @@ async function init() {
         };
         setupGlobalEvents();
         updateUI();
-    } catch (e) { console.error("Critical System Failure", e); }
+    } catch (e) { console.error("Critical Failure", e); }
 }
 
 function updateUI() {
@@ -40,32 +40,21 @@ function updateUI() {
 
 function initIndependentModules() {
     try { initCounters(); } catch(e){}
-    try { setTimeout(initPartnersSwiper, 800); } catch(e){} // Збільшена затримка для стабільності
     try { setupScrollUI(); } catch(e){}
+    try { initBentoInteractions(); } catch(e){}
 }
 
-function initPartnersSwiper() {
-    const swiperContainer = document.querySelector('.b4-swiper-main');
-    if (!swiperContainer) return;
-
-    if (window.partnersSwiper) window.partnersSwiper.destroy(true, true);
-    
-    window.partnersSwiper = new Swiper('.b4-swiper-main', {
-        loop: true,
-        centeredSlides: true,
-        initialSlide: 0,
-        speed: 1000,
-        grabCursor: true,
-        autoplay: { delay: 3000, disableOnInteraction: false },
-        navigation: { nextEl: '.b4-next', prevEl: '.b4-prev' },
-        // ФІКС ЦЕНТРУВАННЯ: режим auto + фіксована ширина в CSS
-        slidesPerView: 'auto', 
-        spaceBetween: 30,
-        loopedSlides: 12,
-        observer: true,
-        observeParents: true,
-        normalizeSlideIndex: true,
-        centeredSlidesBounds: true
+// BENTO 3D GLOW EFFECT
+function initBentoInteractions() {
+    const cards = document.querySelectorAll('.b4-bento-item');
+    cards.forEach(card => {
+        card.onmousemove = (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            card.style.setProperty('--x', `${x}%`);
+            card.style.setProperty('--y', `${y}%`);
+        };
     });
 }
 
@@ -116,8 +105,6 @@ function setupGlobalEvents() {
         entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('section').forEach(s => observer.observe(s));
-    const form = document.getElementById('footerForm');
-    if (form) form.onsubmit = (e) => { e.preventDefault(); alert("Дякуємо! Запит отримано."); form.reset(); };
 }
 
 window.toggleAllAlbums = () => {
@@ -132,7 +119,7 @@ window.openGallery = (id) => {
     const wrapper = document.getElementById('modal-gallery-wrapper');
     wrapper.innerHTML = album.photos.map(src => `<div class="swiper-slide"><img src="${src}"></div>`).join('');
     document.getElementById('galleryModal').style.display = 'flex';
-    new Swiper('.b7-gallery-swiper-engine', { navigation: { nextEl: '.b7-swiper-nav.next', prevEl: '.b7-swiper-nav.prev' }, loop: true });
+    new Swiper('.b7-gallery-swiper-engine', { navigation: { nextEl: '.next', prevEl: '.prev' }, loop: true });
 };
 
 window.openFounderBio = (id) => {

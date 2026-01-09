@@ -15,13 +15,15 @@ export function renderStats(data, lang) {
     container.innerHTML = data.map(item => `<div class="b3-stat-item"><span class="b3-number" data-target="${item.value}">0</span><span class="b3-label">${item.label[lang]}</span></div>`).join('');
 }
 
+// НОВИЙ РЕНДЕР ПАРТНЕРІВ (БЕЗ SWIPER)
 export function renderPartners(data) {
-    const track = document.getElementById('partners-track');
-    if (!track || !data.length) return;
-    track.innerHTML = data.map(p => `
-        <div class="swiper-slide"><div class="b4-item-box">
-            <a href="${p.link}" target="_blank" rel="noopener"><img src="${p.img}" alt="${p.name}"></a>
-        </div></div>
+    const container = document.getElementById('partners-container');
+    if (!container || !data.length) return;
+    
+    container.innerHTML = data.map(p => `
+        <a href="${p.link}" target="_blank" class="b4-bento-item" rel="noopener">
+            <img src="${p.img}" alt="${p.name}">
+        </a>
     `).join('');
 }
 
@@ -32,10 +34,7 @@ export function renderTeam(data, lang) {
         <div class="b5-specialist-card">
             <div class="b5-photo-container"><img src="${m.img}" alt="${m.name}"></div>
             <h3>${m.name}</h3><span class="b5-role-badge">${m.role[lang]}</span>
-            <div class="b5-social-links">
-                <a href="${m.social || '#'}" target="_blank" class="b5-social-btn"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="b5-social-btn"><i class="fab fa-telegram-plane"></i></a>
-            </div>
+            <div class="b5-social-links"><a href="${m.social || '#'}" target="_blank" class="b5-social-btn"><i class="fab fa-facebook-f"></i></a><a href="#" class="b5-social-btn"><i class="fab fa-telegram-plane"></i></a></div>
         </div>
     `).join('');
 }
@@ -46,9 +45,7 @@ export function renderStories(data, lang) {
     container.innerHTML = data.map(s => `
         <div class="b6-card">
             <div class="b6-quote-mark">“</div><p class="b6-card-text">${s.text[lang]}</p>
-            <div class="b6-author"><img src="${s.img}" class="b6-author-img" alt="H">
-                <div class="b6-author-info"><h4>${s.name}</h4><p>${s.rank[lang]}</p></div>
-            </div>
+            <div class="b6-author"><img src="${s.img}" class="b6-author-img" alt="H"><div class="b6-author-info"><h4>${s.name}</h4><p>${s.rank[lang]}</p></div></div>
         </div>
     `).join('');
 }
