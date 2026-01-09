@@ -1,3 +1,4 @@
+// UNIT: ACTIVITIES
 export function renderActivities(data, lang) {
     const container = document.getElementById('activities-container');
     if (!container || !data.length) return;
@@ -9,12 +10,14 @@ export function renderActivities(data, lang) {
     `).join('');
 }
 
+// UNIT: STATS
 export function renderStats(data, lang) {
     const container = document.getElementById('stats-container');
     if (!container || !data.length) return;
     container.innerHTML = data.map(item => `<div class="b3-stat-item"><span class="b3-number" data-target="${item.value}">0</span><span class="b3-label">${item.label[lang]}</span></div>`).join('');
 }
 
+// UNIT: PARTNERS
 export function renderPartners(data) {
     const row1 = document.getElementById('partners-row-1'), row2 = document.getElementById('partners-row-2');
     if (!row1 || !row2 || !data.length) return;
@@ -23,6 +26,7 @@ export function renderPartners(data) {
     row1.innerHTML = html(g1); row2.innerHTML = html(g2);
 }
 
+// UNIT: TEAM
 export function renderTeam(data, lang) {
     const container = document.getElementById('team-container');
     if (!container || !data.length) return;
@@ -35,22 +39,23 @@ export function renderTeam(data, lang) {
     `).join('');
 }
 
+// UNIT: STORIES
 export function renderStories(data, lang) {
     const container = document.getElementById('stories-container');
     if (!container || !data.length) return;
-    container.innerHTML = data.map(s => `<div class="b6-card"><div class="b6-quote-mark">“</div><p class="b6-card-text">${s.text[lang]}</p><div class="b6-author"><img src="${s.img}" class="b6-author-img" alt="H"><div class="b6-author-info"><h4>${s.name}</h4><p>${s.rank[lang]}</p></div></div></div>`).join('');
+    container.innerHTML = data.map(s => `<div class="b6-card"><div class="b6-quote-mark">“</div><p class="b6-card-text">${s.text[lang]}</p>
+            <div class="b6-author"><img src="${s.img}" class="b6-author-img" alt="H"><div class="b6-author-info"><h4>${s.name}</h4><p>${s.rank[lang]}</p></div></div></div>`).join('');
 }
 
+// UNIT: NEWS & ALBUMS (БЕЗПЕЧНА ОБРОБКА)
 export function renderNews(data, lang) {
     const container = document.getElementById('news-container');
     if (!container || !data.length) return;
     container.innerHTML = data.map(n => {
-        let domain = "NEWS";
-        try {
-            if (n.link && n.link.includes('http')) {
-                domain = new URL(n.link).hostname.replace('www.', '').split('.')[0].toUpperCase();
-            }
-        } catch(e) {}
+        let domain = "News";
+        if (n.link && n.link.includes('http')) {
+            try { domain = new URL(n.link).hostname.replace('www.', '').split('.')[0].toUpperCase(); } catch(e){}
+        }
         return `<a href="${n.link}" class="b7-news-item" target="_blank"><div class="b7-item-meta"><div class="b7-live-dot"></div><span class="b7-source-label">${domain} | ${n.date}</span></div><h4>${n.title[lang]}</h4></a>`;
     }).join('');
 }
@@ -63,6 +68,7 @@ export function renderAlbums(data, lang) {
     fullGrid.innerHTML = data.map(html).join('');
 }
 
+// UNIT: FOUNDERS
 export function renderFounders(data, lang) {
     const container = document.getElementById('founders-container');
     if (!container || !data.length) return;
