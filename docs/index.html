@@ -46,7 +46,6 @@
     </header>
 
     <main>
-        <!-- БЛОК 1 -->
         <section id="home" class="b1-hero">
             <div class="b1-bg-wrapper"><div class="b1-bg-image"></div><div class="b1-overlay"></div><div class="b1-grid-pattern"></div></div>
             <div class="container"><div class="b1-content">
@@ -58,36 +57,25 @@
             </div></div>
         </section>
 
-        <!-- БЛОК 2 -->
         <section id="activities" class="b2-activities">
             <div class="container"><h2 class="b2-title-center" data-i18n="b2.title">Наша діяльність</h2><div id="activities-container" class="b2-grid-6"></div></div>
         </section>
 
-        <!-- БЛОК 3 -->
         <section id="stats" class="b3-stats">
             <div class="container"><h2 class="b3-title" data-i18n="b3.title">Наші досягнення</h2><div id="stats-container" class="b3-grid"></div></div>
         </section>
 
-        <!-- БЛОК 4: ПАРТНЕРИ -->
+        <!-- БЛОК 4 -->
         <section id="partners" class="b4-partners">
-            <div class="b4-bg-glow"></div>
-            <div class="container">
-                <h2 class="b4-title" data-i18n="b4.title">Наші партнери</h2>
-            </div>
-            
+            <div class="container"><h2 class="b4-title" data-i18n="b4.title">Наші партнери</h2></div>
             <div class="b4-slider-container">
                 <div class="swiper b4-swiper-main">
-                    <div class="swiper-wrapper" id="partners-track">
-                        <!-- JS Render -->
-                    </div>
+                    <div class="swiper-wrapper" id="partners-track"></div>
                 </div>
-                
-                <!-- КЕРУВАННЯ (ОПУЩЕНО НИЖЧЕ) -->
-                <div class="b4-nav-outer">
-                    <div class="b4-nav-inner">
-                        <button class="b4-nav-unique-btn b4-prev"><i class="fa-solid fa-arrow-left-long"></i></button>
-                        <button class="b4-nav-unique-btn b4-next"><i class="fa-solid fa-arrow-right-long"></i></button>
-                    </div>
+                <!-- Навігація винесена окремо для 100% клікабельності -->
+                <div class="b4-nav-panel">
+                    <button class="b4-arrow-unique b4-prev-btn"><i class="fa-solid fa-arrow-left-long"></i></button>
+                    <button class="b4-arrow-unique b4-next-btn"><i class="fa-solid fa-arrow-right-long"></i></button>
                 </div>
             </div>
         </section>
