@@ -16,8 +16,13 @@ async function init() {
             load('data/news.json'), load('data/albums.json'), load('data/founders.json')
         ]);
         cache = { translations: t, activities: a, stats: s, partners: p, team: tm, stories: st, news: n, albums: al, founders: fnd };
-        setupLanguageSwitcher(); setupMobileMenu(); setupScrollReveal(); updateUI(); setupGalleryModal();
-    } catch (e) { console.error("Init Error:", e); }
+        
+        setupLanguageSwitcher(); 
+        setupMobileMenu(); 
+        setupScrollReveal(); 
+        updateUI();
+        setupGalleryModal();
+    } catch (e) { console.error("Init error:", e); }
 }
 
 function updateUI() {
@@ -30,24 +35,49 @@ function updateUI() {
     render.renderNews(cache.news, currentLang);
     render.renderAlbums(cache.albums, currentLang);
     render.renderFounders(cache.founders, currentLang);
+    
     initCounters(); 
-    setTimeout(() => initPartnersSwiper(), 600);
+    
+    // ПРІОРИТЕТНА ТА БЕЗПЕЧНА ІНІЦІАЛІЗАЦІЯ
+    setTimeout(() => {
+        initPartnersSwiper();
+    }, 800); 
 }
 
-window.openFounderBio = (id) => {
-    const f = cache.founders.find(x => x.id === id);
-    if (!f) return;
-    document.getElementById('f-modal-img').src = f.img;
-    document.getElementById('f-modal-name').innerText = f.name;
-    document.getElementById('f-modal-role').innerText = f.role[currentLang];
-    document.getElementById('f-modal-desc').innerText = f.bio[currentLang];
-    document.getElementById('foundersModal').style.display = 'flex';
-};
+function initPartnersSwiper() {
+    const swiperElem = document.querySelector('.b4-swiper-main');
+    if (!swiperElem) return;
 
+    if (window.partnersSwiper) window.partnersSwiper.destroy(true, true);
+    
+    window.partnersSwiper = new Swiper('.b4-swiper-main', {
+        loop: true,
+        centeredSlides: true,
+        speed: 1000,
+        grabCursor: true,
+        autoplay: { delay: 3000, disableOnInteraction: false },
+        navigation: { 
+            nextEl: '.b4-next', 
+            prevEl: '.b4-prev' 
+        },
+        breakpoints: {
+            320: { slidesPerView: 1, spaceBetween: 20 },
+            768: { slidesPerView: 2.5, spaceBetween: 40 },
+            1200: { slidesPerView: 3.5, spaceBetween: 60 }
+        },
+        loopedSlides: 12,
+        observer: true,
+        observeParents: true,
+        watchSlidesProgress: true
+    });
+}
+
+// РЕШТА ФУНКЦІЙ (БЛОК 7 ТА 8)
 window.toggleAllAlbums = () => {
     const portal = document.getElementById('archivePortal');
-    portal.style.display = portal.style.display === 'block' ? 'none' : 'block';
-    document.body.style.overflow = portal.style.display === 'block' ? 'hidden' : 'auto';
+    const isVisible = portal.style.display === 'block';
+    portal.style.display = isVisible ? 'none' : 'block';
+    document.body.style.overflow = isVisible ? 'auto' : 'hidden';
 };
 
 window.openGallery = (id) => {
@@ -60,6 +90,16 @@ window.openGallery = (id) => {
     window.gallerySwiper = new Swiper('.b7-gallery-swiper-engine', { navigation: { nextEl: '.next', prevEl: '.prev' }, loop: true });
 };
 
+window.openFounderBio = (id) => {
+    const f = cache.founders.find(x => x.id === id);
+    if (!f) return;
+    document.getElementById('f-modal-img').src = f.img;
+    document.getElementById('f-modal-name').innerText = f.name;
+    document.getElementById('f-modal-role').innerText = f.role[currentLang];
+    document.getElementById('f-modal-desc').innerText = f.bio[currentLang];
+    document.getElementById('foundersModal').style.display = 'flex';
+};
+
 function setupGalleryModal() {
     const m1 = document.getElementById('galleryModal');
     const m2 = document.getElementById('foundersModal');
@@ -67,17 +107,6 @@ function setupGalleryModal() {
         if (e.target == m1) m1.style.display = 'none'; 
         if (e.target == m2) m2.style.display = 'none'; 
     };
-}
-
-function initPartnersSwiper() {
-    if (window.partnersSwiper) window.partnersSwiper.destroy(true, true);
-    window.partnersSwiper = new Swiper('.b4-swiper-container', {
-        loop: true, centeredSlides: true, speed: 1000, grabCursor: true,
-        autoplay: { delay: 3000, disableOnInteraction: false },
-        navigation: { nextEl: '.b4-next-unique', prevEl: '.b4-prev-unique' },
-        breakpoints: { 320: { slidesPerView: 1.5, spaceBetween: 20 }, 768: { slidesPerView: 3, spaceBetween: 30 }, 1200: { slidesPerView: 5, spaceBetween: 40 } },
-        loopedSlides: 10, observer: true, observeParents: true
-    });
 }
 
 function initCounters() {
