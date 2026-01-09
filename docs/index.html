@@ -36,7 +36,10 @@
                         <li><a href="#contact" class="nav-link" data-i18n="menu.contacts">Контакти</a></li>
                     </ul>
                 </nav>
-                <div class="lang-switcher"><button class="lang-btn active" data-lang="uk">UA</button><button class="lang-btn" data-lang="en">EN</button></div>
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="uk">UA</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
                 <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
             </div>
         </div>
@@ -56,8 +59,9 @@
         <section id="founders" class="b8-titan-hall"><div class="b8-fog-effect"></div><div class="container"><div class="b8-header"><div class="b8-title-bg">TITANS</div><span class="b8-label" data-i18n="b8.label">ЗАСНОВНИКИ ОРГАНІЗАЦІЇ</span><h2 class="b8-main-title" data-i18n="b8.title">Наші співзасновники</h2></div><div id="founders-container" class="b8-grid"></div></div></section>
     </main>
 
-    <div id="foundersModal" class="b8-dossier-overlay" onclick="window.closeFounderModal()">
-        <div class="b8-dossier-card" onclick="event.stopPropagation()">
+    <!-- МОДАЛКИ -->
+    <div id="foundersModal" class="b8-dossier-overlay">
+        <div class="b8-dossier-card">
             <button class="b8-close-dossier" onclick="window.closeFounderModal()">&times;</button>
             <div class="b8-dossier-grid">
                 <div class="b8-dossier-image"><img id="f-modal-img" src=""><div class="b8-image-glow"></div></div>
@@ -73,7 +77,7 @@
     <div id="archivePortal" class="b7-portal-overlay"><div class="b7-portal-content"><div class="b7-portal-top"><h2 data-i18n="b7.full_archive">Офіційний архів</h2><button class="b7-portal-close" onclick="window.toggleAllAlbums()">&times;</button></div><div id="full-albums-grid" class="b7-portal-items"></div></div></div>
     <div id="galleryModal" class="b7-modal"><span class="b7-modal-close">&times;</span><div class="b7-modal-content"><div class="swiper b7-gallery-swiper-engine"><div class="swiper-wrapper" id="modal-gallery-wrapper"></div><div class="b7-swiper-nav next"><i class="fas fa-chevron-right"></i></div><div class="b7-swiper-nav prev"><i class="fas fa-chevron-left"></i></div></div></div></div>
 
-    <footer class="main-footer" id="contact"><div class="footer-glow"></div><div class="container"><div class="footer-grid"><div class="footer-col contacts"><div class="footer-logo"><img src="images/000.png" alt="L"><span data-i18n="header.logo_title">ГО «Легіон Титанів»</span></div><div class="contact-list"><div class="contact-item"><i class="fas fa-map-marker-alt"></i><p data-i18n="footer.address">м. Буча, Київська обл.</p></div><div class="contact-item"><i class="fas fa-phone-alt"></i><p>+38 (067) 000-00-00</p></div><div class="contact-item"><i class="fas fa-envelope"></i><p>ngo@legion-of-titans.org</p></div></div></div><div class="footer-col links"><h4 data-i18n="footer.nav_title">Навігація</h4><ul><li><a href="#home" data-i18n="menu.home">Головна</a></li><li><a href="#activities" data-i18n="menu.activities">Діяльність</a></li><li><a href="#partners" data-i18n="menu.partners">Партнери</a></li><li><a href="#team" data-i18n="b5.title">Команда</a></li></ul></div><div class="footer-col feedback"><h4 data-i18n="footer.form_title">Надіслати запит</h4><form id="footerForm" class="footer-form"><div class="form-group"><input type="text" id="name" placeholder=" " required><label data-i18n="footer.name">Ваше ім'я</label></div><div class="form-group"><input type="email" id="email" placeholder=" " required><label>Email</label></div><div class="form-group"><textarea id="message" placeholder=" " required></textarea><label data-i18n="footer.message">Повідомлення</label></div><button type="submit" class="footer-submit"><span data-i18n="footer.send">ВІДПРАВИТИ</span><i class="fas fa-paper-plane"></i></button></form></div></div><div class="footer-bottom"><p>&copy; 2026 <span data-i18n="header.logo_title">ГО «Легіон Титанів»</span>. <span data-i18n="footer.copy">Всі права захищені.</span></p></div></div></footer>
+    <footer class="main-footer" id="contact"><div class="footer-glow"></div><div class="container"><div class="footer-grid"><div class="footer-col contacts"><div class="footer-logo"><img src="images/000.png" alt="L"><span data-i18n="header.logo_title">ГО «Легіон Титанів»</span></div><div class="contact-list"><div class="contact-item"><i class="fas fa-map-marker-alt"></i><p data-i18n="footer.address">м. Буча, Київська обл.</p></div><div class="contact-item"><i class="fas fa-phone-alt"></i><p>+38 (067) 000-00-00</p></div><div class="contact-item"><i class="fas fa-envelope"></i><p>ngo@legion-of-titans.org</p></div></div></div><div class="footer-col links"><h4>Навігація</h4><ul><li><a href="#home">Головна</a></li><li><a href="#activities">Діяльність</a></li><li><a href="#partners">Партнери</a></li><li><a href="#team">Команда</a></li></ul></div><div class="footer-col feedback"><h4>Надіслати запит</h4><form id="footerForm" class="footer-form"><div class="form-group"><input type="text" id="name" placeholder=" " required><label data-i18n="footer.name">Ваше ім'я</label></div><div class="form-group"><input type="email" id="email" placeholder=" " required><label>Email</label></div><div class="form-group"><textarea id="message" placeholder=" " required></textarea><label data-i18n="footer.message">Повідомлення</label></div><button type="submit" class="footer-submit"><span>ВІДПРАВИТИ</span><i class="fas fa-paper-plane"></i></button></form></div></div><div class="footer-bottom"><p>&copy; 2026 <span data-i18n="header.logo_title">ГО «Легіон Титанів»</span>. <span data-i18n="footer.copy">Всі права захищені.</span></p></div></div></footer>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module" src="js/main.js"></script>

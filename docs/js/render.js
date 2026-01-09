@@ -19,7 +19,7 @@ export function renderPartners(data) {
     const row1 = document.getElementById('partners-row-1'), row2 = document.getElementById('partners-row-2');
     if (!row1 || !row2 || !data.length) return;
     const g1 = data.slice(0, 5), g2 = data.slice(5, 10);
-    const html = (items) => items.map(p => `<div class="b4-kinetic-item"><a href="${p.link}" target="_blank"><img src="${p.img}" alt="P" onerror="this.src='https://placehold.co/400x400?text=Logo'"></a></div>`).join('').repeat(4);
+    const html = (items) => items.map(p => `<div class="b4-kinetic-item"><a href="${p.link}" target="_blank" rel="noopener"><img src="${p.img}" alt="P" onerror="this.src='https://placehold.co/400x400?text=Logo'"></a></div>`).join('').repeat(4);
     row1.innerHTML = html(g1); row2.innerHTML = html(g2);
 }
 
@@ -45,10 +45,12 @@ export function renderNews(data, lang) {
     const container = document.getElementById('news-container');
     if (!container || !data.length) return;
     container.innerHTML = data.map(n => {
-        let domain = "News";
-        if (n.link && n.link.includes('http')) {
-            try { domain = new URL(n.link).hostname.replace('www.', '').split('.')[0].toUpperCase(); } catch(e){}
-        }
+        let domain = "NEWS";
+        try {
+            if (n.link && n.link.includes('http')) {
+                domain = new URL(n.link).hostname.replace('www.', '').split('.')[0].toUpperCase();
+            }
+        } catch(e) {}
         return `<a href="${n.link}" class="b7-news-item" target="_blank"><div class="b7-item-meta"><div class="b7-live-dot"></div><span class="b7-source-label">${domain} | ${n.date}</span></div><h4>${n.title[lang]}</h4></a>`;
     }).join('');
 }
