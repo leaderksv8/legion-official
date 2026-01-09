@@ -59,11 +59,11 @@ export function renderFounders(data, lang) {
     const container = document.getElementById('founders-container');
     if (!container || !data) return;
     container.innerHTML = data.map(f => `
-        <div class="b8-card" onclick="window.openFounderBio('${f.id}')">
-            <div class="b8-img-box">
+        <div class="b8-titan-card" onclick="window.openFounderBio('${f.id}')">
+            <div class="b8-img-wrap">
                 <img src="${f.img}" alt="${f.name}">
             </div>
-            <div class="b8-info-overlay">
+            <div class="b8-info-box">
                 <h4>${f.name}</h4>
                 <p>${f.role[lang]}</p>
             </div>

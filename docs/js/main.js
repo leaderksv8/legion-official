@@ -34,7 +34,6 @@ function updateUI() {
     setTimeout(() => initPartnersSwiper(), 600);
 }
 
-// МОДАЛКА СПІВЗАСНОВНИКІВ
 window.openFounderBio = (id) => {
     const f = cache.founders.find(x => x.id === id);
     if (!f) return;
@@ -47,9 +46,8 @@ window.openFounderBio = (id) => {
 
 window.toggleAllAlbums = () => {
     const portal = document.getElementById('archivePortal');
-    const isVisible = portal.style.display === 'block';
-    portal.style.display = isVisible ? 'none' : 'block';
-    document.body.style.overflow = isVisible ? 'auto' : 'hidden';
+    portal.style.display = portal.style.display === 'block' ? 'none' : 'block';
+    document.body.style.overflow = portal.style.display === 'block' ? 'hidden' : 'auto';
 };
 
 window.openGallery = (id) => {
