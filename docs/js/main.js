@@ -21,7 +21,7 @@ async function init() {
         };
         setupGlobalEvents();
         updateUI();
-    } catch (e) { console.error("System Error:", e); }
+    } catch (e) { console.error("Critical System Failure", e); }
 }
 
 function updateUI() {
@@ -34,13 +34,39 @@ function updateUI() {
     try { render.renderNews(cache.news, currentLang); } catch(e){}
     try { render.renderAlbums(cache.albums, currentLang); } catch(e){}
     try { render.renderFounders(cache.founders, currentLang); } catch(e){}
+    
     initIndependentModules();
 }
 
 function initIndependentModules() {
     try { initCounters(); } catch(e){}
-    try { setTimeout(initPartnersSwiper, 500); } catch(e){}
+    try { setTimeout(initPartnersSwiper, 800); } catch(e){} // Збільшена затримка для стабільності
     try { setupScrollUI(); } catch(e){}
+}
+
+function initPartnersSwiper() {
+    const swiperContainer = document.querySelector('.b4-swiper-main');
+    if (!swiperContainer) return;
+
+    if (window.partnersSwiper) window.partnersSwiper.destroy(true, true);
+    
+    window.partnersSwiper = new Swiper('.b4-swiper-main', {
+        loop: true,
+        centeredSlides: true,
+        initialSlide: 0,
+        speed: 1000,
+        grabCursor: true,
+        autoplay: { delay: 3000, disableOnInteraction: false },
+        navigation: { nextEl: '.b4-next', prevEl: '.b4-prev' },
+        // ФІКС ЦЕНТРУВАННЯ: режим auto + фіксована ширина в CSS
+        slidesPerView: 'auto', 
+        spaceBetween: 30,
+        loopedSlides: 12,
+        observer: true,
+        observeParents: true,
+        normalizeSlideIndex: true,
+        centeredSlidesBounds: true
+    });
 }
 
 function setupScrollUI() {
@@ -53,19 +79,6 @@ function setupScrollUI() {
 
 window.scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 window.scrollToFooter = () => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-
-function initPartnersSwiper() {
-    if (window.partnersSwiper) window.partnersSwiper.destroy(true, true);
-    const container = document.querySelector('.b4-swiper-main');
-    if (!container) return;
-    window.partnersSwiper = new Swiper('.b4-swiper-main', {
-        loop: true, centeredSlides: true, speed: 1000, grabCursor: true,
-        autoplay: { delay: 3000, disableOnInteraction: false },
-        navigation: { nextEl: '.b4-next', prevEl: '.b4-prev' },
-        breakpoints: { 320: { slidesPerView: 1, spaceBetween: 20 }, 768: { slidesPerView: 2.5, spaceBetween: 40 }, 1200: { slidesPerView: 3.5, spaceBetween: 60 } },
-        loopedSlides: 12, observer: true, observeParents: true
-    });
-}
 
 function initCounters() {
     const statItems = document.querySelectorAll('.b3-stat-item');
