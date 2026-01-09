@@ -44,13 +44,15 @@
     border: 1px solid rgba(197, 160, 89, 0.15);
     text-align: center;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer; /* Підказуємо, що картка інтерактивна */
 }
 
+/* ЕФЕКТ ПРИ НАВЕДЕННІ */
 .b3-stat-item:hover {
     background: rgba(255, 255, 255, 0.07);
     border-color: var(--accent-gold);
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
 
 .b3-number {
@@ -61,6 +63,12 @@
     line-height: 1;
     margin-bottom: 20px;
     font-variant-numeric: tabular-nums;
+    transition: 0.3s;
+}
+
+.b3-stat-item:hover .b3-number {
+    color: var(--accent-gold);
+    text-shadow: 0 0 15px rgba(197, 160, 89, 0.5);
 }
 
 .b3-label {
@@ -70,6 +78,11 @@
     text-transform: uppercase;
     letter-spacing: 1.5px;
     line-height: 1.4;
+    transition: 0.3s;
+}
+
+.b3-stat-item:hover .b3-label {
+    color: var(--white);
 }
 
 @media (max-width: 992px) {

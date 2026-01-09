@@ -29,30 +29,63 @@ function updateUI() {
     render.renderStories(cache.stories, currentLang);
     render.renderNews(cache.news, currentLang);
     render.renderAlbums(cache.albums, currentLang);
-    initCounters(); 
+    
+    initCounters(); // Початкова ініціалізація лічильників
     setTimeout(() => initPartnersSwiper(), 600);
+}
+
+// ФУНКЦІЯ АНІМАЦІЇ ЧИСЕЛ
+function animateNumber(el) {
+    const target = +el.dataset.target;
+    const duration = 1500; 
+    const stepTime = 30;
+    const steps = duration / stepTime;
+    const increment = target / steps;
+    let current = 0;
+
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            el.innerText = target;
+            clearInterval(timer);
+        } else {
+            el.innerText = Math.ceil(current);
+        }
+    }, stepTime);
+}
+
+function initCounters() {
+    const statItems = document.querySelectorAll('.b3-stat-item');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const numEl = entry.target.querySelector('.b3-number');
+                animateNumber(numEl);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    statItems.forEach(item => {
+        observer.observe(item);
+        
+        // ДОДАЄМО RE-TRIGGER ПРИ НАВЕДЕННІ
+        item.addEventListener('mouseenter', () => {
+            const numEl = item.querySelector('.b3-number');
+            animateNumber(numEl);
+        });
+    });
 }
 
 function initPartnersSwiper() {
     if (window.partnersSwiper) window.partnersSwiper.destroy(true, true);
-    
     window.partnersSwiper = new Swiper('.b4-swiper-main', {
-        loop: true,
-        centeredSlides: true,
-        centeredSlidesBounds: true, // ФІКС: Тримає слайди чітко в межах
-        speed: 1000,
-        grabCursor: true,
+        loop: true, centeredSlides: true, speed: 1000, grabCursor: true,
         autoplay: { delay: 3000, disableOnInteraction: false },
-        navigation: { nextEl: '.b4-next-btn', prevEl: '.b4-prev-btn' },
-        breakpoints: {
-            320: { slidesPerView: 1, spaceBetween: 10 }, // ОДИН СЛАЙД ЧІТКО ПО ЦЕНТРУ
-            768: { slidesPerView: 2.5, spaceBetween: 30 },
-            1200: { slidesPerView: 3.5, spaceBetween: 50 },
-            1600: { slidesPerView: 4.5, spaceBetween: 60 }
-        },
-        loopedSlides: 10,
-        observer: true,
-        observeParents: true
+        navigation: { nextEl: '.b4-next', prevEl: '.b4-prev' },
+        breakpoints: { 320: { slidesPerView: 1.3, spaceBetween: 20 }, 768: { slidesPerView: 2.5, spaceBetween: 30 }, 1200: { slidesPerView: 3.5, spaceBetween: 50 }, 1600: { slidesPerView: 4.5, spaceBetween: 60 } },
+        loopedSlides: 10, observer: true, observeParents: true
     });
 }
 
@@ -69,33 +102,12 @@ window.openGallery = (id) => {
     wrapper.innerHTML = album.photos.map(src => `<div class="swiper-slide"><img src="${src}"></div>`).join('');
     document.getElementById('galleryModal').style.display = 'flex';
     if (window.gallerySwiper) window.gallerySwiper.destroy();
-    window.gallerySwiper = new Swiper('.b7-gallery-swiper-engine', {
-        navigation: { nextEl: '.b7-swiper-nav.next', prevEl: '.b7-swiper-nav.prev' }, loop: true
-    });
+    window.gallerySwiper = new Swiper('.b7-gallery-swiper-engine', { navigation: { nextEl: '.next', prevEl: '.prev' }, loop: true });
 };
 
 function setupGalleryModal() {
     const modal = document.getElementById('galleryModal');
     if (modal) window.onclick = (e) => { if (e.target == modal) modal.style.display = 'none'; };
-}
-
-function initCounters() {
-    const counters = document.querySelectorAll('.b3-number');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const target = +entry.target.dataset.target;
-                let current = 0;
-                const timer = setInterval(() => {
-                    current += target / 50;
-                    if (current >= target) { entry.target.innerText = target; clearInterval(timer); }
-                    else { entry.target.innerText = Math.ceil(current); }
-                }, 30);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-    counters.forEach(c => observer.observe(c));
 }
 
 function setupScrollReveal() {
