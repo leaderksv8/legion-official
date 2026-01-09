@@ -15,15 +15,19 @@ export function renderStats(data, lang) {
     container.innerHTML = data.map(item => `<div class="b3-stat-item"><span class="b3-number" data-target="${item.value}">0</span><span class="b3-label">${item.label[lang]}</span></div>`).join('');
 }
 
-// НОВИЙ РЕНДЕР ПАРТНЕРІВ (БЕЗ SWIPER)
+// РЕНДЕР ПАРТНЕРІВ ПІД SWIPER (ВАРІАНТ 2)
 export function renderPartners(data) {
-    const container = document.getElementById('partners-container');
-    if (!container || !data.length) return;
+    const track = document.getElementById('partners-track');
+    if (!track || !data.length) return;
     
-    container.innerHTML = data.map(p => `
-        <a href="${p.link}" target="_blank" class="b4-bento-item" rel="noopener">
-            <img src="${p.img}" alt="${p.name}">
-        </a>
+    track.innerHTML = data.map(p => `
+        <div class="swiper-slide">
+            <div class="b4-item-box">
+                <a href="${p.link}" target="_blank" rel="noopener">
+                    <img src="${p.img}" alt="${p.name}">
+                </a>
+            </div>
+        </div>
     `).join('');
 }
 
@@ -45,7 +49,9 @@ export function renderStories(data, lang) {
     container.innerHTML = data.map(s => `
         <div class="b6-card">
             <div class="b6-quote-mark">“</div><p class="b6-card-text">${s.text[lang]}</p>
-            <div class="b6-author"><img src="${s.img}" class="b6-author-img" alt="H"><div class="b6-author-info"><h4>${s.name}</h4><p>${s.rank[lang]}</p></div></div>
+            <div class="b6-author"><img src="${s.img}" class="b6-author-img" alt="H">
+                <div class="b6-author-info"><h4>${s.name}</h4><p>${s.rank[lang]}</p></div>
+            </div>
         </div>
     `).join('');
 }

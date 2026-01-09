@@ -21,7 +21,7 @@ async function init() {
         };
         setupGlobalEvents();
         updateUI();
-    } catch (e) { console.error("Critical Failure", e); }
+    } catch (e) { console.error("Global Error", e); }
 }
 
 function updateUI() {
@@ -40,21 +40,33 @@ function updateUI() {
 
 function initIndependentModules() {
     try { initCounters(); } catch(e){}
+    try { setTimeout(initOrbitSwiper, 600); } catch(e){}
     try { setupScrollUI(); } catch(e){}
-    try { initBentoInteractions(); } catch(e){}
 }
 
-// BENTO 3D GLOW EFFECT
-function initBentoInteractions() {
-    const cards = document.querySelectorAll('.b4-bento-item');
-    cards.forEach(card => {
-        card.onmousemove = (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = ((e.clientX - rect.left) / rect.width) * 100;
-            const y = ((e.clientY - rect.top) / rect.height) * 100;
-            card.style.setProperty('--x', `${x}%`);
-            card.style.setProperty('--y', `${y}%`);
-        };
+// SWIPER ВАРІАНТ 2: 3D ORBIT (COVERFLOW)
+function initOrbitSwiper() {
+    if (window.partnersSwiper) window.partnersSwiper.destroy(true, true);
+    
+    window.partnersSwiper = new Swiper('.b4-orbit-swiper', {
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        loop: true,
+        speed: 1000,
+        autoplay: { delay: 3000, disableOnInteraction: false },
+        coverflowEffect: {
+            rotate: 35,      // Кут повороту слайдів
+            stretch: 0,      // Розтягування слайдів
+            depth: 250,      // Глибина 3D
+            modifier: 1,     // Множник ефекту
+            slideShadows: false, // Тіні Swiper (ми використовуємо свої для кращого дизайну)
+        },
+        navigation: {
+            nextEl: '.b4-next',
+            prevEl: '.b4-prev',
+        }
     });
 }
 
