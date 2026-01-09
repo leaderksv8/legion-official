@@ -7,34 +7,42 @@ let cache = { translations: {}, activities: [], stats: [], partners: [], team: [
 async function init() {
     try {
         const load = async (url) => { try { const r = await fetch(url); return r.ok ? await r.json() : []; } catch (e) { return []; } };
+
         const data = await Promise.allSettled([
             loadTranslations(), load('data/activities.json'), load('data/stats.json'),
             load('data/partners.json'), load('data/team.json'), load('data/stories.json'),
             load('data/news.json'), load('data/albums.json'), load('data/founders.json')
         ]);
+
         cache = {
-            translations: data[0].value || {}, activities: data[1].value || [], stats: data[2].value || [],
-            partners: data[3].value || [], team: data[4].value || [], stories: data[5].value || [],
-            news: data[6].value || [], albums: data[7].value || [], founders: data[8].value || []
+            translations: data[0].value || {},
+            activities: data[1].value || [],
+            stats: data[2].value || [],
+            partners: data[3].value || [],
+            team: data[4].value || [],
+            stories: data[5].value || [],
+            news: data[6].value || [],
+            albums: data[7].value || [],
+            founders: data[8].value || []
         };
+
         setupGlobalEvents();
         updateUI();
-        setupParallax();
-    } catch (e) { console.error("Critical Failure", e); }
+    } catch (e) { console.error("Global Init Error:", e); }
 }
 
 function updateUI() {
-    try { translatePage(cache.translations, currentLang); } catch(e){}
-    try { render.renderActivities(cache.activities, currentLang); } catch(e){}
-    try { render.renderStats(cache.stats, currentLang); } catch(e){}
-    try { render.renderPartners(cache.partners); } catch(e){}
-    try { render.renderTeam(cache.team, currentLang); } catch(e){}
-    try { render.renderStories(cache.stories, currentLang); } catch(e){}
-    try { render.renderNews(cache.news, currentLang); } catch(e){}
-    try { render.renderAlbums(cache.albums, currentLang); } catch(e){}
-    
-    // ВАЖЛИВО: Перерендер Блоку 8 для перекладу імен та біографій
-    try { render.renderFounders(cache.founders, currentLang); } catch(e){}
+    const safeExec = (name, fn) => { try { fn(); } catch(e) { console.error(`Error in ${name}:`, e); } };
+
+    safeExec("Translate", () => translatePage(cache.translations, currentLang));
+    safeExec("Activities", () => render.renderActivities(cache.activities, currentLang));
+    safeExec("Stats", () => render.renderStats(cache.stats, currentLang));
+    safeExec("Partners", () => render.renderPartners(cache.partners));
+    safeExec("Team", () => render.renderTeam(cache.team, currentLang));
+    safeExec("Stories", () => render.renderStories(cache.stories, currentLang));
+    safeExec("News", () => render.renderNews(cache.news, currentLang));
+    safeExec("Albums", () => render.renderAlbums(cache.albums, currentLang));
+    safeExec("Founders", () => render.renderFounders(cache.founders, currentLang));
     
     initIndependentModules();
 }
@@ -42,16 +50,7 @@ function updateUI() {
 function initIndependentModules() {
     try { initCounters(); } catch(e){}
     try { setupScrollUI(); } catch(e){}
-    try { setTimeout(initVerticalAlbums, 600); } catch(e){}
-}
-
-function setupParallax() {
-    if (window.innerWidth < 1024) return;
-    document.addEventListener("mousemove", (e) => {
-        const layers = document.querySelectorAll(".b7-p-layer");
-        const x = (window.innerWidth - e.pageX * 2) / 100, y = (window.innerHeight - e.pageY * 2) / 100;
-        layers.forEach(layer => { const s = layer.getAttribute('data-speed'); layer.style.transform = `translateX(${x * s}px) translateY(${y * s}px) rotate(${s * 2}deg)`; });
-    });
+    try { setTimeout(initVerticalAlbums, 800); } catch(e){}
 }
 
 function initVerticalAlbums() {
@@ -62,11 +61,11 @@ function initVerticalAlbums() {
 
 function setupScrollUI() {
     const btn = document.getElementById('scrollTopBtn');
-    window.addEventListener('scroll', () => { if (window.scrollY > 500) btn.classList.add('visible'); else btn.classList.remove('visible'); });
+    window.addEventListener('scroll', () => { if (window.scrollY > 500) btn?.classList.add('visible'); else btn?.classList.remove('visible'); });
 }
 
 window.scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-window.scrollToFooter = () => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+window.scrollToFooter = () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
 
 function initCounters() {
     const statItems = document.querySelectorAll('.b3-stat-item');
@@ -81,7 +80,6 @@ function initCounters() {
 }
 
 function setupGlobalEvents() {
-    // МОВИ
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             currentLang = e.target.dataset.lang;
@@ -90,30 +88,35 @@ function setupGlobalEvents() {
         });
     });
 
-    // МЕНЮ
     const toggle = document.getElementById('menuToggle'), menu = document.getElementById('navMenu');
     if (toggle && menu) toggle.onclick = () => menu.classList.toggle('active');
 
-    // SCROLL REVEAL
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('section').forEach(s => observer.observe(s));
     
-    // ФОРМА
+    // ЛОГІКА ЗАКРИТТЯ МОДАЛОК - КЛІК БУДЬ-ДЕ
+    window.addEventListener('click', (e) => {
+        const m1 = document.getElementById('galleryModal');
+        const m2 = document.getElementById('foundersModal');
+        const m3 = document.getElementById('archivePortal');
+        if (m1 && m1.style.display === 'flex') m1.style.display = 'none';
+        if (m2 && m2.style.display === 'flex') m2.style.display = 'none';
+        if (m3 && m3.style.display === 'block') { m3.style.display = 'none'; document.body.style.overflow = 'auto'; }
+    });
+
     const form = document.getElementById('footerForm');
     if (form) form.onsubmit = (e) => { e.preventDefault(); alert("Дякуємо!"); form.reset(); };
-
-    // ЗАКРИТТЯ МОДАЛОК (КРІМ BLOCK 8, ВІН МАЄ ВЛАСНУ ФУНКЦІЮ НИЖЧЕ)
-    const m1 = document.getElementById('galleryModal');
-    const m3 = document.getElementById('archivePortal');
-    window.addEventListener('click', (e) => {
-        if (e.target === m1) m1.style.display = 'none';
-        if (e.target === m3) { m3.style.display = 'none'; document.body.style.overflow = 'auto'; }
-    });
 }
 
-window.toggleAllAlbums = () => { const portal = document.getElementById('archivePortal'); if (portal) { portal.style.display = portal.style.display === 'block' ? 'none' : 'block'; document.body.style.overflow = portal.style.display === 'block' ? 'hidden' : 'auto'; } };
+window.toggleAllAlbums = () => {
+    const portal = document.getElementById('archivePortal');
+    if (!portal) return;
+    const isVisible = portal.style.display === 'block';
+    portal.style.display = isVisible ? 'none' : 'block';
+    document.body.style.overflow = isVisible ? 'auto' : 'hidden';
+};
 
 window.openGallery = (id) => {
     const album = cache.albums.find(a => a.id === id);
@@ -125,9 +128,9 @@ window.openGallery = (id) => {
     window.gallerySwiper = new Swiper('.b7-gallery-swiper-engine', { navigation: { nextEl: '.next', prevEl: '.prev' }, loop: true });
 };
 
-// --- ФУНКЦІЇ БЛОКУ 8 (ЗАКРИТТЯ ТА ВІДКРИТТЯ) ---
+// ВІДКРИТТЯ ДОСЬЄ (ЗУПИНЯЄМО КЛІК, ЩОБ ВІКНО НЕ ЗАКРИЛОСЯ ВІДРАЗУ)
 window.openFounderBio = (id, event) => {
-    if (event) event.stopPropagation(); // Зупиняємо бульбашку, щоб модалка не закрилася відразу
+    event.stopPropagation();
     const f = cache.founders.find(x => x.id === id);
     if (!f) return;
     document.getElementById('f-modal-img').src = f.img;
@@ -135,10 +138,6 @@ window.openFounderBio = (id, event) => {
     document.getElementById('f-modal-role').innerText = f.role[currentLang];
     document.getElementById('f-modal-desc').innerText = f.bio[currentLang];
     document.getElementById('foundersModal').style.display = 'flex';
-};
-
-window.closeFounderModal = () => {
-    document.getElementById('foundersModal').style.display = 'none';
 };
 
 document.addEventListener('DOMContentLoaded', init);
