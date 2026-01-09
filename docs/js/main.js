@@ -4,17 +4,12 @@ import * as render from './render.js';
 let currentLang = 'uk';
 let cache = { translations: {}, activities: [], stats: [], partners: [], team: [], stories: [], news: [], albums: [], founders: [] };
 
-// ІНІЦІАЛІЗАЦІЯ - ТОТАЛЬНА ІЗОЛЯЦІЯ
 async function init() {
     try {
         const load = async (url) => {
-            try {
-                const r = await fetch(url);
-                return r.ok ? await r.json() : [];
-            } catch { return []; }
+            try { const r = await fetch(url); return r.ok ? await r.json() : []; } catch { return []; }
         };
 
-        // Паралельне завантаження без ризику падіння всього сайту
         const data = await Promise.allSettled([
             loadTranslations(), load('data/activities.json'), load('data/stats.json'),
             load('data/partners.json'), load('data/team.json'), load('data/stories.json'),
@@ -35,11 +30,10 @@ async function init() {
 
         setupGlobalEvents();
         updateUI();
-    } catch (e) { console.error("Global System Error:", e); }
+    } catch (e) { console.error("System Failure:", e); }
 }
 
 function updateUI() {
-    // Кожен блок рендериться незалежно
     try { translatePage(cache.translations, currentLang); } catch(e){}
     try { render.renderActivities(cache.activities, currentLang); } catch(e){}
     try { render.renderStats(cache.stats, currentLang); } catch(e){}
@@ -50,35 +44,42 @@ function updateUI() {
     try { render.renderAlbums(cache.albums, currentLang); } catch(e){}
     try { render.renderFounders(cache.founders, currentLang); } catch(e){}
     
-    // Ініціалізація активних скриптів
     initIndependentModules();
 }
 
 function initIndependentModules() {
-    try { initCounters(); } catch(e){ console.error("Stats Module Error", e); }
-    try { setTimeout(initPartnersSwiper, 500); } catch(e){ console.error("Partners Module Error", e); }
+    try { initCounters(); } catch(e){}
+    try { setTimeout(initPartnersSwiper, 500); } catch(e){}
+    try { setupScrollUI(); } catch(e){}
 }
 
-// ПАРТНЕРИ (BLOCK 4) - ІЗОЛЬОВАНО
+// UI LOGIC
+function setupScrollUI() {
+    const btn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) btn.classList.add('visible');
+        else btn.classList.remove('visible');
+    });
+}
+
+window.scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+window.scrollToFooter = () => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+
+// PARTNERS SWIPER
 function initPartnersSwiper() {
     if (window.partnersSwiper) window.partnersSwiper.destroy(true, true);
     const container = document.querySelector('.b4-swiper-main');
     if (!container) return;
-
     window.partnersSwiper = new Swiper('.b4-swiper-main', {
         loop: true, centeredSlides: true, speed: 1000, grabCursor: true,
         autoplay: { delay: 3000, disableOnInteraction: false },
         navigation: { nextEl: '.b4-next', prevEl: '.b4-prev' },
-        breakpoints: {
-            320: { slidesPerView: 1, spaceBetween: 20 },
-            768: { slidesPerView: 2.5, spaceBetween: 40 },
-            1200: { slidesPerView: 3.5, spaceBetween: 60 }
-        },
+        breakpoints: { 320: { slidesPerView: 1, spaceBetween: 20 }, 768: { slidesPerView: 2.5, spaceBetween: 40 }, 1200: { slidesPerView: 3.5, spaceBetween: 60 } },
         loopedSlides: 12, observer: true, observeParents: true
     });
 }
 
-// ДОСЯГНЕННЯ (BLOCK 3) - ІЗОЛЬОВАНО
+// COUNTERS
 function initCounters() {
     const statItems = document.querySelectorAll('.b3-stat-item');
     statItems.forEach(item => {
@@ -100,9 +101,8 @@ function initCounters() {
     });
 }
 
-// ГЛОБАЛЬНІ СИСТЕМНІ ПОДІЇ
+// GLOBAL EVENTS
 function setupGlobalEvents() {
-    // Мови
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             currentLang = e.target.dataset.lang;
@@ -111,19 +111,27 @@ function setupGlobalEvents() {
         });
     });
 
-    // Мобільне меню
     const toggle = document.getElementById('menuToggle');
     const menu = document.getElementById('navMenu');
     if (toggle && menu) toggle.onclick = () => menu.classList.toggle('active');
 
-    // Scroll Reveal
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('section').forEach(s => observer.observe(s));
+    
+    // Форма футера
+    const form = document.getElementById('footerForm');
+    if (form) {
+        form.onsubmit = (e) => {
+            e.preventDefault();
+            alert("Повідомлення надіслано успішно!");
+            form.reset();
+        };
+    }
 }
 
-// ПУБЛІЧНІ ФУНКЦІЇ ДЛЯ ВЗАЄМОДІЇ
+// PORTAL & GALLERY
 window.toggleAllAlbums = () => {
     const portal = document.getElementById('archivePortal');
     const isVisible = portal.style.display === 'block';

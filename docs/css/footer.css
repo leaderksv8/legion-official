@@ -1,0 +1,142 @@
+.main-footer {
+    background-color: #020617;
+    padding: 120px 0 40px;
+    position: relative;
+    overflow: hidden;
+    color: var(--white);
+    border-top: 1px solid rgba(197, 160, 89, 0.2);
+}
+
+.footer-glow {
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 60%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+    box-shadow: 0 0 30px var(--accent-gold);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 1.2fr;
+    gap: 80px;
+    margin-bottom: 80px;
+}
+
+/* КОЛОНКА 1: КОНТАКТИ */
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 35px;
+}
+
+.footer-logo img {
+    width: 50px; height: 50px;
+    background: #fff; padding: 5px; border-radius: 8px;
+}
+
+.footer-logo span {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900; font-size: 1.4rem; color: var(--accent-gold);
+}
+
+.contact-list { display: flex; flex-direction: column; gap: 20px; }
+.contact-item { display: flex; align-items: center; gap: 15px; font-size: 1rem; }
+.contact-item i { color: var(--accent-gold); width: 20px; }
+
+.footer-socials {
+    display: flex; gap: 15px; margin-top: 35px;
+}
+
+.footer-socials a {
+    width: 45px; height: 45px;
+    background: rgba(255,255,255,0.05);
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; border: 1px solid rgba(197, 160, 89, 0.3);
+    transition: 0.3s;
+}
+
+.footer-socials a:hover {
+    background: var(--accent-gold); color: #020617; transform: translateY(-5px);
+}
+
+/* КОЛОНКА 2: ПОСИЛАННЯ */
+.footer-col h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; margin-bottom: 35px; color: var(--white);
+}
+
+.footer-col ul { display: flex; flex-direction: column; gap: 15px; }
+.footer-col ul a {
+    font-weight: 600; color: rgba(255,255,255,0.6);
+    transition: 0.3s; position: relative;
+}
+
+.footer-col ul a:hover { color: var(--accent-gold); padding-left: 10px; }
+
+/* КОЛОНКА 3: ФОРМА (ПРЕМІУМ) */
+.footer-form { display: flex; flex-direction: column; gap: 25px; }
+
+.form-group { position: relative; width: 100%; }
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.03);
+    border: none;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+    padding: 15px 0;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    transition: 0.4s;
+    outline: none;
+}
+
+.form-group label {
+    position: absolute;
+    top: 15px; left: 0;
+    color: rgba(255,255,255,0.4);
+    pointer-events: none;
+    transition: 0.4s;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    border-bottom-color: var(--accent-gold);
+}
+
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group textarea:focus + label,
+.form-group textarea:not(:placeholder-shown) + label {
+    top: -10px; font-size: 0.7rem; color: var(--accent-gold); font-weight: 800;
+}
+
+.footer-submit {
+    background: transparent;
+    border: 2px solid var(--accent-gold);
+    color: var(--white);
+    padding: 15px 30px;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    transition: 0.4s;
+    letter-spacing: 2px;
+}
+
+.footer-submit:hover {
+    background: var(--accent-gold); color: #020617;
+}
+
+.footer-bottom {
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    text-align: center;
+    color: rgba(255,255,255,0.3);
+    font-size: 0.8rem;
+}
+
+@media (max-width: 992px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 60px; }
+}
