@@ -65,23 +65,24 @@
             <div class="container"><h2 class="b3-title" data-i18n="b3.title">Наші досягнення</h2><div id="stats-container" class="b3-grid"></div></div>
         </section>
 
-        <!-- БЛОК 4: ЕЛІТАРНА СТРІЧКА ПАРТНЕРІВ -->
+        <!-- БЛОК 4: ПАРТНЕРИ -->
         <section id="partners" class="b4-partners">
-            <div class="b4-spotlight"></div>
+            <div class="b4-bg-glow"></div>
             <div class="container">
                 <h2 class="b4-title" data-i18n="b4.title">Наші партнери</h2>
             </div>
             
-            <div class="b4-carousel-area">
-                <div class="swiper b4-main-swiper">
+            <div class="b4-slider-container">
+                <div class="swiper b4-swiper-main">
                     <div class="swiper-wrapper" id="partners-track">
                         <!-- JS Render -->
                     </div>
                 </div>
                 
-                <div class="b4-nav-panel">
-                    <button class="b4-nav-arrow b4-prev"><i class="fa-solid fa-arrow-left-long"></i></button>
-                    <button class="b4-nav-arrow b4-next"><i class="fa-solid fa-arrow-right-long"></i></button>
+                <!-- КЕРУВАННЯ -->
+                <div class="b4-nav-wrapper">
+                    <button class="b4-nav-btn b4-prev"><i class="fa-solid fa-arrow-left"></i></button>
+                    <button class="b4-nav-btn b4-next"><i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
         </section>
@@ -101,15 +102,7 @@
         </section>
 
         <section id="media" class="b7-media">
-            <div class="b7-immersive-bg">
-                <img src="images/newspapers/news1.jpg" class="b7-bg-item i1">
-                <img src="images/newspapers/news2.jpg" class="b7-bg-item i2">
-                <img src="images/newspapers/news3.jpg" class="b7-bg-item i3">
-                <img src="images/newspapers/news4.jpg" class="b7-bg-item i4">
-                <img src="images/newspapers/news5.jpg" class="b7-bg-item i5">
-                <img src="images/newspapers/news6.jpg" class="b7-bg-item i6">
-            </div>
-            <div class="b7-vignette-overlay"></div>
+            <div class="b7-stone-texture"></div>
             <div class="container b7-relative">
                 <div class="b7-header-center"><div class="b7-brass-plaque"><div class="b7-plaque-bolt tl"></div><div class="b7-plaque-bolt tr"></div><div class="b7-plaque-bolt bl"></div><div class="b7-plaque-bolt br"></div><h2 class="b7-main-title" data-i18n="b7.title">Медіа-центр</h2><div class="b7-plaque-shine"></div></div></div>
                 <div class="b7-main-layout">
@@ -120,7 +113,6 @@
         </section>
     </main>
 
-    <!-- ПОРТАЛИ -->
     <div id="archivePortal" class="b7-portal-overlay">
         <div class="b7-portal-content"><div class="b7-portal-top"><h2 data-i18n="b7.full_archive">Офіційний архів</h2><button class="b7-portal-close" onclick="window.toggleAllAlbums()">&times;</button></div><div id="full-albums-grid" class="b7-portal-items"></div></div>
     </div>

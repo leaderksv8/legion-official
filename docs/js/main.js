@@ -10,24 +10,13 @@ async function init() {
             const r = await fetch(url);
             return r.ok ? await r.json() : [];
         };
-
         const [t, a, s, p, tm, st, n, al] = await Promise.all([
-            loadTranslations(),
-            load('data/activities.json'),
-            load('data/stats.json'),
-            load('data/partners.json'),
-            load('data/team.json'),
-            load('data/stories.json'),
-            load('data/news.json'),
-            load('data/albums.json')
+            loadTranslations(), load('data/activities.json'), load('data/stats.json'),
+            load('data/partners.json'), load('data/team.json'), load('data/stories.json'),
+            load('data/news.json'), load('data/albums.json')
         ]);
-
         cache = { translations: t, activities: a, stats: s, partners: p, team: tm, stories: st, news: n, albums: al };
-        setupLanguageSwitcher();
-        setupMobileMenu();
-        setupScrollReveal();
-        updateUI();
-        setupGalleryModal();
+        setupLanguageSwitcher(); setupMobileMenu(); setupScrollReveal(); updateUI(); setupGalleryModal();
     } catch (e) { console.error("Init Error:", e); }
 }
 
@@ -40,43 +29,36 @@ function updateUI() {
     render.renderStories(cache.stories, currentLang);
     render.renderNews(cache.news, currentLang);
     render.renderAlbums(cache.albums, currentLang);
-    
     initCounters(); 
-    setTimeout(() => initPartnersSwiper(), 600);
+    setTimeout(() => initPartnersSwiper(), 500);
 }
 
 function initPartnersSwiper() {
     if (window.partnersSwiper) window.partnersSwiper.destroy(true, true);
     
-    window.partnersSwiper = new Swiper('.b4-main-swiper', {
+    window.partnersSwiper = new Swiper('.b4-swiper-main', {
         loop: true,
         centeredSlides: true,
-        speed: 1200, // Плавний преміальний перехід
+        speed: 1000,
         grabCursor: true,
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
-        navigation: {
-            nextEl: '.b4-next',
-            prevEl: '.b4-prev',
-        },
-        // Математично точна кількість слайдів для безшовного циклу
+        autoplay: { delay: 3000, disableOnInteraction: false },
+        navigation: { nextEl: '.b4-next', prevEl: '.b4-prev' },
         breakpoints: {
-            320: { slidesPerView: 1.5, spaceBetween: 20 },
-            768: { slidesPerView: 3, spaceBetween: 40 },
-            1200: { slidesPerView: 5, spaceBetween: 50 }
+            320: { slidesPerView: 1.3, spaceBetween: 20 },
+            768: { slidesPerView: 2.5, spaceBetween: 40 },
+            1200: { slidesPerView: 3.5, spaceBetween: 60 },
+            1600: { slidesPerView: 4.5, spaceBetween: 80 }
         },
-        loopAdditionalSlides: 5,
-        watchSlidesProgress: true
+        loopedSlides: 10,
+        observer: true,
+        observeParents: true
     });
 }
 
 window.toggleAllAlbums = () => {
     const portal = document.getElementById('archivePortal');
-    const isVisible = portal.style.display === 'block';
-    portal.style.display = isVisible ? 'none' : 'block';
-    document.body.style.overflow = isVisible ? 'auto' : 'hidden';
+    portal.style.display = portal.style.display === 'block' ? 'none' : 'block';
+    document.body.style.overflow = portal.style.display === 'block' ? 'hidden' : 'auto';
 };
 
 window.openGallery = (id) => {
@@ -87,15 +69,13 @@ window.openGallery = (id) => {
     document.getElementById('galleryModal').style.display = 'flex';
     if (window.gallerySwiper) window.gallerySwiper.destroy();
     window.gallerySwiper = new Swiper('.b7-gallery-swiper-engine', {
-        navigation: { nextEl: '.b7-swiper-nav.next', prevEl: '.b7-swiper-nav.prev' },
-        loop: true
+        navigation: { nextEl: '.b7-swiper-nav.next', prevEl: '.b7-swiper-nav.prev' }, loop: true
     });
 };
 
 function setupGalleryModal() {
     const modal = document.getElementById('galleryModal');
-    if (!modal) return;
-    window.onclick = (e) => { if (e.target == modal) modal.style.display = 'none'; };
+    if (modal) window.onclick = (e) => { if (e.target == modal) modal.style.display = 'none'; };
 }
 
 function initCounters() {
