@@ -3,7 +3,7 @@
         "id": "founder_1",
         "name": "Олександр ТИТАН",
         "role": { "uk": "Голова правління", "en": "Chairman of the Board" },
-        "img": "https://placehold.co/500x700/1e293b/ffffff?text=Founder+1",
+        "img": "images/founders/founder_1.jpg",
         "bio": {
             "uk": "Ветеран бойових дій, засновник стратегії розвитку ГО. Має понад 10 років досвіду в управлінні соціальними проектами.",
             "en": "Combat veteran, founder of the NGO's development strategy. Has over 10 years of experience in managing social projects."
@@ -13,7 +13,7 @@
         "id": "founder_2",
         "name": "Михайло ПРАВО",
         "role": { "uk": "Керівник юридичного відділу", "en": "Head of Legal Department" },
-        "img": "https://placehold.co/500x700/1e293b/ffffff?text=Founder+2",
+        "img": "images/founders/founder_2.jpg",
         "bio": {
             "uk": "Спеціаліст з міжнародного права, ветеран, який присвятив життя захисту прав побратимів.",
             "en": "Specialist in international law, a veteran who dedicated his life to protecting the rights of brothers-in-arms."
@@ -23,7 +23,7 @@
         "id": "founder_3",
         "name": "Дмитро ПСИХОЛОГ",
         "role": { "uk": "Директор центру реабілітації", "en": "Director of Rehabilitation Center" },
-        "img": "https://placehold.co/500x700/1e293b/ffffff?text=Founder+3",
+        "img": "images/founders/founder_3.jpg",
         "bio": {
             "uk": "Провідний фахівець із посттравматичного відновлення, автор методик адаптації до мирного життя.",
             "en": "Leading specialist in post-traumatic recovery, author of methods for adaptation to peaceful life."
@@ -33,7 +33,7 @@
         "id": "founder_4",
         "name": "Сергій МЕДІА",
         "role": { "uk": "Координатор зв'язків з громадськістю", "en": "Public Relations Coordinator" },
-        "img": "https://placehold.co/500x700/1e293b/ffffff?text=Founder+4",
+        "img": "images/founders/founder_4.jpg",
         "bio": {
             "uk": "Відповідає за прозорість діяльності організації та комунікацію з міжнародними партнерами.",
             "en": "Responsible for the transparency of the organization's activities and communication with international partners."
@@ -43,7 +43,7 @@
         "id": "founder_5",
         "name": "Іван СОЦ",
         "role": { "uk": "Керівник соціальних програм", "en": "Head of Social Programs" },
-        "img": "https://placehold.co/500x700/1e293b/ffffff?text=Founder+5",
+        "img": "images/founders/founder_5.jpg",
         "bio": {
             "uk": "Організатор численних виїздів та заходів з дозвілля для сімей ветеранів.",
             "en": "Organizer of numerous trips and leisure events for the families of veterans."
