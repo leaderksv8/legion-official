@@ -1,47 +1,52 @@
 [
-  {
-    "id": "paustovskyi",
-    "name": { "uk": "Дмитро Паустовський", "en": "Dmytro Paustovskyi" },
-    "role": { "uk": "Голова організації", "en": "Head of Organization" },
-    "bio": { "uk": "Ветеран війни, активний громадський діяч...", "en": "War veteran, active public figure..." },
-    "phone": "+38 (067) 111-22-33",
-    "tg": "@paustovskyi",
-    "img": "https://via.placeholder.com/400x500?text=Dmytro"
-  },
-  {
-    "id": "salikhov",
-    "name": { "uk": "Сергій Саліхов", "en": "Serhii Salikhov" },
-    "role": { "uk": "Співзасновник", "en": "Co-founder" },
-    "bio": { "uk": "Координатор проектів з реабілітації...", "en": "Rehabilitation project coordinator..." },
-    "phone": "+38 (067) 222-33-44",
-    "tg": "@salikhov",
-    "img": "https://via.placeholder.com/400x500?text=Serhii"
-  },
-  {
-    "id": "founder3",
-    "name": { "uk": "Олександр Іванов", "en": "Oleksandr Ivanov" },
-    "role": { "uk": "Співзасновник", "en": "Co-founder" },
-    "bio": { "uk": "Юридична підтримка ветеранів...", "en": "Legal support for veterans..." },
-    "phone": "+38 (067) 333-44-55",
-    "tg": "@alex_titans",
-    "img": "https://via.placeholder.com/400x500?text=Founder3"
-  },
-  {
-    "id": "founder4",
-    "name": { "uk": "Андрій Петренко", "en": "Andrii Petrenko" },
-    "role": { "uk": "Співзасновник", "en": "Co-founder" },
-    "bio": { "uk": "Відповідальний за логістику та допомогу...", "en": "Responsible for logistics..." },
-    "phone": "+38 (067) 444-55-66",
-    "tg": "@andrii_p",
-    "img": "https://via.placeholder.com/400x500?text=Founder4"
-  },
-  {
-    "id": "founder5",
-    "name": { "uk": "Микола Сидоров", "en": "Mykola Sydorov" },
-    "role": { "uk": "Співзасновник", "en": "Co-founder" },
-    "bio": { "uk": "Медичний консультант...", "en": "Medical consultant..." },
-    "phone": "+38 (067) 555-66-77",
-    "tg": "@mykola_doc",
-    "img": "https://via.placeholder.com/400x500?text=Founder5"
-  }
+    {
+        "id": "founder_1",
+        "name": "Олександр ТИТАН",
+        "role": { "uk": "Голова правління", "en": "Chairman of the Board" },
+        "img": "https://placehold.co/500x700/1e293b/ffffff?text=Founder+1",
+        "bio": {
+            "uk": "Ветеран бойових дій, засновник стратегії розвитку ГО. Має понад 10 років досвіду в управлінні соціальними проектами.",
+            "en": "Combat veteran, founder of the NGO's development strategy. Has over 10 years of experience in managing social projects."
+        }
+    },
+    {
+        "id": "founder_2",
+        "name": "Михайло ПРАВО",
+        "role": { "uk": "Керівник юридичного відділу", "en": "Head of Legal Department" },
+        "img": "https://placehold.co/500x700/1e293b/ffffff?text=Founder+2",
+        "bio": {
+            "uk": "Спеціаліст з міжнародного права, ветеран, який присвятив життя захисту прав побратимів.",
+            "en": "Specialist in international law, a veteran who dedicated his life to protecting the rights of brothers-in-arms."
+        }
+    },
+    {
+        "id": "founder_3",
+        "name": "Дмитро ПСИХОЛОГ",
+        "role": { "uk": "Директор центру реабілітації", "en": "Director of Rehabilitation Center" },
+        "img": "https://placehold.co/500x700/1e293b/ffffff?text=Founder+3",
+        "bio": {
+            "uk": "Провідний фахівець із посттравматичного відновлення, автор методик адаптації до мирного життя.",
+            "en": "Leading specialist in post-traumatic recovery, author of methods for adaptation to peaceful life."
+        }
+    },
+    {
+        "id": "founder_4",
+        "name": "Сергій МЕДІА",
+        "role": { "uk": "Координатор зв'язків з громадськістю", "en": "Public Relations Coordinator" },
+        "img": "https://placehold.co/500x700/1e293b/ffffff?text=Founder+4",
+        "bio": {
+            "uk": "Відповідає за прозорість діяльності організації та комунікацію з міжнародними партнерами.",
+            "en": "Responsible for the transparency of the organization's activities and communication with international partners."
+        }
+    },
+    {
+        "id": "founder_5",
+        "name": "Іван СОЦ",
+        "role": { "uk": "Керівник соціальних програм", "en": "Head of Social Programs" },
+        "img": "https://placehold.co/500x700/1e293b/ffffff?text=Founder+5",
+        "bio": {
+            "uk": "Організатор численних виїздів та заходів з дозвілля для сімей ветеранів.",
+            "en": "Organizer of numerous trips and leisure events for the families of veterans."
+        }
+    }
 ]

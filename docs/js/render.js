@@ -15,13 +15,8 @@ export function renderStats(data, lang) {
 export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track || !data) return;
-    track.innerHTML = data.map((p) => `
-        <div class="swiper-slide">
-            <div class="b4-item-box">
-                <a href="${p.link}" target="_blank" rel="noopener"><img src="${p.img}" alt="${p.name}"></a>
-            </div>
-        </div>
-    `).join('');
+    const doubledData = [...data, ...data];
+    track.innerHTML = doubledData.map((p, index) => `<div class="swiper-slide"><div class="b4-item-box"><a href="${p.link}" target="_blank"><img src="${p.img}" alt="${p.name}"></a></div></div>`).join('');
 }
 
 export function renderTeam(data, lang) {
@@ -31,10 +26,7 @@ export function renderTeam(data, lang) {
         <div class="b5-specialist-card">
             <div class="b5-photo-container"><img src="${m.img}" alt="${m.name}"></div>
             <h3>${m.name}</h3><span class="b5-role-badge">${m.role[lang]}</span>
-            <div class="b5-social-links">
-                <a href="${m.social || '#'}" target="_blank" class="b5-social-btn"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="b5-social-btn"><i class="fab fa-telegram-plane"></i></a>
-            </div>
+            <div class="b5-social-links"><a href="${m.social || '#'}" target="_blank" class="b5-social-btn"><i class="fab fa-facebook-f"></i></a><a href="#" class="b5-social-btn"><i class="fab fa-telegram-plane"></i></a></div>
         </div>
     `).join('');
 }
@@ -50,7 +42,7 @@ export function renderNews(data, lang) {
     if (!container || !data) return;
     container.innerHTML = data.map(n => {
         const domain = new URL(n.link).hostname.replace('www.', '').split('.')[0].toUpperCase();
-        return `<a href="${n.link}" class="b7-news-item" target="_blank" rel="noopener noreferrer"><div class="b7-item-meta"><div class="b7-live-dot"></div><span class="b7-source-label">${domain} | ${n.date}</span></div><h4>${n.title[lang]}</h4></a>`;
+        return `<a href="${n.link}" class="b7-news-item" target="_blank"><div class="b7-item-meta"><div class="b7-live-dot"></div><span class="b7-source-label">${domain} | ${n.date}</span></div><h4>${n.title[lang]}</h4></a>`;
     }).join('');
 }
 
@@ -61,4 +53,20 @@ export function renderAlbums(data, lang) {
     const html = (a) => `<div class="b7-album-tile" onclick="window.openGallery('${a.id}')"><img src="${a.preview}" alt="G"><div class="b7-album-tile-overlay"><h4>${a.title[lang]}</h4></div></div>`;
     container.innerHTML = data.slice(0, 3).map(html).join('');
     fullGrid.innerHTML = data.map(html).join('');
+}
+
+export function renderFounders(data, lang) {
+    const container = document.getElementById('founders-container');
+    if (!container || !data) return;
+    container.innerHTML = data.map(f => `
+        <div class="b8-card" onclick="window.openFounderBio('${f.id}')">
+            <div class="b8-img-box">
+                <img src="${f.img}" alt="${f.name}">
+            </div>
+            <div class="b8-info-overlay">
+                <h4>${f.name}</h4>
+                <p>${f.role[lang]}</p>
+            </div>
+        </div>
+    `).join('');
 }
