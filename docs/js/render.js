@@ -20,7 +20,7 @@ export function renderPartners(data) {
     if (!row1 || !row2 || !data.length) return;
     const g1 = data.slice(0, 5), g2 = data.slice(5, 10);
     const html = (items) => {
-        const c = items.map(p => `<div class="b4-kinetic-item"><a href="${p.link}" target="_blank"><img src="${p.img}" alt="P" onerror="this.src='https://placehold.co/400x400?text=Logo'"></a></div>`).join('');
+        const c = items.map(p => `<div class="b4-kinetic-item"><a href="${p.link}" target="_blank" rel="noopener"><img src="${p.img}" alt="P" onerror="this.src='https://placehold.co/400x400/1e293b/ffffff?text=Partner'"></a></div>`).join('');
         return c + c + c + c;
     };
     row1.innerHTML = html(g1); row2.innerHTML = html(g2);
@@ -31,7 +31,7 @@ export function renderTeam(data, lang) {
     if (!container || !data.length) return;
     container.innerHTML = data.map(m => `
         <div class="b5-specialist-card">
-            <div class="b5-photo-container"><img src="${m.img}" alt="T" onerror="this.src='https://placehold.co/400x400?text=Photo'"></div>
+            <div class="b5-photo-container"><img src="${m.img}" alt="T" onerror="this.src='https://placehold.co/400x400/1e293b/ffffff?text=Photo'"></div>
             <h3>${m.name}</h3><span class="b5-role-badge">${m.role[lang]}</span>
             <div class="b5-social-links"><a href="${m.social || '#'}" target="_blank" class="b5-social-btn"><i class="fab fa-facebook-f"></i></a><a href="#" class="b5-social-btn"><i class="fab fa-telegram-plane"></i></a></div>
         </div>
@@ -65,7 +65,7 @@ export function renderFounders(data, lang) {
     const container = document.getElementById('founders-container');
     if (!container || !data.length) return;
     container.innerHTML = data.map(f => `
-        <div class="b8-titan-card" onclick="window.openFounderBio('${f.id}')">
+        <div class="b8-titan-card" onclick="window.openFounderBio('${f.id}', event)">
             <div class="b8-img-wrap"><img src="${f.img}" alt="F" onerror="this.src='https://placehold.co/500x700?text=TITAN'"></div>
             <div class="b8-info-box"><h4>${f.name}</h4><p>${f.role[lang]}</p></div>
         </div>
