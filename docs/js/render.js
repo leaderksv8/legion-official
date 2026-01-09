@@ -1,4 +1,3 @@
-// UNIT: ACTIVITIES
 export function renderActivities(data, lang) {
     const container = document.getElementById('activities-container');
     if (!container || !data.length) return;
@@ -10,44 +9,38 @@ export function renderActivities(data, lang) {
     `).join('');
 }
 
-// UNIT: STATS
 export function renderStats(data, lang) {
     const container = document.getElementById('stats-container');
     if (!container || !data.length) return;
     container.innerHTML = data.map(item => `<div class="b3-stat-item"><span class="b3-number" data-target="${item.value}">0</span><span class="b3-label">${item.label[lang]}</span></div>`).join('');
 }
 
-// UNIT: PARTNERS
 export function renderPartners(data) {
     const row1 = document.getElementById('partners-row-1'), row2 = document.getElementById('partners-row-2');
     if (!row1 || !row2 || !data.length) return;
     const g1 = data.slice(0, 5), g2 = data.slice(5, 10);
-    const html = (items) => items.map(p => `<div class="b4-kinetic-item"><a href="${p.link}" target="_blank" rel="noopener"><img src="${p.img}" alt="P" onerror="this.src='https://placehold.co/400x400?text=Logo'"></a></div>`).join('').repeat(4);
+    const html = (items) => items.map(p => `<div class="b4-kinetic-item"><a href="${p.link}" target="_blank" rel="noopener"><img src="${p.img}" alt="P" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=Logo'"></a></div>`).join('').repeat(4);
     row1.innerHTML = html(g1); row2.innerHTML = html(g2);
 }
 
-// UNIT: TEAM
 export function renderTeam(data, lang) {
     const container = document.getElementById('team-container');
     if (!container || !data.length) return;
     container.innerHTML = data.map(m => `
         <div class="b5-specialist-card">
-            <div class="b5-photo-container"><img src="${m.img}" alt="T" onerror="this.src='https://placehold.co/400x400?text=Photo'"></div>
+            <div class="b5-photo-container"><img src="${m.img}" alt="T" loading="lazy"></div>
             <h3>${m.name}</h3><span class="b5-role-badge">${m.role[lang]}</span>
             <div class="b5-social-links"><a href="${m.social || '#'}" target="_blank" class="b5-social-btn"><i class="fab fa-facebook-f"></i></a><a href="#" class="b5-social-btn"><i class="fab fa-telegram-plane"></i></a></div>
         </div>
     `).join('');
 }
 
-// UNIT: STORIES
 export function renderStories(data, lang) {
     const container = document.getElementById('stories-container');
     if (!container || !data.length) return;
-    container.innerHTML = data.map(s => `<div class="b6-card"><div class="b6-quote-mark">“</div><p class="b6-card-text">${s.text[lang]}</p>
-            <div class="b6-author"><img src="${s.img}" class="b6-author-img" alt="H"><div class="b6-author-info"><h4>${s.name}</h4><p>${s.rank[lang]}</p></div></div></div>`).join('');
+    container.innerHTML = data.map(s => `<div class="b6-card"><div class="b6-quote-mark">“</div><p class="b6-card-text">${s.text[lang]}</p><div class="b6-author"><img src="${s.img}" class="b6-author-img" alt="H" loading="lazy"><div class="b6-author-info"><h4>${s.name}</h4><p>${s.rank[lang]}</p></div></div></div>`).join('');
 }
 
-// UNIT: NEWS & ALBUMS (БЕЗПЕЧНА ОБРОБКА)
 export function renderNews(data, lang) {
     const container = document.getElementById('news-container');
     if (!container || !data.length) return;
@@ -63,18 +56,17 @@ export function renderNews(data, lang) {
 export function renderAlbums(data, lang) {
     const container = document.getElementById('albums-container'), fullGrid = document.getElementById('full-albums-grid');
     if (!container || !data.length) return;
-    const html = (a) => `<div class="swiper-slide"><div class="b7-album-stack" onclick="window.openGallery('${a.id}')"><img src="${a.preview}" alt="G"><h4>${a.title[lang]}</h4></div></div>`;
+    const html = (a) => `<div class="b7-album-tile" onclick="window.openGallery('${a.id}')"><img src="${a.preview}" alt="G" loading="lazy"><div class="b7-album-tile-overlay"><h4>${a.title[lang]}</h4></div></div>`;
     container.innerHTML = data.slice(0, 3).map(html).join('');
     fullGrid.innerHTML = data.map(html).join('');
 }
 
-// UNIT: FOUNDERS
 export function renderFounders(data, lang) {
     const container = document.getElementById('founders-container');
     if (!container || !data.length) return;
     container.innerHTML = data.map(f => `
         <div class="b8-titan-card" onclick="window.openFounderBio('${f.id}', event)">
-            <div class="b8-img-wrap"><img src="${f.img}" alt="F" onerror="this.src='https://placehold.co/500x700?text=TITAN'"></div>
+            <div class="b8-img-wrap"><img src="${f.img}" alt="F" loading="lazy" onerror="this.src='https://placehold.co/500x700?text=TITAN'"></div>
             <div class="b8-info-box"><h4>${f.name}</h4><p>${f.role[lang]}</p></div>
         </div>
     `).join('');
