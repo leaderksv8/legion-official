@@ -15,7 +15,6 @@
     max-width: 500px; pointer-events: none;
 }
 
-/* Розстановка газет */
 .p1 { top: -5%; left: -10%; transform: rotate(-12deg); }
 .p2 { top: 5%; right: -5%; transform: rotate(10deg); }
 .p3 { bottom: -10%; left: 10%; transform: rotate(5deg); }
@@ -73,3 +72,27 @@
 }
 
 .b7-portal-trigger { margin-top: 30px; cursor: pointer; color: #1a1a1a; font-weight: 700; }
+
+/* ФІКС ПОРТАЛУ - ТЕПЕР ВІН FIXED */
+.b7-portal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: #f4f1ea; z-index: 20000;
+    padding: 60px 20px; overflow-y: auto;
+}
+.b7-portal-content { max-width: 1200px; margin: 0 auto; }
+.b7-portal-items { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+
+/* МОДАЛКА ГАЛЕРЕЇ */
+.b7-modal {
+    display: none; position: fixed; inset: 0; background: #000;
+    z-index: 30000; align-items: center; justify-content: center;
+}
+.b7-modal-content { width: 90%; height: 80vh; position: relative; }
+.b7-swiper-nav { position: absolute; top: 50%; color: white; font-size: 40px; cursor: pointer; z-index: 10; }
+.next { right: -60px; } .prev { left: -60px; }
+.b7-modal-close-btn { position: absolute; top: 20px; right: 40px; color: white; font-size: 60px; cursor: pointer; }
+
+@media (max-width: 992px) {
+    .b7-main-grid { grid-template-columns: 1fr; }
+    .b7-portal-items { grid-template-columns: 1fr; }
+}
