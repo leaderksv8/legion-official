@@ -15,13 +15,10 @@ export function renderStats(data, lang) {
 export function renderPartners(data) {
     const track = document.getElementById('partners-track');
     if (!track || !data) return;
-    // Тільки один набір даних, Swiper сам впорається з loop
     track.innerHTML = data.map((p) => `
         <div class="swiper-slide">
             <div class="b4-item-box">
-                <a href="${p.link}" target="_blank" rel="noopener">
-                    <img src="${p.img}" alt="${p.name}" onerror="this.src='https://placehold.co/400x400/1e293b/ffffff?text=Partner'">
-                </a>
+                <a href="${p.link}" target="_blank" rel="noopener"><img src="${p.img}" alt="${p.name}"></a>
             </div>
         </div>
     `).join('');
@@ -45,16 +42,7 @@ export function renderTeam(data, lang) {
 export function renderStories(data, lang) {
     const container = document.getElementById('stories-container');
     if (!container || !data) return;
-    container.innerHTML = data.map(s => `
-        <div class="b6-card">
-            <div class="b6-quote-mark">“</div>
-            <p class="b6-card-text">${s.text[lang]}</p>
-            <div class="b6-author">
-                <img src="${s.img}" class="b6-author-img" alt="${s.name}">
-                <div class="b6-author-info"><h4>${s.name}</h4><p>${s.rank[lang]}</p></div>
-            </div>
-        </div>
-    `).join('');
+    container.innerHTML = data.map(s => `<div class="b6-card"><div class="b6-quote-mark">“</div><p class="b6-card-text">${s.text[lang]}</p><div class="b6-author"><img src="${s.img}" class="b6-author-img" alt="${s.name}"><div class="b6-author-info"><h4>${s.name}</h4><p>${s.rank[lang]}</p></div></div></div>`).join('');
 }
 
 export function renderNews(data, lang) {
@@ -70,7 +58,7 @@ export function renderAlbums(data, lang) {
     const container = document.getElementById('albums-container');
     const fullGrid = document.getElementById('full-albums-grid');
     if (!container || !data) return;
-    const html = (a) => `<div class="b7-album-tile" onclick="window.openGallery('${a.id}')"><img src="${a.preview}" alt="Gallery"><div class="b7-album-tile-overlay"><h4>${a.title[lang]}</h4></div></div>`;
+    const html = (a) => `<div class="b7-album-tile" onclick="window.openGallery('${a.id}')"><img src="${a.preview}" alt="G"><div class="b7-album-tile-overlay"><h4>${a.title[lang]}</h4></div></div>`;
     container.innerHTML = data.slice(0, 3).map(html).join('');
     fullGrid.innerHTML = data.map(html).join('');
 }
