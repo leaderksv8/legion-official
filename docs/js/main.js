@@ -9,28 +9,19 @@ async function init() {
         const load = async (url) => {
             try { const r = await fetch(url); return r.ok ? await r.json() : []; } catch { return []; }
         };
-
         const data = await Promise.allSettled([
             loadTranslations(), load('data/activities.json'), load('data/stats.json'),
             load('data/partners.json'), load('data/team.json'), load('data/stories.json'),
             load('data/news.json'), load('data/albums.json'), load('data/founders.json')
         ]);
-
         cache = {
-            translations: data[0].value || {},
-            activities: data[1].value || [],
-            stats: data[2].value || [],
-            partners: data[3].value || [],
-            team: data[4].value || [],
-            stories: data[5].value || [],
-            news: data[6].value || [],
-            albums: data[7].value || [],
-            founders: data[8].value || []
+            translations: data[0].value || {}, activities: data[1].value || [], stats: data[2].value || [],
+            partners: data[3].value || [], team: data[4].value || [], stories: data[5].value || [],
+            news: data[6].value || [], albums: data[7].value || [], founders: data[8].value || []
         };
-
         setupGlobalEvents();
         updateUI();
-    } catch (e) { console.error("System Failure:", e); }
+    } catch (e) { console.error("System Error:", e); }
 }
 
 function updateUI() {
@@ -43,7 +34,6 @@ function updateUI() {
     try { render.renderNews(cache.news, currentLang); } catch(e){}
     try { render.renderAlbums(cache.albums, currentLang); } catch(e){}
     try { render.renderFounders(cache.founders, currentLang); } catch(e){}
-    
     initIndependentModules();
 }
 
@@ -53,7 +43,6 @@ function initIndependentModules() {
     try { setupScrollUI(); } catch(e){}
 }
 
-// UI LOGIC
 function setupScrollUI() {
     const btn = document.getElementById('scrollTopBtn');
     window.addEventListener('scroll', () => {
@@ -65,7 +54,6 @@ function setupScrollUI() {
 window.scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 window.scrollToFooter = () => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
 
-// PARTNERS SWIPER
 function initPartnersSwiper() {
     if (window.partnersSwiper) window.partnersSwiper.destroy(true, true);
     const container = document.querySelector('.b4-swiper-main');
@@ -79,7 +67,6 @@ function initPartnersSwiper() {
     });
 }
 
-// COUNTERS
 function initCounters() {
     const statItems = document.querySelectorAll('.b3-stat-item');
     statItems.forEach(item => {
@@ -101,7 +88,6 @@ function initCounters() {
     });
 }
 
-// GLOBAL EVENTS
 function setupGlobalEvents() {
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -110,33 +96,21 @@ function setupGlobalEvents() {
             updateUI();
         });
     });
-
     const toggle = document.getElementById('menuToggle');
     const menu = document.getElementById('navMenu');
     if (toggle && menu) toggle.onclick = () => menu.classList.toggle('active');
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('section').forEach(s => observer.observe(s));
-    
-    // Форма футера
     const form = document.getElementById('footerForm');
-    if (form) {
-        form.onsubmit = (e) => {
-            e.preventDefault();
-            alert("Повідомлення надіслано успішно!");
-            form.reset();
-        };
-    }
+    if (form) form.onsubmit = (e) => { e.preventDefault(); alert("Дякуємо! Запит отримано."); form.reset(); };
 }
 
-// PORTAL & GALLERY
 window.toggleAllAlbums = () => {
     const portal = document.getElementById('archivePortal');
-    const isVisible = portal.style.display === 'block';
-    portal.style.display = isVisible ? 'none' : 'block';
-    document.body.style.overflow = isVisible ? 'auto' : 'hidden';
+    portal.style.display = portal.style.display === 'block' ? 'none' : 'block';
+    document.body.style.overflow = portal.style.display === 'block' ? 'hidden' : 'auto';
 };
 
 window.openGallery = (id) => {
