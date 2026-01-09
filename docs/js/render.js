@@ -15,11 +15,15 @@ export function renderStats(data, lang) {
     container.innerHTML = data.map(item => `<div class="b3-stat-item"><span class="b3-number" data-target="${item.value}">0</span><span class="b3-label">${item.label[lang]}</span></div>`).join('');
 }
 
+// UNIT: KINETIC PARTNERS (BLOCK 4)
 export function renderPartners(data) {
     const row1 = document.getElementById('partners-row-1');
     const row2 = document.getElementById('partners-row-2');
     if (!row1 || !row2 || !data.length) return;
-    const group1 = data.slice(0, 5), group2 = data.slice(5, 10);
+
+    const group1 = data.slice(0, 5);
+    const group2 = data.slice(5, 10);
+
     const createMarqueeContent = (items) => {
         const content = items.map(p => `
             <div class="b4-kinetic-item">
@@ -28,6 +32,7 @@ export function renderPartners(data) {
         `).join('');
         return content + content + content + content;
     };
+
     row1.innerHTML = createMarqueeContent(group1);
     row2.innerHTML = createMarqueeContent(group2);
 }
@@ -58,15 +63,18 @@ export function renderStories(data, lang) {
 export function renderNews(data, lang) {
     const container = document.getElementById('news-container');
     if (!container || !data.length) return;
-    container.innerHTML = data.map(n => `<a href="${n.link}" class="b7-news-item"><span class="b7-date">${n.date}</span><h4>${n.title[lang]}</h4></a>`).join('');
+    container.innerHTML = data.map(n => {
+        const domain = new URL(n.link).hostname.replace('www.', '').split('.')[0].toUpperCase();
+        return `<a href="${n.link}" class="b7-news-item" target="_blank"><div class="b7-item-meta"><div class="b7-live-dot"></div><span class="b7-source-label">${domain} | ${n.date}</span></div><h4>${n.title[lang]}</h4></a>`;
+    }).join('');
 }
 
 export function renderAlbums(data, lang) {
     const container = document.getElementById('albums-container');
     const fullGrid = document.getElementById('full-albums-grid');
     if (!container || !data.length) return;
-    const html = (a) => `<div class="swiper-slide"><div class="b7-album-stack" onclick="window.openGallery('${a.id}')"><img src="${a.preview}" alt="G"><h4>${a.title[lang]}</h4></div></div>`;
-    container.innerHTML = data.map(html).join('');
+    const html = (a) => `<div class="b7-album-tile" onclick="window.openGallery('${a.id}')"><img src="${a.preview}" alt="G"><div class="b7-album-tile-overlay"><h4>${a.title[lang]}</h4></div></div>`;
+    container.innerHTML = data.slice(0, 3).map(html).join('');
     fullGrid.innerHTML = data.map(html).join('');
 }
 

@@ -6,21 +6,31 @@ let cache = { translations: {}, activities: [], stats: [], partners: [], team: [
 
 async function init() {
     try {
-        const load = async (url) => { try { const r = await fetch(url); return r.ok ? await r.json() : []; } catch { return []; } };
+        const load = async (url) => {
+            try { const r = await fetch(url); return r.ok ? await r.json() : []; } catch { return []; }
+        };
+
         const data = await Promise.allSettled([
             loadTranslations(), load('data/activities.json'), load('data/stats.json'),
             load('data/partners.json'), load('data/team.json'), load('data/stories.json'),
             load('data/news.json'), load('data/albums.json'), load('data/founders.json')
         ]);
+
         cache = {
-            translations: data[0].value || {}, activities: data[1].value || [], stats: data[2].value || [],
-            partners: data[3].value || [], team: data[4].value || [], stories: data[5].value || [],
-            news: data[6].value || [], albums: data[7].value || [], founders: data[8].value || []
+            translations: data[0].value || {},
+            activities: data[1].value || [],
+            stats: data[2].value || [],
+            partners: data[3].value || [],
+            team: data[4].value || [],
+            stories: data[5].value || [],
+            news: data[6].value || [],
+            albums: data[7].value || [],
+            founders: data[8].value || []
         };
+
         setupGlobalEvents();
         updateUI();
-        setupParallax();
-    } catch (e) { console.error("Init Error:", e); }
+    } catch (e) { console.error("Critical System Failure", e); }
 }
 
 function updateUI() {
@@ -33,32 +43,22 @@ function updateUI() {
     try { render.renderNews(cache.news, currentLang); } catch(e){}
     try { render.renderAlbums(cache.albums, currentLang); } catch(e){}
     try { render.renderFounders(cache.founders, currentLang); } catch(e){}
+    
     initIndependentModules();
 }
 
 function initIndependentModules() {
     try { initCounters(); } catch(e){}
     try { setupScrollUI(); } catch(e){}
-    try { setTimeout(initVerticalAlbums, 600); } catch(e){}
-}
-
-function setupParallax() {
-    if (window.innerWidth < 1024) return;
-    document.addEventListener("mousemove", (e) => {
-        const layers = document.querySelectorAll(".b7-p-layer");
-        const x = (window.innerWidth - e.pageX * 2) / 100, y = (window.innerHeight - e.pageY * 2) / 100;
-        layers.forEach(layer => { const s = layer.getAttribute('data-speed'); layer.style.transform = `translateX(${x * s}px) translateY(${y * s}px) rotate(${s * 2}deg)`; });
-    });
-}
-
-function initVerticalAlbums() {
-    const isMobile = window.innerWidth < 992;
-    new Swiper('.b7-albums-swiper', { direction: isMobile ? 'horizontal' : 'vertical', slidesPerView: isMobile ? 1.2 : 2, spaceBetween: 20, mousewheel: !isMobile, grabCursor: true, nested: true, autoplay: { delay: 3000 } });
 }
 
 function setupScrollUI() {
     const btn = document.getElementById('scrollTopBtn');
-    window.addEventListener('scroll', () => { if (window.scrollY > 500) btn.classList.add('visible'); else btn.classList.remove('visible'); });
+    if (!btn) return;
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) btn.classList.add('visible');
+        else btn.classList.remove('visible');
+    });
 }
 
 window.scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -70,23 +70,49 @@ function initCounters() {
         const numEl = item.querySelector('.b3-number');
         if (!numEl) return;
         const target = +numEl.dataset.target;
-        const animate = () => { let current = 0; const timer = setInterval(() => { current += target / 50; if (current >= target) { numEl.innerText = target; clearInterval(timer); } else { numEl.innerText = Math.ceil(current); } }, 30); };
-        new IntersectionObserver((entries, obs) => { entries.forEach(en => { if (en.isIntersecting) { animate(); obs.unobserve(en.target); } }); }, { threshold: 0.5 }).observe(item);
+        const animate = () => {
+            let current = 0;
+            const timer = setInterval(() => {
+                current += target / 50;
+                if (current >= target) { numEl.innerText = target; clearInterval(timer); }
+                else { numEl.innerText = Math.ceil(current); }
+            }, 30);
+        };
+        new IntersectionObserver((entries, obs) => {
+            entries.forEach(en => { if (en.isIntersecting) { animate(); obs.unobserve(en.target); } });
+        }, { threshold: 0.5 }).observe(item);
         item.addEventListener('mouseenter', animate);
     });
 }
 
 function setupGlobalEvents() {
-    document.querySelectorAll('.lang-btn').forEach(btn => { btn.addEventListener('click', (e) => { currentLang = e.target.dataset.lang; document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b === e.target)); updateUI(); }); });
-    const toggle = document.getElementById('menuToggle'), menu = document.getElementById('navMenu');
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            currentLang = e.target.dataset.lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b === e.target));
+            updateUI();
+        });
+    });
+
+    const toggle = document.getElementById('menuToggle');
+    const menu = document.getElementById('navMenu');
     if (toggle && menu) toggle.onclick = () => menu.classList.toggle('active');
-    const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); }); }, { threshold: 0.1 });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.1 });
     document.querySelectorAll('section').forEach(s => observer.observe(s));
+    
     const form = document.getElementById('footerForm');
     if (form) form.onsubmit = (e) => { e.preventDefault(); alert("Дякуємо! Запит отримано."); form.reset(); };
 }
 
-window.toggleAllAlbums = () => { const portal = document.getElementById('archivePortal'); portal.style.display = portal.style.display === 'block' ? 'none' : 'block'; document.body.style.overflow = portal.style.display === 'block' ? 'hidden' : 'auto'; };
+window.toggleAllAlbums = () => {
+    const portal = document.getElementById('archivePortal');
+    const isVisible = portal.style.display === 'block';
+    portal.style.display = isVisible ? 'none' : 'block';
+    document.body.style.overflow = isVisible ? 'auto' : 'hidden';
+};
 
 window.openGallery = (id) => {
     const album = cache.albums.find(a => a.id === id);
@@ -94,8 +120,7 @@ window.openGallery = (id) => {
     const wrapper = document.getElementById('modal-gallery-wrapper');
     wrapper.innerHTML = album.photos.map(src => `<div class="swiper-slide"><img src="${src}"></div>`).join('');
     document.getElementById('galleryModal').style.display = 'flex';
-    if (window.gallerySwiper) window.gallerySwiper.destroy();
-    window.gallerySwiper = new Swiper('.b7-gallery-swiper-engine', { navigation: { nextEl: '.next', prevEl: '.prev' }, loop: true });
+    new Swiper('.b7-gallery-swiper-engine', { navigation: { nextEl: '.b7-swiper-nav.next', prevEl: '.b7-swiper-nav.prev' }, loop: true });
 };
 
 window.openFounderBio = (id) => {
