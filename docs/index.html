@@ -21,12 +21,17 @@
     <link rel="stylesheet" href="css/ui-elements.css">
 </head>
 <body>
-    <div class="ui-join-fixed" onclick="window.scrollToFooter()"><i class="fas fa-user-plus"></i><span data-i18n="ui.join">Приєднатися</span></div>
+    <div class="ui-join-fixed" onclick="window.scrollToFooter()">
+        <i class="fas fa-user-plus"></i><span data-i18n="ui.join">Приєднатися</span>
+    </div>
     <div class="ui-scroll-top" id="scrollTopBtn" onclick="window.scrollToTop()"><i class="fas fa-arrow-up"></i></div>
 
     <header class="main-header">
         <div class="container header-wrapper">
-            <a href="index.html" class="logo-area"><div class="logo-box"><img src="images/000.png" alt="Logo"></div><span class="logo-title" data-i18n="header.logo_title">ГО «Легіон Титанів»</span></a>
+            <a href="index.html" class="logo-area">
+                <div class="logo-box"><img src="images/000.png" alt="Logo"></div>
+                <span class="logo-title" data-i18n="header.logo_title">ГО «Легіон Титанів»</span>
+            </a>
             <div class="header-controls">
                 <nav class="nav-menu" id="navMenu">
                     <ul>
@@ -36,14 +41,26 @@
                         <li><a href="#contact" class="nav-link" data-i18n="menu.contacts">Контакти</a></li>
                     </ul>
                 </nav>
-                <div class="lang-switcher"><button class="lang-btn active" data-lang="uk">UA</button><button class="lang-btn" data-lang="en">EN</button></div>
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="uk">UA</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
                 <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
             </div>
         </div>
     </header>
 
     <main>
-        <section id="home" class="b1-hero"><div class="b1-bg-wrapper"><div class="b1-bg-image"></div><div class="b1-overlay"></div><div class="b1-grid-pattern"></div></div><div class="container"><div class="b1-content"><div class="b1-label-wrap"><span class="b1-label" data-i18n="b1.label">ГРОМАДСЬКА ОРГАНІЗАЦІЯ</span></div><div class="b1-title-wrap"><h1 class="b1-title" data-i18n="b1.title">«ЛЕГІОН ТИТАНІВ»</h1></div><div class="b1-subtitle-wrap"><h2 class="b1-subtitle" data-i18n="b1.subtitle">ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ</h2></div><p class="b1-description" data-i18n="b1.description">Ми об'єднуємо тих, хто захищав країну, для взаємодопомоги та адаптації до мирного життя.</p><div class="b1-actions"><a href="#contact" class="b1-btn-primary"><span data-i18n="b1.btn">ДІЗНАТИСЯ БІЛЬШЕ</span><div class="b1-btn-shine"></div></a></div></div></div></section>
+        <section id="home" class="b1-hero">
+            <div class="b1-bg-wrapper"><div class="b1-bg-image"></div><div class="b1-overlay"></div><div class="b1-grid-pattern"></div></div>
+            <div class="container"><div class="b1-content">
+                <div class="b1-label-wrap"><span class="b1-label" data-i18n="b1.label">ГРОМАДСЬКА ОРГАНІЗАЦІЯ</span></div>
+                <div class="b1-title-wrap"><h1 class="b1-title" data-i18n="b1.title">«ЛЕГІОН ТИТАНІВ»</h1></div>
+                <div class="b1-subtitle-wrap"><h2 class="b1-subtitle" data-i18n="b1.subtitle">ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ</h2></div>
+                <p class="b1-description" data-i18n="b1.description">Ми об'єднуємо тих, хто захищав країну, для взаємодопомоги та адаптації до мирного життя.</p>
+                <div class="b1-actions"><a href="#contact" class="b1-btn-primary"><span data-i18n="b1.btn">ДІЗНАТИСЯ БІЛЬШЕ</span><div class="b1-btn-shine"></div></a></div>
+            </div></div>
+        </section>
         <section id="activities" class="b2-activities"><div class="container"><h2 class="b2-title-center" data-i18n="b2.title">Наша діяльність</h2><div id="activities-container" class="b2-grid-6"></div></div></section>
         <section id="stats" class="b3-stats"><div class="container"><h2 class="b3-title" data-i18n="b3.title">Наші досягнення</h2><div id="stats-container" class="b3-grid"></div></div></section>
         <section id="partners" class="b4-partners-kinetic"><div class="container"><h2 class="b4-title" data-i18n="b4.title">Наші партнери</h2></div><div class="b4-kinetic-viewport"><div class="b4-marquee-row ltr" id="partners-row-1"></div><div class="b4-marquee-row rtl" id="partners-row-2"></div></div></section>
@@ -53,14 +70,47 @@
             <div class="b7-parallax-bg"><img src="images/newspapers/news1.jpg" class="b7-p-layer l1" data-speed="2"><img src="images/newspapers/news2.jpg" class="b7-p-layer l2" data-speed="-3"><img src="images/newspapers/news3.jpg" class="b7-p-layer l3" data-speed="4"><img src="images/newspapers/news4.jpg" class="b7-p-layer l4" data-speed="-2"><img src="images/newspapers/news5.jpg" class="b7-p-layer l5" data-speed="5"><img src="images/newspapers/news6.jpg" class="b7-p-layer l6" data-speed="-4"></div><div class="b7-vignette-deep"></div>
             <div class="container b7-relative"><div class="b7-wax-seal"><span>Медіа центр</span></div><div class="b7-main-grid"><div class="b7-archive-sheet"><div class="b7-sheet-header"><span class="b7-rubber-stamp" data-i18n="b7.news_title">Новини</span></div><div id="news-container" class="b7-data-list"></div></div><div class="b7-archive-sheet"><div class="b7-sheet-header"><span class="b7-rubber-stamp" data-i18n="b7.albums_title">Архів</span></div><div class="swiper b7-albums-swiper"><div class="swiper-wrapper" id="albums-container"></div><div class="b7-swiper-hint"><i class="fas fa-chevron-down"></i> <span data-i18n="b7.scroll_hint">Більше</span></div></div></div></div></div>
         </section>
-        <section id="founders" class="b8-titan-hall"><div class="b8-light-ray"></div><div class="container"><div class="b8-header"><div class="b8-title-bg">TITANS</div><span class="b8-label" data-i18n="b8.label">ЗАСНОВНИКИ ОРГАНІЗАЦІЇ</span><h2 class="b8-main-title" data-i18n="b8.title">Наші співзасновники</h2></div><div id="founders-container" class="b8-grid"></div></div></section>
+        <section id="founders" class="b8-titan-hall"><div class="b8-fog-effect"></div><div class="container"><div class="b8-header"><div class="b8-title-bg">TITANS</div><span class="b8-label" data-i18n="b8.label">ЗАСНОВНИКИ ОРГАНІЗАЦІЇ</span><h2 class="b8-main-title" data-i18n="b8.title">Наші співзасновники</h2></div><div id="founders-container" class="b8-grid"></div></div></section>
     </main>
+
+    <footer class="main-footer" id="contact">
+        <div class="footer-glow"></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col contacts">
+                    <div class="footer-logo"><img src="images/000.png" alt="L"><span data-i18n="header.logo_title">ГО «Легіон Титанів»</span></div>
+                    <div class="contact-list">
+                        <div class="contact-item"><i class="fas fa-map-marker-alt"></i><p data-i18n="footer.address">м. Буча, Київська обл.</p></div>
+                        <div class="contact-item"><i class="fas fa-phone-alt"></i><p>+38 (067) 000-00-00</p></div>
+                        <div class="contact-item"><i class="fas fa-envelope"></i><p>ngo@legion-of-titans.org</p></div>
+                    </div>
+                </div>
+                <div class="footer-col links">
+                    <h4 data-i18n="footer.nav_title">Навігація</h4>
+                    <ul>
+                        <li><a href="#home" data-i18n="menu.home">Головна</a></li>
+                        <li><a href="#activities" data-i18n="menu.activities">Діяльність</a></li>
+                        <li><a href="#partners" data-i18n="menu.partners">Партнери</a></li>
+                        <li><a href="#team" data-i18n="b5.title">Наша команда та Спеціалісти</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col feedback">
+                    <h4 data-i18n="footer.form_title">Надіслати запит</h4>
+                    <form id="footerForm" class="footer-form">
+                        <div class="form-group"><input type="text" id="name" placeholder=" " required><label data-i18n="footer.name">Ваше ім'я</label></div>
+                        <div class="form-group"><input type="email" id="email" placeholder=" " required><label>Email</label></div>
+                        <div class="form-group"><textarea id="message" placeholder=" " required></textarea><label data-i18n="footer.message">Повідомлення</label></div>
+                        <button type="submit" class="footer-submit"><span data-i18n="footer.send">ВІДПРАВИТИ</span><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 <span data-i18n="header.logo_title">ГО «Легіон Титанів»</span>. <span data-i18n="footer.copy">Всі права захищені.</span></p></div>
+        </div>
+    </footer>
 
     <div id="foundersModal" class="b8-dossier-overlay"><div class="b8-dossier-card"><button class="b8-close-dossier" onclick="document.getElementById('foundersModal').style.display='none'">&times;</button><div class="b8-dossier-grid"><div class="b8-dossier-image"><img id="f-modal-img" src=""><div class="b8-image-glow"></div></div><div class="b8-dossier-info"><span class="b8-dossier-stamp">OFFICIAL DOSSIER</span><h2 id="f-modal-name"></h2><h3 id="f-modal-role"></h3><div class="b8-dossier-line"></div><p id="f-modal-desc"></p></div></div></div></div>
     <div id="archivePortal" class="b7-portal-overlay"><div class="b7-portal-content"><div class="b7-portal-top"><h2 data-i18n="b7.full_archive">Офіційний архів</h2><button class="b7-portal-close" onclick="window.toggleAllAlbums()">&times;</button></div><div id="full-albums-grid" class="b7-portal-items"></div></div></div>
-    <div id="galleryModal" class="b7-modal"><span class="b7-modal-close">&times;</span><div class="b7-modal-content"><div class="swiper b7-gallery-swiper-engine"><div class="swiper-wrapper" id="modal-gallery-wrapper"></div><div class="b7-swiper-next"><i class="fas fa-chevron-right"></i></div><div class="b7-swiper-nav prev"><i class="fas fa-chevron-left"></i></div></div></div></div>
-
-    <footer class="main-footer" id="contact"><div class="footer-glow"></div><div class="container"><div class="footer-grid"><div class="footer-col contacts"><div class="footer-logo"><img src="images/000.png" alt="L"><span>ГО «Легіон Титанів»</span></div><div class="contact-list"><div class="contact-item"><i class="fas fa-map-marker-alt"></i><p>м. Буча, Київська обл.</p></div><div class="contact-item"><i class="fas fa-phone-alt"></i><p>+38 (067) 000-00-00</p></div><div class="contact-item"><i class="fas fa-envelope"></i><p>ngo@legion-of-titans.org</p></div></div></div><div class="footer-col links"><h4>Навігація</h4><ul><li><a href="#home">Головна</a></li><li><a href="#activities">Діяльність</a></li><li><a href="#partners">Партнери</a></li><li><a href="#team">Команда</a></li></ul></div><div class="footer-col feedback"><h4>Надіслати запит</h4><form id="footerForm" class="footer-form"><div class="form-group"><input type="text" id="name" placeholder=" " required><label>Ваше ім'я</label></div><div class="form-group"><input type="email" id="email" placeholder=" " required><label>Email</label></div><div class="form-group"><textarea id="message" placeholder=" " required></textarea><label>Повідомлення</label></div><button type="submit" class="footer-submit"><span>ВІДПРАВИТИ</span><i class="fas fa-paper-plane"></i></button></form></div></div><div class="footer-bottom"><p>&copy; 2026 ГО «Легіон Титанів». Всі права захищені.</p></div></div></footer>
+    <div id="galleryModal" class="b7-modal"><span class="b7-modal-close">&times;</span><div class="b7-modal-content"><div class="swiper b7-gallery-swiper-engine"><div class="swiper-wrapper" id="modal-gallery-wrapper"></div><div class="b7-swiper-nav next"><i class="fas fa-chevron-right"></i></div><div class="b7-swiper-nav prev"><i class="fas fa-chevron-left"></i></div></div></div></div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module" src="js/main.js"></script>
