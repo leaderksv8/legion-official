@@ -1,7 +1,8 @@
 .b1-hero { height: 100vh; display: flex; align-items: center; background: #fff; position: relative; }
-.b1-bg-image { position: absolute; inset: 0; background: url('../images/001.jpg') center/cover; opacity: 0.08; }
+.b1-bg-image { position: absolute; inset: 0; background: url('../images/001.jpg') center/cover; opacity: 0.1; }
 .b1-content { position: relative; z-index: 10; padding-left: 20px; }
-.b1-label { color: var(--gold); font-weight: 800; letter-spacing: 6px; margin-bottom: 20px; display: block; }
+
+.b1-label { color: var(--gold); font-weight: 800; letter-spacing: 5px; margin-bottom: 20px; display: block; }
 
 .b1-main-title { font-family: 'Playfair Display', serif; line-height: 0.85; margin-bottom: 40px; }
 .b1-word { display: block; font-size: clamp(4rem, 15vw, 10rem); font-weight: 900; color: var(--royal-blue); text-transform: uppercase; }
@@ -9,16 +10,13 @@
 .b1-word.gold {
     background: linear-gradient(135deg, var(--royal-blue) 0%, var(--gold) 45%, var(--gold-bright) 50%, var(--gold) 55%, var(--royal-blue) 100%);
     background-size: 300% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    animation: gold-ingot-flow 15s infinite linear;
+    animation: gold-ingot-flow 12s infinite linear;
 }
 
-@keyframes gold-ingot-flow { 
-    0% { background-position: 150% center; } 
-    100% { background-position: -150% center; } 
-}
+@keyframes gold-ingot-flow { 0% { background-position: 150% center; } 100% { background-position: -150% center; } }
 
-.b1-subtitle { font-size: 1.5rem; color: var(--dark); border-left: 6px solid var(--gold); padding-left: 30px; margin-bottom: 40px; }
-.b1-desc { max-width: 600px; font-size: 1.1rem; color: var(--text-main); margin-bottom: 40px; }
+.b1-subtitle { font-size: 1.5rem; color: #000; border-left: 5px solid var(--gold); padding-left: 30px; margin-bottom: 40px; max-width: 800px; }
+.b1-desc { max-width: 600px; font-size: 1.1rem; color: #4b5563; margin-bottom: 40px; }
 
 .b1-btn {
     display: inline-block; padding: 20px 55px; background: var(--dark); color: var(--gold) !important;
