@@ -1,16 +1,92 @@
-.b1-hero { height: 100vh; display: flex; align-items: center; background: #fff; position: relative; overflow: hidden; }
-.b1-bg-image { position: absolute; inset: 0; background: url('../images/001.jpg') center/cover; opacity: 0.1; }
-.b1-content { position: relative; z-index: 10; padding-left: 20px; }
-.b1-label { color: var(--gold); font-weight: 800; letter-spacing: 5px; margin-bottom: 20px; display: block; }
-.b1-title-composite { font-family: 'Playfair Display', serif; line-height: 0.82; margin-bottom: 40px; }
-.word1 { display: block; font-size: clamp(4rem, 15vw, 10rem); color: var(--royal-blue); }
-.word2.gold-ingot {
-    display: block; font-size: clamp(3.5rem, 13vw, 9rem); padding-left: 100px;
-    background: linear-gradient(135deg, var(--royal-blue) 0%, var(--gold) 45%, var(--gold-bright) 50%, var(--gold) 55%, var(--royal-blue) 100%);
-    background-size: 300% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+.b1-hero {
+    height: 100vh;
+    background: #fdfcf8;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.b1-bg-image {
+    position: absolute;
+    inset: 0;
+    background: url('../images/001.jpg') center/cover;
+    opacity: 0.1;
+    filter: sepia(0.2);
+}
+
+.b1-content {
+    position: relative;
+    z-index: 10;
+    padding-left: 50px; /* Захист від обрізки літер */
+}
+
+.b1-label {
+    color: var(--gold);
+    font-weight: 800;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.b1-main-title {
+    font-family: 'Playfair Display', serif;
+    line-height: 0.85;
+    margin-bottom: 40px;
+}
+
+.word-l {
+    display: block;
+    font-size: clamp(4rem, 15vw, 11rem);
+    font-weight: 900;
+    color: #1a365d;
+}
+
+.word-t.gold-ingot {
+    display: block;
+    font-size: clamp(3.5rem, 13vw, 10rem);
+    padding-left: 15%;
+    background: linear-gradient(135deg, #1a365d 0%, #c5a059 45%, #f1e0b5 50%, #c5a059 55%, #1a365d 100%);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     animation: gold-flow 12s infinite linear;
 }
-@keyframes gold-flow { 0% { background-position: 150% center; } 100% { background-position: -150% center; } }
-.b1-subtitle { font-size: 1.4rem; color: #000; border-left: 6px solid var(--gold); padding-left: 30px; margin-bottom: 40px; max-width: 800px; }
-.b1-btn { display: inline-block; padding: 22px 60px; background: var(--dark); color: var(--gold) !important; font-weight: 800; border: 1px solid var(--gold); transition: 0.4s; }
-.b1-btn:hover { background: var(--gold); color: white !important; transform: translateY(-5px); }
+
+@keyframes gold-flow {
+    0% { background-position: 150% center; }
+    100% { background-position: -150% center; }
+}
+
+.b1-subtitle {
+    font-size: 1.5rem;
+    color: #111;
+    border-left: 5px solid var(--gold);
+    padding-left: 30px;
+    margin-bottom: 30px;
+    max-width: 800px;
+}
+
+.b1-desc {
+    max-width: 600px;
+    font-size: 1.1rem;
+    color: #4b5563;
+    margin-bottom: 40px;
+}
+
+.b1-btn {
+    display: inline-block;
+    padding: 22px 60px;
+    background: #0f172a;
+    color: #c5a059 !important;
+    font-weight: 900;
+    border: 1px solid #c5a059;
+    letter-spacing: 2px;
+    transition: 0.4s;
+}
+
+.b1-btn:hover {
+    background: #c5a059;
+    color: #fff !important;
+    transform: translateY(-5px);
+}
