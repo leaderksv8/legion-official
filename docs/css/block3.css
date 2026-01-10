@@ -1,95 +1,42 @@
 .b3-stats {
-    padding: 120px 0;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    color: var(--white);
-    position: relative;
-    overflow: hidden;
-}
-
-.b3-stats::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -10%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(197, 160, 89, 0.07) 0%, transparent 70%);
-    z-index: 1;
-}
-
-.b3-stats .container {
-    position: relative;
-    z-index: 2;
+    background-color: var(--bg-slate);
+    border-top: 1px solid #e5e7eb;
 }
 
 .b3-title {
     text-align: center;
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 800;
-    color: var(--accent-gold);
+    font-size: 3rem;
     margin-bottom: 80px;
-    text-transform: uppercase;
 }
 
 .b3-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
+    gap: 40px;
 }
 
 .b3-stat-item {
-    background: rgba(255, 255, 255, 0.03);
-    padding: 60px 20px;
-    border-radius: 30px;
-    border: 1px solid rgba(197, 160, 89, 0.15);
     text-align: center;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer; /* Підказуємо, що картка інтерактивна */
-}
-
-/* ЕФЕКТ ПРИ НАВЕДЕННІ */
-.b3-stat-item:hover {
-    background: rgba(255, 255, 255, 0.07);
-    border-color: var(--accent-gold);
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    padding: 20px;
 }
 
 .b3-number {
-    display: block;
-    font-size: clamp(3rem, 6vw, 4.5rem);
-    font-weight: 900;
-    color: var(--white);
-    line-height: 1;
-    margin-bottom: 20px;
-    font-variant-numeric: tabular-nums;
-    transition: 0.3s;
-}
-
-.b3-stat-item:hover .b3-number {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 8vw, 6rem);
     color: var(--accent-gold);
-    text-shadow: 0 0 15px rgba(197, 160, 89, 0.5);
+    display: block;
+    line-height: 1;
+    margin-bottom: 10px;
 }
 
 .b3-label {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--accent-gold);
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    line-height: 1.4;
-    transition: 0.3s;
+    letter-spacing: 3px;
+    font-size: 0.85rem;
+    color: var(--text-title);
 }
 
-.b3-stat-item:hover .b3-label {
-    color: var(--white);
-}
-
-@media (max-width: 992px) {
+@media (max-width: 768px) {
     .b3-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 500px) {
-    .b3-grid { grid-template-columns: 1fr; }
-    .b3-stat-item { padding: 50px 20px; }
 }
