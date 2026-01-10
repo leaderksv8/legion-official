@@ -6,7 +6,7 @@ let cache = { translations: {}, activities: [], stats: [], partners: [], team: [
 
 async function init() {
     try {
-        const load = async (url) => { try { const r = await fetch(url); return r.ok ? await r.json() : []; } catch (e) { return []; } };
+        const load = async (url) => { const r = await fetch(url); return r.ok ? await r.json() : []; };
         const data = await Promise.allSettled([
             loadTranslations(), load('data/activities.json'), load('data/stats.json'),
             load('data/partners.json'), load('data/team.json'), load('data/stories.json'),
@@ -23,63 +23,73 @@ async function init() {
 }
 
 function updateUI() {
-    // HARD SYNC TRANSLATION
-    translatePage(cache.translations, currentLang);
+    const safeExec = (fn) => { try { fn(); } catch(e) {} };
+    safeExec(() => translatePage(cache.translations, currentLang));
+    safeExec(() => render.renderActivities(cache.activities, currentLang));
+    safeExec(() => render.renderStats(cache.stats, currentLang));
+    safeExec(() => render.renderPartners(cache.partners));
+    safeExec(() => render.renderTeam(cache.team, currentLang));
+    safeExec(() => render.renderStories(cache.stories, currentLang));
+    safeExec(() => render.renderNews(cache.news, currentLang));
+    safeExec(() => render.renderAlbums(cache.albums, currentLang));
+    safeExec(() => render.renderFounders(cache.founders, currentLang));
     
-    // SAFE RENDER
-    const blocks = [
-        () => render.renderActivities(cache.activities, currentLang),
-        () => render.renderStats(cache.stats, currentLang),
-        () => render.renderPartners(cache.partners),
-        () => render.renderTeam(cache.team, currentLang),
-        () => render.renderStories(cache.stories, currentLang),
-        () => render.renderNews(cache.news, currentLang),
-        () => render.renderAlbums(cache.albums, currentLang),
-        () => render.renderFounders(cache.founders, currentLang)
-    ];
-    blocks.forEach(b => { try { b(); } catch(e) {} });
-
     initCounters();
     setupScrollUI();
 }
 
-window.openSupportModal = (e) => { e.stopPropagation(); document.getElementById('supportModal').style.display = 'flex'; };
+window.openSupportModal = () => document.getElementById('supportModal').style.display = 'flex';
+window.toggleAllAlbums = () => {
+    const portal = document.getElementById('archivePortal');
+    portal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+};
+
+window.openFounderBio = (id, e) => {
+    if (e) e.stopPropagation();
+    const f = cache.founders.find(x => x.id === id);
+    if (!f) return;
+    document.getElementById('f-modal-name').innerText = f.name;
+    document.getElementById('f-modal-role').innerText = f.role[currentLang];
+    document.getElementById('f-modal-desc').innerText = f.bio[currentLang];
+    document.getElementById('foundersModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+};
+
+window.openGallery = (id) => {
+    const album = cache.albums.find(a => a.id === id);
+    if (!album) return;
+    document.getElementById('modal-gallery-wrapper').innerHTML = album.photos.map(src => `<div class="swiper-slide"><img src="${src}"></div>`).join('');
+    document.getElementById('galleryModal').style.display = 'flex';
+    new Swiper('.gallery-swiper', { navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }, loop: true });
+    document.body.style.overflow = 'hidden';
+};
+
 window.closeAllModals = () => {
-    ['galleryModal', 'foundersModal', 'archivePortal', 'supportModal'].forEach(id => {
+    ['supportModal', 'archivePortal', 'foundersModal', 'galleryModal'].forEach(id => {
         const el = document.getElementById(id); if (el) el.style.display = 'none';
     });
     document.body.style.overflow = 'auto';
 };
 
 function setupGlobalEvents() {
-    // LANGUAGE PERMANENT FIX
     document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.onclick = (e) => {
-            e.preventDefault();
-            currentLang = btn.dataset.lang;
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b === btn));
-            updateUI();
-        };
+        btn.onclick = (e) => { e.preventDefault(); currentLang = btn.dataset.lang; document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b === btn)); updateUI(); };
     });
+    const toggle = document.getElementById('menuToggle'), menu = document.querySelector('.nav-menu');
+    if (toggle) toggle.onclick = () => menu.classList.toggle('active');
 
-    const toggle = document.getElementById('menuToggle'), menu = document.getElementById('navMenu');
-    if (toggle && menu) toggle.onclick = () => menu.classList.toggle('active');
-
-    window.onclick = (e) => {
-        if (['galleryModal', 'foundersModal', 'archivePortal', 'supportModal'].includes(e.target.id)) window.closeAllModals();
-    };
-    
-    const obs = new IntersectionObserver((entries) => {
+    const scrollObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
     }, { threshold: 0.1 });
-    document.querySelectorAll('section').forEach(s => obs.observe(s));
+    document.querySelectorAll('section').forEach(s => scrollObserver.observe(s));
 }
 
-// REST OF LOGIC (SCROLL, COUNTERS)
 function setupScrollUI() {
     const btn = document.getElementById('scrollTopBtn');
-    window.onscroll = () => { btn?.classList.toggle('visible', window.scrollY > 600); };
+    window.addEventListener('scroll', () => { if (window.scrollY > 600) btn?.classList.add('visible'); else btn?.classList.remove('visible'); });
 }
+
 window.scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 window.scrollToFooter = () => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
 

@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ГО «Легіон Титанів» | Бучанський район</title>
+    <title>ГО «ЛЕГІОН ТИТАНІВ»</title>
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Styles -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/block1.css">
@@ -21,29 +23,29 @@
     <link rel="stylesheet" href="css/ui-elements.css">
 </head>
 <body>
-    <!-- FLOATING UI: SUPPORT BUTTON -->
-    <div class="ui-support-float" onclick="window.openSupportModal(event)">
-        <div class="ui-support-vibro"></div>
-        <div class="ui-support-shine"></div>
-        <i class="fas fa-heart"></i>
-        <span data-i18n="ui.support">Підтримати</span>
+    <!-- Floating Support Badge (Left Side) -->
+    <div class="ui-support-badge" onclick="window.openSupportModal()">
+        <div class="ui-badge-glow"></div>
+        <span data-i18n="ui.support">ПІДТРИМАТИ</span>
     </div>
-    
-    <div class="ui-scroll-top" id="scrollTopBtn" onclick="window.scrollToTop()"><i class="fas fa-arrow-up"></i></div>
+
+    <div class="ui-scroll-top" id="scrollTopBtn" onclick="window.scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
 
     <header class="main-header">
         <div class="container header-wrapper">
             <a href="index.html" class="logo-area">
                 <div class="logo-box"><img src="images/000.png" alt="Logo"></div>
-                <span class="logo-title" data-i18n="header.logo_title">ГО «Легіон Титанів»</span>
+                <span class="logo-title" data-i18n="header.logo_title">ГО «ЛЕГІОН ТИТАНІВ»</span>
             </a>
-            <div class="header-controls">
-                <nav class="nav-menu" id="navMenu">
+            <div class="header-right">
+                <nav class="nav-menu">
                     <ul>
-                        <li><a href="#home" class="nav-link" data-i18n="menu.home">Головна</a></li>
-                        <li><a href="#activities" class="nav-link" data-i18n="menu.activities">Діяльність</a></li>
-                        <li><a href="#partners" class="nav-link" data-i18n="menu.partners">Партнери</a></li>
-                        <li><a href="#contact" class="nav-link" data-i18n="menu.contacts">Контакти</a></li>
+                        <li><a href="#home" data-i18n="menu.home">Головна</a></li>
+                        <li><a href="#activities" data-i18n="menu.activities">Діяльність</a></li>
+                        <li><a href="#partners" data-i18n="menu.partners">Партнери</a></li>
+                        <li><a href="#contact" data-i18n="menu.contacts">Контакти</a></li>
                     </ul>
                 </nav>
                 <div class="lang-switcher">
@@ -58,102 +60,166 @@
     <main>
         <!-- BLOCK 1: HERO -->
         <section id="home" class="b1-hero">
-            <div class="b1-bg-wrapper"><div class="b1-bg-image"></div><div class="b1-overlay"></div><div class="b1-grid-pattern"></div></div>
+            <div class="b1-bg-image"></div>
             <div class="container">
                 <div class="b1-content">
                     <span class="b1-label" data-i18n="b1.label">ГРОМАДСЬКА ОРГАНІЗАЦІЯ</span>
-                    <h1 class="b1-title-composite">
-                        <span class="word1">ЛЕГІОН</span>
-                        <span class="word2">ТИТАНІВ</span>
+                    <h1 class="b1-title-main">
+                        <span class="b1-word">ЛЕГІОН</span>
+                        <span class="b1-word gold">ТИТАНІВ</span>
                     </h1>
-                    <div class="b1-subtitle-wrap"><h2 class="b1-subtitle" data-i18n="b1.subtitle">ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ</h2></div>
-                    <p class="b1-description" data-i18n="b1.description">Ми об'єднуємо тих, хто захищав країну, для взаємодопомоги та адаптації до мирного життя.</p>
-                    <div class="b1-actions"><a href="#activities" class="b1-btn-primary"><span data-i18n="b1.btn">ДІЗНАТИСЯ БІЛЬШЕ</span><div class="b1-btn-shine"></div></a></div>
+                    <div class="b1-subtitle-wrap">
+                        <h2 class="b1-subtitle" data-i18n="b1.subtitle">ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ</h2>
+                    </div>
+                    <p class="b1-desc" data-i18n="b1.description">Ми об'єднуємо тих, хто захищав країну, для взаємодопомоги та адаптації до мирного життя.</p>
+                    <a href="#activities" class="b1-btn" data-i18n="b1.btn">ДІЗНАТИСЯ БІЛЬШЕ</a>
                 </div>
             </div>
         </section>
 
-        <!-- OTHER BLOCKS -->
-        <section id="activities" class="b2-activities"><div class="container"><h2 class="b2-title-center" data-i18n="b2.title">Наша діяльність</h2><div id="activities-container" class="b2-grid-6"></div></div></section>
-        <section id="stats" class="b3-stats"><div class="container"><h2 class="b3-title" data-i18n="b3.title">Наші досягнення</h2><div id="stats-container" class="b3-grid"></div></div></section>
-        <section id="partners" class="b4-partners-kinetic"><div class="container"><h2 class="b4-title" data-i18n="b4.title">Наші партнери</h2></div><div class="b4-kinetic-viewport"><div class="b4-marquee-row ltr" id="partners-row-1"></div><div class="b4-marquee-row rtl" id="partners-row-2"></div></div></section>
-        <section id="team" class="b5-team-section"><div class="container"><div class="b5-header"><span class="b5-pretitle" data-i18n="b5.label">ЕКСПЕРТНА ПІДТРИМКА</span><h2 class="b5-title" data-i18n="b5.title">Наша команда та Спеціалісти</h2></div><div id="team-container" class="b5-team-grid"></div></div></section>
-        <section id="stories" class="b6-impact-wall"><div class="container"><div class="b6-header"><span class="b6-subtitle" data-i18n="b6.label">ВІДГУКИ</span><h2 class="b6-title" data-i18n="b6.title">Історії героїв</h2></div><div id="stories-container" class="b6-masonry-grid"></div></div></section>
-        
+        <!-- BLOCK 2: ACTIVITIES -->
+        <section id="activities" class="b2-activities">
+            <div class="container">
+                <h2 class="section-title" data-i18n="b2.title">Наша діяльність</h2>
+                <div id="activities-container" class="b2-grid"></div>
+            </div>
+        </section>
+
+        <!-- BLOCK 3: STATS -->
+        <section id="stats" class="b3-stats">
+            <div class="container">
+                <h2 class="section-title" data-i18n="b3.title">Наші досягнення</h2>
+                <div id="stats-container" class="b3-grid"></div>
+            </div>
+        </section>
+
+        <!-- BLOCK 4: PARTNERS -->
+        <section id="partners" class="b4-partners">
+            <div class="container"><h2 class="section-title" data-i18n="b4.title">Наші партнери</h2></div>
+            <div class="b4-marquee-container">
+                <div id="partners-row-1" class="b4-marquee-row ltr"></div>
+                <div id="partners-row-2" class="b4-marquee-row rtl"></div>
+            </div>
+        </section>
+
+        <!-- BLOCK 5: TEAM -->
+        <section id="team" class="b5-team">
+            <div class="container">
+                <h2 class="section-title" data-i18n="b5.title">Наша команда та Спеціалісти</h2>
+                <div id="team-container" class="b5-grid"></div>
+            </div>
+        </section>
+
+        <!-- BLOCK 6: STORIES -->
+        <section id="stories" class="b6-stories">
+            <div class="container">
+                <h2 class="section-title" data-i18n="b6.title">Історії героїв</h2>
+                <div id="stories-container" class="b6-masonry"></div>
+            </div>
+        </section>
+
         <!-- BLOCK 7: MEDIA -->
         <section id="media" class="b7-media">
-            <div class="b7-newspaper-scatter"><img src="images/newspapers/news1.jpg" class="paper p1"><img src="images/newspapers/news2.jpg" class="paper p2"><img src="images/newspapers/news3.jpg" class="paper p3"><img src="images/newspapers/news4.jpg" class="paper p4"></div><div class="b7-vignette"></div>
-            <div class="container b7-relative">
-                <div class="b7-title-card"><h2 class="b7-title-text" data-i18n="b7.title">Медіа-центр</h2></div>
-                <div class="b7-main-grid">
-                    <div class="b7-glass-panel">
-                        <div class="b7-panel-header"><span class="b7-panel-label" data-i18n="b7.news_title">Новини</span></div>
-                        <div id="news-container" class="b7-list-box"></div>
+            <div class="container">
+                <h2 class="section-title" data-i18n="b7.title">Медіа-центр</h2>
+                <div class="b7-grid">
+                    <div class="b7-glass-card">
+                        <h3 class="b7-sub-label" data-i18n="b7.news_title">Новини</h3>
+                        <div id="news-container"></div>
                     </div>
-                    <div class="b7-glass-panel">
-                        <div class="b7-panel-header"><span class="b7-panel-label" data-i18n="b7.albums_title">Фотоархів</span></div>
-                        <div id="albums-container" class="b7-list-box"></div>
-                        <div class="b7-portal-trigger" onclick="window.toggleAllAlbums(event)"><span data-i18n="b7.all_albums">Відкрити весь архів</span><i class="fas fa-arrow-right-long"></i></div>
+                    <div class="b7-glass-card">
+                        <h3 class="b7-sub-label" data-i18n="b7.albums_title">Архів фото</h3>
+                        <div id="albums-container"></div>
+                        <div class="b7-all-trigger" onclick="window.toggleAllAlbums()">
+                            <span data-i18n="b7.all_albums">Відкрити весь архів</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="founders" class="b8-titan-hall"><div class="b8-fog-effect"></div><div class="container"><div class="b8-header"><div class="b8-title-bg">TITANS</div><span class="b8-label" data-i18n="b8.label">ЗАСНОВНИКИ</span><h2 class="b8-main-title" data-i18n="b8.title">Наші співзасновники</h2></div><div id="founders-container" class="b8-grid"></div></div></section>
+        <!-- BLOCK 8: FOUNDERS -->
+        <section id="founders" class="b8-founders">
+            <div class="b8-watermark">TITANS</div>
+            <div class="container">
+                <h2 class="section-title" data-i18n="b8.title">Наші співзасновники</h2>
+                <div id="founders-container" class="b8-grid"></div>
+            </div>
+        </section>
     </main>
 
+    <!-- FOOTER -->
     <footer class="main-footer" id="contact">
-        <div class="footer-glow"></div>
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-col contacts">
-                    <div class="footer-logo"><img src="images/000.png" alt="L"><span data-i18n="header.logo_title">ГО «Легіон Титанів»</span></div>
-                    <div class="contact-list">
-                        <div class="contact-item"><i class="fas fa-map-marker-alt"></i><p data-i18n="footer.address">м. Буча, Київська обл.</p></div>
-                        <div class="contact-item"><i class="fas fa-envelope"></i><p>ngo@legion-of-titans.org</p></div>
-                    </div>
+                <div class="footer-info">
+                    <div class="footer-logo"><img src="images/000.png" alt="L"><span>ЛЕГІОН ТИТАНІВ</span></div>
+                    <p data-i18n="footer.address">м. Буча, Київська обл.</p>
+                    <p>ngo@legion-of-titans.org</p>
                 </div>
-                <div class="footer-col links">
+                <div class="footer-nav">
                     <h4 data-i18n="footer.nav_title">Навігація</h4>
                     <ul>
                         <li><a href="#home" data-i18n="menu.home">Головна</a></li>
                         <li><a href="#activities" data-i18n="menu.activities">Діяльність</a></li>
                         <li><a href="#partners" data-i18n="menu.partners">Партнери</a></li>
-                        <li><a href="#team" data-i18n="b5.title">Команда</a></li>
                     </ul>
                 </div>
-                <div class="footer-col feedback">
+                <div class="footer-form-box">
                     <h4 data-i18n="footer.form_title">Надіслати запит</h4>
-                    <form id="footerForm" class="footer-form">
-                        <div class="form-group"><input type="text" name="name" placeholder=" " required><label data-i18n="footer.name">Повне ПІБ</label></div>
-                        <div class="form-group"><input type="tel" name="phone" placeholder=" " required><label data-i18n="footer.phone">Телефон</label></div>
-                        <div class="form-group"><input type="email" name="email" placeholder=" " required><label>Email</label></div>
-                        <div class="form-group"><textarea name="message" placeholder=" " required></textarea><label data-i18n="footer.message">Повідомлення</label></div>
-                        <button type="submit" class="footer-submit"><span data-i18n="footer.send">ВІДПРАВИТИ</span><i class="fas fa-paper-plane"></i></button>
+                    <form id="footerForm">
+                        <input type="text" name="name" data-i18n-placeholder="footer.name" placeholder="Ваше ПІБ" required>
+                        <input type="tel" name="phone" data-i18n-placeholder="footer.phone" placeholder="Телефон" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <textarea name="msg" data-i18n-placeholder="footer.message" placeholder="Повідомлення"></textarea>
+                        <button type="submit" data-i18n="footer.send">ВІДПРАВИТИ</button>
                     </form>
                 </div>
             </div>
-            <div class="footer-bottom"><p>&copy; 2026 <span data-i18n="header.logo_title">ГО «Легіон Титанів»</span>. <span data-i18n="footer.copy">Всі права захищені.</span></p></div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 <span data-i18n="header.logo_title">ГО «ЛЕГІОН ТИТАНІВ»</span>. <span data-i18n="footer.copy">Всі права захищені.</span></p>
+            </div>
         </div>
     </footer>
 
-    <!-- MODALS: SUPPORT & GALLERY -->
-    <div id="supportModal" class="ui-modal" onclick="window.closeAllModals()">
-        <div class="ui-modal-card" onclick="event.stopPropagation()">
-            <span class="ui-close" onclick="window.closeAllModals()">&times;</span>
+    <!-- Modals -->
+    <div id="supportModal" class="system-modal" onclick="window.closeAllModals()">
+        <div class="modal-content" onclick="event.stopPropagation()">
             <h2 data-i18n="footer.form_title">Підтримати фонд</h2>
-            <div class="ui-bank-details">
-                <p><strong>ГО «Легіон Титанів»</strong></p>
+            <div class="bank-card">
+                <p><strong>ГО «ЛЕГІОН ТИТАНІВ»</strong></p>
                 <p><strong>ЄДРПОУ:</strong> 43720363</p>
                 <p><strong>IBAN:</strong> UA000000000000000000000000000</p>
-                <p class="ui-purpose"><strong>Призначення:</strong> Благодійний безповоротний внесок на розвиток ГО «Легіон Титанів»</p>
+                <p class="purpose"><strong>Призначення:</strong> Благодійний безповоротний внесок на розвиток ГО «ЛЕГІОН ТИТАНІВ»</p>
             </div>
+            <button onclick="window.closeAllModals()" class="close-modal-btn">ЗАКРИТИ</button>
         </div>
     </div>
 
-    <div id="archivePortal" class="b7-portal-overlay" onclick="window.closeAllModals()"><div class="b7-portal-content" onclick="event.stopPropagation()"><div class="b7-portal-top"><h2 data-i18n="b7.full_archive">Офіційний архів</h2><button class="b7-portal-close" onclick="window.closeAllModals()">&times;</button></div><div id="full-albums-grid" class="b7-portal-items"></div></div></div>
-    <div id="galleryModal" class="b7-modal" onclick="window.closeAllModals()"><div class="b7-modal-content" onclick="event.stopPropagation()"><span class="b7-modal-close" onclick="window.closeAllModals()">&times;</span><div class="swiper b7-gallery-swiper-engine"><div class="swiper-wrapper" id="modal-gallery-wrapper"></div><div class="b7-swiper-nav next"><i class="fas fa-chevron-right"></i></div><div class="b7-swiper-nav prev"><i class="fas fa-chevron-left"></i></div></div></div></div>
-    <div id="foundersModal" class="b8-dossier-overlay" onclick="window.closeAllModals()"><div class="b8-dossier-card" onclick="event.stopPropagation()"><button class="b8-close-dossier" onclick="window.closeAllModals()">&times;</button><div class="b8-dossier-info"><span class="b8-dossier-stamp">OFFICIAL DOSSIER</span><h2 id="f-modal-name"></h2><h3 id="f-modal-role"></h3><div class="b8-dossier-line"></div><div id="f-modal-desc" class="b8-dossier-text"></div></div></div></div>
+    <div id="archivePortal" class="system-modal fixed-portal" onclick="window.closeAllModals()">
+        <div class="modal-content full" onclick="event.stopPropagation()">
+            <div class="portal-header"><h2 data-i18n="b7.full_archive">Офіційний архів</h2><span onclick="window.closeAllModals()" class="close-x">&times;</span></div>
+            <div id="full-albums-grid" class="portal-grid"></div>
+        </div>
+    </div>
+
+    <div id="foundersModal" class="system-modal" onclick="window.closeAllModals()">
+        <div class="modal-content dossier" onclick="event.stopPropagation()">
+            <h2 id="f-modal-name"></h2>
+            <h3 id="f-modal-role"></h3>
+            <div class="dossier-line"></div>
+            <p id="f-modal-desc"></p>
+        </div>
+    </div>
+
+    <div id="galleryModal" class="system-modal" onclick="window.closeAllModals()">
+        <div class="modal-content gallery" onclick="event.stopPropagation()">
+            <div class="swiper gallery-swiper">
+                <div class="swiper-wrapper" id="modal-gallery-wrapper"></div>
+                <div class="swiper-button-next"></div><div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module" src="js/main.js"></script>
