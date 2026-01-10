@@ -19,7 +19,7 @@ export function renderPartners(data) {
     const row1 = document.getElementById('partners-row-1'), row2 = document.getElementById('partners-row-2');
     if (!row1 || !row2 || !data.length) return;
     const g1 = data.slice(0, 5), g2 = data.slice(5, 10);
-    const html = (items) => items.map(p => `<div class="b4-kinetic-item"><a href="${p.link}" target="_blank" rel="noopener"><img src="${p.img}" alt="P" loading="lazy"></a></div>`).join('').repeat(4);
+    const html = (items) => items.map(p => `<div class="b4-kinetic-item"><a href="${p.link}" target="_blank"><img src="${p.img}" alt="P" loading="lazy"></a></div>`).join('').repeat(4);
     row1.innerHTML = html(g1); row2.innerHTML = html(g2);
 }
 
@@ -30,7 +30,6 @@ export function renderTeam(data, lang) {
         <div class="b5-specialist-card">
             <div class="b5-photo-container"><img src="${m.img}" alt="T" loading="lazy"></div>
             <h3>${m.name}</h3><span class="b5-role-badge">${m.role[lang]}</span>
-            <div class="b5-social-links"><a href="${m.social || '#'}" target="_blank" class="b5-social-btn"><i class="fab fa-facebook-f"></i></a><a href="#" class="b5-social-btn"><i class="fab fa-telegram-plane"></i></a></div>
         </div>
     `).join('');
 }
@@ -44,13 +43,7 @@ export function renderStories(data, lang) {
 export function renderNews(data, lang) {
     const container = document.getElementById('news-container');
     if (!container || !data.length) return;
-    container.innerHTML = data.map(n => {
-        let domain = "News";
-        if (n.link && n.link.includes('http')) {
-            try { domain = new URL(n.link).hostname.replace('www.', '').split('.')[0].toUpperCase(); } catch(e){}
-        }
-        return `<a href="${n.link}" class="b7-news-item" target="_blank"><div class="b7-item-meta"><h4>${n.title[lang]}</h4><span class="b7-date">${n.date} | ${domain}</span></div></a>`;
-    }).join('');
+    container.innerHTML = data.map(n => `<a href="${n.link}" class="b7-news-item" target="_blank"><h4>${n.title[lang]}</h4><span class="b7-date">${n.date}</span></a>`).join('');
 }
 
 export function renderAlbums(data, lang) {

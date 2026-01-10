@@ -1,117 +1,83 @@
 .b1-hero {
-    position: relative;
     height: 100vh;
     min-height: 700px;
     display: flex;
     align-items: center;
-    color: var(--white);
-    background: #020617;
+    background: var(--bg-cream); /* Світлий фон замість темного */
     overflow: hidden;
 }
 
 .b1-bg-wrapper {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    inset: 0;
     z-index: 1;
 }
 
 .b1-bg-image {
-    position: absolute;
     width: 100%; height: 100%;
     background: url('../images/001.jpg') center/cover no-repeat;
-    animation: b1-ken-burns 20s infinite alternate ease-in-out;
-}
-
-@keyframes b1-ken-burns {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.15); }
-}
-
-.b1-overlay {
-    position: absolute;
-    width: 100%; height: 100%;
-    background: linear-gradient(90deg, rgba(2, 6, 23, 0.95) 0%, rgba(2, 6, 23, 0.4) 100%);
+    opacity: 0.15; /* Легкий фон */
+    animation: b1-ken-burns 20s infinite alternate;
 }
 
 .b1-grid-pattern {
-    position: absolute;
-    width: 100%; height: 100%;
-    background-image: radial-gradient(rgba(197, 160, 89, 0.1) 1px, transparent 1px);
-    background-size: 30px 30px;
-    opacity: 0.5;
+    position: absolute; inset: 0;
+    background-image: radial-gradient(var(--accent-gold-soft) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.3;
 }
 
-.b1-hero .container { position: relative; z-index: 10; }
-
-.b1-label-wrap, .b1-title-wrap, .b1-subtitle-wrap { overflow: hidden; margin-bottom: 10px; }
+.b1-content {
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+}
 
 .b1-label {
-    display: inline-block;
-    font-size: 1.2rem;
-    font-weight: 700;
     color: var(--accent-gold);
+    font-weight: 800;
     letter-spacing: 6px;
-    text-transform: uppercase;
-    transform: translateY(100%);
-    animation: b1-reveal 0.8s forwards 0.2s;
+    display: block;
+    margin-bottom: 20px;
 }
 
+/* ЗОЛОТИЙ ПЕРЕЛИВ НАЗВИ */
 .b1-title {
-    font-size: clamp(3rem, 10vw, 6rem);
-    font-weight: 900;
-    line-height: 1;
-    text-transform: uppercase;
-    transform: translateY(100%);
-    animation: b1-reveal 1s forwards 0.4s;
+    font-size: clamp(3rem, 10vw, 6.5rem);
+    line-height: 0.9;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #8b6e37 0%, #f1e0b5 25%, #c5a059 50%, #f1e0b5 75%, #8b6e37 100%);
+    background-size: 400% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gold-shimmer 6s infinite linear;
+}
+
+@keyframes gold-shimmer {
+    to { background-position: 400% center; }
 }
 
 .b1-subtitle {
-    font-size: clamp(1.2rem, 3vw, 2rem);
+    font-size: 1.4rem;
     font-weight: 700;
-    color: #e2e8f0;
-    border-left: 4px solid var(--accent-gold);
-    padding-left: 20px;
-    transform: translateX(-100%);
-    opacity: 0;
-    animation: b1-slide-in 0.8s forwards 0.8s;
-}
-
-.b1-description {
-    font-size: 1.25rem;
-    max-width: 600px;
-    margin: 30px 0;
-    color: #94a3b8;
-    opacity: 0;
-    animation: b1-fade 1s forwards 1.2s;
+    color: var(--text-title);
+    margin-bottom: 40px;
+    border-left: 5px solid var(--accent-gold);
+    padding-left: 25px;
 }
 
 .b1-btn-primary {
-    position: relative;
     display: inline-block;
-    padding: 20px 45px;
+    padding: 20px 50px;
     border: 2px solid var(--accent-gold);
-    color: var(--white);
+    color: var(--accent-gold);
     font-weight: 800;
     letter-spacing: 2px;
-    overflow: hidden;
-    transition: 0.4s;
-    opacity: 0;
-    animation: b1-fade 1s forwards 1.5s;
+    transition: var(--transition);
 }
 
-.b1-btn-primary:hover { background: var(--accent-gold); color: var(--primary-dark); }
-
-.b1-btn-shine {
-    position: absolute;
-    top: 0; left: -100%;
-    width: 50%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transform: skewX(-25deg);
-    animation: b1-shine 4s infinite;
+.b1-btn-primary:hover {
+    background: var(--accent-gold);
+    color: #fff;
+    box-shadow: var(--shadow-gold);
 }
-
-@keyframes b1-reveal { to { transform: translateY(0); } }
-@keyframes b1-slide-in { to { transform: translateX(0); opacity: 1; } }
-@keyframes b1-fade { to { opacity: 1; } }
-@keyframes b1-shine { 0% { left: -100%; } 20%, 100% { left: 150%; } }

@@ -4,7 +4,7 @@
     --bg-cream: #f9f7f2;
     --bg-slate: #f1f5f9;
     --accent-gold: #c5a059;
-    --accent-gold-soft: rgba(197, 160, 89, 0.15);
+    --accent-gold-dark: #b38f4d;
     --text-main: #374151;
     --text-title: #111827;
     --white: #ffffff;
@@ -48,16 +48,5 @@ section {
     position: relative;
 }
 
-img {
-    max-width: 100%;
-    display: block;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-ul {
-    list-style: none;
-}
+ul { list-style: none; }
+a { text-decoration: none; color: inherit; }
