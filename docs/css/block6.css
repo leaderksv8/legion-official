@@ -1,36 +1,10 @@
-.b6-impact-wall {
-    background-color: var(--bg-light);
-}
-
+.b6-impact-wall { background-color: var(--bg-light); }
 .b6-header { text-align: center; margin-bottom: 80px; }
-.b6-subtitle { color: var(--accent-gold); font-weight: 800; letter-spacing: 4px; display: block; margin-bottom: 10px; }
-
-.b6-masonry-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-}
-
-.b6-card {
-    background: var(--bg-cream);
-    padding: 40px;
-    border-radius: var(--radius-lg);
-    border: 1px solid rgba(197, 160, 89, 0.1);
-    transition: var(--transition);
-}
-
-.b6-card:hover {
-    background: var(--white);
-    box-shadow: var(--shadow-premium);
-    transform: translateY(-10px);
-}
-
-.b6-quote-mark { font-family: serif; font-size: 3rem; color: var(--accent-gold); opacity: 0.3; line-height: 1; }
-.b6-card-text { font-size: 1.1rem; font-style: italic; color: var(--text-main); margin: 20px 0 30px; }
-
+.b6-masonry-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+.b6-card { background: var(--bg-cream); padding: 40px; border-radius: var(--radius-lg); border: 1px solid rgba(197, 160, 89, 0.1); transition: var(--transition); }
+.b6-card:hover { background: var(--white); box-shadow: var(--shadow-premium); transform: translateY(-10px); }
+.b6-quote-mark { font-family: serif; font-size: 3rem; color: var(--accent-gold); opacity: 0.3; }
+.b6-card-text { font-size: 1.1rem; font-style: italic; margin: 20px 0 30px; }
 .b6-author { display: flex; align-items: center; gap: 15px; }
 .b6-author-img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
-.b6-author-info h4 { font-size: 1rem; font-family: 'Montserrat', sans-serif; }
-.b6-author-info p { font-size: 0.75rem; font-weight: 700; color: var(--accent-gold); }
-
 @media (max-width: 992px) { .b6-masonry-grid { grid-template-columns: 1fr; } }

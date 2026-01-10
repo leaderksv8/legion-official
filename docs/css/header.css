@@ -1,100 +1,22 @@
 .main-header {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(15px);
     padding: 15px 0;
     position: fixed;
     top: 0; width: 100%;
     z-index: 1000;
     border-bottom: 1px solid rgba(197, 160, 89, 0.2);
-    box-shadow: 0 4px 30px rgba(0,0,0,0.03);
 }
-
-.header-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo-area {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.logo-box {
-    width: 45px; height: 45px;
-    background: #fff;
-    padding: 3px;
-    border-radius: 10px;
-    border: 1px solid #eee;
-}
-
-.logo-title {
-    font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    font-size: 1.3rem;
-    color: var(--text-title);
-    letter-spacing: 1px;
-}
-
-.nav-menu ul {
-    display: flex;
-    gap: 30px;
-}
-
-.nav-link {
-    font-weight: 700;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    color: var(--text-main);
-    letter-spacing: 1px;
-    transition: var(--transition);
-}
-
-.nav-link:hover {
-    color: var(--accent-gold);
-}
-
-.lang-switcher {
-    display: flex;
-    gap: 5px;
-    background: var(--bg-slate);
-    padding: 4px;
-    border-radius: 50px;
-    margin-left: 20px;
-}
-
-.lang-btn {
-    background: transparent;
-    border: none;
-    padding: 6px 15px;
-    border-radius: 50px;
-    font-weight: 800;
-    font-size: 0.7rem;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.lang-btn.active {
-    background: var(--accent-gold);
-    color: white;
-}
-
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 6px;
-    background: none;
-    border: none;
-}
-
-.menu-toggle span {
-    width: 28px; height: 3px;
-    background: var(--text-title);
-    border-radius: 2px;
-}
-
-@media (max-width: 992px) {
-    .nav-menu { display: none; }
-    .menu-toggle { display: flex; }
-}
+.header-wrapper { display: flex; justify-content: space-between; align-items: center; }
+.logo-area { display: flex; align-items: center; gap: 15px; }
+.logo-box { width: 45px; height: 45px; background: #fff; padding: 3px; border-radius: 10px; border: 1px solid #eee; }
+.logo-title { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.3rem; color: var(--text-title); }
+.nav-menu ul { display: flex; gap: 30px; }
+.nav-link { font-weight: 700; font-size: 0.85rem; text-transform: uppercase; color: var(--text-main); transition: 0.3s; }
+.nav-link:hover { color: var(--accent-gold); }
+.lang-switcher { display: flex; gap: 5px; background: var(--bg-slate); padding: 4px; border-radius: 50px; margin-left: 20px; }
+.lang-btn { background: transparent; border: none; padding: 6px 15px; border-radius: 50px; font-weight: 800; font-size: 0.7rem; cursor: pointer; }
+.lang-btn.active { background: var(--accent-gold); color: white; }
+.menu-toggle { display: none; flex-direction: column; gap: 6px; background: none; border: none; }
+.menu-toggle span { width: 28px; height: 3px; background: var(--text-title); border-radius: 2px; }
+@media (max-width: 992px) { .nav-menu { display: none; } .menu-toggle { display: flex; } }

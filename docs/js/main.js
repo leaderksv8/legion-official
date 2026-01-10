@@ -113,5 +113,4 @@ function setupGlobalEvents() {
         if (['galleryModal', 'foundersModal', 'archivePortal'].includes(e.target.id)) window.closeAllModals();
     });
 }
-
 document.addEventListener('DOMContentLoaded', init);

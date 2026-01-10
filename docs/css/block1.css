@@ -1,83 +1,44 @@
 .b1-hero {
     height: 100vh;
-    min-height: 700px;
     display: flex;
     align-items: center;
-    background: var(--bg-cream); /* Світлий фон замість темного */
+    background: var(--bg-cream);
     overflow: hidden;
 }
-
-.b1-bg-wrapper {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-}
-
 .b1-bg-image {
     width: 100%; height: 100%;
     background: url('../images/001.jpg') center/cover no-repeat;
-    opacity: 0.15; /* Легкий фон */
-    animation: b1-ken-burns 20s infinite alternate;
+    opacity: 0.12;
+    animation: b1-ken-burns 25s infinite alternate;
 }
+@keyframes b1-ken-burns { from { transform: scale(1); } to { transform: scale(1.1); } }
+.b1-content { position: relative; z-index: 10; max-width: 900px; }
+.b1-label { color: var(--accent-gold); font-weight: 800; letter-spacing: 6px; display: block; margin-bottom: 20px; }
 
-.b1-grid-pattern {
-    position: absolute; inset: 0;
-    background-image: radial-gradient(var(--accent-gold-soft) 1px, transparent 1px);
-    background-size: 40px 40px;
-    opacity: 0.3;
-}
-
-.b1-content {
-    position: relative;
-    z-index: 10;
-    max-width: 900px;
-}
-
-.b1-label {
-    color: var(--accent-gold);
-    font-weight: 800;
-    letter-spacing: 6px;
-    display: block;
-    margin-bottom: 20px;
-}
-
-/* ЗОЛОТИЙ ПЕРЕЛИВ НАЗВИ */
+/* ЕФЕКТ ЗОЛОТОГО ЗЛИТКА */
 .b1-title {
-    font-size: clamp(3rem, 10vw, 6.5rem);
-    line-height: 0.9;
-    margin-bottom: 30px;
-    background: linear-gradient(135deg, #8b6e37 0%, #f1e0b5 25%, #c5a059 50%, #f1e0b5 75%, #8b6e37 100%);
-    background-size: 400% auto;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 12vw, 8rem);
+    line-height: 0.85;
+    font-weight: 900;
+    margin-bottom: 40px;
+    color: #1a365d; /* Royal Blue Base */
+    background: linear-gradient(135deg, 
+        #1a365d 0%, 
+        #1a365d 40%, 
+        #f1e0b5 50%, 
+        #c5a059 55%, 
+        #1a365d 65%, 
+        #1a365d 100%);
+    background-size: 300% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: gold-shimmer 6s infinite linear;
+    animation: gold-ingot-flow 10s infinite ease-in-out;
 }
-
-@keyframes gold-shimmer {
-    to { background-position: 400% center; }
+@keyframes gold-ingot-flow {
+    0% { background-position: 150% center; }
+    100% { background-position: -150% center; }
 }
-
-.b1-subtitle {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--text-title);
-    margin-bottom: 40px;
-    border-left: 5px solid var(--accent-gold);
-    padding-left: 25px;
-}
-
-.b1-btn-primary {
-    display: inline-block;
-    padding: 20px 50px;
-    border: 2px solid var(--accent-gold);
-    color: var(--accent-gold);
-    font-weight: 800;
-    letter-spacing: 2px;
-    transition: var(--transition);
-}
-
-.b1-btn-primary:hover {
-    background: var(--accent-gold);
-    color: #fff;
-    box-shadow: var(--shadow-gold);
-}
+.b1-subtitle { font-size: 1.4rem; color: var(--text-title); border-left: 6px solid var(--accent-gold); padding-left: 30px; max-width: 700px; }
+.b1-btn-primary { display: inline-block; padding: 22px 50px; background: var(--text-title); color: var(--accent-gold) !important; font-weight: 800; border: 1px solid var(--accent-gold); transition: 0.4s; }
+.b1-btn-primary:hover { background: var(--accent-gold); color: #fff !important; transform: translateY(-5px); }
