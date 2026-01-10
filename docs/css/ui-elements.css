@@ -1,33 +1,23 @@
-.ui-support-badge {
+.ui-support-tag {
     position: fixed; top: 50%; left: 0; transform: translateY(-50%);
-    background: #1a1a1a; color: #d4af37; padding: 30px 15px;
-    writing-mode: vertical-lr; text-orientation: mixed;
-    cursor: pointer; z-index: 10001; border-radius: 0 8px 8px 0;
-    font-weight: 900; letter-spacing: 2px; border: 2px solid #d4af37; border-left: none;
-    transition: 0.3s;
+    background: #1a1a1a; color: #fff; padding: 35px 15px;
+    writing-mode: vertical-lr; text-orientation: mixed; cursor: pointer;
+    z-index: 9000; border-radius: 0 10px 10px 0; border: 1px solid #d4af37;
+    font-weight: 900; letter-spacing: 2px; transition: 0.3s;
 }
-
-.ui-support-badge:hover { background: #d4af37; color: #1a1a1a; padding-left: 20px; }
-
-.ui-badge-shine {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(transparent, rgba(255,255,255,0.2), transparent);
-    animation: shine 3s infinite;
+.ui-tag-shimmer {
+    position: absolute; inset: 0; overflow: hidden;
 }
-
-@keyframes shine { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
-
-.bank-details { background: #fff; padding: 30px; border: 1px solid #ddd; border-radius: 8px; text-align: left; }
-.bank-details p { margin-bottom: 15px; font-size: 1.1rem; }
-.purpose { color: #8b0000; font-weight: 700; border-top: 1px solid #eee; padding-top: 15px; }
-
-.close-btn { margin-top: 30px; padding: 10px 30px; background: var(--dark); color: #fff; border: none; cursor: pointer; }
-
+.ui-tag-shimmer::after {
+    content: ""; position: absolute; top: -100%; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(transparent, rgba(255,215,0,0.3), transparent);
+    animation: shimmer 3s infinite;
+}
+@keyframes shimmer { 0% { top: -100%; } 100% { top: 100%; } }
 .ui-scroll-top {
     position: fixed; bottom: 40px; right: 40px; width: 55px; height: 55px;
     background: var(--dark); color: var(--gold); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.3rem; cursor: pointer; opacity: 0; visibility: hidden;
-    transition: 0.4s; z-index: 10001;
+    display: flex; align-items: center; justify-content: center; opacity: 0;
+    visibility: hidden; transition: 0.4s; z-index: 9000;
 }
 .ui-scroll-top.visible { opacity: 1; visibility: visible; }

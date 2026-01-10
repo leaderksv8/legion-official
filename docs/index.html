@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ГО «ЛЕГІОН ТИТАНІВ»</title>
-    <!-- Fonts -->
+    <title>ГО «ЛЕГІОН ТИТАНІВ» | Бучанський район</title>
+    <!-- Пріоритетні шрифти -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <!-- Styles -->
+    
+    <!-- Всі стилі ізольовані -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/block1.css">
@@ -23,10 +24,9 @@
     <link rel="stylesheet" href="css/ui-elements.css">
 </head>
 <body>
-    <!-- Floating UI Elements -->
-    <div class="ui-support-badge" onclick="window.openSupportModal(event)">
-        <div class="ui-badge-vibro"></div>
-        <div class="ui-badge-shine"></div>
+    <!-- Статусна мітка підтримки -->
+    <div class="ui-support-tag" onclick="window.openSupportModal()">
+        <div class="ui-tag-shimmer"></div>
         <span data-i18n="ui.support">ПІДТРИМАТИ</span>
     </div>
 
@@ -37,7 +37,7 @@
     <header class="main-header">
         <div class="container header-wrapper">
             <a href="index.html" class="logo-area">
-                <div class="logo-box"><img src="images/000.png" alt="Logo"></div>
+                <div class="logo-box"><img src="images/000.png" alt="L"></div>
                 <span class="logo-title" data-i18n="header.logo_title">ГО «ЛЕГІОН ТИТАНІВ»</span>
             </a>
             <div class="header-right">
@@ -59,7 +59,7 @@
     </header>
 
     <main>
-        <!-- BLOCK 1: HERO -->
+        <!-- Блок 1 -->
         <section id="home" class="b1-hero">
             <div class="b1-bg-image"></div>
             <div class="container">
@@ -67,7 +67,7 @@
                     <span class="b1-label" data-i18n="b1.label">ГРОМАДСЬКА ОРГАНІЗАЦІЯ</span>
                     <h1 class="b1-title-composite">
                         <span class="word1">ЛЕГІОН</span>
-                        <span class="word2">ТИТАНІВ</span>
+                        <span class="word2 gold-ingot">ТИТАНІВ</span>
                     </h1>
                     <div class="b1-subtitle-wrap">
                         <h2 class="b1-subtitle" data-i18n="b1.subtitle">ВЕТЕРАНИ ВІЙНИ З ОБМЕЖЕНИМИ МОЖЛИВОСТЯМИ БУЧАНСЬКОГО РАЙОНУ</h2>
@@ -78,7 +78,7 @@
             </div>
         </section>
 
-        <!-- BLOCK 2: ACTIVITIES -->
+        <!-- Блок 2 -->
         <section id="activities" class="b2-activities">
             <div class="container">
                 <h2 class="section-title" data-i18n="b2.title">Наша діяльність</h2>
@@ -86,7 +86,7 @@
             </div>
         </section>
 
-        <!-- BLOCK 3: STATS -->
+        <!-- Блок 3 -->
         <section id="stats" class="b3-stats">
             <div class="container">
                 <h2 class="section-title" data-i18n="b3.title">Наші досягнення</h2>
@@ -94,7 +94,7 @@
             </div>
         </section>
 
-        <!-- BLOCK 4: PARTNERS -->
+        <!-- Блок 4 -->
         <section id="partners" class="b4-partners">
             <div class="container"><h2 class="section-title" data-i18n="b4.title">Наші партнери</h2></div>
             <div class="b4-marquee-viewport">
@@ -103,15 +103,15 @@
             </div>
         </section>
 
-        <!-- BLOCK 5: TEAM -->
+        <!-- Блок 5 -->
         <section id="team" class="b5-team">
             <div class="container">
-                <h2 class="section-title" data-i18n="b5.title">Наша команда</h2>
+                <h2 class="section-title" data-i18n="b5.title">Наша команда та Спеціалісти</h2>
                 <div id="team-container" class="b5-grid"></div>
             </div>
         </section>
 
-        <!-- BLOCK 6: STORIES -->
+        <!-- Блок 6 -->
         <section id="stories" class="b6-stories">
             <div class="container">
                 <h2 class="section-title" data-i18n="b6.title">Історії наших героїв</h2>
@@ -119,30 +119,29 @@
             </div>
         </section>
 
-        <!-- BLOCK 7: MEDIA -->
+        <!-- Блок 7 -->
         <section id="media" class="b7-media">
-            <div class="b7-stone-texture"></div>
-            <div class="container b7-relative">
-                <div class="b7-header-block">
-                    <h2 class="b7-display-title" data-i18n="b7.title">Медіа-центр</h2>
-                </div>
-                <div class="b7-main-layout">
-                    <div class="b7-column-glass">
-                        <h3 class="b7-label-tag" data-i18n="b7.news_title">Новини</h3>
-                        <div id="news-container" class="b7-news-list"></div>
+            <div class="container">
+                <h2 class="section-title" data-i18n="b7.title">Медіа-центр</h2>
+                <div class="b7-grid">
+                    <div class="b7-glass-card">
+                        <h3 class="b7-sub-label" data-i18n="b7.news_title">Новини</h3>
+                        <div id="news-container"></div>
                     </div>
-                    <div class="b7-column-glass">
-                        <h3 class="b7-label-tag" data-i18n="b7.albums_title">Фотоархів</h3>
-                        <div id="albums-container" class="b7-albums-list"></div>
-                        <button class="b7-portal-btn" onclick="window.toggleAllAlbums()" data-i18n="b7.all_albums">Відкрити весь архів</button>
+                    <div class="b7-glass-card">
+                        <h3 class="b7-sub-label" data-i18n="b7.albums_title">Фотоархів</h3>
+                        <div id="albums-container"></div>
+                        <div class="b7-all-trigger" onclick="window.toggleAllAlbums()">
+                            <span data-i18n="b7.all_albums">Відкрити весь архів</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- BLOCK 8: FOUNDERS -->
+        <!-- Блок 8 -->
         <section id="founders" class="b8-founders">
-            <div class="b8-bg-watermark">TITANS</div>
+            <div class="b8-watermark">TITANS</div>
             <div class="container">
                 <h2 class="section-title" data-i18n="b8.title">Наші співзасновники</h2>
                 <div id="founders-container" class="b8-grid"></div>
@@ -150,6 +149,7 @@
         </section>
     </main>
 
+    <!-- Футер -->
     <footer class="main-footer" id="contact">
         <div class="container">
             <div class="footer-grid">
@@ -163,54 +163,57 @@
                     <ul>
                         <li><a href="#home" data-i18n="menu.home">Головна</a></li>
                         <li><a href="#activities" data-i18n="menu.activities">Діяльність</a></li>
+                        <li><a href="#partners" data-i18n="menu.partners">Партнери</a></li>
                     </ul>
                 </div>
-                <div class="footer-form-area">
+                <div class="footer-form-box">
                     <h4 data-i18n="footer.form_title">Надіслати запит</h4>
                     <form id="footerForm">
-                        <div class="input-group"><input type="text" name="name" required placeholder=" "><label data-i18n="footer.name">Повне ПІБ</label></div>
-                        <div class="input-group"><input type="tel" name="phone" required placeholder=" "><label data-i18n="footer.phone">Телефон</label></div>
-                        <div class="input-group"><input type="email" name="email" required placeholder=" "><label>Email</label></div>
-                        <div class="input-group"><textarea name="msg" required placeholder=" "></textarea><label data-i18n="footer.message">Повідомлення</label></div>
-                        <button type="submit" class="submit-btn" data-i18n="footer.send">ВІДПРАВИТИ</button>
+                        <div class="group"><input type="text" name="name" required placeholder=" "><label data-i18n="footer.name">ПІБ</label></div>
+                        <div class="group"><input type="tel" name="phone" required placeholder=" "><label data-i18n="footer.phone">Телефон</label></div>
+                        <div class="group"><input type="email" name="email" required placeholder=" "><label>Email</label></div>
+                        <div class="group"><textarea name="msg" placeholder=" "></textarea><label data-i18n="footer.message">Повідомлення</label></div>
+                        <button type="submit" data-i18n="footer.send">ВІДПРАВИТИ</button>
                     </form>
                 </div>
             </div>
-            <div class="footer-bottom"><p>&copy; 2026 ГО «ЛЕГІОН ТИТАНІВ». <span data-i18n="footer.copy">Всі права захищені.</span></p></div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 <span data-i18n="header.logo_title">ГО «ЛЕГІОН ТИТАНІВ»</span>. <span data-i18n="footer.copy">Всі права захищені.</span></p>
+            </div>
         </div>
     </footer>
 
-    <!-- MODALS SYSTEM -->
-    <div id="supportModal" class="ui-modal" onclick="window.closeAllModals()">
+    <!-- Системні модальні вікна -->
+    <div id="supportModal" class="system-modal" onclick="window.closeAllModals()">
         <div class="modal-card" onclick="event.stopPropagation()">
-            <h2 data-i18n="footer.form_title">Підтримати фонд</h2>
-            <div class="bank-details">
-                <p class="bank-name">ГО «ЛЕГІОН ТИТАНІВ»</p>
-                <div class="bank-row"><span>ЄДРПОУ:</span> <strong>43720363</strong></div>
-                <div class="bank-row"><span>IBAN:</span> <strong>UA000000000000000000000000000</strong></div>
-                <p class="purpose">Призначення: Благодійний безповоротний внесок на розвиток ГО «Легіон Титанів»</p>
+            <h2 data-i18n="footer.form_title">Реквізити фонду</h2>
+            <div class="bank-details-box">
+                <p><strong>ГО «ЛЕГІОН ТИТАНІВ»</strong></p>
+                <p>ЄДРПОУ: 43720363</p>
+                <p>IBAN: UA000000000000000000000000000</p>
+                <p class="p-red">Призначення: Благодійний внесок на статутну діяльність</p>
             </div>
             <button class="close-btn" onclick="window.closeAllModals()">ЗАКРИТИ</button>
         </div>
     </div>
 
-    <div id="archivePortal" class="ui-modal portal" onclick="window.closeAllModals()">
+    <div id="archivePortal" class="system-modal fixed-portal" onclick="window.closeAllModals()">
         <div class="modal-card full" onclick="event.stopPropagation()">
-            <div class="portal-header"><h2 data-i18n="b7.full_archive">Повний архів</h2><span class="portal-close" onclick="window.closeAllModals()">&times;</span></div>
+            <div class="portal-head"><h2 data-i18n="b7.all_albums">Весь фотоархів</h2><span class="close-x" onclick="window.closeAllModals()">&times;</span></div>
             <div id="full-albums-grid" class="portal-grid"></div>
         </div>
     </div>
 
-    <div id="foundersModal" class="ui-modal" onclick="window.closeAllModals()">
+    <div id="foundersModal" class="system-modal" onclick="window.closeAllModals()">
         <div class="modal-card dossier" onclick="event.stopPropagation()">
             <h2 id="f-modal-name"></h2>
             <h3 id="f-modal-role"></h3>
             <div class="dossier-line"></div>
-            <div id="f-modal-desc" class="dossier-text"></div>
+            <p id="f-modal-desc"></p>
         </div>
     </div>
 
-    <div id="galleryModal" class="ui-modal" onclick="window.closeAllModals()">
+    <div id="galleryModal" class="system-modal" onclick="window.closeAllModals()">
         <div class="modal-card gallery" onclick="event.stopPropagation()">
             <div class="swiper gallery-swiper">
                 <div class="swiper-wrapper" id="modal-gallery-wrapper"></div>
