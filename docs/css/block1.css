@@ -4,30 +4,29 @@
     align-items: center;
     background: var(--bg-cream);
     overflow: hidden;
+    position: relative;
 }
+
 .b1-bg-image {
     width: 100%; height: 100%;
     background: url('../images/001.jpg') center/cover no-repeat;
     opacity: 0.12;
     animation: b1-ken-burns 25s infinite alternate;
 }
-@keyframes b1-ken-burns { from { transform: scale(1); } to { transform: scale(1.1); } }
-.b1-content { position: relative; z-index: 10; max-width: 900px; }
-.b1-label { color: var(--accent-gold); font-weight: 800; letter-spacing: 6px; display: block; margin-bottom: 20px; }
 
-/* ЕФЕКТ ЗОЛОТОГО ЗЛИТКА */
 .b1-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(3.5rem, 12vw, 8rem);
-    line-height: 0.85;
+    font-size: clamp(3.5rem, 12vw, 8.5rem);
+    line-height: 0.82;
     font-weight: 900;
     margin-bottom: 40px;
-    color: #1a365d; /* Royal Blue Base */
+    color: #1a365d; /* Royal Blue */
     background: linear-gradient(135deg, 
         #1a365d 0%, 
-        #1a365d 40%, 
-        #f1e0b5 50%, 
-        #c5a059 55%, 
+        #1a365d 35%, 
+        #f1e0b5 45%, 
+        #c5a059 50%, 
+        #f1e0b5 55%, 
         #1a365d 65%, 
         #1a365d 100%);
     background-size: 300% auto;
@@ -35,10 +34,32 @@
     -webkit-text-fill-color: transparent;
     animation: gold-ingot-flow 10s infinite ease-in-out;
 }
+
 @keyframes gold-ingot-flow {
     0% { background-position: 150% center; }
     100% { background-position: -150% center; }
 }
-.b1-subtitle { font-size: 1.4rem; color: var(--text-title); border-left: 6px solid var(--accent-gold); padding-left: 30px; max-width: 700px; }
-.b1-btn-primary { display: inline-block; padding: 22px 50px; background: var(--text-title); color: var(--accent-gold) !important; font-weight: 800; border: 1px solid var(--accent-gold); transition: 0.4s; }
-.b1-btn-primary:hover { background: var(--accent-gold); color: #fff !important; transform: translateY(-5px); }
+
+.b1-subtitle {
+    font-size: 1.4rem;
+    color: var(--text-title);
+    border-left: 6px solid var(--accent-gold);
+    padding-left: 30px;
+    max-width: 700px;
+}
+
+.b1-btn-primary {
+    display: inline-block;
+    padding: 22px 50px;
+    background: var(--text-title);
+    color: var(--accent-gold) !important;
+    font-weight: 800;
+    border: 1px solid var(--accent-gold);
+    transition: 0.4s;
+}
+
+.b1-btn-primary:hover {
+    background: var(--accent-gold);
+    color: #fff !important;
+    transform: translateY(-5px);
+}
