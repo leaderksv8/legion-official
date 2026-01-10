@@ -1,12 +1,12 @@
 [
     {
-        "tag": { "uk": "СМІ", "en": "Media" },
+        "tag": { "uk": "Події", "en": "Events" },
         "date": "Сьогодні",
         "title": { 
-            "uk": "Українська правда: Головні новини політики та фронту", 
-            "en": "Ukrainska Pravda: Main politics and frontline news" 
+            "uk": "ТСН: Останні новини України та світу в реальному часі", 
+            "en": "TSN: Latest news of Ukraine and the world in real time" 
         },
-        "link": "https://www.pravda.com.ua/news/"
+        "link": "https://tsn.ua/"
     },
     {
         "tag": { "uk": "Події", "en": "Events" },
@@ -18,39 +18,39 @@
         "link": "https://tsn.ua/"
     },
     {
-        "tag": { "uk": "Аналітика", "en": "Analytics" },
+        "tag": { "uk": "Події", "en": "Events" },
         "date": "Сьогодні",
         "title": { 
-            "uk": "Кореспондент: Огляд найважливіших подій дня", 
-            "en": "Korrespondent: Overview of the most important events" 
+            "uk": "ТСН: Останні новини України та світу в реальному часі", 
+            "en": "TSN: Latest news of Ukraine and the world in real time" 
         },
-        "link": "https://ua.korrespondent.net/"
+        "link": "https://tsn.ua/"
     },
     {
-        "tag": { "uk": "Важливо", "en": "Important" },
+        "tag": { "uk": "Події", "en": "Events" },
         "date": "Сьогодні",
         "title": { 
-            "uk": "УНІАН: Оперативні новини та ексклюзивні репортажі", 
-            "en": "UNIAN: breaking news and exclusive reports" 
+            "uk": "ТСН: Останні новини України та світу в реальному часі", 
+            "en": "TSN: Latest news of Ukraine and the world in real time" 
         },
-        "link": "https://www.unian.ua/"
+        "link": "https://tsn.ua/"
     },
     {
-        "tag": { "uk": "Економіка", "en": "Economy" },
+        "tag": { "uk": "Події", "en": "Events" },
         "date": "Сьогодні",
         "title": { 
-            "uk": "iPress: Незалежний погляд на події в Україні", 
-            "en": "iPress: Independent look at events in Ukraine" 
+            "uk": "ТСН: Останні новини України та світу в реальному часі", 
+            "en": "TSN: Latest news of Ukraine and the world in real time" 
         },
-        "link": "https://ipress.ua/"
+        "link": "https://tsn.ua/"
     },
     {
-        "tag": { "uk": "Стрічка", "en": "Feed" },
+        "tag": { "uk": "Події", "en": "Events" },
         "date": "Сьогодні",
         "title": { 
-            "uk": "УНІАН: Повна стрічка актуальних новин", 
-            "en": "UNIAN: Full feed of current news" 
+            "uk": "ТСН: Останні новини України та світу в реальному часі", 
+            "en": "TSN: Latest news of Ukraine and the world in real time" 
         },
-        "link": "https://www.unian.ua/detail/all_news"
+        "link": "https://tsn.ua/"
     }
 ]
